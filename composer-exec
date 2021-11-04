@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --rm --interactive --tty -v $(pwd):/app -w /app -u $UID mats9798/crypto-app:latest composer $@

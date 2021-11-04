@@ -1,0 +1,9 @@
+#!/bin/bash
+docker build -t mats9798/crypto-app:latest .
+
+#docker login -u mats9798
+#7da17db8-5116-43c9-a511-bd794b081b2e
+
+docker push mats9798/crypto-app:latest
+
+#docker run --rm -t --name crypto-app -p 9000:80 mats9798/crypto-app:latest

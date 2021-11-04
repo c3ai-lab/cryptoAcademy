@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+    crypto-app:
+        container_name: crypto-app
+        restart: always
+        image: mats9798/crypto-app:latest
+        volumes:
+            - ./prod.env:/app/.env
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        ports:
+            - 8888:80
