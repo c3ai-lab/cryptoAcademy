@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from './pages/Home.vue';
-import About from './pages/About.vue';
+import crypto from './views/dashboard/crypto.vue';
 
 Vue.use(VueRouter);
 
@@ -12,13 +11,8 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: About
+            name: 'crypto',
+            component: crypto
         },
     ]
 });

@@ -20,7 +20,7 @@ fi
 
 echo_and_run docker run --rm --interactive --tty -v $(pwd):/app -w /app -u $UID mats9798/crypto-app:latest composer update
 echo_and_run docker run --rm --interactive --tty -v $(pwd):/app -w /app -u $UID mats9798/crypto-app:latest composer install --no-interaction --optimize-autoloader
-echo_and_run docker run --rm --interactive --tty -v $(pwd):/app -w /app node:12.14 npm install
+echo_and_run docker run --rm --interactive --tty -v $(pwd):/app -w /app node:14 npm install
 
 echo_and_run docker exec -it crypto-app chmod -R 777 ./storage
 echo_and_run docker exec -it crypto-app chmod 777 ./.env

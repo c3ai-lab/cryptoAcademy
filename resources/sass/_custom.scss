@@ -1,0 +1,175 @@
+.modal-backdrop {
+    opacity: .5;
+}
+
+.modal-header,
+.alert {
+    .close {
+        padding: 0.5rem 1.75rem;
+        background: transparent;
+        border: 0;
+        font-size: 25px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: .5;
+        width: 1em;
+        height: 1em;
+        z-index: 2;
+
+        button {
+            display: none;
+        }
+    }
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vhd__datepicker__input {
+    height: $input-height !important;
+    line-height: $input-height !important;
+}
+
+.form-check {
+    .custom-control-input {
+        border-radius: .25em;
+        float: left;
+        margin: 3px 3px 3px -19px !important;
+    }
+}
+
+.check-group {
+    input {
+        position: absolute;
+        clip: rect(0,0,0,0);
+        pointer-events: none;
+    }    
+}
+
+
+.dataTables_length {
+    select {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+.datepicker__input {
+    background-color: $input-bg;
+    height: $input-height !important;
+    line-height: 2.5 !important;
+}
+.vnis__input, .datepicker__wrapper, .datepicker__inner, .datepicker__input {
+    background-color: $input-bg !important;
+    color: $input-color !important;
+    border-color: $input-border-color !important;
+}
+.datepicker__dummy-wrapper{
+    overflow: hidden;
+    border-color: $input-border-color !important;
+}
+.datepicker__input:focus {
+    outline: 0px solid !important;
+}
+// .datepicker__week-row {
+//     border-bottom: 5px solid $hr-border-color !important;
+// }
+// .datepicker__months:before {
+//     background: $hr-border-color !important;
+// }
+.datepicker__month-day--allowed-checkout:hover, .datepicker__month-day--valid:hover {
+    background-color: $primary !important;
+    color: $white !important;
+}
+.mx-datepicker {
+    .mx-icon-calendar{
+        color: $input-color !important;
+    }
+}
+
+.blog-card {
+    > h5 {
+        position: absolute;
+        margin-top: 10px !important;    
+    }
+    .tabs {
+        width: 100%;
+        .card-body {
+            padding: 1.25rem 0 0;
+        }
+    }
+}
+
+
+.modal-backdrop {
+    opacity: .5;
+}
+
+.modal-header,
+.alert {
+    .close {
+        padding: 0.5rem 1.75rem;
+        background: transparent;
+        border: 0;
+        font-size: 25px;
+        position: absolute;
+        top: -3px;
+        right: 0;
+        opacity: .5;
+        width: 1em;
+        height: 1em;
+        z-index: 2;
+
+        button {
+            display: none;
+        }
+    }
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vhd__datepicker__input {
+    height: $input-height !important;
+    line-height: $input-height !important;
+}
+
+.form-check {
+    .custom-control-input {
+        border-radius: .25em;
+        float: left;
+        margin: 3px 3px 3px -19px !important;
+    }
+}
+
+.check-group {
+    input {
+        position: absolute;
+        clip: rect(0,0,0,0);
+        pointer-events: none;
+    }    
+}
+
+// drawer
+.vue-simple-drawer {
+    background: $gray-100 !important;
+    color: $gray-800 !important;
+
+    .close-btn {
+        .leftright,
+        .rightleft {
+            width: 20px !important;
+            background-color: $gray-600 !important
+        }
+    }
+}
+
+body {
+    * {
+        outline: none;
+    }
+}
