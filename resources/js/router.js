@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import crypto from './views/dashboard/crypto.vue';
+import CryptoDashboard from "./views/CryptoDashboard.vue"
 
 Vue.use(VueRouter);
 
@@ -11,8 +11,8 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'crypto',
-            component: crypto
+            name: 'CryptoDashboard',
+            component: CryptoDashboard
         },
     ]
 });
