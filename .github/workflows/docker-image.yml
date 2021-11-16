@@ -14,10 +14,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Composer install
-      run: docker run --rm --interactive --tty -v $(pwd):/app -w /app -u $UID mats9798/crypto-app:latest composer install --no-interaction --optimize-autoloader --no-dev
-    - name: Npm install
-      run: docker run --rm --interactive --tty -v $(pwd):/app -w /app node:14 npm install --production
+    - name: Version
+      run: |
+            docker --version
+            node --version
+            composer --version
+  #  - name: Composer install
+  #    run: docker run --rm --interactive --tty -v $(pwd):/app -w /app -u $UID mats9798/crypto-app:latest composer install --no-interaction --optimize-autoloader --no-dev
+  #  - name: Npm install
+  #    run: docker run --rm --interactive --tty -v $(pwd):/app -w /app node:14 npm install --production
   #  - name: Build the Docker image
   #    run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       
