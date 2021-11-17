@@ -11,7 +11,7 @@ $ bash docker/developer/startup
 ODER 
 
 ```bash
-$ chmod +x docker/developer/startup
+$ chmod +x docker/developer/startup #Nur einmal danach nur noch die nächste Zeile
 $ ./docker/developer/startup
 ```
 
@@ -24,6 +24,6 @@ $ bash npm-exec run watch
 ODER 
 
 ```bash
-$ chmod +x npm-exec
+$ chmod +x npm-exec #Nur einmal danach nur noch die nächste Zeile
 $ ./npm-exec run watch
 ```
