@@ -74,6 +74,8 @@
         "vuetable-2": "^1.7.5"
     },
     "dependencies": {
+        "binance": "^2.0.16",
+        "crypto-browserify": "^3.12.0",
         "vue-router": "^3.5.3"
     }
 }
