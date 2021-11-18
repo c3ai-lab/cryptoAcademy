@@ -22,6 +22,7 @@ services:
         restart: always
         networks:
             crypto-net:
+                ipv4_address: 172.23.0.42
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: cryptoacademy
