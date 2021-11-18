@@ -5,10 +5,10 @@
 </template>
 
 <style lang="sass" scoped>
-.main {
-    width: 75vw;
-    margin: 2rem auto;
-}
+// .main {
+//     width: 75vw;
+//     margin: 2rem auto;
+// }
 </style>
 
 <script>
