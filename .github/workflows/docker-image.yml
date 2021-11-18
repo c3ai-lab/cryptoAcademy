@@ -1,9 +1,9 @@
 name: Build and Push Docker Image CI
 
 on:
-  create:
+  push:
     tags:
-      - *
+      - '*'
 
 jobs:
   build:
