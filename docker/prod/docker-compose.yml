@@ -5,8 +5,53 @@ services:
         restart: always
         image: mats9798/crypto-app:latest
         volumes:
-            - ./prod.env:/app/.env
+            - ./env:/app/.env
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
         ports:
-            - 8888:80
+            - 80:80
+            - 443:443
+        networks:
+            crypto-net:
+
+    crypto-app_db:
+        container_name: crypto-app_db
+        image: mysql:8
+        restart: always
+        networks:
+            crypto-net:
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: cryptoacademy
+            MYSQL_USER: cryptoacademy
+            MYSQL_PASSWORD: cryptoacademy
+        volumes:
+            - crypto_mysql_data:/var/lib/mysql
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        depends_on:
+            - crypto-app_db
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        environment:
+            - PMA_ABSOLUTE_URI=http://pma.developer.local
+            - PMA_HOST=crypto-app_db
+            - PMA_VERBOSE=CryptoAcademy
+            - UPLOAD_LIMIT=2500M
+        networks:
+            crypto-net:
+        ports:
+            - 8080:80
+volumes:
+    crypto_mysql_data:
+        name: crypto_mysql_data
+
+networks:
+    crypto-net:
+        name: crypto-net
+        driver: bridge
