@@ -24,7 +24,7 @@ class CreateCandlesTable extends Migration
             $table->timestamps();
 
             $table->foreignId('symbol_id')->constrained();
-            $table->foreignId('time_frame_id_id')->constrained();
+            $table->foreignId('time_frame_id')->constrained();
 
             $table->index(['mts', 'symbol_id', 'time_frame_id']);
         });
