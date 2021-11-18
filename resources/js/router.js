@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from './pages/Home.vue';
-import About from './pages/About.vue';
+import MainView from "./views/MainView.vue";
+import LoginView from "./views/LoginView.vue";
+import RegisterView from "./views/RegisterView.vue";
 
 Vue.use(VueRouter);
 
@@ -12,13 +13,18 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home
+            name: 'main',
+            component: MainView,
         },
         {
-            path: '/about',
-            name: 'about',
-            component: About
+            path: '/login',
+            name: 'login',
+            component: LoginView,
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: RegisterView,
         },
     ]
 });

@@ -1,0 +1,22 @@
+{
+    "auth": {
+        "welcome": "Herlich willkommen!",
+        "welcome_back": "Willkommen zurück!",
+        "register_for_free": "Registriere dich um mitzumachen.",
+        "login_to_continue": "Melde dich an um fortzufahren.",
+        "email": "E-Mail",
+        "username": "Benutzername",
+        "password": "Passwort",
+        "enter_email": "E-Mail eingeben",
+        "enter_username": "Benutzername eingeben",
+        "enter_password": "Passwort eingeben",
+        "register_now": "Jetzt registrieren!",
+        "register_with": "Registrieren mit",
+        "login_now": "Jetzt einloggen!",
+        "login_with": "Einloggen mit",
+        "forgot_password": "Passwort vergessen?",
+        "no_account": "Noch keinen Account?",
+        "already_account": "Bereits einen Account?",
+        "accept_by_registration": "Mit der Registrierung akzeptieren Sie die"
+    }
+}
