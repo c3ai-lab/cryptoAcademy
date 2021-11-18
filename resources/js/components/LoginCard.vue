@@ -128,10 +128,3 @@ export default Vue.extend({
   name: "LoginCard",
 });
 </script>
-
-<style lang="scss" scoped>
-.main {
-  width: 28rem;
-  margin: 5rem auto 0 auto;
-}
-</style>

@@ -1,15 +1,12 @@
 <template>
-    <div class="main">
-        <router-view></router-view>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <router-view class="my-5"></router-view>
+            </div>
+        </div>
     </div>
 </template>
-
-<style lang="sass" scoped>
-.main {
-    width: 75vw;
-    margin: 2rem auto;
-}
-</style>
 
 <script>
 export default {
