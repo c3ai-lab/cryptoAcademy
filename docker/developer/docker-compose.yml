@@ -12,7 +12,7 @@ services:
             - /etc/timezone:/etc/timezone:ro
         hostname: crypto-app.developer.local
         ports:
-            - 9000:80
+            - 9876:80
         networks:
             crypto-net:
 
