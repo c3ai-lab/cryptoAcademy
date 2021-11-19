@@ -18,11 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: .env
-        run: |
-          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/.env
-          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/.env
-
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
 
@@ -43,11 +38,15 @@ jobs:
           docker build . --file docker/prod/Dockerfile --tag mats9798/cryptocademy:latest
           docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
           docker push mats9798/cryptocademy:latest
+      - name: .env
+        run: |
+          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/prod.env
+          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/prod.env
       - name: Move .env, docker-compose and startup to Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
-          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/.env "${{ env.SSH_CONNECTION }}:app/.env"
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/prod.env "${{ env.SSH_CONNECTION }}:app/.env"
           rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
 
