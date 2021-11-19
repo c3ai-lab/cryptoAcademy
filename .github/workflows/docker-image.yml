@@ -8,7 +8,7 @@ on:
 
 env:
   NODE_VERSION: '14.x'                # set this to the node version to use
-  SSH_CONNECTION: 'azureuser@20.103.253.225:app'
+  SSH_CONNECTION: 'azureuser@20.103.253.225'
 
 jobs:
   build-and-deploy:
@@ -17,6 +17,11 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v2
+
+      - name: Move .env, docker-compose and startup to Prod-Server
+        run: |
+          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
 
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
