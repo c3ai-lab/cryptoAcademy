@@ -2,14 +2,28 @@
 
 ## Commands
 
-Run development docker container(s):
+### Run development docker container(s):
 
 ```bash
-$ docker/developer/startup
+$ bash docker/developer/startup
 ```
 
-Build VueJS frontend (hot reload):
+ODER 
 
 ```bash
+$ chmod +x docker/developer/startup #Nur einmal danach nur noch die nächste Zeile
+$ ./docker/developer/startup
+```
+
+### Build VueJS frontend (hot reload):
+
+```bash
+$ bash npm-exec run watch
+```
+
+ODER 
+
+```bash
+$ chmod +x npm-exec #Nur einmal danach nur noch die nächste Zeile
 $ ./npm-exec run watch
 ```
