@@ -40,8 +40,8 @@ jobs:
           docker push mats9798/cryptocademy:latest
       - name: .env
         run: |
-          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" .env
-          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" .env
+          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" ./docker/prod/.env
+          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" ./docker/prod/.env
       - name: Move .env, docker-compose and startup to Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
