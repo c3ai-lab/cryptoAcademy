@@ -6,30 +6,47 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  NODE_VERSION: '14.x'                # set this to the node version to use
+  SSH_CONNECTION: 'azureuser@20.103.253.225:app'
+
 jobs:
-
-  build:
-
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v2
-      - name: Version
-        run: |
-          docker --version
-          node --version
-          composer --version
+
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
-      - name: Npm install
-        run: npm install --production
-      - name: PHP Artisan
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: npm install, build, and test
         run: |
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+          # Build and test the project
+          npm install --production
+          npm run build --if-present
+          npm run test --if-present
+
       - name: Build the Docker image
         run: |
-          docker build . --file Dockerfile --tag mats9798/crypto-app:latest
-          docker login -u mats9798 -p mats9798mats9798
-          docker push mats9798/crypto-app:latest
+          docker build . --file docker/prod/Dockerfile --tag mats9798/cryptocademy:latest
+          docker login -u mats9798 -p ${{ env.DOCKER_LOGIN_PASSWORD }}
+          docker push mats9798/cryptocademy:latest
+      - name: .env
+        run: |
+          sed -ri -e "s!APP_KEY=!APP_KEY=${{ env.APP_KEY }}!g" .env
+          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ env.DB_PASSWORD }}!g" .env
+      - name: Move .env, docker-compose and startup to Prod-Server
+        run: |
+          mkdir -p ~/.ssh && echo "${{ env.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' ./docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' ./docker/prod/.env "${{ env.SSH_CONNECTION }}:app/.env"
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' ./docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
 
