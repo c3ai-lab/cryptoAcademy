@@ -7,6 +7,8 @@ DOCKER_DIR=$(pwd)/docker/developer
 PROJECT_ROOT=$(pwd)
 echo "PROJECT_ROOT=$PROJECT_ROOT" > $DOCKER_DIR/.env
 
+#echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml rm --stop -f -v
+
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml pull
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml up -d --force-recreate
 echo_and_run rm -rf $(pwd)/composer.lock
@@ -28,4 +30,6 @@ echo_and_run docker exec -it crypto-app php artisan config:cache
 echo_and_run docker exec -it crypto-app php artisan route:cache
 # Optimizing View loading
 echo_and_run docker exec -it crypto-app php artisan view:cache
+# Migrations
+echo_and_run docker exec -it crypto-app php artisan migrate
 

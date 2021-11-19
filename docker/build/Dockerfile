@@ -5,7 +5,7 @@ LABEL maintainer="Magdalena Tsolaki"
 RUN apt-get clean
 RUN apt-get update
 
-ARG NODE_VERSION=16
+ARG NODE_VERSION=14
 
 ENV TZ=Europe/Berlin
 
@@ -38,8 +38,6 @@ RUN set -ex; \
         echo 'date.timezone = "'${TZ}'"'; \
     } > $PHP_INI_DIR/php.ini
 
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-
 # And clean up the image
 RUN apt-get -y autoremove \
     && apt-get clean \
@@ -56,6 +54,9 @@ RUN touch /etc/cron.d/cron && chmod 0644 /etc/cron.d/cron
 
 # Add cron to base-image entrypoint script
 RUN sed -i 's/^exec /docker-laravel-entrypoint\n\nexec /' /usr/local/bin/apache2-foreground
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!$APACHE_DOCUMENT_ROOT!g' /etc/apache2/sites-available/*.conf
 
 VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2"]
 EXPOSE 80 443
