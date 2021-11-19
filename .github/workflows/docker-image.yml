@@ -21,6 +21,7 @@ jobs:
       - name: Move .env, docker-compose and startup to Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PUBLIC_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa.pub
           ssh -o StrictHostKeyChecking=no ${{ env.SSH_CONNECTION }}
 
       - name: Composer install
@@ -50,6 +51,7 @@ jobs:
       - name: Move .env, docker-compose and startup to Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PUBLIC_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa.pub
           rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
           rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/prod.env "${{ env.SSH_CONNECTION }}:app/.env"
           rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
