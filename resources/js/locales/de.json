@@ -20,11 +20,21 @@
         "accept_by_registration": "Mit der Registrierung akzeptieren Sie die"
     },
     "dashboard": {
-        "portfolio_value": "Portfoliowert"
+        "title": "Dashboard",
+        "portfolio_value": "Portfoliowert",
+        "news": "Neuigkeiten"
     },
     "datetime": {
         "month_short": "M",
         "year_short": "J",
         "all": "Gesamt"
+    },
+    "coins": {
+        "BTC": {
+            "name": "Bitcoin"
+        },
+        "ETH": {
+            "name": "Ethereum"
+        }
     }
 }
