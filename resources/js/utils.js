@@ -1,4 +1,4 @@
-export const generateSampleSeries = () => {
+export const generateSampleSeries = (name) => {
   let data = [];
 
   let y = Math.random() * 1000 + 1;
@@ -10,7 +10,7 @@ export const generateSampleSeries = () => {
 
   return [
     {
-      name: "Beispiel",
+      name: name,
       data: data,
     },
   ];

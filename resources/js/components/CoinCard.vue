@@ -53,7 +53,7 @@ export default {
 
   data: function () {
     return {
-      series: generateSampleSeries(),
+      series: generateSampleSeries(this.coin),
     };
   },
 

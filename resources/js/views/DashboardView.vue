@@ -34,7 +34,7 @@ export default {
     return {
       Coin,
 
-      series: generateSampleSeries(),
+      series: generateSampleSeries("Total"),
 
       newsTitle: "Ich bin ein toller Titel",
       newsText:
