@@ -134,13 +134,6 @@ export const APEXCHART_OPTIONS = {
   },
   xaxis: {
     type: "datetime",
-    min: new Date("01 Mar 2012").getTime(),
-    tickAmount: 6,
-  },
-  tooltip: {
-    x: {
-      format: "dd MMM yyyy",
-    },
   },
   fill: {
     type: "gradient",

@@ -5,6 +5,7 @@
       <li><router-link to="login">LoginView</router-link></li>
       <li><router-link to="register">RegisterView</router-link></li>
       <li><router-link to="dashboard">DashboardView</router-link></li>
+      <li><router-link to="profile">ProfileView</router-link></li>
     </ul>
   </div>
 </template>
