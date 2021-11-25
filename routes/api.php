@@ -13,15 +13,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-//bash php-exec
-Route::group([
-  'middleware' => 'api',
-  'prefix' => 'auth'
 
-], function ($router) {
+Route::group(['prefix' => 'auth'], function ($router) {
   Route::post('/login', [AuthController::class, 'login']);
   Route::post('/register', [AuthController::class, 'register']);
-  Route::post('/logout', [AuthController::class, 'logout']);
-  Route::post('/refresh', [AuthController::class, 'refresh']);
-  Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+  Route::group(['middleware' => 'jwt'], function ($router) {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+  });
 });
