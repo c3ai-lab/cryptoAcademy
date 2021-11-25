@@ -2,7 +2,7 @@
   <p>© 2021 CryptoCademy</p>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
 
 export default Vue.extend({
