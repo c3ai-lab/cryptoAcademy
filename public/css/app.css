@@ -2366,13 +2366,13 @@ progress {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .container-xl,
   .container-lg,
   .container-md,
   .container-sm,
   .container {
-    max-width: 1140px;
+    max-width: 1340px;
   }
 }
 
@@ -2383,7 +2383,7 @@ progress {
   .container-md,
   .container-sm,
   .container {
-    max-width: 1320px;
+    max-width: 1620px;
   }
 }
 
@@ -3256,7 +3256,7 @@ progress {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .col-xl {
     flex: 1 0 0%;
   }
@@ -3880,7 +3880,7 @@ progress {
   }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1139.98px) {
   .table-responsive-xl {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -5872,7 +5872,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .dropdown-menu-xl-start {
     --bs-position: start;
   }
@@ -6558,7 +6558,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .navbar-expand-xl {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -7658,7 +7658,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .list-group-horizontal-xl {
     flex-direction: row;
   }
@@ -8133,7 +8133,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .modal-xl {
     max-width: 1140px;
   }
@@ -8245,7 +8245,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1139.98px) {
   .modal-fullscreen-xl-down {
     width: 100vw;
     max-width: none;
@@ -9218,7 +9218,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .sticky-xl-top {
     position: -webkit-sticky;
     position: sticky;
@@ -13191,7 +13191,7 @@ fieldset:disabled .btn {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   .float-xl-start {
     float: left !important;
   }
@@ -51176,6 +51176,10 @@ readers do not read off random characters that represent icons */
   color: #495057 !important;
 }
 
+.card {
+  box-shadow: 0 1rem 1.5rem rgba(95, 95, 95, 0.13);
+}
+
 .blog-card > h5,
 .blog-card > .h5 {
   position: absolute;
@@ -52224,7 +52228,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
   background-color: transparent;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1140px) {
   body[data-layout=horizontal] .container-fluid,
   body[data-layout=horizontal] .container-sm,
   body[data-layout=horizontal] .container-md,

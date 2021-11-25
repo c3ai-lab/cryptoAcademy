@@ -22,7 +22,8 @@
     "dashboard": {
         "title": "Dashboard",
         "portfolio_value": "Portfoliowert",
-        "news": "Neuigkeiten"
+        "news": "Neuigkeiten",
+        "coins": "Coins"
     },
     "datetime": {
         "month_short": "M",

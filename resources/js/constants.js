@@ -82,14 +82,14 @@ export const COIN_CARD_APEXCHART_OPTIONS = {
   },
   stroke: {
     curve: "smooth",
-    width: 2,
+    width: 0,
   },
   fill: {
     type: "gradient",
     gradient: {
-      shadeIntensity: 1,
-      opacityFrom: 0.3,
-      opacityTo: 0.9,
+      shadeIntensity: 0,
+      opacityFrom: 0.9,
+      opacityTo: 0.6,
       stops: [0, 100],
     },
   },
