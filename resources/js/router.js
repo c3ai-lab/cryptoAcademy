@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import MainView from "./views/MainView.vue";
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
+import DashboardView from "./views/DashboardView.vue";
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,11 @@ const router = new VueRouter({
             path: '/register',
             name: 'register',
             component: RegisterView,
+        },
+        {
+            path: '/dashboard',
+            name: 'dashboard',
+            component: DashboardView,
         },
     ]
 });

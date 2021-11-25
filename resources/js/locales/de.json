@@ -18,5 +18,24 @@
         "no_account": "Noch keinen Account?",
         "already_account": "Bereits einen Account?",
         "accept_by_registration": "Mit der Registrierung akzeptieren Sie die"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "portfolio_value": "Portfoliowert",
+        "news": "Neuigkeiten",
+        "coins": "Coins"
+    },
+    "datetime": {
+        "month_short": "M",
+        "year_short": "J",
+        "all": "Gesamt"
+    },
+    "coins": {
+        "BTC": {
+            "name": "Bitcoin"
+        },
+        "ETH": {
+            "name": "Ethereum"
+        }
     }
 }
