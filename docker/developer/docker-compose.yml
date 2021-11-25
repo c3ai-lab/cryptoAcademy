@@ -3,20 +3,20 @@ services:
     crypto-app:
         container_name: crypto-app
         restart: always
-        image: mats9798/crypto-app:latest
+        image: mats9798/laravel8-php-8-apache:latest
         extra_hosts:
             - "host.docker.internal:host-gateway"
         volumes:
-            - ${PROJECT_ROOT}:/app
+            - ${PROJECT_ROOT}:/var/www/html
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-        hostname: crypto-app.developer.local
+        hostname: cryptocademy.developer.local
         ports:
-            - 9000:80
+            - 9876:80
         networks:
             crypto-net:
 
-    crypto-app-db:
+    crypto-app_db:
         container_name: crypto-app_db
         image: mysql:8
         restart: always
@@ -24,7 +24,7 @@ services:
             crypto-net:
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: cryptoacademy
+            MYSQL_DATABASE: cryptocademy
         volumes:
             - crypto_mysql_data:/var/lib/mysql
             - /etc/localtime:/etc/localtime:ro
@@ -34,7 +34,7 @@ services:
         container_name: phpmyadmin
         restart: always
         depends_on:
-            - crypto-app-db
+            - crypto-app_db
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
@@ -57,4 +57,4 @@ networks:
         driver: bridge
         ipam:
             config:
-                - subnet: 172.23.0.0/24
+                -   subnet: 172.23.0.0/24

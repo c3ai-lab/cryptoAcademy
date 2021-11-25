@@ -1,0 +1,59 @@
+name: Build and Push Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  NODE_VERSION: '14.x'                # set this to the node version to use
+  SSH_CONNECTION: 'azureuser@20.103.253.225'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+
+#      - name: Move .env, docker-compose and startup to Prod-Server
+#        run: |
+#          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+#          echo "${{ secrets.SSH_PUBLIC_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa.pub && chmod 600 ~/.ssh/id_rsa.pub
+#          ssh -o StrictHostKeyChecking=no ${{ env.SSH_CONNECTION }}
+
+      - name: Composer install
+        run: composer install --no-interaction --optimize-autoloader --no-dev
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: npm install, build, and test
+        run: |
+          # Build and test the project
+          npm install --production
+          npm run build --if-present
+          npm run test --if-present
+
+      - name: Build the Docker image
+        run: |
+          docker build . --file docker/prod/Dockerfile --tag mats9798/cryptocademy:latest
+          docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
+          docker push mats9798/cryptocademy:latest
+      - name: .env
+        run: |
+          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/prod.env
+          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/prod.env
+      - name: Move .env, docker-compose and startup to Prod-Server
+        run: |
+          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PUBLIC_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa.pub && chmod 600 ~/.ssh/id_rsa.pub
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/prod.env "${{ env.SSH_CONNECTION }}:app/.env"
+          rsync -aPc -e 'ssh -o StrictHostKeyChecking=no' docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
+
