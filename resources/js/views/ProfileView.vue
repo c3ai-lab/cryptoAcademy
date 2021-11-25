@@ -4,6 +4,7 @@
     <div class="card">
       <div class="card-body">
         <Avatar :username="user.username" class="avatar" />
+        <i class="mdi mdi-logout text-danger"></i>
         <p>{{ user.username }}</p>
         <p>{{ user.email }}</p>
         <hr />
