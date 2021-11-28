@@ -1,6 +1,17 @@
 <template>
-    <div v-if="isLoaded">
-        <h1>{{symbol}}</h1>
+    <div v-if="hasLoadedSeries">
+        <h1>
+            <b-form-select
+                v-model="symbol"
+                :options="symbols"
+                style="background: none; outline: none; border: none;"
+                @change="onSymbolChange"
+            ></b-form-select>
+        </h1>
+        <div v-if="hasLoadedPrice" style="margin-left: 6px; font-size: 16px">
+        {{price | usd}}
+        </div>
+
         <apexchart
             class="apex-charts"
             type="line"
@@ -9,7 +20,11 @@
             :options="chartOptions"
             ref="chart"
         ></apexchart>
-        {{price}}
+        <div style="display: flex; justify-content: space-evenly;">
+            <button v-for="(dimension, i) in dimensions" :key="i" class="btn">
+                {{dimension}}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -29,9 +44,29 @@ const binanceWs = new WebsocketClient({
 export default {
     data() {
         return {
-            isLoaded: false,
+            hasLoadedSeries: false,
+            hasLoadedPrice: false,
             price: null,
+            dimensions: [
+                '1H',
+                '1D',
+                '1W',
+                '1M',
+                'All',
+            ],
+            wsKey: null,
             symbol: 'BTCUSDT',
+            symbols: [
+                'BTCUSDT',
+                'ETHUSDT',
+                'BNBUSDT',
+                'SOLUSDT',
+                'ADAUSDT',
+                'XRPUSDT',
+                'DOTUSDT',
+                'DOGEUSDT',
+                'SHIBUSDT',
+            ],
             timeframe: [
                 {
                 name: '30 Minuten',
@@ -66,8 +101,8 @@ export default {
                     enabled: false
                 },
                 stroke: {
-                    curve: 'straight',
-                    width: 1.5,
+                    curve: 'smooth',
+                    width: 2,
                     dashArray: [0, 0, 3]
                 },
                 fill: {
@@ -113,38 +148,60 @@ export default {
         }
     },
     created() {
-        binanceWs.subscribeKlines(this.symbol, this.timeframe.symbol, 'spot')
+        this.subscribeCandles()
+        this.fetchCandles()
+    },
+    methods: {
+        onSymbolChange() {
+            this.hasLoadedPrice = false
 
-        binanceWs.on('formattedMessage', (data) => {
-            if (!Array.isArray(data)) {
-                if (data.eventType === 'kline') {
-                    this.price = data.kline.close
+            this.subscribeCandles()
+            this.fetchCandles()
+        },
+        subscribeCandles() {
 
-                    if(this.isLoaded) {
-                        this.series[0].data = this.series[0].data.map(
-                                x => data.kline.startTime === x[0] ? [ x[0], data.kline.close ] : x
-                        )
-                        console.log(this.series);
-                        this.$refs.chart.updateSeries([{
-                            data: this.series[0].data
-                        }])
+            setTimeout(
+                () => binanceWs.close(this.wsKey, false),
+                1,
+            );
+            binanceWs.subscribeKlines(this.symbol, this.timeframe.symbol, 'spot')
+
+            binanceWs.on('formattedMessage', (data) => {
+                if (!Array.isArray(data)) {
+                    if (data.eventType === 'kline') {
+                        this.wsKey = data.wsKey
+                        console.log(this.wsKey);
+                        this.price = data.kline.close
+                        this.hasLoadedPrice = true
+                        if(this.hasLoadedSeries) {
+                            this.series[0].data = this.series[0].data.map(
+                                    x => data.kline.startTime === x[0] ? [ x[0], data.kline.close ] : x
+                            )
+                            // console.log(this.series);
+                            // this.$refs.chart.updateSeries([{
+                            //     data: this.series[0].data
+                            // }])
+                        }
+
+                        return
                     }
-
-                    return
                 }
-            }
-        })
+            })
+        },
+        fetchCandles() {
+            this.hasLoadedSeries = false
+            binanceRest.getKlines({
+                symbol: this.symbol,
+                interval: this.timeframe.symbol,
+                limit: 50,
+            }).then(response => {
+                this.series[0].data = response.map(x => [x[0], x[3]])
+                this.hasLoadedSeries = true
+            }).catch(error => {
+                alert(error)
+            })
+        },
 
-        binanceRest.getKlines({
-            symbol: this.symbol,
-            interval: this.timeframe.symbol,
-            limit: 20,
-        }).then(response => {
-            this.series[0].data = response.map(x => [x[0], x[3]])
-            this.isLoaded = true
-        }).catch(error => {
-            alert(error)
-        })
     }
 }
 </script>
