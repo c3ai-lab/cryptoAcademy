@@ -18,6 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Test
+        run: ls -la app/Http/Controllers/
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
 
