@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "065ed8469ec3b5828891c3827f3e641a",
+    "content-hash": "9937cec077fa79f3967be7c904b3561e",
     "packages": [
+        {
+            "name": "adrifkat/cryptopanic",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adrifkat/cryptopanic.git",
+                "reference": "15ee1c80662d58c5982a55c59bbc6b15218784fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adrifkat/cryptopanic/zipball/15ee1c80662d58c5982a55c59bbc6b15218784fa",
+                "reference": "15ee1c80662d58c5982a55c59bbc6b15218784fa",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.2",
+                "netresearch/jsonmapper": "^4.0",
+                "php": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Adrifkat\\Cryptopanic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rifkat Adeev",
+                    "email": "adrifkat@gmail.com"
+                }
+            ],
+            "description": "PHP unofficial client to cryptopanic.com API",
+            "keywords": [
+                "aggregator",
+                "api",
+                "client",
+                "crypto",
+                "cryptocurrencies",
+                "cryptopanic",
+                "news"
+            ],
+            "support": {
+                "issues": "https://github.com/adrifkat/cryptopanic/issues",
+                "source": "https://github.com/adrifkat/cryptopanic/tree/1.0.0"
+            },
+            "time": "2021-08-24T22:18:39+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",
@@ -2126,6 +2178,57 @@
                 }
             ],
             "time": "2021-11-01T21:22:20+00:00"
+        },
+        {
+            "name": "netresearch/jsonmapper",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweiske/jsonmapper.git",
+                "reference": "8bbc021a8edb2e4a7ea2f8ad4fa9ec9dce2fcb8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/8bbc021a8edb2e4a7ea2f8ad4fa9ec9dce2fcb8d",
+                "reference": "8bbc021a8edb2e4a7ea2f8ad4fa9ec9dce2fcb8d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-spl": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7.5 || ~8.0 || ~9.0",
+                "squizlabs/php_codesniffer": "~3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JsonMapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Weiske",
+                    "email": "cweiske@cweiske.de",
+                    "homepage": "http://github.com/cweiske/jsonmapper/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Map nested JSON structures onto PHP classes",
+            "support": {
+                "email": "cweiske@cweiske.de",
+                "issues": "https://github.com/cweiske/jsonmapper/issues",
+                "source": "https://github.com/cweiske/jsonmapper/tree/v4.0.0"
+            },
+            "time": "2020-12-01T19:48:11+00:00"
         },
         {
             "name": "nette/schema",
