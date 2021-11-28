@@ -13,6 +13,11 @@ import tinymce from "vue-tinymce-editor";
 // import * as VueGoogleMaps from "vue2-google-maps";
 // import VueSweetalert2 from "vue-sweetalert2";
 
+
+//Filters:
+import './filters.js';
+
+
 Vue.use(BootstrapVue);
 Vue.component("apexchart", VueApexCharts);
 Vue.component("tinymce", tinymce);
