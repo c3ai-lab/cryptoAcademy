@@ -17,7 +17,9 @@
         "forgot_password": "Passwort vergessen?",
         "no_account": "Noch keinen Account?",
         "already_account": "Bereits einen Account?",
-        "accept_by_registration": "Mit der Registrierung akzeptieren Sie die"
+        "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
+        "login_failed": "Anmeldung fehlgeschlagen!",
+        "register_failed": "Registrierung fehlgeschlagen!"
     },
     "dashboard": {
         "title": "Dashboard",
