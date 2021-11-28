@@ -21,8 +21,6 @@ COPY . .
 RUN rm -rf .editorconfing .git .github .gitignore .styleci.yml README.md composer-exec composer.json composer.lock docker npm-exec package-lock.json package.json php-exec tests webpack.mix.js
 RUN composer update
 RUN composer install --no-interaction --optimize-autoloader --no-dev
-# Optimizing Configuration loading
-RUN php artisan config:cache
 # Optimizing Route loading
 RUN php artisan route:cache
 # Optimizing View loading
