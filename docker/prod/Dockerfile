@@ -2,8 +2,6 @@ FROM mats9798/laravel8-php-8-apache:latest
 
 LABEL maintainer="Magdalena Tsolaki"
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 RUN set -ex; \
