@@ -3,9 +3,8 @@ services:
     crypto-app:
         container_name: crypto-app
         restart: always
-        image: mats9798/crypto-app:latest
+        image: mats9798/cryptocademy:latest
         volumes:
-            - ./env:/app/.env
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
         ports:
@@ -22,9 +21,9 @@ services:
             crypto-net:
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: cryptoacademy
-            MYSQL_USER: cryptoacademy
-            MYSQL_PASSWORD: cryptoacademy
+            MYSQL_DATABASE: cryptocademy
+            MYSQL_USER: cryptocademy
+            MYSQL_PASSWORD: cryptocademy
         volumes:
             - crypto_mysql_data:/var/lib/mysql
             - /etc/localtime:/etc/localtime:ro

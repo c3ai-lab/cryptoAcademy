@@ -2366,13 +2366,21 @@ progress {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .container-xl,
   .container-lg,
   .container-md,
   .container-sm,
   .container {
+<<<<<<< HEAD
     max-width: 1140px;
+=======
+    max-width: 1340px;
+>>>>>>> main
   }
 }
 
@@ -2383,7 +2391,11 @@ progress {
   .container-md,
   .container-sm,
   .container {
+<<<<<<< HEAD
     max-width: 1320px;
+=======
+    max-width: 1620px;
+>>>>>>> main
   }
 }
 
@@ -3256,7 +3268,11 @@ progress {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .col-xl {
     flex: 1 0 0%;
   }
@@ -3880,7 +3896,11 @@ progress {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 1199.98px) {
+=======
+@media (max-width: 1139.98px) {
+>>>>>>> main
   .table-responsive-xl {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -5872,7 +5892,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .dropdown-menu-xl-start {
     --bs-position: start;
   }
@@ -6558,7 +6582,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .navbar-expand-xl {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -7658,7 +7686,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .list-group-horizontal-xl {
     flex-direction: row;
   }
@@ -8133,7 +8165,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .modal-xl {
     max-width: 1140px;
   }
@@ -8245,7 +8281,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 1199.98px) {
+=======
+@media (max-width: 1139.98px) {
+>>>>>>> main
   .modal-fullscreen-xl-down {
     width: 100vw;
     max-width: none;
@@ -9218,7 +9258,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .sticky-xl-top {
     position: -webkit-sticky;
     position: sticky;
@@ -13191,7 +13235,11 @@ fieldset:disabled .btn {
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   .float-xl-start {
     float: left !important;
   }
@@ -51176,6 +51224,13 @@ readers do not read off random characters that represent icons */
   color: #495057 !important;
 }
 
+<<<<<<< HEAD
+=======
+.card {
+  box-shadow: 0 1rem 1.5rem rgba(95, 95, 95, 0.13);
+}
+
+>>>>>>> main
 .blog-card > h5,
 .blog-card > .h5 {
   position: absolute;
@@ -52224,7 +52279,11 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
   background-color: transparent;
 }
 
+<<<<<<< HEAD
 @media (min-width: 1200px) {
+=======
+@media (min-width: 1140px) {
+>>>>>>> main
   body[data-layout=horizontal] .container-fluid,
   body[data-layout=horizontal] .container-sm,
   body[data-layout=horizontal] .container-md,
