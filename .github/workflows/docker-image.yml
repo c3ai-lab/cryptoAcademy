@@ -35,6 +35,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
+          docker pull mats9798/cryptocademy:latest
           docker build . --file docker/prod/Dockerfile --tag mats9798/cryptocademy:latest
           docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
           docker push mats9798/cryptocademy:latest

@@ -4,6 +4,11 @@ LABEL maintainer="Magdalena Tsolaki"
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y ssl-cert \
+ && rm -r /var/lib/apt/lists/* \
+
 RUN set -ex; \
     { \
         echo 'memory_limit = 2G'; \
@@ -24,11 +29,6 @@ RUN php artisan route:cache
 RUN php artisan view:cache
 
 RUN chown -R www-data:www-data /var/www/html
-
-
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y ssl-cert \
- && rm -r /var/lib/apt/lists/*
 
 # enable ssl module and enable the default-ssl site
 RUN a2enmod ssl \
