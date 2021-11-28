@@ -8,7 +8,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
         ports:
-            - 80:80
+            - 80:443
             - 443:443
         networks:
             crypto-net:
@@ -45,7 +45,7 @@ services:
         networks:
             crypto-net:
         ports:
-            - 8080:80
+            - 8080:443
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data
