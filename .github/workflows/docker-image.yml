@@ -18,9 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Move .env, docker-compose and startup to Prod-Server
-        run: scp
-
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
 
