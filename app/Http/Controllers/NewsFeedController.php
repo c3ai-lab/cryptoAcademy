@@ -10,9 +10,9 @@ class NewsFeedController extends Controller
 {
   public function getAll(Request $request)
   {
-    $page = $request->has('page') ? $request->get('page') : 1;
+    $offset = $request->has('offset') ? $request->get('offset') : 1;
     $limit = $request->has('limit') ? $request->get('limit') : 10;
 
-    return response()->json(NewsFeed::query()->offset(($page - 1) * $limit)->limit($limit)->get());
+    return response()->json(NewsFeed::query()->offset($offset)->limit($limit)->get());
   }
 }
