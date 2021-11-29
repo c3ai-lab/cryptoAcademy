@@ -48,7 +48,7 @@ class Kernel extends ConsoleKernel
         }
         sleep(6);
       }
-    })->ev();
+    })->everyMinute();
   }
 
   /**

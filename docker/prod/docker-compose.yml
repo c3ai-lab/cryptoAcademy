@@ -45,7 +45,7 @@ services:
         networks:
             crypto-net:
         ports:
-            - 8080:443
+            - 8080:80
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data
