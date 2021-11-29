@@ -10,14 +10,9 @@ class NewsFeed extends Model
   use HasFactory;
 
   protected $table = 'newsfeed';
-//
-//  /**
-//   * The attributes that are mass assignable.
-//   *
-//   * @var string[]
-//   */
-//  protected $fillable = [
-//    'newsitem',
-//  ];
 
+  public function getNewsitemAttribute($value)
+  {
+    return json_decode($value);
+  }
 }

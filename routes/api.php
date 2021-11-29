@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NewsFeedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +23,6 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
-    Route::get('/news', [NewsController::class, 'getAll']);
+    Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
   });
 });

@@ -6,7 +6,6 @@ use Adrifkat\Cryptopanic\Http\Response\PostsResponse;
 use App\Models\NewsFeed;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Psy\Util\Json;
 
 class Kernel extends ConsoleKernel
 {
@@ -44,13 +43,12 @@ class Kernel extends ConsoleKernel
             return;
           $news = new NewsFeed;
           $news->id = $newsModel->id;
-          $news->newsitem = JSON::encode($newsModel);
+          $news->newsitem = json_encode($newsModel);
           $news->save();
         }
         sleep(6);
-        echo $p;
       }
-    })->everyMinute();
+    })->ev();
   }
 
   /**
