@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Adrifkat\Cryptopanic\Http\Response\PostsResponse;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
