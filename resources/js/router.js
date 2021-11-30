@@ -5,6 +5,7 @@ import { store } from "./store/main";
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
 import DashboardView from "./views/DashboardView.vue";
+import ProfileView from "./views/ProfileView.vue";
 
 Vue.use(VueRouter);
 
@@ -12,14 +13,6 @@ const router = new VueRouter({
   mode: "history",
   linkExactActiveClass: "active",
   routes: [
-    {
-      path: "/",
-      name: "dashboard",
-      component: DashboardView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
     {
       path: "/login",
       name: "login",
@@ -34,6 +27,22 @@ const router = new VueRouter({
       component: RegisterView,
       meta: {
         requiresAuth: false,
+      },
+    },
+    {
+      path: "/",
+      name: "dashboard",
+      component: DashboardView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: ProfileView,
+      meta: {
+        requiresAuth: true,
       },
     },
   ],
