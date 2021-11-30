@@ -22,8 +22,8 @@ Vue.component("tinymce", tinymce);
 // Vue.use(require("vue-chartist"));
 // Vue.use(VueSweetalert2);
 // Vue.use(VueGoogleMaps, {
-    //     load: {
-        //         key: "AIzaSyAbvyBxmMbFhrzP9Z8moyYr6dCr-pzjhBE",
+//     load: {
+//         key: "AIzaSyAbvyBxmMbFhrzP9Z8moyYr6dCr-pzjhBE",
 //         libraries: "places"
 //     },
 //     installComponents: true
@@ -32,21 +32,23 @@ Vue.component("tinymce", tinymce);
 /**
  * Set development / prodution mode
  */
- Vue.prototype.$isDev = process.env.MIX_APP_ENV !== "production";
- Vue.config.devtools = Vue.prototype.$isDev;
- Vue.config.debug = Vue.prototype.$isDev;
- Vue.config.silent = !Vue.prototype.$isDev;
+Vue.prototype.$isDev = process.env.MIX_APP_ENV !== "production";
+Vue.config.devtools = Vue.prototype.$isDev;
+Vue.config.debug = Vue.prototype.$isDev;
+Vue.config.silent = !Vue.prototype.$isDev;
 
 /**
  * Create the main app
  */
 import router from "./router";
+import { store } from "./store/main";
 import i18n from "./i18n";
 import MainLayout from "./layouts/MainLayout.vue";
 
 const app = new Vue({
-    el: "#app",
-    render: h => h(MainLayout),
-    router,
-    i18n,
+  el: "#app",
+  render: (h) => h(MainLayout),
+  router,
+  store,
+  i18n,
 });
