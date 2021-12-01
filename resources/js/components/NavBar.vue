@@ -1,7 +1,5 @@
 
 <script>
-import i18n from "../i18n";
-import simplebar from "simplebar-vue";
 
 /**
  * Nav-bar Component
@@ -9,17 +7,31 @@ import simplebar from "simplebar-vue";
 export default {
   data() {
     return {
-     
-      components: { simplebar },
       name: "NavBar",
- 
-      methods: {
-        toggleMenu() {
-          this.$parent.toggleMenu();
-        }
       }
-    }
-  }
+ },
+
+ data: function() {
+   return {
+
+   }
+ },
+
+ methods: {
+            openNav() {
+                document.getElementById('open-btn').style.display = 'none'
+                document.getElementById('close-button').style.display = 'block'
+                document.getElementById('nav-menu').style.display = 'block'
+                
+            },
+            closeNav() {
+                document.getElementById('close-button').style.display = 'none' 
+                document.getElementById('open-btn').style.display = 'block'
+                document.getElementById('nav-menu').style.display = 'none'
+            }
+        }
+    
+  
 }
 </script>
 
@@ -35,17 +47,30 @@ export default {
             </span>
           </a>
         </div>
-
+        
+        
+        
         <button
-          id="vertical-menu-btn"
+          id="open-btn"
           type="button"
-          class="btn btn-sm px-3 font-size-16 header-item"
-          @click="toggleMenu"
+          class="open btn btn-sm px-3 font-size-16 header-item"
+          @click="openNav"
         >
           <i class="fa fa-fw fa-bars"></i>
         </button>
 
-      <!--- Setting Button in Navbar
+        <button
+          id="close-button"
+          type="button"
+          style="display: none"
+          class="close btn btn-sm px-3 font-size-16 header-item"
+          @click="closeNav"
+        >
+          <i class="fa fa-fw fa-bars"></i>
+        </button>
+
+<!---
+      Setting Button in Navbar
         <div class="dropdown d-inline-block">
           <button
             type="button"
@@ -59,9 +84,42 @@ export default {
         --->
       </div>
     </div>
+    <div id="nav-menu" class="vertical-menu">
+    <router-link to="dashboard">
+          {{ $t("navigation.dashboard") }}
+        </router-link>
+        <br>
+    
+      <router-link to="login">
+          {{ $t("navigation.login") }}
+        </router-link>
+        <br>
+    <router-link to="register">
+          {{ $t("navigation.register") }}
+        </router-link>
+        <br>
+        <router-link to="profile">
+          {{ $t("navigation.profile") }}
+        </router-link>
+   
+
+  </div>
   </header>
 </template>
 
 <style scoped>
+#nav-menu
+{
+  padding: 20px;
+  font-size: 15px;
+  line-height: 3;
+  display: none;
+  background-color: #2a3042;
+ 
+}
 
+ a
+  {
+    color: white;
+  }
 </style>
