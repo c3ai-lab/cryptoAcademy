@@ -1,3 +1,5 @@
+import { Dimension } from "./enums";
+
 const APEXCHART_LOCALES = [
   {
     name: "de",
@@ -145,3 +147,25 @@ export const APEXCHART_OPTIONS = {
     },
   },
 };
+
+export const DIMENSION_MAP = {
+  [Dimension.ONE_DAY]: {
+    'interval': '30m',
+    'limit': 48,
+  },
+  [Dimension.ONE_WEEK]: {
+    'interval': '4h',
+    'limit': 42,
+  },
+  [Dimension.ONE_MONTH]: {
+    'interval': '12h',
+    'limit': 62,
+  },
+  [Dimension.ONE_YEAR]: {
+    'interval': '1w',
+    'limit': 52,
+  },
+  [Dimension.ALL]: {
+    'interval': '1w',
+  },
+}
