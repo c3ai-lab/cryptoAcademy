@@ -1,8 +1,11 @@
 <template>
   <div class="row">
-    <div class="col-12 mb-4 ">
+    <div class="col-12 mb-4">
       <h1>{{ $t("dashboard.title") }}</h1>
-      <ApexChartCard :title="$t('dashboard.portfolio_value')" :series="series" />
+      <ApexChartCard
+        :title="$t('dashboard.portfolio_value')"
+        :series="series"
+      />
     </div>
     <div class="col-lg-6 mb-4">
       <h2>{{ $t("dashboard.coins") }}</h2>
@@ -10,10 +13,12 @@
       <CoinCard :coin="Coin.ETH" />
     </div>
     <div class="col-lg-6">
-    <h2>{{ $t("dashboard.news") }}</h2>
-      <NewsCard :title="newsTitle" :text="newsText" />
-      <NewsCard :title="newsTitle" :text="newsText" />
-      <NewsCard :title="newsTitle" :text="newsText" />
+      <h2>{{ $t("dashboard.news") }}</h2>
+      <NewsCard
+        v-for="article in latestNews"
+        :key="article.id"
+        :article="article"
+      />
     </div>
   </div>
 </template>
@@ -40,13 +45,17 @@ export default {
       Coin,
 
       series: generateSampleSeries("Total"),
-
-      newsTitle: "Ich bin ein toller Titel",
-      newsText:
-        "Überall dieselbe alte Leier. Das Layout ist fertig, der Text lässt auf sich warten. " +
-        "Damit das Layout nun nicht nackt im Raume steht und sich klein und leer vorkommt, springe ich ein: " +
-        "der Blindtext.",
     };
+  },
+
+  computed: {
+    latestNews: function () {
+      return this.$store.getters["news/latest"](3);
+    },
+  },
+
+  created() {
+    this.$store.dispatch("news/fetchLatest");
   },
 };
 </script>
