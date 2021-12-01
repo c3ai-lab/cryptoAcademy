@@ -14,13 +14,14 @@
       <div class="card-body pt-1 row justify-content-center">
         <div class="p-1 col-lg-6">
           <b-alert
-            v-model="isAuthError"
+            v-model="registerFailed"
             variant="danger"
             class="mt-3"
             dismissible
-            >{{ authError }}</b-alert
           >
-          <b-form class="p-2" :action="submitUrl" method="POST">
+            {{ $t("auth.register_failed") }}
+          </b-alert>
+          <b-form class="p-2" v-on:submit.prevent>
             <slot />
             <b-form-group
               id="input-group-1"
@@ -67,7 +68,12 @@
               ></b-form-input>
             </b-form-group>
             <div class="mt-3 d-grid">
-              <b-button type="submit" variant="primary" class="btn-block">
+              <b-button
+                type="submit"
+                variant="primary"
+                class="btn-block"
+                @click="register()"
+              >
                 {{ $t("auth.register_now") }}
               </b-button>
             </div>
@@ -127,5 +133,29 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "RegisterCard",
+
+  data: function () {
+    return {
+      email: "",
+      username: "",
+      password: "",
+
+      registerFailed: null,
+    };
+  },
+
+  methods: {
+    register: function () {
+      this.$store
+        .dispatch("user/register", {
+          email: this.email,
+          username: this.username,
+          password: this.password,
+          password_confirmation: this.password,
+        })
+        .then(() => this.$router.push({ name: "login" }))
+        .catch(() => (this.registerFailed = true));
+    },
+  },
 });
 </script>

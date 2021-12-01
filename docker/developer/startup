@@ -11,7 +11,6 @@ echo "PROJECT_ROOT=$PROJECT_ROOT" > $DOCKER_DIR/.env
 
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml pull
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml up -d --force-recreate
-echo_and_run rm -rf $(pwd)/composer.lock
 
 if [ ! -f $(pwd)/.env ]; then
     echo_and_run cp -ap $DOCKER_DIR/laravel.env $(pwd)/.env

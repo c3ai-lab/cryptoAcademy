@@ -55,8 +55,8 @@ RUN touch /etc/cron.d/cron && chmod 0644 /etc/cron.d/cron
 # Add cron to base-image entrypoint script
 RUN sed -i 's/^exec /docker-laravel-entrypoint\n\nexec /' /usr/local/bin/apache2-foreground
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!$APACHE_DOCUMENT_ROOT!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2"]
 EXPOSE 80 443

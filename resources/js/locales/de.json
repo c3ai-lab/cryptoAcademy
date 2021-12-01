@@ -1,4 +1,10 @@
 {
+    "common": {
+        "yes": "Ja",
+        "no": "Nein",
+        "save": "Speichern",
+        "abort": "Abbrechen"
+    },
     "auth": {
         "welcome": "Herzlich willkommen!",
         "welcome_back": "Willkommen zurück!",
@@ -17,13 +23,23 @@
         "forgot_password": "Passwort vergessen?",
         "no_account": "Noch keinen Account?",
         "already_account": "Bereits einen Account?",
-        "accept_by_registration": "Mit der Registrierung akzeptieren Sie die"
+        "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
+        "login_failed": "Anmeldung fehlgeschlagen!",
+        "register_failed": "Registrierung fehlgeschlagen!"
     },
     "dashboard": {
         "title": "Dashboard",
         "portfolio_value": "Portfoliowert",
         "news": "Neuigkeiten",
         "coins": "Coins"
+    },
+    "profile": {
+        "title": "Profil",
+        "change_password": "Passwort ändern",
+        "delete_account": "Account löschen",
+        "new_password": "Neues Passwort",
+        "repeat_new_password": "Neues Passwort wiederholen",
+        "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?"
     },
     "datetime": {
         "month_short": "M",
