@@ -41,7 +41,7 @@
 <script>
 import { WebsocketClient } from 'binance';
 import { MainClient } from 'binance';
-import NicePrice from '../components/NicePrice.vue';
+import { Dimension } from '../enums';
 
 const binanceRest = new MainClient({
   // Optional (default: false) - when true, response strings are parsed to floats (only for known keys).
@@ -59,7 +59,7 @@ export default {
             hasLoadedSeries: false,
             hasLoadedPrice: false,
             price: null,
-            activeDimension: '1D',
+            activeDimension: Dimension.ONE_DAY,
             dimensions: [
                 '1D',
                 '1W',
@@ -204,9 +204,10 @@ export default {
                     ]
                 }
             }
-        }
+        },
     },
     created() {
+        this.$store.dispatch('coinDetails/subscribe', { symbol: this.symbol, dimension: this.activeDimension })
         this.subscribeCandles()
         this.fetchCandles()
     },
@@ -262,7 +263,7 @@ export default {
               this.series[1].data = response.map(x => [x[0], x[3]*1.003])
               this.series[2].data = response.map(x => [x[0], x[3]*0.995])
 
-                this.hasLoadedSeries = true
+              this.hasLoadedSeries = true
             }).catch(error => {
                 alert(error)
             })

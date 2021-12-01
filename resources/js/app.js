@@ -57,6 +57,8 @@ import { store } from "./store/main";
 import i18n from "./i18n";
 import MainLayout from "./layouts/MainLayout.vue";
 
+store.dispatch('coinDetails/init');
+
 const app = new Vue({
   el: "#app",
   render: (h) => h(MainLayout),

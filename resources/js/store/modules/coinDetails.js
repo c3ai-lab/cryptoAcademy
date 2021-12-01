@@ -31,7 +31,7 @@ const actions = {
           commit('setEurUsdt', data.kline.close);
         }
       }
-    })
+    });
   },
   subscribe({ commit, state }, { symbol, dimension }) {
     if (state[symbol] === undefined || state[symbol][dimension] === undefined) {
