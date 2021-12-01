@@ -24,26 +24,14 @@ export default {
 </script>
 
 <template>
-  <header id="page-topbar">
-    <div class="navbar-header">
+  <header id="page-topbar" >
+    <div>
       <div class="d-flex">
         <!-- LOGO -->
         <div class="navbar-brand-box">
-          <a href="/" class="logo logo-dark">
-            <span class="logo-sm">
-              <img src="/images/logo.svg" alt height="22" />
-            </span>
-            <span class="logo-lg">
-              <img src="/images/logo-dark.png" alt height="17" />
-            </span>
-          </a>
-
-          <a href="/" class="logo logo-light">
-            <span class="logo-sm">
-              <img src="/images/logo-light.svg" alt height="22" />
-            </span>
-            <span class="logo-lg">
-              <img src="/images/logo-light.png" alt height="19" />
+          <a href="/" class="logo">
+            <span>
+              <img src="/images/vendor/logo.png" alt height="50" />
             </span>
           </a>
         </div>
@@ -73,3 +61,7 @@ export default {
     </div>
   </header>
 </template>
+
+<style scoped>
+
+</style>

@@ -2,10 +2,10 @@
 <div>
      <NavBar />
             <SideBar :is-condensed="isMenuCondensed" />
-    <div class="container bg-white px-lg-5 my-lg-5">
+    <div class="container px-lg-5 mt-5">
         <div class="row">
-            <div class="col-12">
-                <router-view class="my-5"></router-view>
+            <div class="col-12 mt-3">
+                <router-view class="my-lg-4 my-3"></router-view>
             </div>
         </div>
     </div>

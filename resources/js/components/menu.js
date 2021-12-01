@@ -1,22 +1,22 @@
 export const menuItems = [
     {
         id: 1,
-        label: "Dashboard",
+        label: "$t('navigation.dashboard')",
         link: "/dashboard",
     },
     {
         id: 2,
-        label: "Login",
+        label: "$t('navigation.login')",
         link: "/login",
     },
     {
         id: 3,
-        label: "Register",
+        label: "$t('navigation.register')",
         link: "/register",
     },
     {
         id: 4,
-        label: "Profil",
+        label: "$t('navigation.profile')",
         link: "/profile",
     },
 
