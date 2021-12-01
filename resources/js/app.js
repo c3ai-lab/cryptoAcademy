@@ -21,6 +21,13 @@ import './filters.js';
 Vue.use(BootstrapVue);
 Vue.component("apexchart", VueApexCharts);
 Vue.component("tinymce", tinymce);
+
+
+// Custom global components
+import NicePrice from './components/NicePrice.vue'
+
+Vue.component('NicePrice', NicePrice);
+
 // Vue.use(vClickOutside);
 // Vue.use(VueMask);
 // Vue.use(Vuelidate);
