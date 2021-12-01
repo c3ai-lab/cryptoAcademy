@@ -4,7 +4,7 @@
       <b-card-title>
         <h4 class="card-title">{{ title }}</h4>
       </b-card-title>
-      <b-card-text> {{ source }} &ndash; {{ datetime }} </b-card-text>
+      <b-card-text> {{ source }} &ndash; {{ publishedAt }} </b-card-text>
     </b-card-body>
   </b-card>
 </template>
@@ -33,8 +33,10 @@ export default {
     url: function () {
       return this.article.newsitem.url;
     },
-    datetime: function () {
-      return new Date(this.article.updated_at).toLocaleString("de-DE");
+    publishedAt: function () {
+      const publishedAtTimestamp = this.article.newsitem.publishedAt;
+      if (publishedAtTimestamp == null) return "null";
+      return new Date(publishedAtTimestamp).toLocaleString("de-DE");
     },
   },
 

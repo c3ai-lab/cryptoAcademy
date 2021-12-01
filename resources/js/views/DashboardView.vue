@@ -45,11 +45,16 @@ export default {
       Coin,
 
       series: generateSampleSeries("Total"),
-      latestNews: this.$store.getters["news/latest"](3),
     };
   },
 
-  created: function () {
+  computed: {
+    latestNews: function () {
+      return this.$store.getters["news/latest"](3);
+    },
+  },
+
+  created() {
     this.$store.dispatch("news/fetchLatest");
   },
 };
