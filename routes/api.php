@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsFeedController;
+use App\Http\Controllers\SymbolController;
+use App\Http\Controllers\SymbolUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +26,9 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
+    Route::get('/symbols', [SymbolController::class, 'index']);
+    Route::get('/favorites', [SymbolUserController::class, 'index']);
+    Route::post('/favorites/{symbol}/add', [SymbolUserController::class, 'store']);
+    Route::post('/favorites/{symbol}/remove', [SymbolUserController::class, 'delete']);
   });
 });

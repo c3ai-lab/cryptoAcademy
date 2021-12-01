@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
     'name',
     'email',
     'password',
-//    'password_confirmation',
+    //    'password_confirmation',
   ];
 
   /**
@@ -50,5 +50,10 @@ class User extends Authenticatable implements JWTSubject
   public function getJWTCustomClaims()
   {
     return [];
+  }
+
+  public function favorites()
+  {
+    return $this->belongsToMany(Symbol::class, 'symbol_user');
   }
 }
