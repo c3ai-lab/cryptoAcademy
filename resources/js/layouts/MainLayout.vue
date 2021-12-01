@@ -1,8 +1,8 @@
 <template>
-    <div class="container bg-white px-lg-5 my-lg-5">
-        <div class="row">
-            <div class="col-12">
-                <router-view class="my-5"></router-view>
+    <div class="bg-white">
+        <div>
+            <div>
+                <router-view></router-view>
             </div>
         </div>
     </div>
