@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     hasLoadedData() {
-      return !!this.series
+      return this.series.length > 0
     },
     tradeSymbol() {
       return this.symbol.split('USDT')[0];
