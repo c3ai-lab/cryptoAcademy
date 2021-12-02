@@ -4,7 +4,8 @@ import { store } from "./store/main";
 
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
-import TradingView from "./views/TradingView.vue";
+import TradingIndexView from "./views/TradingIndexView.vue";
+import TradingShowView from "./views/TradingShowView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
 
@@ -49,7 +50,10 @@ const router = new VueRouter({
     {
       path: '/trading',
       name: 'trading',
-      component: TradingView,
+      component: TradingIndexView,
+      meta: {
+        requiresAuth: true,
+      },
     },
   ],
 });

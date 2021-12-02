@@ -169,3 +169,10 @@ export const DIMENSION_MAP = {
     'interval': '1w',
   },
 }
+
+export const DIMENSION_MAP_LOW_RES = {
+  [Dimension.ONE_DAY]: {
+    'interval': '1h',
+    'limit': 24,
+  },
+}
