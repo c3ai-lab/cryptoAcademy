@@ -43,11 +43,16 @@ Vue.config.silent = !Vue.prototype.$isDev;
 import router from "./router";
 import { store } from "./store/main";
 import i18n from "./i18n";
+
+import LoginLayout from "./layouts/LoginLayout.vue";
 import MainLayout from "./layouts/MainLayout.vue";
 
 const app = new Vue({
   el: "#app",
-  render: (h) => h(MainLayout),
+  render: (h) => {
+    if (store.getters["user/accessToken"]() === null) return h(LoginLayout);
+    return h(MainLayout);
+  },
   router,
   store,
   i18n,

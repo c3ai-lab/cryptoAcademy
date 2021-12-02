@@ -53,5 +53,10 @@
         "ETH": {
             "name": "Ethereum"
         }
+    },
+    "navigation": {
+        "dashboard": "Dashboard",
+        "trading": "Trading",
+        "profile": "Profil"
     }
 }
