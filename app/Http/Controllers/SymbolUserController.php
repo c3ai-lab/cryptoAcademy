@@ -16,14 +16,8 @@ class SymbolUserController extends Controller
 
   public function store(Request $request, Symbol $symbol)
   {
-    $validated = $request->validate([
-      'symbol_id' => [
-        'required',
-        'unique:symbol_user,symbol_id,' . $symbol->id . ',user_id,' . Auth::id(),
-      ],
-    ]);
-
-    User::find(Auth::id())->favorites()->attach($symbol);
+    #TODO add validation
+    $request->user()->favorites()->attach($symbol);
 
     return [
       'status' => 'success',
@@ -32,14 +26,8 @@ class SymbolUserController extends Controller
 
   public function delete(Request $request, Symbol $symbol)
   {
-    $validated = $request->validate([
-      'symbol_id' => [
-        'required',
-        'exists:symbol_user,symbol_id,' . $symbol->id . ',user_id,' . Auth::id(),
-      ],
-    ]);
-
-    User::find(Auth::id())->favorites()->detach($symbol);
+    #TODO add validation
+    $request->user()->favorites()->detach($symbol);
 
     return [
       'status' => 'success',

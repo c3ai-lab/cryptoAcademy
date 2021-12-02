@@ -66,11 +66,43 @@ const actions = {
   fetchFavorites({ commit }) {
 
   },
-  addFavorite({ commit }, id) {
-
+  addFavorite({ commit, rootGetters }, id) {
+    fetch(`/api/auth/favorites/${id}/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok === true) {
+          commit('setFavoriteForSymbol', { id, isFavorite: true });
+          return response.json();
+        }
+        return null;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
-  removeFavorite({ commit }, id) {
-
+  removeFavorite({ commit, rootGetters }, id) {
+    fetch(`/api/auth/favorites/${id}/remove`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok === true) {
+          commit('setFavoriteForSymbol', { id, isFavorite: false });
+          return response.json();
+        }
+        return null;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 }
 
@@ -81,6 +113,9 @@ const mutations = {
   setDataForSymbol(state, { symbol, data }) {
     state.all.find(x => x.api_symbol === symbol)['series'] = [{ data }];
   },
+  setFavoriteForSymbol(state, { id, isFavorite }) {
+    state.all.find(x => x.id === id).is_favorite = isFavorite;
+  }
 }
 
 export default {

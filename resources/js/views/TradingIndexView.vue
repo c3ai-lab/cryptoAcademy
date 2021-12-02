@@ -5,6 +5,8 @@
         :name="coin.name"
         :symbol="coin.api_symbol"
         :series="coin.series"
+        :isFavorite="coin.is_favorite"
+        :id="coin.id"
       />
     </div>
   </div>

@@ -2,26 +2,32 @@
   <div class="card" v-if="hasLoadedData">
     <div class="card-body">
       <div
-        style="font-size: 32px; display: flex; justify-content: space-between;"
+        class="row"
+        style="font-size: 32px;"
       >
-      <div style="display: flex">
-        {{tradeSymbol}}
-        <span
-          class="text-muted"
-          style="font-size: 13px; margin-top: 11px; margin-left: 6px"
-        >({{ name }})
-        </span>
-      </div>
-        <div
-          class="text-muted text-truncate mb-0"
-          style="font-size: 13px; margin-top: 11px;"
+        <div class="col-6" style="display: flex">
+          {{tradeSymbol}}
+          <span
+            class="text-muted"
+            style="font-size: 13px; margin-top: 15px; margin-left: 6px"
+          >{{ name }}
+          </span>
+        </div>
+        <div class="col-6" style="display: flex; justify-content: space-between; align-items: center">
+          <div
+            class="text-muted text-truncate mb-0"
+            style="font-size: 13px; margin-top: 1px"
           >
-          {{ absoluteChange >= 0 ? `+${absoluteChange}` : absoluteChange }}
-          (
-          {{ relativeChange >= 0 ? `+${relativeChange}` : relativeChange }}%
-          )
+            {{ absoluteChange >= 0 ? `+${absoluteChange}` : absoluteChange }}
+            (
+            {{ relativeChange >= 0 ? `+${relativeChange}` : relativeChange }}%
+            )
+            <i class="mdi ml-1" :class="[arrowClasses]" />
+          </div>
 
-          <i class="mdi ml-1" :class="[arrowClasses]"></i>
+          <div style="margin-top: -6px">
+            <i @click.prevent="favoriteMethod" class="mdi ml-4" :class="[favoriteClasses]" style="font-size: 24px;"/>
+          </div>
         </div>
       </div>
 
@@ -37,17 +43,19 @@
           </div>
         </div>
         <div class="col-6">
-          <div>
-            <apexchart
-              class="apex-charts"
-              :height="50"
-              :options="chartOptions"
-              :series="series"
-            />
+          <div style="position: relative">
           </div>
         </div>
       </div>
     </div>
+            <apexchart
+              class="apex-charts"
+              :height="50"
+              width="100%"
+              :options="chartOptions"
+              :series="series"
+              style="position: absolute; width: 100vw; left: 0; right: 0; bottom: 0"
+            />
   </div>
 </template>
 
@@ -60,6 +68,8 @@ export default {
     symbol: String,
     price: Number,
     series: Array,
+    id: Number,
+    isFavorite: Boolean,
   },
   created() {
     this.$store.dispatch('coinIndex/getLowResPriceData', this.symbol);
@@ -71,14 +81,14 @@ export default {
     tradeSymbol() {
       return this.symbol.split('USDT')[0];
     },
-    currentValue: function () {
+    currentValue() {
       if (this.hasLoadedData) {
         const data = this.series[0].data;
         return data[data.length - 1][1];
       }
       return null;
     },
-    absoluteChange: function () {
+    absoluteChange() {
       if (this.hasLoadedData) {
         const data = this.series[0].data;
         const absoluteChange = data[data.length - 1][1] - data[0][1];
@@ -87,7 +97,7 @@ export default {
       return null;
 
     },
-    relativeChange: function () {
+    relativeChange() {
       if (this.hasLoadedData) {
         const data = this.series[0].data;
         const relativeChange = (data[data.length - 1][1] / data[0][1] - 1) * 100;
@@ -96,15 +106,26 @@ export default {
       return null;
     },
 
-    chartOptions: function () {
+    chartOptions() {
       return {
         ...COIN_CARD_APEXCHART_OPTIONS,
-
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 0,
+            opacityFrom: 0.5,
+            opacityTo: 0.4,
+            stops: [0, 60],
+          },
+        },
+        tooltip: {
+          enabled: false,
+        },
         colors: [this.coinColor],
       };
     },
 
-    // iconClass: function () {
+    // iconClass() {
     //   switch (this.coin) {
     //     case Coin.BTC:
     //       return "mdi-bitcoin";
@@ -112,16 +133,39 @@ export default {
     //       return "mdi-ethereum";
     //   }
     // },
-    coinColor: function () {
-      return "#3c3c3d";
+    coinColor() {
+      return "#556ee6";
     },
-    arrowClasses: function () {
+    arrowClasses() {
       if (this.absoluteChange >= 0) {
         return "mdi-arrow-up text-success";
       } else {
         return "mdi-arrow-down text-danger";
       }
     },
+    favoriteClasses() {
+      if (this.isFavorite) {
+        return "mdi-heart text-danger";
+      } else {
+        return "mdi-heart-outline";
+      }
+    },
+    favoriteMethod() {
+      return this.isFavorite ? this.removeFavorite : this.setFavorite;
+    }
   },
+  methods: {
+    setFavorite() {
+      this.$store.dispatch('coinIndex/addFavorite', this.id);
+    },
+    removeFavorite() {
+      this.$store.dispatch('coinIndex/removeFavorite', this.id);
+    },
+  }
 };
 </script>
+<style scoped>
+.card-body{
+  padding: 4px 12px 0px 12px;
+}
+</style>

@@ -18,15 +18,37 @@ export default {
     series: Array
   },
   computed: {
-    chartOptions() {
-      // Filter high and low
-      let high = this.series[0].data.reduce(
+    high() {
+      return this.series[0].data.reduce(
         (prev, current) => (prev[1] > current[1]) ? prev : current
-      )
-      let low = this.series[0].data.reduce(
+      );
+    },
+    low() {
+      return this.series[0].data.reduce(
         (prev, current) => (prev[1] < current[1]) ? prev : current
-      )
+      );
+    },
+    minMts() {
 
+    },
+    maxMts() {
+
+    },
+    lowIsInFirstHalf() {
+
+    },
+    highIsInFirstHalf() {
+
+    },
+    offset() {
+      let lenOfPrice = Math.max(
+        this.$options.filters.usd(data[0][1]).length,
+        this.$options.filters.usd(data[data.length - 1][1]).length,
+      )
+      let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
+      return Math.ceil(data.length * offset) * this.timeframe.duration_mts
+    },
+    chartOptions() {
 
       // clamp high and low timestamp, that they dont overflow
       let data = this.series[0].data // for readability
@@ -44,8 +66,8 @@ export default {
       let minMts = firstMts + offsetInMts
       let maxMts = lastMts - offsetInMts
 
-      let lowIsInFirstHalf = Math.abs(low[0] - data[0][0]) <= Math.abs(low[0] - data[data.length - 1][0])
-      let highIsInFirstHalf = Math.abs(high[0] - data[0][0]) <= Math.abs(high[0] - data[data.length - 1][0])
+      let lowIsInFirstHalf = Math.abs(this.low[0] - data[0][0]) <= Math.abs(this.low[0] - data[data.length - 1][0])
+      let highIsInFirstHalf = Math.abs(this.high[0] - data[0][0]) <= Math.abs(this.high[0] - data[data.length - 1][0])
 
       return {
           chart: {
