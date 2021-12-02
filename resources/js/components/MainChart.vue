@@ -1,5 +1,5 @@
 <template>
-  <div v-if="_series">
+  <div>
     <apexchart
       class="apex-charts"
       type="line"
@@ -7,97 +7,103 @@
       :series="_series"
       :options="chartOptions"
       ref="chart"
-    >
-    </apexchart>
+    />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    series: Array
+    series: Array,
+    mtsPerTimestep: Number,
   },
-  computed: {
-    _series() {
-      if (this.series.length === 0) return null;
-      console.log(this.series);
-      return [
-        { data: this.series},
-        { data: this.series.map(x => [x[0], x[3]*1.003]) },
-        { data: this.series.map(x => [x[0], x[3]*0.995]) },
-      ];
-    },
-    // high() {
-    //   return this.series[0].data.reduce(
-    //     (prev, current) => (prev[1] > current[1]) ? prev : current
-    //   );
-    // },
-    // low() {
-    //   return this.series[0].data.reduce(
-    //     (prev, current) => (prev[1] < current[1]) ? prev : current
-    //   );
-    // },
-    minMts() {
 
+  computed: {
+    loaded() {
+      return this.series.length > 0;
+    },
+    _series() {
+      if (!this.loaded) {
+        return [];
+      }
+      const newSeries = [
+        { data: this.series},
+        { data: this.series.map(x => [x[0], x[1]*1.003]) },
+        { data: this.series.map(x => [x[0], x[1]*0.995]) },
+      ];
+
+      return newSeries
+    },
+    high() {
+      if (!this.loaded) return null;
+
+      return this.series.reduce(
+        (prev, current) => (prev[1] > current[1]) ? prev : current
+      );
+    },
+    low() {
+      if (!this.loaded) return null;
+
+      return this.series.reduce(
+        (prev, current) => (prev[1] < current[1]) ? prev : current
+      );
+    },
+    minMts() {
+      if (!this.loaded) return null;
+
+      return this.series[0][0] + this.offset
     },
     maxMts() {
+      if (!this.loaded) return null;
 
+      return this.series[this.series.length - 1][0] - this.offset
     },
     lowIsInFirstHalf() {
+      if (!this.loaded) return null;
 
+      return Math.abs(this.low[0] - this.series[0][0]) <= Math.abs(this.low[0] - this.series[this.series.length - 1][0]);
     },
     highIsInFirstHalf() {
+      if (!this.loaded) return null;
 
+      return Math.abs(this.high[0] - this.series[0][0]) <= Math.abs(this.high[0] - this.series[this.series.length - 1][0])
     },
     offset() {
-      // let lenOfPrice = Math.max(
-      //   this.$options.filters.usd(data[0][1]).length,
-      //   this.$options.filters.usd(data[data.length - 1][1]).length,
-      // )
-      // let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
-      // return Math.ceil(data.length * offset) * this.timeframe.duration_mts
+      if (!this.loaded) return null;
+
+      const lenOfPrice = Math.max(
+        this.$options.filters.eur(this.high).length,
+        this.$options.filters.eur(this.low).length,
+      )
+      const offset = 0.2 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
+      return Math.ceil(this.series.length * offset) * this.mtsPerTimestep
     },
     chartOptions() {
-
-      // clamp high and low timestamp, that they dont overflow
-      // let data = this.series[0].data // for readability
-      // let firstMts = data[0][0] // first timestamp
-      // let lastMts = data[data.length - 1][0] // last timestamp
-
-      // // relative factor: adding 0.015 per char if more chars than 7
-      // let lenOfPrice = Math.max(
-      //   this.$options.filters.usd(data[0][1]).length,
-      //   this.$options.filters.usd(data[data.length - 1][1]).length,
-      // )
-      // let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
-      // let offsetInMts = Math.ceil(data.length * offset) * this.timeframe.duration_mts
-
-      // let minMts = firstMts + offsetInMts
-      // let maxMts = lastMts - offsetInMts
-
-      // let lowIsInFirstHalf = Math.abs(this.low[0] - data[0][0]) <= Math.abs(this.low[0] - data[data.length - 1][0])
-      // let highIsInFirstHalf = Math.abs(this.high[0] - data[0][0]) <= Math.abs(this.high[0] - data[data.length - 1][0])
+      if (!this.loaded) return null;
 
       return {
           chart: {
               type: "line",
-              height: '100%',
+              height: '400px',
               sparkline: {
                   enabled: true
               },
+          },
+          animations: {
+              enabled: false,
           },
           stroke: {
               curve: "smooth",
               width: 2
           },
-          colors: [this.lineColor,"#f1b44c00","#f1b44c00"],
+          colors: ["#f1b44c","#f1b44c00","#f1b44c00"],
 
           tooltip: {
               custom: ({series, seriesIndex, dataPointIndex, w}) =>  {
                 return `
                 <div class="arrow_box"><span>
                 ${
-                  this.$options.filters.usd(
+                  this.$options.filters.eur(
                     series[seriesIndex][dataPointIndex]
                   )
                 }
@@ -109,8 +115,8 @@ export default {
           annotations: {
               points: [
                   {
-                      // x: lowIsInFirstHalf ? Math.max(low[0], minMts) : Math.min(low[0], maxMts),
-                      // y: low[1],
+                      x: this.lowIsInFirstHalf ? Math.max(this.low[0], this.minMts) : Math.min(this.low[0], this.maxMts),
+                      y: this.low[1],
                       marker: {
                         size: 0,
                       },
@@ -121,12 +127,12 @@ export default {
                           color: "#00000000",
                           background: "#00000000"
                         },
-                        // text: this.$options.filters.usd(low[1])
+                        text: this.$options.filters.eur(this.low[1])
                       }
                   },
                   {
-                      // x: highIsInFirstHalf ? Math.max(high[0], minMts) : Math.min(high[0], maxMts),
-                      // y: high[1],
+                      x: this.highIsInFirstHalf ? Math.max(this.high[0], this.minMts) : Math.min(this.high[0], this.maxMts),
+                      y: this.high[1],
                       marker: {
                         size: 0,
                       },
@@ -137,7 +143,7 @@ export default {
                           color: "#00000000",
                           background: "#00000000"
                         },
-                        // text: this.$options.filters.usd(high[1])
+                        text: this.$options.filters.eur(this.high[1])
                       }
                   },
               ]
@@ -145,10 +151,5 @@ export default {
         }
       },
     },
-
 }
 </script>
-
-<style>
-
-</style>

@@ -176,3 +176,11 @@ export const DIMENSION_MAP_LOW_RES = {
     'limit': 24,
   },
 }
+
+export const DIMENSION_TIMEFRAME_MTS_MAP = {
+  [Dimension.ONE_DAY]: 1_800_000,
+  [Dimension.ONE_WEEK]: 604_800_000,
+  [Dimension.ONE_MONTH]: 14_400_000,
+  [Dimension.ONE_YEAR]: 201_600_000,
+  [Dimension.ALL]: 201_600_000,
+}
