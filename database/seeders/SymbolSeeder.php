@@ -28,8 +28,8 @@ class SymbolSeeder extends Seeder
         'api_symbol' => 'BNBUSDT',
       ],
       [
-        'name' => 'SOLUSDT',
-        'api_symbol' => 'Solano',
+        'name' => 'Solano',
+        'api_symbol' => 'SOLUSDT',
       ],
       [
         'name' => 'Cardano',
