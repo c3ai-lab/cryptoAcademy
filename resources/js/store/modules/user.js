@@ -81,12 +81,31 @@ const actions = {
     });
   },
 
+  logout({ commit, dispatch, rootGetters }, callback) {
+    fetch("/api/auth/logout", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+    }).then((response) => {
+      if (response.ok === true) {
+        commit("clear");
+        dispatch("save");
+        callback();
+      }
+    });
+  },
+
   save({ state }) {
     localStorage.setItem("user", JSON.stringify(state));
   },
 };
 
 const mutations = {
+  clear(state) {
+    state.user = null;
+    state.accessToken = null;
+  },
   setUser(state, user) {
     state.user = user;
   },
