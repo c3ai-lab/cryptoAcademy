@@ -3,13 +3,13 @@
     <div class="card-body">
       <div
         class="row"
-        style="font-size: 32px;"
+        style="font-size: 24px;"
       >
-        <div class="col-6" style="display: flex">
+        <div class="col-6" style="display: flex" @click="showDetails">
           {{tradeSymbol}}
           <span
             class="text-muted"
-            style="font-size: 13px; margin-top: 15px; margin-left: 6px"
+            style="font-size: 13px; margin-top: 9px; margin-left: 6px"
           >{{ name }}
           </span>
         </div>
@@ -48,14 +48,17 @@
         </div>
       </div>
     </div>
-            <apexchart
-              class="apex-charts"
-              :height="50"
-              width="100%"
-              :options="chartOptions"
-              :series="series"
-              style="position: absolute; width: 100vw; left: 0; right: 0; bottom: 0"
-            />
+    <div
+      style="position: absolute; width: 100%; left: 0; right: 0; bottom: 0; border-radius: 2em"
+    >
+      <apexchart
+        class="apex-charts"
+        :height="50"
+        width="100%"
+        :options="chartOptions"
+        :series="series"
+      />
+    </div>
   </div>
 </template>
 
@@ -161,11 +164,21 @@ export default {
     removeFavorite() {
       this.$store.dispatch('coinIndex/removeFavorite', this.id);
     },
+    showDetails() {
+      this.$router.push({ name: 'trading.show', params: { symbol: this.symbol } })
+    }
   }
 };
 </script>
 <style scoped>
 .card-body{
-  padding: 4px 12px 0px 12px;
+  padding: 8px 12px 8px 12px;
+}
+.card {
+  margin: 16px 8px;
+  border-radius: 0em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 1px 2px rgba(95, 95, 95, 0.2);
 }
 </style>

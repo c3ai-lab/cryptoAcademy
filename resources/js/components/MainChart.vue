@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="_series">
     <apexchart
       class="apex-charts"
       type="line"
@@ -18,16 +18,25 @@ export default {
     series: Array
   },
   computed: {
-    high() {
-      return this.series[0].data.reduce(
-        (prev, current) => (prev[1] > current[1]) ? prev : current
-      );
+    _series() {
+      if (this.series.length === 0) return null;
+      console.log(this.series);
+      return [
+        { data: this.series},
+        { data: this.series.map(x => [x[0], x[3]*1.003]) },
+        { data: this.series.map(x => [x[0], x[3]*0.995]) },
+      ];
     },
-    low() {
-      return this.series[0].data.reduce(
-        (prev, current) => (prev[1] < current[1]) ? prev : current
-      );
-    },
+    // high() {
+    //   return this.series[0].data.reduce(
+    //     (prev, current) => (prev[1] > current[1]) ? prev : current
+    //   );
+    // },
+    // low() {
+    //   return this.series[0].data.reduce(
+    //     (prev, current) => (prev[1] < current[1]) ? prev : current
+    //   );
+    // },
     minMts() {
 
     },
@@ -41,33 +50,33 @@ export default {
 
     },
     offset() {
-      let lenOfPrice = Math.max(
-        this.$options.filters.usd(data[0][1]).length,
-        this.$options.filters.usd(data[data.length - 1][1]).length,
-      )
-      let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
-      return Math.ceil(data.length * offset) * this.timeframe.duration_mts
+      // let lenOfPrice = Math.max(
+      //   this.$options.filters.usd(data[0][1]).length,
+      //   this.$options.filters.usd(data[data.length - 1][1]).length,
+      // )
+      // let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
+      // return Math.ceil(data.length * offset) * this.timeframe.duration_mts
     },
     chartOptions() {
 
       // clamp high and low timestamp, that they dont overflow
-      let data = this.series[0].data // for readability
-      let firstMts = data[0][0] // first timestamp
-      let lastMts = data[data.length - 1][0] // last timestamp
+      // let data = this.series[0].data // for readability
+      // let firstMts = data[0][0] // first timestamp
+      // let lastMts = data[data.length - 1][0] // last timestamp
 
-      // relative factor: adding 0.015 per char if more chars than 7
-      let lenOfPrice = Math.max(
-        this.$options.filters.usd(data[0][1]).length,
-        this.$options.filters.usd(data[data.length - 1][1]).length,
-      )
-      let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
-      let offsetInMts = Math.ceil(data.length * offset) * this.timeframe.duration_mts
+      // // relative factor: adding 0.015 per char if more chars than 7
+      // let lenOfPrice = Math.max(
+      //   this.$options.filters.usd(data[0][1]).length,
+      //   this.$options.filters.usd(data[data.length - 1][1]).length,
+      // )
+      // let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
+      // let offsetInMts = Math.ceil(data.length * offset) * this.timeframe.duration_mts
 
-      let minMts = firstMts + offsetInMts
-      let maxMts = lastMts - offsetInMts
+      // let minMts = firstMts + offsetInMts
+      // let maxMts = lastMts - offsetInMts
 
-      let lowIsInFirstHalf = Math.abs(this.low[0] - data[0][0]) <= Math.abs(this.low[0] - data[data.length - 1][0])
-      let highIsInFirstHalf = Math.abs(this.high[0] - data[0][0]) <= Math.abs(this.high[0] - data[data.length - 1][0])
+      // let lowIsInFirstHalf = Math.abs(this.low[0] - data[0][0]) <= Math.abs(this.low[0] - data[data.length - 1][0])
+      // let highIsInFirstHalf = Math.abs(this.high[0] - data[0][0]) <= Math.abs(this.high[0] - data[data.length - 1][0])
 
       return {
           chart: {
@@ -100,8 +109,8 @@ export default {
           annotations: {
               points: [
                   {
-                      x: lowIsInFirstHalf ? Math.max(low[0], minMts) : Math.min(low[0], maxMts),
-                      y: low[1],
+                      // x: lowIsInFirstHalf ? Math.max(low[0], minMts) : Math.min(low[0], maxMts),
+                      // y: low[1],
                       marker: {
                         size: 0,
                       },
@@ -112,12 +121,12 @@ export default {
                           color: "#00000000",
                           background: "#00000000"
                         },
-                        text: this.$options.filters.usd(low[1])
+                        // text: this.$options.filters.usd(low[1])
                       }
                   },
                   {
-                      x: highIsInFirstHalf ? Math.max(high[0], minMts) : Math.min(high[0], maxMts),
-                      y: high[1],
+                      // x: highIsInFirstHalf ? Math.max(high[0], minMts) : Math.min(high[0], maxMts),
+                      // y: high[1],
                       marker: {
                         size: 0,
                       },
@@ -128,7 +137,7 @@ export default {
                           color: "#00000000",
                           background: "#00000000"
                         },
-                        text: this.$options.filters.usd(high[1])
+                        // text: this.$options.filters.usd(high[1])
                       }
                   },
               ]
@@ -136,7 +145,7 @@ export default {
         }
       },
     },
-  }
+
 }
 </script>
 

@@ -11,13 +11,15 @@ const binanceWs = new WebsocketClient({
 
 const state = {
   eurUsdt: 1,
+  connections: [],
+  coins: {},
 };
 
 const getters = {
-  current: (state) => (symbol, dimension) => {
-    if (state[symbol] === undefined || state[symbol][dimension] === undefined) return [];
+  getSeries: (state) => (symbol, dimension) => {
+    if (state.coins[symbol] === undefined || state.coins[symbol][dimension] === undefined) return [];
 
-    return state[symbol][dimension].map(x => [x[0], x[1] / state.eurUsdt]);
+    return state.coins[symbol][dimension].map(x => [x[0], x[1] / state.eurUsdt]);
   },
 };
 
@@ -34,7 +36,7 @@ const actions = {
     });
   },
   subscribe({ commit, state }, { symbol, dimension }) {
-    if (state[symbol] === undefined || state[symbol][dimension] === undefined) {
+    if (state.coins[symbol] === undefined || state.coins[symbol][dimension] === undefined) {
       binanceRest.getKlines({
         ...DIMENSION_MAP[dimension],
         symbol: symbol,
@@ -59,11 +61,19 @@ const mutations = {
   add(state, { symbol, dimension, data }) {
     state.user = user;
   },
+  addConnection(state, { connection, symbol }) {
+    if (state.coins[symbol] !== undefined) state.coins[symbol]['connection'] = connection;
+  },
   set(state, { symbol, dimension, data }) {
-    console.log(symbol, dimension, data);
-    if (state[symbol] === undefined) state[symbol] = {};
+    if (state.coins[symbol] === undefined) state.coins[symbol] = {};
 
-    state[symbol][dimension] = data;
+    state.coins = {
+      ...state.coins,
+      [symbol]: {
+        ...state.coins[symbol],
+        [dimension]: data,
+      },
+    };
   },
 };
 

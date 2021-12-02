@@ -1,30 +1,20 @@
 <template>
     <div>
-        <div v-if="hasLoadedSeries && hasLoadedPrice">
+        <div>
             <h1>
-                <b-form-select
-                    v-model="symbol"
-                    :options="symbols"
-                    style="background: none; outline: none; border: none;"
-                    @change="onSymbolChange"
-                ></b-form-select>
+              {{symbol}}
             </h1>
-            <div v-if="hasLoadedPrice" style="margin-left: 6px; font-size: 16px">
+            <div style="margin-left: 6px; font-size: 16px">
             <nice-price
+              v-if="price"
               style="font-size: 20px"
               :value="price"
               currency="usd"
             />
             </div>
-
-            <apexchart
-                class="apex-charts"
-                type="line"
-                dir=""
-                :series="series"
-                :options="chartOptions"
-                ref="chart"
-            ></apexchart>
+            <main-chart
+              :series="series"
+            />
             <div style="display: flex; justify-content: space-evenly;">
                 <button v-for="(dimension, i) in dimensions" :key="i" class="btn" @click="setDimension(dimension)">
                     {{dimension}}
@@ -32,16 +22,15 @@
             </div>
             {{activeDimension}}
         </div>
-        <div v-else>
-          LOADING
-        </div>
     </div>
 </template>
 
 <script>
-import { WebsocketClient } from 'binance';
-import { MainClient } from 'binance';
 import { Dimension } from '../enums';
+import { MainClient } from 'binance';
+import { mapGetters } from 'vuex';
+import { WebsocketClient } from 'binance';
+import MainChart from '../components/MainChart.vue';
 
 const binanceRest = new MainClient({
   // Optional (default: false) - when true, response strings are parsed to floats (only for known keys).
@@ -53,12 +42,17 @@ const binanceWs = new WebsocketClient({
   });
 
 export default {
+    props: {
+      symbol: String,
+    },
+    components: {
+      MainChart
+    },
     data() {
         return {
           lineColor: "#f1b44c",
             hasLoadedSeries: false,
             hasLoadedPrice: false,
-            price: null,
             activeDimension: Dimension.ONE_DAY,
             dimensions: [
                 '1D',
@@ -68,7 +62,7 @@ export default {
                 'All',
             ],
             wsKey: null,
-            symbol: 'SOLUSDT',
+            // symbol: 'SOLUSDT',
             symbols: [
                 'BTCUSDT',
                 'ETHUSDT',
@@ -94,122 +88,39 @@ export default {
                 format: 'hh:mm, dd MMM yy'
                 },
             ][1],
-            series: [
-              {
-                data: null,
-              },
-              {
-                data: null,
-              },
-              {
-                data: null,
-              },
-            ],
+            // series: [
+            //   {
+            //     data: null,
+            //   },
+            //   {
+            //     data: null,
+            //   },
+            //   {
+            //     data: null,
+            //   },
+            // ],
         }
     },
 
     computed: {
-        chartOptions() {
-            // Filter high and low
-            let high = this.series[0].data.reduce(
-              (prev, current) => (prev[1] > current[1]) ? prev : current
-            )
-            let low = this.series[0].data.reduce(
-              (prev, current) => (prev[1] < current[1]) ? prev : current
-            )
-
-
-
-            // clamp high and low timestamp, that they dont overflow
-            let data = this.series[0].data // for readability
-            let firstMts = data[0][0] // first timestamp
-            let lastMts = data[data.length - 1][0] // last timestamp
-
-            // relative factor: adding 0.015 per char if more chars than 7
-            let lenOfPrice = Math.max(
-              this.$options.filters.usd(data[0][1]).length,
-              this.$options.filters.usd(data[data.length - 1][1]).length,
-            )
-            let offset = 0.03 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
-            let offsetInMts = Math.ceil(data.length * offset) * this.timeframe.duration_mts
-
-            let minMts = firstMts + offsetInMts
-            let maxMts = lastMts - offsetInMts
-
-            let lowIsInFirstHalf = Math.abs(low[0] - data[0][0]) <= Math.abs(low[0] - data[data.length - 1][0])
-            let highIsInFirstHalf = Math.abs(high[0] - data[0][0]) <= Math.abs(high[0] - data[data.length - 1][0])
-
-            return {
-                chart: {
-                    type: "line",
-                    height: '100%',
-                    sparkline: {
-                        enabled: true
-                    },
-                },
-                stroke: {
-                    curve: "smooth",
-                    width: 2
-                },
-                colors: [this.lineColor,"#f1b44c00","#f1b44c00"],
-
-                tooltip: {
-                    custom: ({series, seriesIndex, dataPointIndex, w}) =>  {
-                      return `
-                      <div class="arrow_box"><span>
-                      ${
-                        this.$options.filters.usd(
-                          series[seriesIndex][dataPointIndex]
-                        )
-                      }
-                      </span></div>
-                      `
-                    },
-                    enabledOnSeries: [0],
-                },
-                annotations: {
-                    points: [
-                        {
-                            x: lowIsInFirstHalf ? Math.max(low[0], minMts) : Math.min(low[0], maxMts),
-                            y: low[1],
-                            marker: {
-                              size: 0,
-                            },
-                            label: {
-                              borderColor: "#00000000",
-                              offsetY: 26,
-                              style: {
-                                color: "#00000000",
-                                background: "#00000000"
-                              },
-                              text: this.$options.filters.usd(low[1])
-                            }
-                        },
-                        {
-                            x: highIsInFirstHalf ? Math.max(high[0], minMts) : Math.min(high[0], maxMts),
-                            y: high[1],
-                            marker: {
-                              size: 0,
-                            },
-                            label: {
-                              borderColor: "#00000000",
-                              offsetY: 4,
-                              style: {
-                                color: "#00000000",
-                                background: "#00000000"
-                              },
-                              text: this.$options.filters.usd(high[1])
-                            }
-                        },
-                    ]
-                }
-            }
-        },
+      ...mapGetters('coinDetails', [
+        'getSeries',
+      ]),
+      series() {
+        return this.getSeries(this.symbol, this.activeDimension);
+      },
+      price() {
+        // console.log(this.series);
+        return 0;
+      },
+      // series() {
+      //   return this.$store.getters['coinDetails/current']({ symbol: this.symbol, dimension: this.activeDimension });
+      // },
     },
     created() {
         this.$store.dispatch('coinDetails/subscribe', { symbol: this.symbol, dimension: this.activeDimension })
-        this.subscribeCandles()
-        this.fetchCandles()
+        // this.subscribeCandles()
+        // this.fetchCandles()
     },
     methods: {
         setDimension(dimension) {

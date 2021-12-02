@@ -55,6 +55,15 @@ const router = new VueRouter({
         requiresAuth: true,
       },
     },
+    {
+      path: '/trading/:symbol',
+      name: 'trading.show',
+      component: TradingShowView,
+      props: true,
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
 });
 

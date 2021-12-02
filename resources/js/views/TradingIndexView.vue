@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <div v-for="(coin, i) in all" :key="i">
+  <!-- <div style="background: #f5f5f5"> -->
+    <div>
+    <div
+      v-for="(coin, i) in all"
+      :key="i"
+    >
       <coin-card-real-data
         :name="coin.name"
         :symbol="coin.api_symbol"
