@@ -57,6 +57,7 @@
     "navigation": {
         "dashboard": "Dashboard",
         "trading": "Trading",
+        "academy": "Academy",
         "profile": "Profil"
     }
 }

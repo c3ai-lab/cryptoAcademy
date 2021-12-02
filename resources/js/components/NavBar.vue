@@ -85,6 +85,10 @@ export default {
         {{ $t("navigation.trading") }}
       </router-link>
       <br />
+      <router-link :to="{ name: 'academy' }">
+        {{ $t("navigation.academy") }}
+      </router-link>
+      <br />
       <router-link :to="{ name: 'profile' }">
         {{ $t("navigation.profile") }}
       </router-link>
