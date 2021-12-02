@@ -10,8 +10,8 @@
             </div>
           </div>
           <div class="col-12 col-sm-9 align-self-center">
-            <h4 class="d-flex justify-content-center justify-content-sm-start mt-3"><b>{{ user.username }}</b></h4>
-            <p class="d-flex justify-content-center justify-content-sm-start">{{ user.email }}</p> 
+            <h5 class="d-flex justify-content-center justify-content-sm-start mt-3"><b>{{ user.username }}</b></h5>
+            <h6 class="d-flex justify-content-center justify-content-sm-start">{{ user.email }}</h6> 
             <i class="mdi mdi-logout text-danger d-flex justify-content-center justify-content-sm-start"></i>
           </div>
         </div> 
