@@ -35,6 +35,6 @@ export default {
 <style>
     .card-body
     {
-        padding: 1rem 0.5rem;
+        padding: 1rem;
     }
 </style>

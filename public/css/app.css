@@ -1718,9 +1718,9 @@ File: Custom Bootstrap Css File
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 0.8125rem;
+  --bs-body-font-size: 0.9rem;
   --bs-body-font-weight: 400;
-  --bs-body-line-height: 1.5;
+  --bs-body-line-height: 2;
   --bs-body-color: #495057;
   --bs-body-bg: #f8f8fb;
 }
@@ -1782,53 +1782,60 @@ h1,
 
 h1,
 .h1 {
-  font-size: calc(1.328125rem + 0.9375vw);
+  font-size: calc(1.323rem + 0.876vw);
 }
 
 @media (min-width: 1200px) {
   h1,
   .h1 {
-    font-size: 2.03125rem;
+    font-size: 1.98rem;
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(1.2875rem + 0.45vw);
+  font-size: calc(1.287rem + 0.444vw);
 }
 
 @media (min-width: 1200px) {
   h2,
   .h2 {
-    font-size: 1.625rem;
+    font-size: 1.62rem;
   }
 }
 
 h3,
 .h3 {
-  font-size: calc(1.2671875rem + 0.20625vw);
+  font-size: calc(1.269rem + 0.228vw);
 }
 
 @media (min-width: 1200px) {
   h3,
   .h3 {
-    font-size: 1.421875rem;
+    font-size: 1.44rem;
   }
 }
 
 h4,
 .h4 {
-  font-size: 1.21875rem;
+  font-size: calc(1.251rem + 0.012vw);
+}
+
+@media (min-width: 1200px) {
+  h4,
+  .h4 {
+    font-size: 1.26rem;
+  }
 }
 
 h5,
 .h5 {
-  font-size: 1.015625rem;
+  font-size: 1.08rem;
 }
 
 h6,
 .h6 {
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
 }
 
 p {
@@ -2181,7 +2188,7 @@ progress {
 }
 
 .lead {
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   font-weight: 300;
 }
 
@@ -2282,7 +2289,7 @@ progress {
 
 .blockquote {
   margin-bottom: 1rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
 }
 
 .blockquote > :last-child {
@@ -3903,19 +3910,19 @@ progress {
   padding-bottom: calc(0.47rem + 1px);
   margin-bottom: 0;
   font-size: inherit;
-  line-height: 1.5;
+  line-height: 2;
 }
 
 .col-form-label-lg {
   padding-top: calc(0.5rem + 1px);
   padding-bottom: calc(0.5rem + 1px);
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
 }
 
 .col-form-label-sm {
   padding-top: calc(0.25rem + 1px);
   padding-bottom: calc(0.25rem + 1px);
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
 }
 
 .form-text {
@@ -3928,9 +3935,9 @@ progress {
   display: block;
   width: 100%;
   padding: 0.47rem 0.75rem;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
@@ -3965,7 +3972,7 @@ progress {
 }
 
 .form-control::-webkit-date-and-time-value {
-  height: 1.5em;
+  height: 2em;
 }
 
 .form-control::-moz-placeholder {
@@ -4073,7 +4080,7 @@ progress {
   width: 100%;
   padding: 0.47rem 0;
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 2;
   color: #495057;
   background-color: transparent;
   border: solid transparent;
@@ -4087,9 +4094,9 @@ progress {
 }
 
 .form-control-sm {
-  min-height: calc(1.5em + 0.5rem + 2px);
+  min-height: calc(2em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   border-radius: 0.2rem;
 }
 
@@ -4115,9 +4122,9 @@ progress {
 }
 
 .form-control-lg {
-  min-height: calc(1.5em + 1rem + 2px);
+  min-height: calc(2em + 1rem + 2px);
   padding: 0.5rem 1rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   border-radius: 0.4rem;
 }
 
@@ -4143,15 +4150,15 @@ progress {
 }
 
 textarea.form-control {
-  min-height: calc(1.5em + 0.94rem + 2px);
+  min-height: calc(2em + 0.94rem + 2px);
 }
 
 textarea.form-control-sm {
-  min-height: calc(1.5em + 0.5rem + 2px);
+  min-height: calc(2em + 0.5rem + 2px);
 }
 
 textarea.form-control-lg {
-  min-height: calc(1.5em + 1rem + 2px);
+  min-height: calc(2em + 1rem + 2px);
 }
 
 .form-control-color {
@@ -4165,12 +4172,12 @@ textarea.form-control-lg {
 }
 
 .form-control-color::-moz-color-swatch {
-  height: 1.5em;
+  height: 2em;
   border-radius: 0.25rem;
 }
 
 .form-control-color::-webkit-color-swatch {
-  height: 1.5em;
+  height: 2em;
   border-radius: 0.25rem;
 }
 
@@ -4179,9 +4186,9 @@ textarea.form-control-lg {
   width: 100%;
   padding: 0.47rem 1rem 0.47rem 0.75rem;
   -moz-padding-start: calc(0.75rem - 3px);
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   color: #495057;
   background-color: #fff;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
@@ -4228,7 +4235,7 @@ textarea.form-control-lg {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   border-radius: 0.2rem;
 }
 
@@ -4236,13 +4243,13 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   border-radius: 0.3rem;
 }
 
 .form-check {
   display: block;
-  min-height: 1.21875rem;
+  min-height: 1.8rem;
   padding-left: 1.5em;
   margin-bottom: 0.125rem;
 }
@@ -4255,7 +4262,7 @@ textarea.form-control-lg {
 .form-check-input {
   width: 1em;
   height: 1em;
-  margin-top: 0.25em;
+  margin-top: 0.5em;
   vertical-align: top;
   background-color: #fff;
   background-repeat: no-repeat;
@@ -4601,9 +4608,9 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   padding: 0.47rem 0.75rem;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   color: #495057;
   text-align: center;
   white-space: nowrap;
@@ -4617,7 +4624,7 @@ textarea.form-control-lg {
 .input-group-lg > .input-group-text,
 .input-group-lg > .btn {
   padding: 0.5rem 1rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   border-radius: 0.4rem;
 }
 
@@ -4626,7 +4633,7 @@ textarea.form-control-lg {
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   border-radius: 0.2rem;
 }
 
@@ -4669,8 +4676,8 @@ textarea.form-control-lg {
   max-width: 100%;
   padding: 0.4rem 0.7rem;
   margin-top: 0.1rem;
-  font-size: 0.7109375rem;
-  line-height: 1.5;
+  font-size: 0.7875rem;
+  line-height: 2;
   color: #fff;
   background-color: rgba(52, 195, 143, 0.9);
   border-radius: 0.25rem;
@@ -4686,11 +4693,11 @@ textarea.form-control-lg {
 .was-validated .form-control:valid,
 .form-control.is-valid {
   border-color: #34c38f;
-  padding-right: calc(1.5em + 0.94rem);
+  padding-right: calc(2em + 0.94rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2334c38f' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right calc(0.375em + 0.235rem) center;
-  background-size: calc(0.75em + 0.47rem) calc(0.75em + 0.47rem);
+  background-position: right calc(0.5em + 0.235rem) center;
+  background-size: calc(1em + 0.47rem) calc(1em + 0.47rem);
 }
 
 .was-validated .form-control:valid:focus,
@@ -4701,8 +4708,8 @@ textarea.form-control-lg {
 
 .was-validated textarea.form-control:valid,
 textarea.form-control.is-valid {
-  padding-right: calc(1.5em + 0.94rem);
-  background-position: top calc(0.375em + 0.235rem) right calc(0.375em + 0.235rem);
+  padding-right: calc(2em + 0.94rem);
+  background-position: top calc(0.5em + 0.235rem) right calc(0.5em + 0.235rem);
 }
 
 .was-validated .form-select:valid,
@@ -4717,7 +4724,7 @@ textarea.form-control.is-valid {
   padding-right: calc(0.75em + 2.455rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2334c38f' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-position: right 0.75rem center, center right 1.75rem;
-  background-size: 16px 12px, calc(0.75em + 0.47rem) calc(0.75em + 0.47rem);
+  background-size: 16px 12px, calc(1em + 0.47rem) calc(1em + 0.47rem);
 }
 
 .was-validated .form-select:valid:focus,
@@ -4780,8 +4787,8 @@ textarea.form-control.is-valid {
   max-width: 100%;
   padding: 0.4rem 0.7rem;
   margin-top: 0.1rem;
-  font-size: 0.7109375rem;
-  line-height: 1.5;
+  font-size: 0.7875rem;
+  line-height: 2;
   color: #fff;
   background-color: rgba(244, 106, 106, 0.9);
   border-radius: 0.25rem;
@@ -4797,11 +4804,11 @@ textarea.form-control.is-valid {
 .was-validated .form-control:invalid,
 .form-control.is-invalid {
   border-color: #f46a6a;
-  padding-right: calc(1.5em + 0.94rem);
+  padding-right: calc(2em + 0.94rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23f46a6a'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23f46a6a' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right calc(0.375em + 0.235rem) center;
-  background-size: calc(0.75em + 0.47rem) calc(0.75em + 0.47rem);
+  background-position: right calc(0.5em + 0.235rem) center;
+  background-size: calc(1em + 0.47rem) calc(1em + 0.47rem);
 }
 
 .was-validated .form-control:invalid:focus,
@@ -4812,8 +4819,8 @@ textarea.form-control.is-valid {
 
 .was-validated textarea.form-control:invalid,
 textarea.form-control.is-invalid {
-  padding-right: calc(1.5em + 0.94rem);
-  background-position: top calc(0.375em + 0.235rem) right calc(0.375em + 0.235rem);
+  padding-right: calc(2em + 0.94rem);
+  background-position: top calc(0.5em + 0.235rem) right calc(0.5em + 0.235rem);
 }
 
 .was-validated .form-select:invalid,
@@ -4828,7 +4835,7 @@ textarea.form-control.is-invalid {
   padding-right: calc(0.75em + 2.455rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23f46a6a'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23f46a6a' stroke='none'/%3e%3c/svg%3e");
   background-position: right 0.75rem center, center right 1.75rem;
-  background-size: 16px 12px, calc(0.75em + 0.47rem) calc(0.75em + 0.47rem);
+  background-size: 16px 12px, calc(1em + 0.47rem) calc(1em + 0.47rem);
 }
 
 .was-validated .form-select:invalid:focus,
@@ -4878,7 +4885,7 @@ textarea.form-control.is-invalid {
 .btn {
   display: inline-block;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   color: #495057;
   text-align: center;
   vertical-align: middle;
@@ -4890,7 +4897,7 @@ textarea.form-control.is-invalid {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.47rem 0.75rem;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -5707,14 +5714,14 @@ fieldset:disabled .btn {
 .btn-lg,
 .btn-group-lg > .btn {
   padding: 0.5rem 1rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   border-radius: 0.4rem;
 }
 
 .btn-sm,
 .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   border-radius: 0.2rem;
 }
 
@@ -5778,7 +5785,7 @@ fieldset:disabled .btn {
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   color: #495057;
   text-align: left;
   list-style: none;
@@ -5992,7 +5999,7 @@ fieldset:disabled .btn {
   display: block;
   padding: 0.5rem 1.5rem;
   margin-bottom: 0;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   color: #74788d;
   white-space: nowrap;
 }
@@ -6285,10 +6292,10 @@ fieldset:disabled .btn {
 }
 
 .navbar-brand {
-  padding-top: 0.34765625rem;
-  padding-bottom: 0.34765625rem;
+  padding-top: 0.275rem;
+  padding-bottom: 0.275rem;
   margin-right: 1rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   white-space: nowrap;
 }
 
@@ -6327,7 +6334,7 @@ fieldset:disabled .btn {
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
@@ -7023,7 +7030,7 @@ fieldset:disabled .btn {
   align-items: center;
   width: 100%;
   padding: 1rem 1.25rem;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   color: #495057;
   text-align: left;
   background-color: transparent;
@@ -7237,7 +7244,7 @@ fieldset:disabled .btn {
 
 .pagination-lg .page-link {
   padding: 0.75rem 1.5rem;
-  font-size: 1.015625rem;
+  font-size: 1.125rem;
 }
 
 .pagination-lg .page-item:first-child .page-link {
@@ -7252,7 +7259,7 @@ fieldset:disabled .btn {
 
 .pagination-sm .page-link {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
 }
 
 .pagination-sm .page-item:first-child .page-link {
@@ -7421,7 +7428,7 @@ fieldset:disabled .btn {
   display: flex;
   height: 0.625rem;
   overflow: hidden;
-  font-size: 0.609375rem;
+  font-size: 0.675rem;
   background-color: #f6f6f6;
   border-radius: 0.25rem;
 }
@@ -8082,7 +8089,7 @@ fieldset:disabled .btn {
 
 .modal-title {
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 2;
 }
 
 .modal-body {
@@ -8307,7 +8314,7 @@ fieldset:disabled .btn {
   font-family: var(--bs-font-sans-serif);
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -8318,7 +8325,7 @@ fieldset:disabled .btn {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   word-wrap: break-word;
   opacity: 0;
 }
@@ -8432,7 +8439,7 @@ fieldset:disabled .btn {
   font-family: var(--bs-font-sans-serif);
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -8443,7 +8450,7 @@ fieldset:disabled .btn {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.7109375rem;
+  font-size: 0.7875rem;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: padding-box;
@@ -8562,7 +8569,7 @@ fieldset:disabled .btn {
 .popover-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   background-color: whitesmoke;
   border-bottom: 1px solid #f6f6f6;
   border-top-left-radius: calc(0.4rem - 1px);
@@ -10406,27 +10413,27 @@ fieldset:disabled .btn {
 }
 
 .fs-1 {
-  font-size: calc(1.328125rem + 0.9375vw) !important;
+  font-size: calc(1.323rem + 0.876vw) !important;
 }
 
 .fs-2 {
-  font-size: calc(1.2875rem + 0.45vw) !important;
+  font-size: calc(1.287rem + 0.444vw) !important;
 }
 
 .fs-3 {
-  font-size: calc(1.2671875rem + 0.20625vw) !important;
+  font-size: calc(1.269rem + 0.228vw) !important;
 }
 
 .fs-4 {
-  font-size: 1.21875rem !important;
+  font-size: calc(1.251rem + 0.012vw) !important;
 }
 
 .fs-5 {
-  font-size: 1.015625rem !important;
+  font-size: 1.08rem !important;
 }
 
 .fs-6 {
-  font-size: 0.8125rem !important;
+  font-size: 0.9rem !important;
 }
 
 .fst-italic {
@@ -10466,7 +10473,7 @@ fieldset:disabled .btn {
 }
 
 .lh-base {
-  line-height: 1.5 !important;
+  line-height: 2 !important;
 }
 
 .lh-lg {
@@ -14797,15 +14804,19 @@ fieldset:disabled .btn {
 
 @media (min-width: 1200px) {
   .fs-1 {
-    font-size: 2.03125rem !important;
+    font-size: 1.98rem !important;
   }
 
   .fs-2 {
-    font-size: 1.625rem !important;
+    font-size: 1.62rem !important;
   }
 
   .fs-3 {
-    font-size: 1.421875rem !important;
+    font-size: 1.44rem !important;
+  }
+
+  .fs-4 {
+    font-size: 1.26rem !important;
   }
 }
 
@@ -51121,8 +51132,8 @@ readers do not read off random characters that represent icons */
 }
 
 .vhd__datepicker__input {
-  height: calc(1.5em + 0.94rem + 2px) !important;
-  line-height: calc(1.5em + 0.94rem + 2px) !important;
+  height: calc(2em + 0.94rem + 2px) !important;
+  line-height: calc(2em + 0.94rem + 2px) !important;
 }
 
 .form-check .custom-control-input {
@@ -51144,7 +51155,7 @@ readers do not read off random characters that represent icons */
 
 .datepicker__input {
   background-color: #fff;
-  height: calc(1.5em + 0.94rem + 2px) !important;
+  height: calc(2em + 0.94rem + 2px) !important;
   line-height: 2.5 !important;
 }
 
@@ -51224,8 +51235,8 @@ readers do not read off random characters that represent icons */
 }
 
 .vhd__datepicker__input {
-  height: calc(1.5em + 0.94rem + 2px) !important;
-  line-height: calc(1.5em + 0.94rem + 2px) !important;
+  height: calc(2em + 0.94rem + 2px) !important;
+  line-height: calc(2em + 0.94rem + 2px) !important;
 }
 
 .form-check .custom-control-input {
@@ -54099,12 +54110,12 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .multiselect__tags {
-  min-height: calc(1.5em + 0.94rem + 2px) !important;
+  min-height: calc(2em + 0.94rem + 2px) !important;
   padding: 0.47rem 0.75rem !important;
   font-family: var(--bs-font-sans-serif) !important;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   font-weight: 400 !important;
-  line-height: 1.5 !important;
+  line-height: 2 !important;
   color: #495057 !important;
   background-color: #fff !important;
   background-clip: padding-box;
@@ -54435,12 +54446,12 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 [dir=rtl] .timepicker-orient-top {
-  top: calc(1.5em + 0.94rem + 2px) !important;
+  top: calc(2em + 0.94rem + 2px) !important;
 }
 
 [dir=rtl] .timepicker-orient-bottom {
   top: auto !important;
-  bottom: calc(1.5em + 0.94rem + 2px) !important;
+  bottom: calc(2em + 0.94rem + 2px) !important;
 }
 
 .mx-datepicker {
@@ -54450,12 +54461,12 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 
 .mx-input {
   display: block !important;
-  height: calc(1.5em + 0.94rem + 2px) !important;
+  height: calc(2em + 0.94rem + 2px) !important;
   padding: 0.47rem 0.75rem !important;
   font-family: !important;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   font-weight: 400 !important;
-  line-height: 1.5 !important;
+  line-height: 2 !important;
   color: #495057 !important;
   background-color: #fff !important;
   background-clip: padding-box;
@@ -54524,12 +54535,12 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 [dir=rtl] .timepicker-orient-top {
-  top: calc(1.5em + 0.94rem + 2px) !important;
+  top: calc(2em + 0.94rem + 2px) !important;
 }
 
 [dir=rtl] .timepicker-orient-bottom {
   top: auto !important;
-  bottom: calc(1.5em + 0.94rem + 2px) !important;
+  bottom: calc(2em + 0.94rem + 2px) !important;
 }
 
 .datepicker {
@@ -54995,7 +55006,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 .table-edits input,
 .table-edits select {
-  height: calc(1.5em + 0.5rem + 2px);
+  height: calc(2em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
   border: 1px solid #ced4da;
   color: #495057;
@@ -55138,7 +55149,7 @@ div.dataTables_wrapper div.dataTables_filter input {
   background: #343a40;
   color: #f8f9fa;
   font-family: var(--bs-font-sans-serif);
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   padding: 5px 8px;
 }
 

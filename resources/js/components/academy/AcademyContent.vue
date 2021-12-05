@@ -1,6 +1,11 @@
 <template>
-  <div ref="container">
-    <slot></slot>
+  <div class="card">
+    <div class="card-body" ref="container">
+    
+    <slot>
+      <!--- ToDO: die Überschrift über der Card anzeigen, wie auf allen anderen Seiten --->
+    </slot>
+    </div>
   </div>
 </template>
 
