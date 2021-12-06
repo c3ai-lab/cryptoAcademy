@@ -47,6 +47,17 @@ services:
             crypto-net:
         ports:
             - 8080:80
+    mailhog:
+        restart: always
+        image: mailhog/mailhog:latest
+        container_name: crypto-app_mailhog
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        networks:
+            crypto-net:
+        ports:
+            - 8025:8025
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data

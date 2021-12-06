@@ -139,6 +139,40 @@
 					"response": []
 				},
 				{
+					"name": "resetCurrentUserPassword",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"max.muster@trading.local\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/user/password/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"user",
+								"password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getCurrentUser",
 					"request": {
 						"method": "GET",
@@ -323,7 +357,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTg3NlwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzODc5ODg4MCwiZXhwIjoxNjM4ODAyNDgwLCJuYmYiOjE2Mzg3OTg4ODAsImp0aSI6InNaVkdJZmJJRXhpamJQNm0iLCJzdWIiOjUsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UlO0nTWW-oAYPB2XWXpjYUH98hlsTQzcoFJJfVLvZQA",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTg3NlwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzODgxMzM1MywiZXhwIjoxNjM4ODE2OTUzLCJuYmYiOjE2Mzg4MTMzNTMsImp0aSI6InJ3aWtSWFVab0o5Z0NxVXoiLCJzdWIiOjEwLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.wJl0l6Kl63XH93jWNuXJISPxQ7jQfu8Jg7lolekcruA",
 				"type": "string"
 			}
 		]
