@@ -22,6 +22,7 @@ Route::group(['prefix' => 'auth'], function () {
   Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/change-password', [AuthController::class, 'changePassword']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
   });

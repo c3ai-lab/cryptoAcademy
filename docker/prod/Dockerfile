@@ -16,7 +16,7 @@ RUN set -ex; \
         echo 'max_execution_time = 600'; \
         echo 'session.gc_maxlifetime = 7200'; \
         echo 'date.timezone = "'${TZ}'"'; \
-    } > $PHP_INI_DIR/php.ini \
+    } > $PHP_INI_DIR/php.ini
 
 WORKDIR ${ENV_WORKDIR}
 RUN rm -rf ${ENV_WORKDIR}{*,.*}
