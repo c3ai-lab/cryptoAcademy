@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsFeedController;
-use App\Http\Controllers\TradingController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,9 +33,9 @@ Route::group(['prefix' => 'user'], function () {
 
 });
 
-Route::group(['prefix' => 'trading'], function () {
-  Route::post('/buy', [TradingController::class, 'createUser']);
-  Route::post('/sell', [TradingController::class, 'updateCurrentUser']);
+Route::group(['prefix' => 'transaction'], function () {
+  Route::post('/buy', [TransactionController::class, 'buy']);
+  Route::post('/sell', [TransactionController::class, 'sell']);
 });
 
 Route::get('/news-feed', [NewsFeedController::class, 'getAll']);

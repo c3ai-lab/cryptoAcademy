@@ -1,6 +1,6 @@
 ### Trading Buy
 
-**URL** : `/api/trading/buy`
+**URL** : `/api/transaction/buy`
 **Method** : `POST`
 **Auth required** : `YES`
 
@@ -36,7 +36,7 @@
 
 ### Trading Buy
 
-**URL** : `/api/trading/sell`
+**URL** : `/api/transaction/sell`
 **Method** : `POST`
 **Auth required** : `YES`
 

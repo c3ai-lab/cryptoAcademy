@@ -274,15 +274,15 @@
 			]
 		},
 		{
-			"name": "Order",
+			"name": "Transaction",
 			"item": [
 				{
-					"name": "trading buy",
+					"name": "transaction buy",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9876/api/trading/buy",
+							"raw": "http://localhost:9876/api/transaction/buy",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -290,7 +290,7 @@
 							"port": "9876",
 							"path": [
 								"api",
-								"trading",
+								"transaction",
 								"buy"
 							]
 						}
@@ -298,12 +298,12 @@
 					"response": []
 				},
 				{
-					"name": "trading sell",
+					"name": "transaction sell",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9876/api/trading/sell",
+							"raw": "http://localhost:9876/api/transaction/sell",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -311,7 +311,7 @@
 							"port": "9876",
 							"path": [
 								"api",
-								"trading",
+								"transaction",
 								"sell"
 							]
 						}
