@@ -4,6 +4,7 @@ LABEL maintainer="Magdalena Tsolaki"
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
+ENV ENV_WORKDIR="/var/www/html/"
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y ssl-cert \
@@ -15,9 +16,11 @@ RUN set -ex; \
         echo 'max_execution_time = 600'; \
         echo 'session.gc_maxlifetime = 7200'; \
         echo 'date.timezone = "'${TZ}'"'; \
-    } > $PHP_INI_DIR/php.ini
+    } > $PHP_INI_DIR/php.ini \
 
-COPY . .
+WORKDIR ${ENV_WORKDIR}
+RUN rm -rf ${ENV_WORKDIR}{*,.*}
+ADD . $ENV_WORKDIR
 RUN rm -rf .editorconfing .git .github .gitignore .styleci.yml README.md composer-exec composer.json composer.lock docker npm-exec package-lock.json package.json php-exec tests webpack.mix.js
 RUN composer update
 RUN composer install --no-interaction --optimize-autoloader --no-dev

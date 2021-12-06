@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -53,6 +54,7 @@ class AuthController extends Controller
       $validator->validated(),
       ['password' => bcrypt($request->password)]
     ));
+    event(new Registered($user));
 
     return response()->json([
       'message' => 'User successfully registered',
@@ -70,7 +72,7 @@ class AuthController extends Controller
   {
     auth()->logout();
 
-    return response()->json(['message' => 'User successfully signed out']);
+    return response()->json(['message' => 'Successfully logged out']);
   }
 
   /**
