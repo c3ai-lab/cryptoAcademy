@@ -50,6 +50,7 @@ $ ./npm-exec run watch
 **Code** : `200 OK`
 
 **Content examples**
+
 ```json
 {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTg3NlwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzNzg2MDkyMiwiZXhwIjoxNjM3ODY0NTIyLCJuYmYiOjE2Mzc4NjA5MjIsImp0aSI6IlRVZ2VYY0FLcFY5bXl4NmkiLCJzdWIiOjUsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.4h5MCim5mTBBBXtx27duEqqdqCCz7gGBASn6PNT_JgA",
@@ -67,7 +68,6 @@ $ ./npm-exec run watch
 ```
 
 ___
-
 
 ### Refresh Token
 
@@ -88,6 +88,7 @@ ___
 **Code** : `200 OK`
 
 **Content examples**
+
 ```json
 {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTg3NlwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzNzg2MDkyMiwiZXhwIjoxNjM3ODY0NTIyLCJuYmYiOjE2Mzc4NjA5MjIsImp0aSI6IlRVZ2VYY0FLcFY5bXl4NmkiLCJzdWIiOjUsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.4h5MCim5mTBBBXtx27duEqqdqCCz7gGBASn6PNT_JgA",
@@ -101,6 +102,71 @@ ___
     "created_at": "2021-11-25T17:06:08.000000Z",
     "updated_at": "2021-11-25T17:06:08.000000Z"
   }
+}
+```
+
+___
+
+### Update Password
+
+**URL** : `/api/auth/change-password`
+**Method** : `POST`
+**Auth required** : `YES`
+
+**Header constraints**
+
+```json
+{
+  "Authorization": "Bearer __JWT__"
+}
+```
+
+**Data constraints**
+
+```json
+{
+  "password": "",
+  "new_password": "",
+  "new_password_confirmation": ""
+}
+```
+
+##### Success Response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+```json
+{
+  "message": "Password change successfully."
+}
+
+```
+
+OR Validation Error
+
+```json
+{
+  "field_name": [
+    "The given password doesn't match with old password."
+  ],
+  "password": [
+    "The password field is required."
+  ],
+  "password": [
+    "The given password doesn't match with old password."
+  ],
+  "new_password": [
+    "The new password field is required."
+  ],
+  "new_password": [
+    "The new password must be at least 6 characters."
+  ],
+  "new_password": [
+    "The new password confirmation does not match."
+  ]
+  ...
 }
 ```
 
@@ -143,6 +209,7 @@ ___
 ```
 
 ___
+
 ### Logout
 
 **URL** : `/api/auth/logout`
@@ -168,6 +235,7 @@ ___
   "message": "User successfully signed out"
 }
 ```
+
 ___
 
 ### User
@@ -226,6 +294,7 @@ ___
   "offset": 1
 }
 ```
+
 ##### Success Response
 
 **Code** : `200 OK`

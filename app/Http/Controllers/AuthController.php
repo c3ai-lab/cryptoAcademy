@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\MatchOldPassword;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Validator;
@@ -112,4 +113,19 @@ class AuthController extends Controller
     ]);
   }
 
+  public function changePassword(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'password' => ['required', new MatchOldPassword],
+      'new_password' => 'required|string|confirmed|min:6',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 422);
+    }
+    User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
+
+    return response()->json(['message' => 'Password change successfully.']);
+  }
 }
+
