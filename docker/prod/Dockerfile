@@ -16,8 +16,7 @@ RUN set -ex; \
         echo 'date.timezone = "'${TZ}'"'; \
     } > $PHP_INI_DIR/php.ini
 
-COPY . /var/www/html
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+COPY . /var/www/html/
 
 # Optimizing
 RUN php artisan optimize
