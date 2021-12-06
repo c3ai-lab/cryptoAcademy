@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('user/verify/{verification_code}', [AuthController::class, 'verifyUser']);
+//Route::get('password/reset/{token}', [ResetPasswordController, 'showResetForm'])->name('password.request');
+//Route::post('password/reset', [ResetPasswordController, 'postReset'])->name('password.reset');
 
 Route::get('/{any}', function () {
   return view('layouts.vue');

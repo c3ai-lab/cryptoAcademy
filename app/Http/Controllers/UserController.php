@@ -6,7 +6,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Validator;
 
 class UserController extends Controller
@@ -47,10 +50,14 @@ class UserController extends Controller
       $validator->validated(),
       ['password' => bcrypt($request->password), "balance" => "1000000"]
     ));
-//    event(new Registered($user));
+
+    $verification_code = Str::random(30); //Generate verification code
+    DB::table('user_verifications')->insert(['user_id' => $user->id, 'token' => $verification_code]);
+
+    event(new Registered($user));
 
     return response()->json([
-      'message' => 'User successfully registered',
+      'message' => 'Thanks for signing up! Please check your email to complete your registration.',
       'user' => new UserResource($user)
     ], 201);
   }
