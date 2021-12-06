@@ -29,6 +29,8 @@ Route::group(['prefix' => 'user'], function () {
   Route::put('/', [UserController::class, 'updateCurrentUser']);
   Route::delete('/', [UserController::class, 'deleteCurrentUser']);
   Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
+  Route::post('/password/reset', [UserController::class, 'resetCurrentUserPassword']);
+
 });
 
 Route::group(['prefix' => 'trading'], function () {

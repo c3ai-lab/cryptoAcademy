@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,7 @@ class UserController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('jwt.verify', ['except' => ['createUser', 'verifyUser']]);
+    $this->middleware('jwt.verify', ['except' => ['createUser', 'verifyUser', 'resetCurrentUserPassword']]);
   }
 
   /**
@@ -104,6 +106,26 @@ class UserController extends Controller
     return response()->json(['message' => 'Password change successfully.']);
   }
 
+  public function resetCurrentUserPassword(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'email' => 'required|email',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 422);
+    }
+    $password = Str::random();
+
+    $user = User::where(["email" => $request->email])->first();
+    if (!is_null($user)) {
+      $user->notify(new PasswordResetMail($user, $password));
+      $user->update(['password' => bcrypt($password)]);
+      return response()->json(['message' => 'Password reset successfully.']);
+    }
+    return response()->json(['message' => 'Account doesn\'t exist.'], 400);
+  }
+
   public function verifyUser($verification_code)
   {
     $check = DB::table('user_verifications')->where('token', $verification_code)->first();
@@ -113,20 +135,18 @@ class UserController extends Controller
 
       if ($user->is_verified == 1) {
         return response()->json([
-          'success' => true,
           'message' => 'Account already verified.'
         ]);
       }
 
-      $user->update(['is_verified' => 1]);
+      $user->update(['is_verified' => 1, 'email_verified_at' => Carbon::now()]);
       DB::table('user_verifications')->where('token', $verification_code)->delete();
 
       return response()->json([
-        'success' => true,
-        'message' => 'You have successfully verified your email address.'
+        'message' => 'You have successfully verified your email address . '
       ]);
     }
 
-    return response()->json(['success' => false, 'error' => "Verification code is invalid."]);
+    return response()->json(['message' => "Verification code is invalid."], 400);
   }
 }

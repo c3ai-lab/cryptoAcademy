@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('user/verify/{verification_code}', [UserController::class, 'verifyUser']);
-//Route::get('password/reset/{token}', [ResetPasswordController, 'showResetForm'])->name('password.request');
-//Route::post('password/reset', [ResetPasswordController, 'postReset'])->name('password.reset');
 
 Route::get('/{any}', function () {
   return view('layouts.vue');

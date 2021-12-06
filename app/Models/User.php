@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\VerificationMail;
+use App\Notifications\PasswordResetMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,6 +25,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     'password',
     'balance',
     'is_verified',
+    'email_verified_at',
 //    'password_confirmation',
   ];
 
