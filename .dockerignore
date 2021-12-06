@@ -15,6 +15,7 @@
 **/package-lock.json
 **/package.json
 **/docs
+**/docker
 **/php-exec
 **/phpunit.xml
 **/tests
