@@ -26,7 +26,7 @@ class TransactionController extends Controller
     /**
      * balance = €
      * quantity*$price (in Euro)
-    */
+     */
     $this->createTransaction($request, TransactionModel::ACTION_BUY);
     return response()->json("", 201);
   }
@@ -55,6 +55,7 @@ class TransactionController extends Controller
   {
     $transactionModel = new TransactionModel;
     $transactionModel->user_id = auth()->user()->id;
+    $transactionModel->currency_id = 0;
     $transactionModel->quantity = $request->quantity;
     $transactionModel->currency = $request->currency;
     $transactionModel->price = $this->getBinanceApi()->price($request->currency);
