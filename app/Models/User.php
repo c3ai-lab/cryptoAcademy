@@ -23,6 +23,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     'email',
     'password',
     'balance',
+    'is_verified',
 //    'password_confirmation',
   ];
 

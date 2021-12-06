@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('user/verify/{verification_code}', [AuthController::class, 'verifyUser']);
+Route::get('user/verify/{verification_code}', [UserController::class, 'verifyUser']);
 //Route::get('password/reset/{token}', [ResetPasswordController, 'showResetForm'])->name('password.request');
 //Route::post('password/reset', [ResetPasswordController, 'postReset'])->name('password.reset');
 

@@ -29,8 +29,12 @@ class AuthController extends Controller
       return response()->json($validator->errors(), 422);
     }
 
-    if (!$token = auth()->attempt($validator->validated())) {
-      return response()->json(['error' => 'Unauthorized'], 401);
+    $credentials = $request->only('email', 'password');
+    $credentials['is_verified'] = 1;
+
+
+    if (!$token = auth()->attempt(array_merge($validator->validated(), $credentials))) {
+      return response()->json(['status' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 401);
     }
 
     return $this->createNewToken($token);
@@ -79,28 +83,28 @@ class AuthController extends Controller
 
   public function verifyUser($verification_code)
   {
-    $check = DB::table('user_verifications')->where('token',$verification_code)->first();
+    $check = DB::table('user_verifications')->where('token', $verification_code)->first();
 
-    if(!is_null($check)){
+    if (!is_null($check)) {
       $user = User::find($check->user_id);
 
-      if($user->is_verified == 1){
+      if ($user->is_verified == 1) {
         return response()->json([
-          'success'=> true,
-          'message'=> 'Account already verified..'
+          'success' => true,
+          'message' => 'Account already verified..'
         ]);
       }
 
       $user->update(['is_verified' => 1]);
-      DB::table('user_verifications')->where('token',$verification_code)->delete();
+      DB::table('user_verifications')->where('token', $verification_code)->delete();
 
       return response()->json([
-        'success'=> true,
-        'message'=> 'You have successfully verified your email address.'
+        'success' => true,
+        'message' => 'You have successfully verified your email address.'
       ]);
     }
 
-    return response()->json(['success'=> false, 'error'=> "Verification code is invalid."]);
+    return response()->json(['success' => false, 'error' => "Verification code is invalid."]);
 
   }
 }

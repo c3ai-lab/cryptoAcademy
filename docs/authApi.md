@@ -33,6 +33,15 @@
     "updated_at": "2021-11-25T17:06:08.000000Z"
   }
 }
+
+```
+
+OR Validation Error
+Response: 401
+```json
+{
+  "status": "We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address."
+}
 ```
 
 ___
