@@ -1,7 +1,7 @@
 #!/bin/bash
 echo_and_run() {
-    echo "$*"
-    "$@"
+  echo "$*"
+  "$@"
 }
 DOCKER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
@@ -9,5 +9,6 @@ echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml pull
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml up -d --force-recreate
 echo_and_run docker cp .env crypto-app:/var/www/html/.env
 # Optimizing Configuration loading
-echo_and_run docker exec crypto-app php artisan config:cache
+echo_and_run docker exec crypto-app php artisan optimize
+# Migrations
 echo_and_run docker exec crypto-app php artisan migrate --force
