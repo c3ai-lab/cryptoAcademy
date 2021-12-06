@@ -21,12 +21,12 @@
 ```json
 
 {
-  "id": 5,
-  "balance": "1234567",
+  "id": 1,
   "name": "mmuster",
   "email": "max.muster@trading.local",
-  "updated_at": "2021-11-25T17:06:08.000000Z",
-  "created_at": "2021-11-25T17:06:08.000000Z"
+  "balance": 1000000,
+  "created_at": "2021-12-06T13:12:10.000000Z",
+  "updated_at": "2021-12-06T13:12:10.000000Z"
 }
 ```
 
@@ -42,10 +42,10 @@ ___
 
 ```json
 {
-  "email": "",
-  "name": "",
-  "password": "",
-  "password_confirmation": ""
+  "name": "mmuster",
+  "email": "max.muster@trading.local",
+  "password": "start_01",
+  "password_confirmation": "start_01"
 }
 ```
 
@@ -59,12 +59,12 @@ ___
 {
   "message": "User successfully registered",
   "user": {
-    "id": 5,
-    "balance": "1234567",
+    "id": 3,
     "name": "mmuster",
     "email": "max.muster@trading.local",
-    "updated_at": "2021-11-25T17:06:08.000000Z",
-    "created_at": "2021-11-25T17:06:08.000000Z"
+    "balance": "1000000",
+    "created_at": "2021-12-06T13:29:05.000000Z",
+    "updated_at": "2021-12-06T13:29:05.000000Z"
   }
 }
 ```
@@ -89,8 +89,8 @@ ___
 
 ```json
 {
-  "name": "",
-  "email": ""
+  "name": "mmuster",
+  "email": "max.muster@trading.local"
 }
 ```
 
@@ -102,14 +102,36 @@ ___
 
 ```json
 {
-  "message": "User change successfully."
+  "message": "User change successfully.",
+  "user": {
+    "id": 1,
+    "name": "mmuster",
+    "email": "max.muster@trading.local",
+    "balance": 1000000,
+    "created_at": "2021-12-06T13:12:10.000000Z",
+    "updated_at": "2021-12-06T13:39:38.000000Z"
+  }
 }
-
 ```
 
+OR Validation Error
+
+```json
+{
+  "name": [
+    "The name has already been taken."
+  ],
+  "email": [
+    "The email has already been taken."
+  ]
+  ...
+  ...
+  ...
+}
 ```
 
 ___
+
 ### DELETE Current User
 
 **URL** : `/api/user`
@@ -157,9 +179,9 @@ ___
 
 ```json
 {
-  "password": "",
-  "new_password": "",
-  "new_password_confirmation": ""
+  "password": "start_01",
+  "new_password": "start_02",
+  "new_password_confirmation": "start_02"
 }
 ```
 
@@ -198,6 +220,8 @@ OR Validation Error
   "new_password": [
     "The new password confirmation does not match."
   ]
+  ...
+  ...
   ...
 }
 ```

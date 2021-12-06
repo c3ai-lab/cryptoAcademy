@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\NewsFeed;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class NewsFeedController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('jwt.verify');
+  }
+
   public function getAll(Request $request)
   {
     $offset = $request->has('offset') ? $request->get('offset') : 1;

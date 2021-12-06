@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -35,35 +34,51 @@ class UserController extends Controller
   public function createUser(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required|string|between:2,100',
+      'name' => 'required|string|between:2,100|unique:users',
       'email' => 'required|string|email|max:100|unique:users',
       'password' => 'required|string|confirmed|min:6',
     ]);
 
     if ($validator->fails()) {
-      return response()->json($validator->errors()->toJson(), 400);
+      return response()->json($validator->errors(), 400);
     }
 
     $user = User::create(array_merge(
       $validator->validated(),
       ['password' => bcrypt($request->password), "balance" => "1000000"]
     ));
-    event(new Registered($user));
+//    event(new Registered($user));
 
     return response()->json([
       'message' => 'User successfully registered',
-      'user' => $user
+      'user' => new UserResource($user)
     ], 201);
   }
 
   public function updateCurrentUser(Request $request)
   {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|string|between:2,100|unique:users',
+      'email' => 'required|string|email|max:100|unique:users'
+    ]);
 
+    if ($validator->fails()) {
+
+      return response()->json($validator->errors(), 400);
+    }
+
+    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email]);
+
+    return response()->json([
+      'message' => 'User change successfully.',
+      'user' => new UserResource(User::find(auth()->user()->id))
+    ], 201);
   }
 
   public function deleteCurrentUser()
   {
     User::find(auth()->user()->id)->delete();
+    auth()->logout();
     return response()->json(['message' => 'User deleted successfully.']);
   }
 

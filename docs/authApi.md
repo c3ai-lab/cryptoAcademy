@@ -8,8 +8,8 @@
 
 ```json
 {
-  "email": "name@test.com",
-  "password": "testtest"
+  "email": "max.muster@trading.local",
+  "password": "start_01"
 }
 ```
 
@@ -25,9 +25,9 @@
   "token_type": "bearer",
   "expires_in": 3600,
   "user": {
-    "id": 5,
-    "name": "Testname",
-    "email": "name@test.com",
+    "id": 1,
+    "name": "mmuser",
+    "email": "max.muster@trading.local",
     "email_verified_at": null,
     "created_at": "2021-11-25T17:06:08.000000Z",
     "updated_at": "2021-11-25T17:06:08.000000Z"
