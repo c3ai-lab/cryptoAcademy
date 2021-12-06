@@ -21,7 +21,7 @@ COPY . /var/www/html/
 # Optimizing
 RUN php artisan optimize
 
-RUN chown -R www-data:www-data /var/www/html
+RUN chown www-data:www-data -R /var/www/html
 
 # enable ssl module and enable the default-ssl site
 RUN a2enmod ssl \

@@ -7,6 +7,7 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
+            - crypto_app_data:/var/www/html/storage
         ports:
             - 80:80
             - 443:443
@@ -49,6 +50,8 @@ services:
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data
+    crypto_app_data:
+        name: crypto_app_data
 
 networks:
     crypto-net:
