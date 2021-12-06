@@ -34,7 +34,7 @@ class AuthController extends Controller
 
 
     if (!$token = auth()->attempt(array_merge($validator->validated(), $credentials))) {
-      return response()->json(['status' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 401);
+      return response()->json(['message' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 401);
     }
 
     return $this->createNewToken($token);

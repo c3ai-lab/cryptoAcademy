@@ -161,6 +161,37 @@ ___
 
 ___
 
+### Reset Password
+
+wird automatisch zurückgesetzt und das neue Password an die genannte Emailadresse gesendet
+
+**URL** : `/api/user/password/reset`
+**Method** : `POST`
+**Auth required** : `NO`
+
+**Data constraints**
+
+```json
+{
+  "email": "max.muster@trading.local"
+}
+```
+
+##### Success Response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+```json
+
+{
+  "message": "Password reset successfully"
+}
+```
+
+___
+
 ### Update Currentuser Password
 
 **URL** : `/api/user/password`

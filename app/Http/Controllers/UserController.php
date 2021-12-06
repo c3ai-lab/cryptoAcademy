@@ -143,7 +143,7 @@ class UserController extends Controller
       DB::table('user_verifications')->where('token', $verification_code)->delete();
 
       return response()->json([
-        'message' => 'You have successfully verified your email address . '
+        'message' => 'You have successfully verified your email address. '
       ]);
     }
 
