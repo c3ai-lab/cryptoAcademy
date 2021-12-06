@@ -1,4 +1,4 @@
-!docker/prod/Dockerfile
+!Dockerfile
 **/.config
 **/.dockerignore
 **/.editorconfig
@@ -14,7 +14,6 @@
 **/npm-exec
 **/package-lock.json
 **/package.json
-**/docker
 **/docs
 **/php-exec
 **/phpunit.xml
