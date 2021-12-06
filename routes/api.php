@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsFeedController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'auth'], function () {
-  Route::post('/login', [AuthController::class, 'login']);
-  Route::post('/register', [AuthController::class, 'register']);
-
-  Route::group(['middleware' => ['jwt.verify']], function () {
+Route::group(['middleware' => 'jwt.verify'], function () {
+  Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/change-password', [AuthController::class, 'changePassword']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
-    Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
   });
+
+  Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'getCurrentUser']);
+    Route::post('/', [UserController::class, 'createUser']);
+    Route::put('/', [UserController::class, 'updateCurrentUser']);
+    Route::delete('', [UserController::class, 'deleteCurrentUser']);
+    Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
+  });
+
+  Route::group(['prefix' => 'trading'], function () {
+    Route::post('/buy', [UserController::class, 'createUser']);
+    Route::post('/sell', [UserController::class, 'updateCurrentUser']);
+  });
+
+  Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
 });
+
+
+
