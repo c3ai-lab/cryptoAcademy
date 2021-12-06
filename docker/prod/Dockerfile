@@ -16,9 +16,7 @@ RUN set -ex; \
         echo 'date.timezone = "'${TZ}'"'; \
     } > $PHP_INI_DIR/php.ini
 
-COPY . .
-RUN ls -la docker
-RUN composer update
+COPY . /var/www/html
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 # Optimizing
