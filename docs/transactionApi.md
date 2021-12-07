@@ -16,22 +16,19 @@
 
 ```json
 {
-  ...
+  "quantity": "20",
+  "currency": "BNBBTC"
 }
 ```
 
 ##### Success Response
 
-**Code** : `200 OK`
+**Code** : `201 OK`
 
 **Content examples**
 
 ```json
-[
-  {
-    "id": 13484749
-  }
-]
+[]
 ```
 
 ### Trading Buy
@@ -52,20 +49,17 @@
 
 ```json
 {
-  ...
+  "quantity": "20",
+  "currency": "BNBBTC"
 }
 ```
 
 ##### Success Response
 
-**Code** : `200 OK`
+**Code** : `201 OK`
 
 **Content examples**
 
 ```json
-[
-  {
-    "id": 13484749
-  }
-]
+[]
 ```
