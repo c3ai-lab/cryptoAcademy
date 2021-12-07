@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Notifications\VerificationMail;
-use App\Notifications\PasswordResetMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -63,4 +62,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     $this->notify(new VerificationMail($this));
   }
 
+  public function favorites()
+  {
+    return $this->belongsToMany(Symbol::class, 'symbol_user');
+  }
 }

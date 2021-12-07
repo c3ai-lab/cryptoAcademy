@@ -18,7 +18,7 @@ class TransactionController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'quantity' => 'required|string|min:1',
-      'currency' => 'required|string|min:1'
+      'symbol' => 'required|string|min:1'
     ]);
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
@@ -35,7 +35,7 @@ class TransactionController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'quantity' => 'required|string|min:1',
-      'currency' => 'required|string|min:1'
+      'symbol' => 'required|string|min:1'
     ]);
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
@@ -66,12 +66,14 @@ class TransactionController extends Controller
      * quantity*$price (in Euro)
      */
     try {
+      $symbol = Symbol::where(["api_symbol" => $request->symbol])->first();
+      if (is_null($symbol))
+        throw new \Exception("Symbol '" . $request->symbol . "' NOT Found");
       $transactionModel = new TransactionModel;
       $transactionModel->user_id = $user->id;
-      $transactionModel->currency_id = 0;
+      $transactionModel->symbol_id = $symbol->id;
       $transactionModel->quantity = $request->quantity;
-      $transactionModel->currency = $request->currency;
-      $transactionModel->price = $this->getBinanceApi()->price($request->currency);
+      $transactionModel->price = $this->getBinanceApi()->price($request->symbol);
       $transactionModel->action = $action;
       $transactionModel->save();
     } catch (\Exception $e) {
