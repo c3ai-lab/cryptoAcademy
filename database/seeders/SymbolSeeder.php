@@ -51,6 +51,6 @@ class SymbolSeeder extends Seeder
         'name' => 'Shiba Inu',
         'api_symbol' => 'SHIBUSDT',
       ],
-    ])->each(fn ($symbolData) => Symbol::create($symbolData));
+    ])->each(fn($symbolData) => Symbol::create($symbolData));
   }
 }
