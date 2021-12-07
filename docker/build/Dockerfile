@@ -1,4 +1,4 @@
-FROM php:8-apache
+FROM php:8.0-apache
 
 LABEL maintainer="Magdalena Tsolaki"
 
@@ -11,7 +11,7 @@ ENV TZ=Europe/Berlin
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN requirements="gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 vim libmcrypt-dev libc-client-dev libkrb5-dev libmcrypt4 libcurl3-dev libxml2-dev libzip-dev zip msmtp cron build-essential libssl-dev libpq-dev libonig-dev" \
+RUN requirements="tzdata cron gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 vim libmcrypt-dev libc-client-dev libkrb5-dev libmcrypt4 libcurl3-dev libxml2-dev libzip-dev zip msmtp cron build-essential libssl-dev libpq-dev libonig-dev" \
     && apt-get update && apt-get install -y --no-install-recommends $requirements && rm -rf /var/lib/apt/lists/* \
     && mkdir -p ~/.gnupg \
     && chmod 600 ~/.gnupg \
@@ -43,17 +43,18 @@ RUN apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
 RUN a2enmod rewrite headers
-
-COPY ./docker-laravel-entrypoint /usr/local/bin/docker-laravel-entrypoint
-RUN chmod +x /usr/local/bin/docker-laravel-entrypoint
+# Copy cron file to the cron.d directory
+COPY cron /etc/cron.d/cron
 
 # Give execution rights on the cron job
-RUN touch /etc/cron.d/cron && chmod 0644 /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
 
-# Add cron to base-image entrypoint script
-RUN sed -i 's/^exec /docker-laravel-entrypoint\n\nexec /' /usr/local/bin/apache2-foreground
+# Apply cron job
+RUN crontab /etc/cron.d/cron
+
+# Add a command to base-image entrypont scritp
+RUN sed -i 's/^exec /service cron start\n\nexec /' /usr/local/bin/apache2-foreground
 
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
