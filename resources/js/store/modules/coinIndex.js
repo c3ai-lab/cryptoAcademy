@@ -25,7 +25,7 @@ const getters = {
 const actions = {
   fetchSymbols({ commit, rootGetters }) {
     return new Promise((resolve, reject) => {
-      fetch("/api/auth/symbols", {
+      fetch("/api/user/favorites", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const actions = {
 
   },
   addFavorite({ commit, rootGetters }, id) {
-    fetch(`/api/auth/favorites/${id}/add`, {
+    fetch(`/api/user/favorites/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,8 +86,8 @@ const actions = {
       });
   },
   removeFavorite({ commit, rootGetters }, id) {
-    fetch(`/api/auth/favorites/${id}/remove`, {
-      method: "POST",
+    fetch(`/api/user/favorites/${id}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
