@@ -23,12 +23,12 @@ class TransactionController extends Controller
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
     }
-    /**
-     * balance = €
-     * quantity*$price (in Euro)
-     */
-    $this->createTransaction($request, TransactionModel::ACTION_BUY);
-    return response()->json("", 201);
+    try {
+      $this->createTransaction($request, TransactionModel::ACTION_BUY);
+      return response()->json([], 201);
+    } catch (\Exception $e) {
+      return response($e->getMessage(), 400);
+    }
   }
 
   public function sell(Request $request)
@@ -40,8 +40,12 @@ class TransactionController extends Controller
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
     }
-    $this->createTransaction($request, TransactionModel::ACTION_SELL);
-    return response()->json("", 201);
+    try {
+      $this->createTransaction($request, TransactionModel::ACTION_SELL);
+      return response()->json([], 201);
+    } catch (\Exception $e) {
+      return response($e->getMessage(), 400);
+    }
   }
 
   private function getBinanceApi(): API
@@ -51,15 +55,27 @@ class TransactionController extends Controller
     return $api;
   }
 
+  /**
+   * @throws \Exception
+   */
   private function createTransaction(Request $request, string $action): void
   {
-    $transactionModel = new TransactionModel;
-    $transactionModel->user_id = auth()->user()->id;
-    $transactionModel->currency_id = 0;
-    $transactionModel->quantity = $request->quantity;
-    $transactionModel->currency = $request->currency;
-    $transactionModel->price = $this->getBinanceApi()->price($request->currency);
-    $transactionModel->action = $action;
-    $transactionModel->save();
+    $user = auth()->user();
+    /**
+     * balance = €
+     * quantity*$price (in Euro)
+     */
+    try {
+      $transactionModel = new TransactionModel;
+      $transactionModel->user_id = $user->id;
+      $transactionModel->currency_id = 0;
+      $transactionModel->quantity = $request->quantity;
+      $transactionModel->currency = $request->currency;
+      $transactionModel->price = $this->getBinanceApi()->price($request->currency);
+      $transactionModel->action = $action;
+      $transactionModel->save();
+    } catch (\Exception $e) {
+      throw $e;
+    }
   }
 }
