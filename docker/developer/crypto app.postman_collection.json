@@ -281,6 +281,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\": \"20\",\n    \"currency\": \"BNBBTC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:9876/api/transaction/buy",
 							"protocol": "http",
@@ -302,6 +311,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\": \"20\",\n    \"currency\": \"BNBBTC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:9876/api/transaction/sell",
 							"protocol": "http",
@@ -357,7 +375,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTg3NlwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzODgxMzM1MywiZXhwIjoxNjM4ODE2OTUzLCJuYmYiOjE2Mzg4MTMzNTMsImp0aSI6InJ3aWtSWFVab0o5Z0NxVXoiLCJzdWIiOjEwLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.wJl0l6Kl63XH93jWNuXJISPxQ7jQfu8Jg7lolekcruA",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTg3NlwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzODg2MTAyMCwiZXhwIjoxNjM4ODY0NjIwLCJuYmYiOjE2Mzg4NjEwMjAsImp0aSI6ImhyN1BiMEJGd2VEZVFKVnoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.e_5wT3DWr7s5xCs5_1J4UEaBk6Q6a3EPGFCSSbi7Q9E",
 				"type": "string"
 			}
 		]
