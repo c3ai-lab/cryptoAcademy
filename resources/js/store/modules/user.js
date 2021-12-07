@@ -14,7 +14,11 @@ const state = () => {
 
 const getters = {
   current: (state) => () => state.user,
-  accessToken: (state) => () => state.accessToken,
+  accessToken: (state) => () =>
+    state.accessToken !== null &&
+    state.accessToken.expiresAt > new Date().getTime()
+      ? state.accessToken.token
+      : null,
 };
 
 const actions = {
@@ -41,7 +45,10 @@ const actions = {
             reject();
           } else {
             commit("setUser", data.user);
-            commit("setAccessToken", data.access_token);
+            commit("setAccessToken", {
+              token: data.access_token,
+              expiresIn: data.expires_in,
+            });
             dispatch("save");
             resolve();
           }
@@ -81,17 +88,39 @@ const actions = {
     });
   },
 
+  logout({ commit, dispatch, rootGetters }, callback) {
+    fetch("/api/auth/logout", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+    }).then((response) => {
+      if (response.ok === true) {
+        commit("clear");
+        dispatch("save");
+        callback();
+      }
+    });
+  },
+
   save({ state }) {
     localStorage.setItem("user", JSON.stringify(state));
   },
 };
 
 const mutations = {
+  clear(state) {
+    state.user = null;
+    state.accessToken = null;
+  },
   setUser(state, user) {
     state.user = user;
   },
-  setAccessToken(state, accessToken) {
-    state.accessToken = accessToken;
+  setAccessToken(state, { token, expiresIn }) {
+    state.accessToken = {
+      token: token,
+      expiresAt: new Date().getTime() + expiresIn * 1000,
+    };
   },
 };
 

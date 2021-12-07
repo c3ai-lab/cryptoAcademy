@@ -7,6 +7,7 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
+            - crypto_app_data:/var/www/html/storage
         ports:
             - 80:80
             - 443:443
@@ -46,9 +47,22 @@ services:
             crypto-net:
         ports:
             - 8080:80
+    mailhog:
+        restart: always
+        image: mailhog/mailhog:latest
+        container_name: crypto-app_mailhog
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        networks:
+            crypto-net:
+        ports:
+            - 8025:8025
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data
+    crypto_app_data:
+        name: crypto_app_data
 
 networks:
     crypto-net:

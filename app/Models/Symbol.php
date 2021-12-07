@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 
 class Symbol extends Model
 {
@@ -16,8 +15,8 @@ class Symbol extends Model
 
   public function getIsFavoriteAttribute()
   {
-    if (Auth::user()) {
-      return Auth::user()->favorites->contains($this);
+    if (auth()->user()) {
+      return auth()->user()->favorites->contains($this);
     }
     return false;
   }

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Notifications\VerificationMail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
   use HasFactory, Notifiable;
 
@@ -20,7 +22,10 @@ class User extends Authenticatable implements JWTSubject
     'name',
     'email',
     'password',
-    //    'password_confirmation',
+    'balance',
+    'is_verified',
+    'email_verified_at',
+//    'password_confirmation',
   ];
 
   /**
@@ -52,8 +57,18 @@ class User extends Authenticatable implements JWTSubject
     return [];
   }
 
+  public function sendEmailVerificationNotification()
+  {
+    $this->notify(new VerificationMail($this));
+  }
+
   public function favorites()
   {
     return $this->belongsToMany(Symbol::class, 'symbol_user');
+  }
+
+  public function transactions()
+  {
+    return $this->hasMany(TransactionModel::class, "user_id", "id");
   }
 }

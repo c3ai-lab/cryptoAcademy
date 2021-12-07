@@ -10,15 +10,40 @@
             </div>
           </div>
           <div class="col-12 col-sm-9 align-self-center">
-            <h4 class="d-flex justify-content-center justify-content-sm-start mt-3"><b>{{ user.username }}</b></h4>
-            <p class="d-flex justify-content-center justify-content-sm-start">{{ user.email }}</p> 
-            <i class="mdi mdi-logout text-danger d-flex justify-content-center justify-content-sm-start"></i>
+            <h4
+              class="
+                d-flex
+                justify-content-center justify-content-sm-start
+                mt-3
+              "
+            >
+              <b>{{ user.username }}</b>
+            </h4>
+            <p class="d-flex justify-content-center justify-content-sm-start">
+              {{ user.email }}
+            </p>
+            <i
+              class="
+                mdi mdi-logout
+                text-danger
+                d-flex
+                justify-content-center justify-content-sm-start
+              "
+              @click="logout()"
+            ></i>
           </div>
-        </div> 
+        </div>
 
-        <hr class="my-4"/>
+        <hr class="my-4" />
         <div class="row">
-          <p class="col-12 col-sm-6 justify-content-center justify-content-sm-end d-flex" v-if="!user.sso && !changePassword && !deleteAccount">
+          <p
+            class="
+              col-12 col-sm-6
+              justify-content-center justify-content-sm-end
+              d-flex
+            "
+            v-if="!user.sso && !changePassword && !deleteAccount"
+          >
             <button class="btn btn-primary" @click="changePassword = true">
               {{ $t("profile.change_password") }}
             </button>
@@ -49,14 +74,23 @@
             </button>
           </div>
 
-          <p class="col-12 col-sm-6 justify-content-center justify-content-sm-start d-flex" v-if="!changePassword && !deleteAccount">
-                      <button class="btn btn-danger" @click="deleteAccount = true">
+          <p
+            class="
+              col-12 col-sm-6
+              justify-content-center justify-content-sm-start
+              d-flex
+            "
+            v-if="!changePassword && !deleteAccount"
+          >
+            <button class="btn btn-danger" @click="deleteAccount = true">
               {{ $t("profile.delete_account") }}
             </button>
           </p>
           <div v-if="deleteAccount">
             <h2>{{ $t("profile.delete_account") }}</h2>
-            <p class="text-danger">{{ $t("profile.delete_account_question") }}</p>
+            <p class="text-danger">
+              {{ $t("profile.delete_account_question") }}
+            </p>
             <button class="btn btn-danger" @click="deleteAccount = false">
               {{ $t("common.yes") }}
             </button>
@@ -71,25 +105,21 @@
 </template>
 
 <style lang="scss" scoped>
-
-
 .avatar-box {
   background-color: rgb(243, 243, 243);
   border-radius: 100px;
   padding: 10px;
-  
+
   .avatar {
-  height: 10vw;
-  min-height: 100px;
+    height: 10vw;
+    min-height: 100px;
   }
 }
 
-i.text-danger
-{
+i.mdi-logout {
+  cursor: pointer;
   font-size: 20pt;
 }
-
-
 </style>
 
 <script>
@@ -113,6 +143,14 @@ export default {
       changePassword: false,
       deleteAccount: false,
     };
+  },
+
+  methods: {
+    logout() {
+      this.$store.dispatch("user/logout", () =>
+        this.$router.push({ name: "login" })
+      );
+    },
   },
 };
 </script>

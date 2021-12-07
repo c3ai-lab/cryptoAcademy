@@ -1,11 +1,11 @@
 #!/bin/bash
 echo_and_run() {
-    echo "$*"
-    "$@"
+  echo "$*"
+  "$@"
 }
 DOCKER_DIR=$(pwd)/docker/developer
 PROJECT_ROOT=$(pwd)
-echo "PROJECT_ROOT=$PROJECT_ROOT" > $DOCKER_DIR/.env
+echo "PROJECT_ROOT=$PROJECT_ROOT" >$DOCKER_DIR/.env
 
 #echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml rm --stop -f -v
 
@@ -13,7 +13,7 @@ echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml pull
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml up -d --force-recreate
 
 if [ ! -f $(pwd)/.env ]; then
-    echo_and_run cp -ap $DOCKER_DIR/laravel.env $(pwd)/.env
+  echo_and_run cp -ap $DOCKER_DIR/laravel.env $(pwd)/.env
 fi
 
 echo_and_run docker run --rm --interactive --tty -v $(pwd):/var/www/html -u $UID mats9798/laravel8-php-8-apache:latest composer update
@@ -24,11 +24,8 @@ echo_and_run docker exec -it crypto-app chmod -R 777 ./storage
 echo_and_run docker exec -it crypto-app chmod 777 ./.env
 
 # Optimizing Configuration loading
-echo_and_run docker exec -it crypto-app php artisan config:cache
-# Optimizing Route loading
-echo_and_run docker exec -it crypto-app php artisan route:cache
-# Optimizing View loading
-echo_and_run docker exec -it crypto-app php artisan view:cache
+echo_and_run docker exec -it crypto-app php artisan optimize
 # Migrations
-echo_and_run docker exec -it crypto-app php artisan migrate
+echo_and_run docker exec crypto-app php artisan migrate --force
 
+echo_and_run docker exec crypto-app php artisan schedule:work

@@ -20,6 +20,8 @@ class CreateSymbolUser extends Migration
       $table->timestamps();
 
       $table->unique(['symbol_id', 'user_id']);
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      $table->foreign('symbol_id')->references('id')->on('symbols')->onDelete('cascade');
     });
   }
 
