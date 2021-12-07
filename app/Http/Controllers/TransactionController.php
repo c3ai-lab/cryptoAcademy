@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TransactionResource;
+use App\Models\Symbol;
 use App\Models\TransactionModel;
 use Binance\API;
 use Illuminate\Http\Request;
@@ -9,16 +11,17 @@ use Validator;
 
 class TransactionController extends Controller
 {
-  public function __construct()
+
+  public function index(Request $request)
   {
-    $this->middleware('jwt.verify');
+    return TransactionResource::collection(auth()->user()->transactions);
   }
 
   public function buy(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'quantity' => 'required|string|min:1',
-      'symbol' => 'required|string|min:1'
+      'quantity' => 'required|min:1',
+      'symbol' => 'required|min:1|exists:symbols,api_symbol'
     ]);
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
@@ -33,13 +36,31 @@ class TransactionController extends Controller
 
   public function sell(Request $request)
   {
+    $user = auth()->user();
     $validator = Validator::make($request->all(), [
-      'quantity' => 'required|string|min:1',
-      'symbol' => 'required|string|min:1'
+      'quantity' => 'required|min:1',
+      'symbol' => 'required|min:1|exists:symbols,api_symbol'
     ]);
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
     }
+
+    $symbol = Symbol::where(["api_symbol" => $request->symbol])->first();
+    $model = TransactionModel::where([["user_id", $user->id], ["symbol_id", $symbol->id]]);
+    if ($model->count() != 0) {
+      $sell = 0;
+      $buy = 0;
+      $symbol->get()->each(function ($val) use ($sell, $buy) {
+        if ($val->action == TransactionModel::ACTION_BUY)
+          $sell += $val->quantity;
+        elseif ($val->action == TransactionModel::ACTION_BUY)
+          $buy += $val->quantity;
+      });
+      var_dump($sell, $buy);
+      die();
+    } else
+      return response()->json("You can't sell stuff you don't own", 400);
+
     try {
       $this->createTransaction($request, TransactionModel::ACTION_SELL);
       return response()->json([], 201);
@@ -50,7 +71,7 @@ class TransactionController extends Controller
 
   private function getBinanceApi(): API
   {
-    $api = new \Binance\API(config('api.binance_api_key'), config('api.binance_secret_key'), true);
+    $api = new API(config('api.binance_api_key'), config('api.binance_secret_key'));
     $api->caOverride = true;
     return $api;
   }
@@ -61,14 +82,12 @@ class TransactionController extends Controller
   private function createTransaction(Request $request, string $action): void
   {
     $user = auth()->user();
-    /**
+    /** @todo
      * balance = €
      * quantity*$price (in Euro)
      */
     try {
       $symbol = Symbol::where(["api_symbol" => $request->symbol])->first();
-      if (is_null($symbol))
-        throw new \Exception("Symbol '" . $request->symbol . "' NOT Found");
       $transactionModel = new TransactionModel;
       $transactionModel->user_id = $user->id;
       $transactionModel->symbol_id = $symbol->id;

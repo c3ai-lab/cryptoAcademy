@@ -66,4 +66,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
   {
     return $this->belongsToMany(Symbol::class, 'symbol_user');
   }
+
+  public function transactions()
+  {
+    return $this->hasMany(TransactionModel::class, "user_id", "id");
+  }
 }

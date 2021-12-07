@@ -39,6 +39,7 @@ Route::group(['prefix' => 'user'], function () {
   });
 
   Route::group(['prefix' => 'transaction'], function () {
+    Route::get('/', [TransactionController::class, 'index']);
     Route::post('/buy', [TransactionController::class, 'buy']);
     Route::post('/sell', [TransactionController::class, 'sell']);
   });

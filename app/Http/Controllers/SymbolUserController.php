@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SymbolUserResource;
 use App\Models\Symbol;
+use App\Models\SymbolUser;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -18,33 +19,40 @@ class SymbolUserController extends Controller
 
   public function store(Request $request, Symbol $symbol)
   {
-    $this->validator($symbol);
-    auth()->user()->favorites()->attach($symbol);
+    $user = auth()->user();
+    $validatorSymbols = Validator::make(
+      ['symbol' => $symbol->id],
+      ['symbol' => 'required|exists:symbols,id']
+    );
+    if ($validatorSymbols->fails())
+      return response()->json($validatorSymbols->errors(), 422);
+
+    $model = SymbolUser::where([["user_id", $user->id], ["symbol_id", $symbol->id]]);
+    if ($model->count() > 0) {
+      return response()->json(["message" => "This symbol already exists in the favoritecollection."], 422);
+    }
+
+    $user->favorites()->attach($symbol);
     return response(['status' => 'success']);
   }
 
   public function delete(Request $request, Symbol $symbol)
   {
-    $this->validator($symbol);
-    auth()->user()->favorites()->detach($symbol);
-    return response(['status' => 'success']);
-  }
-
-  private function validator(Symbol $symbol)
-  {
-    $validator = Validator::make(
+    $user = auth()->user();
+    $validatorSymbols = Validator::make(
       ['symbol' => $symbol->id],
       ['symbol' => 'required|exists:symbols,id']
     );
-    if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
+    if ($validatorSymbols->fails())
+      return response()->json($validatorSymbols->errors(), 422);
+
+
+    $model = SymbolUser::where([["user_id", $user->id], ["symbol_id", $symbol->id]]);
+    if ($model->count() == 0) {
+      return response()->json(["message" => "This symbol doesn't exists in the favoritecollection."], 422);
     }
-    $validator = Validator::make(
-      ['symbol' => $symbol->id],
-      ['symbol' => 'required|exists:symbol_user,symbol_id']
-    );
-    if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
-    }
+
+    auth()->user()->favorites()->detach($symbol);
+    return response(['status' => 'success']);
   }
 }

@@ -34,6 +34,8 @@ $ ./npm-exec run watch
 
 [User](docs/userApi.md)
 
+[Transacion](docs/favoriteApi.md)
+
 [Transacion](docs/transactionApi.md)
 
 [News Feed](docs/newsFeedApi.md)
