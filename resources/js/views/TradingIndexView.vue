@@ -7,7 +7,7 @@
     >
       <coin-card-real-data
         :name="coin.name"
-        :symbol="coin.api_symbol"
+        :symbol="coin.symbol"
         :series="coin.series"
         :isFavorite="coin.is_favorite"
         :id="coin.id"

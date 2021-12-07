@@ -111,7 +111,7 @@ const mutations = {
     state.all = data;
   },
   setDataForSymbol(state, { symbol, data }) {
-    state.all.find(x => x.api_symbol === symbol)['series'] = [{ data }];
+    state.all.find(x => x.symbol === symbol)['series'] = [{ data }];
   },
   setFavoriteForSymbol(state, { id, isFavorite }) {
     state.all.find(x => x.id === id).is_favorite = isFavorite;
