@@ -24,7 +24,7 @@ class Symbol extends Model
 
   public function getUserBalanceAttribute()
   {
-    if (auth()->user->transactions->count === 0) {
+    if (auth()->user()->transactions->count() === 0) {
       return 0;
     }
 
