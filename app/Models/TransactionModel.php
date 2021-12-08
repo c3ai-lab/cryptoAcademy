@@ -34,4 +34,12 @@ class TransactionModel extends Model
   {
     return $this->getSymbol()->value("api_symbol");
   }
+
+  public function getQuantityAttribute()
+  {
+    if ($this->action === self::ACTION_SELL) {
+      return $this->quantity * (-1);
+    }
+    return $this->quantity;
+  }
 }
