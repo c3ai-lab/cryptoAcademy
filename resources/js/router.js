@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import { store } from "./store/main";
 
+import { SESSION_REFRESH_AFTER_MINUTES } from "./constants";
+
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
 import DashboardView from "./views/DashboardView.vue";
@@ -49,6 +51,14 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const sessionExpiresAt = store.getters["user/sessionExpiresAt"]();
+  if (
+    sessionExpiresAt <
+    new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000
+  ) {
+    store.dispatch("user/refreshSession");
+  }
+
   const accessToken = store.getters["user/accessToken"]();
   if (to.meta.requiresAuth === true && accessToken === null) {
     // store original target and redirect user to it after login / registration

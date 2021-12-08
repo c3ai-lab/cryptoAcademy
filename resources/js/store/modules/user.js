@@ -4,27 +4,57 @@ const state = () => {
     accessToken: null,
   };
 
-  const data = localStorage.getItem("user");
+  const data = localStorage.getItem("accessToken");
   if (data !== null) {
-    state = JSON.parse(data);
+    state.accessToken = JSON.parse(data);
   }
 
   return state;
 };
 
+const processUserResponse = ({
+  response,
+  commit,
+  dispatch,
+  resolve,
+  reject,
+}) => {
+  response
+    .then((response) => {
+      if (response.ok === true) {
+        return response.json();
+      }
+      return null;
+    })
+    .then((data) => {
+      if (data === null) {
+        reject();
+      } else {
+        commit("setUser", data.user);
+        commit("setAccessToken", {
+          token: data.access_token,
+          expiresIn: data.expires_in,
+        });
+        dispatch("save");
+        resolve();
+      }
+    });
+};
+
 const getters = {
-  current: (state) => () => state.user,
   accessToken: (state) => () =>
     state.accessToken !== null &&
     state.accessToken.expiresAt > new Date().getTime()
       ? state.accessToken.token
       : null,
+  sessionExpiresAt: (state) => () =>
+    state.accessToken === null ? null : state.accessToken.expiresAt,
 };
 
 const actions = {
   login({ commit, dispatch }, data) {
     return new Promise((resolve, reject) => {
-      fetch("/api/auth/login", {
+      const response = fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,26 +63,34 @@ const actions = {
           email: data.email,
           password: data.password,
         }),
-      })
-        .then((response) => {
-          if (response.ok === true) {
-            return response.json();
-          }
-          return null;
-        })
-        .then((data) => {
-          if (data === null) {
-            reject();
-          } else {
-            commit("setUser", data.user);
-            commit("setAccessToken", {
-              token: data.access_token,
-              expiresIn: data.expires_in,
-            });
-            dispatch("save");
-            resolve();
-          }
-        });
+      });
+
+      processUserResponse({
+        response,
+        commit,
+        dispatch,
+        resolve,
+        reject,
+      });
+    });
+  },
+
+  refreshSession({ commit, dispatch, getters }) {
+    return new Promise((resolve, reject) => {
+      const response = fetch("/api/auth/refresh", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${getters["accessToken"]()}`,
+        },
+      });
+
+      processUserResponse({
+        response,
+        commit,
+        dispatch,
+        resolve,
+        reject,
+      });
     });
   },
 
@@ -104,7 +142,7 @@ const actions = {
   },
 
   save({ state }) {
-    localStorage.setItem("user", JSON.stringify(state));
+    localStorage.setItem("accessToken", JSON.stringify(state.accessToken));
   },
 };
 
