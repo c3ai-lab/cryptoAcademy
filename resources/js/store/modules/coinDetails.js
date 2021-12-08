@@ -17,9 +17,24 @@ const state = {
 
 const getters = {
   getSeries: (state) => (symbol, dimension) => {
-    if (state.coins[symbol] === undefined || state.coins[symbol][dimension] === undefined) return [];
+    if (
+      state.coins[symbol] === undefined ||
+      state.coins[symbol][dimension] === undefined ||
+      state.coins['EURUSDT'] === undefined ||
+      state.coins['EURUSDT'][dimension] === undefined
+    ) return [];
 
-    return state.coins[symbol][dimension].map(x => [x[0], x[1] / state.eurUsdt]);
+    const result = []
+
+    const series = state.coins[symbol][dimension]
+
+    for (let i = 0; i < series.length; i++) {
+      result.push([
+        series[i][0], series[i][1] / state.coins['EURUSDT'][dimension][i][1]
+      ]);
+
+    }
+    return result;
   },
 };
 
@@ -42,6 +57,15 @@ const actions = {
         symbol: symbol,
       }).then(response =>
         commit('set', { symbol, dimension, data: response.map(x => [x[0], Number(x[3])]) })
+      ).catch(error =>
+        alert(error)
+      );
+
+      binanceRest.getKlines({
+        ...DIMENSION_MAP[dimension],
+        symbol: 'EURUSDT',
+      }).then(response =>
+        commit('set', { symbol: 'EURUSDT', dimension, data: response.map(x => [x[0], Number(x[3])]) })
       ).catch(error =>
         alert(error)
       );
