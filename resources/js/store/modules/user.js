@@ -58,7 +58,7 @@ const actions = {
 
   register({ commit }, data) {
     return new Promise((resolve, reject) => {
-      fetch("/api/auth/register", {
+      fetch("/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,22 @@
 <style lang="scss" scoped>
 .main {
   cursor: pointer;
+  
+
+:hover
+{
+  background-color: #2a3042;
+  color: white;
+  border-radius: 0.25rem;
+  
+  h4.card-title
+  {
+    color: white;
+  }
 }
+  
+}
+
 </style>
 
 <script>

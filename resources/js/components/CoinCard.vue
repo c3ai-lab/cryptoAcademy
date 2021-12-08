@@ -1,14 +1,14 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <p class="text-muted mb-4">
+      <h6 class="text-muted mb-4">
         <i
-          class="mdi h2 align-middle mb-0 me-3"
+          class="mdi h2 align-middle mb-0 me-2"
           :class="[iconClass]"
           :style="{ color: coinColor }"
         ></i>
         {{ $t(`coins.${coin}.name`) }}
-      </p>
+      </h6>
 
       <div class="row">
         <div class="col-6">

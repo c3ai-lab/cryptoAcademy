@@ -4,7 +4,6 @@ LABEL maintainer="Magdalena Tsolaki"
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y ssl-cert \
  && rm -r /var/lib/apt/lists/* \
@@ -17,16 +16,12 @@ RUN set -ex; \
         echo 'date.timezone = "'${TZ}'"'; \
     } > $PHP_INI_DIR/php.ini
 
-COPY . .
-RUN rm -rf .editorconfing .git .github .gitignore .styleci.yml README.md composer-exec composer.json composer.lock docker npm-exec package-lock.json package.json php-exec tests webpack.mix.js
-RUN composer update
-RUN composer install --no-interaction --optimize-autoloader --no-dev
-# Optimizing Route loading
-RUN php artisan route:cache
-# Optimizing View loading
-RUN php artisan view:cache
+COPY . /var/www/html/
 
-RUN chown -R www-data:www-data /var/www/html
+# Optimizing
+RUN php artisan optimize
+
+RUN chown www-data:www-data -R /var/www/html
 
 # enable ssl module and enable the default-ssl site
 RUN a2enmod ssl \

@@ -10,7 +10,7 @@
             </div>
           </div>
           <div class="col-12 col-sm-9 align-self-center">
-            <h4
+            <h5
               class="
                 d-flex
                 justify-content-center justify-content-sm-start
@@ -18,10 +18,10 @@
               "
             >
               <b>{{ user.username }}</b>
-            </h4>
-            <p class="d-flex justify-content-center justify-content-sm-start">
+            </h5>
+            <h6 class="d-flex justify-content-center justify-content-sm-start">
               {{ user.email }}
-            </p>
+            </h6>
             <i
               class="
                 mdi mdi-logout
@@ -112,7 +112,8 @@
 
   .avatar {
     height: 10vw;
-    min-height: 100px;
+    min-height: 4rem;
+    max-height: 7rem;
   }
 }
 

@@ -1,5 +1,6 @@
 #!/bin/bash
-docker build -t mats9798/laravel8-php-8-apache:latest .
+docker image tag mats9798/laravel8-php-8-apache:latest mats9798/laravel8-php-8-apache:old
+docker build --no-cache . -t mats9798/laravel8-php-8-apache:latest
 docker login -u mats9798 -p mats9798mats9798
 docker push mats9798/laravel8-php-8-apache:latest
 docker logout mats9798

@@ -1,3 +1,15 @@
+body, .card-title
+{
+    font-family: $font-family-sans-serif
+}
+
+h1,h2,h3,h4,h5,h6, .heading-font
+{
+    font-family: $font-family-heading;
+}
+
+
+
 .modal-backdrop {
     opacity: .5;
 }

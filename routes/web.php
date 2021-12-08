@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('user/verify/{verification_code}', [UserController::class, 'verifyUser']);
 
 Route::get('/{any}', function () {
   return view('layouts.vue');
 })->where('any', '.*');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

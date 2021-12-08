@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsFeedController;
+use App\Http\Controllers\SymbolUserController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +18,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'auth'], function ($router) {
+Route::group(['prefix' => 'auth'], function () {
   Route::post('/login', [AuthController::class, 'login']);
-  Route::post('/register', [AuthController::class, 'register']);
+  Route::post('/logout', [AuthController::class, 'logout']);
+  Route::post('/refresh', [AuthController::class, 'refresh']);
+});
 
-  Route::group(['middleware' => 'jwt'], function ($router) {
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
-    Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
+Route::group(['prefix' => 'user'], function () {
+  Route::get('/', [UserController::class, 'getCurrentUser']);
+  Route::post('/', [UserController::class, 'createUser']);
+  Route::put('/', [UserController::class, 'updateCurrentUser']);
+  Route::delete('/', [UserController::class, 'deleteCurrentUser']);
+  Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
+  Route::post('/password/reset', [UserController::class, 'resetCurrentUserPassword']);
+
+  Route::group(['prefix' => 'favorites'], function () {
+    Route::get('/', [SymbolUserController::class, 'index']);
+    Route::post('/{symbol}', [SymbolUserController::class, 'store']);
+    Route::delete('/{symbol}', [SymbolUserController::class, 'delete']);
+  });
+
+  Route::group(['prefix' => 'transaction'], function () {
+    Route::get('/', [TransactionController::class, 'index']);
+    Route::post('/buy', [TransactionController::class, 'buy']);
+    Route::post('/sell', [TransactionController::class, 'sell']);
   });
 });
+
+
+Route::get('/news-feed', [NewsFeedController::class, 'getAll']);
