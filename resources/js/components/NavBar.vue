@@ -33,16 +33,8 @@ export default {
   <header id="page-topbar">
     <div>
       <div class="d-flex">
-        <!-- LOGO -->
-        <div class="navbar-brand-box">
-          <a href="/" class="logo">
-            <span>
-              <img src="/images/vendor/logo.png" alt height="50" />
-            </span>
-          </a>
-        </div>
 
-        <button
+         <button
           id="open-btn"
           type="button"
           class="open btn btn-sm px-3 font-size-16 header-item"
@@ -60,6 +52,23 @@ export default {
         >
           <i class="fa fa-fw fa-bars"></i>
         </button>
+        <!-- LOGO -->
+        <div class="navbar-brand-box d-none d-lg-block">
+          <a href="/" class="logo">
+            <span>
+              <img src="/images/cryptocademy.svg" style="width: 100%;" />
+            </span>
+          </a>
+        </div>
+       <div class="d-block d-lg-none " style="width: 35px;">
+         <a href="/" class="logo">
+            <span>
+              <img src="/images/cryptocademy_coin.svg" style="height: 35px;" class="px-2" />
+            </span>
+          </a>
+       </div>
+
+       
 
         <!---
       Setting Button in Navbar
@@ -76,7 +85,7 @@ export default {
         --->
       </div>
     </div>
-    <div id="nav-menu" class="vertical-menu">
+    <div id="nav-menu" class="vertical-menu font-heading">
       <router-link :to="{ name: 'dashboard' }">
         {{ $t("navigation.dashboard") }}
       </router-link>
@@ -92,7 +101,7 @@ export default {
   </header>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 #nav-menu {
   padding: 20px;
   font-size: 15px;
@@ -101,7 +110,17 @@ export default {
   background-color: #2a3042;
 }
 
+.vertical-menu
+{
+  width: 180px;
+}
+
 a {
   color: white;
+}
+
+.navbar-brand-box
+{
+  padding: 0;
 }
 </style>
