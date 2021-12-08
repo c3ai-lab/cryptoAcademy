@@ -30,7 +30,7 @@ class TransactionController extends Controller
       $this->createTransaction($request, TransactionModel::ACTION_BUY);
       return response()->json([], 201);
     } catch (\Exception $e) {
-      return response($e->getMessage(), 400);
+      return response($e->getMessage(), 500);
     }
   }
 
@@ -65,7 +65,7 @@ class TransactionController extends Controller
       $this->createTransaction($request, TransactionModel::ACTION_SELL);
       return response()->json([], 201);
     } catch (\Exception $e) {
-      return response($e->getMessage(), 400);
+      return response($e->getMessage(), 500);
     }
   }
 
