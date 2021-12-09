@@ -4,9 +4,14 @@ const state = () => {
     accessToken: null,
   };
 
-  const data = localStorage.getItem("accessToken");
-  if (data !== null) {
-    state.accessToken = JSON.parse(data);
+  const user = localStorage.getItem("user");
+  if (user !== null) {
+    state.user = JSON.parse(user);
+  }
+
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken !== null) {
+    state.accessToken = JSON.parse(accessToken);
   }
 
   return state;
@@ -44,7 +49,7 @@ const processUserResponse = ({
 const getters = {
   accessToken: (state) => () =>
     state.accessToken !== null &&
-      state.accessToken.expiresAt > new Date().getTime()
+    state.accessToken.expiresAt > new Date().getTime()
       ? state.accessToken.token
       : null,
   sessionExpiresAt: (state) => () =>
@@ -143,6 +148,7 @@ const actions = {
   },
 
   save({ state }) {
+    localStorage.setItem("user", JSON.stringify(state.user));
     localStorage.setItem("accessToken", JSON.stringify(state.accessToken));
   },
 };
