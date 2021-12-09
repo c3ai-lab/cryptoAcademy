@@ -14,3 +14,11 @@ export const Coin = {
   BTC: "BTC",
   ETH: "ETH",
 };
+
+export const Dimension = {
+  ONE_DAY: "1D",
+  ONE_WEEK: "1W",
+  ONE_MONTH: "1M",
+  ONE_YEAR: "1Y",
+  ALL: "All",
+}

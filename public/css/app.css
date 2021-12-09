@@ -56409,4 +56409,20 @@ div.dataTables_wrapper div.dataTables_filter input {
   margin: 0px auto;
 }
 
+.padded {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .padded {
+    padding: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  .padded {
+    padding: 20px;
+  }
+}
+
 

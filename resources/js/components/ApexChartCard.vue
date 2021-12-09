@@ -1,19 +1,16 @@
 <template>
-
   <div class="card">
     <div class="card-body">
       <h2 class="card-title mb-3">{{ title }}</h2>
       <div>
-            <h5>$ {{ currentValue }}</h5>
-            <p class="text-muted text-truncate mb-0">
-              {{ absoluteChange >= 0 ? `+${absoluteChange}` : absoluteChange }}
-              (
-              {{ relativeChange >= 0 ? `+${relativeChange}` : relativeChange }}%
-              )
+        <h5>$ {{ currentValue }}</h5>
+        <p class="text-muted text-truncate mb-0">
+          {{ absoluteChange >= 0 ? `+${absoluteChange}` : absoluteChange }} $ (
+          {{ relativeChange >= 0 ? `+${relativeChange}` : relativeChange }}% )
 
-              <i class="mdi ml-1" :class="[arrowClasses]"></i>
-            </p>
-          </div>
+          <i class="mdi ml-1" :class="[arrowClasses]"></i>
+        </p>
+      </div>
       <div>
         <div id="overview-chart" class="apex-charts" dir="ltr">
           <apexchart
@@ -26,46 +23,45 @@
           />
         </div>
       </div>
-        <div class="toolbar button-items text-center">
-          <button
-            id="one_month"
-            class="btn btn-light btn-sm"
-            @click="setTimeFrame(TimeFrame.ONE_MONTH)"
-            :class="{ active: timeFrame === TimeFrame.ONE_MONTH }"
-          >
-            1{{ $t("datetime.month_short") }}
-          </button>
+      <div class="toolbar button-items text-center">
+        <button
+          id="one_month"
+          class="btn btn-light btn-sm"
+          @click="setTimeFrame(TimeFrame.ONE_MONTH)"
+          :class="{ active: timeFrame === TimeFrame.ONE_MONTH }"
+        >
+          1{{ $t("datetime.month_short") }}
+        </button>
 
-          <button
-            id="six_months"
-            class="btn btn-light btn-sm"
-            @click="setTimeFrame(TimeFrame.SIX_MONTHS)"
-            :class="{ active: timeFrame === TimeFrame.SIX_MONTHS }"
-          >
-            6{{ $t("datetime.month_short") }}
-          </button>
+        <button
+          id="six_months"
+          class="btn btn-light btn-sm"
+          @click="setTimeFrame(TimeFrame.SIX_MONTHS)"
+          :class="{ active: timeFrame === TimeFrame.SIX_MONTHS }"
+        >
+          6{{ $t("datetime.month_short") }}
+        </button>
 
-          <button
-            id="one_year"
-            class="btn btn-light btn-sm"
-            @click="setTimeFrame(TimeFrame.ONE_YEAR)"
-            :class="{ active: timeFrame === TimeFrame.ONE_YEAR }"
-          >
-            1{{ $t("datetime.year_short") }}
-          </button>
+        <button
+          id="one_year"
+          class="btn btn-light btn-sm"
+          @click="setTimeFrame(TimeFrame.ONE_YEAR)"
+          :class="{ active: timeFrame === TimeFrame.ONE_YEAR }"
+        >
+          1{{ $t("datetime.year_short") }}
+        </button>
 
-          <button
-            id="all"
-            class="btn btn-light btn-sm"
-            @click="setTimeFrame(TimeFrame.ALL)"
-            :class="{ active: timeFrame === TimeFrame.ALL }"
-          >
-            {{ $t("datetime.all") }}
-          </button>
-        </div>
+        <button
+          id="all"
+          class="btn btn-light btn-sm"
+          @click="setTimeFrame(TimeFrame.ALL)"
+          :class="{ active: timeFrame === TimeFrame.ALL }"
+        >
+          {{ $t("datetime.all") }}
+        </button>
       </div>
     </div>
-
+  </div>
 </template>
 
 <script>
@@ -105,13 +101,35 @@ export default Vue.extend({
   },
 
   computed: {
-    chartOptions: function () {
+    chartOptions() {
       let options = APEXCHART_OPTIONS;
 
       options.chart.type = "area";
       options.chart.height = 250;
 
       return options;
+    },
+
+    currentValue() {
+      if (this.series == null || this.series.length === 0) return 0;
+      const data = this.series[0].data;
+      return parseFloat(data[data.length - 1][1]).toFixed(2);
+    },
+
+    absoluteChange() {
+      if (this.series == null || this.series.length === 0) return 0;
+      const data = this.series[0].data;
+      const start = data[0][1];
+      const end = data[data.length - 1][1];
+      return parseFloat(end - start).toFixed(2);
+    },
+
+    relativeChange() {
+      if (this.series == null || this.series.length === 0) return 0;
+      const data = this.series[0].data;
+      const start = data[0][1];
+      const end = data[data.length - 1][1];
+      return parseFloat((end / start) * 100).toFixed(2);
     },
   },
 
