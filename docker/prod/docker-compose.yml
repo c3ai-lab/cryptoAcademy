@@ -74,8 +74,6 @@ services:
             - PMA_HOST=crypto-app_db
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
-        ports:
-            - 8080:80
     mailhog:
         restart: always
         image: mailhog/mailhog:latest
@@ -83,8 +81,6 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-        ports:
-            - 8025:8025
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data
