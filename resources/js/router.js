@@ -6,6 +6,7 @@ import { SESSION_REFRESH_AFTER_MINUTES } from "./constants";
 
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
+import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
 
@@ -30,7 +31,15 @@ const router = new VueRouter({
       meta: {
         requiresAuth: false,
       },
-    },
+    },  
+    {
+      path: "/reset-password",
+      name: "reset-password",
+      component: ResetPasswordView ,
+      meta: {
+        requiresAuth: false,
+      },
+    },  
     {
       path: "/",
       name: "dashboard",
@@ -47,6 +56,7 @@ const router = new VueRouter({
         requiresAuth: true,
       },
     },
+    
   ],
 });
 
