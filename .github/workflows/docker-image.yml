@@ -7,7 +7,11 @@ on:
   pull_request:
     branches:
       - main
-
+  # Also trigger on page_build, as well as release created events
+  page_build:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
 env:
   NODE_VERSION: '14.x'                # set this to the node version to use
   SSH_CONNECTION: 'root@cryptocademy.app'
