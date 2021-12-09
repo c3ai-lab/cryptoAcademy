@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import { Dimension } from "./enums";
-=======
 export const SESSION_REFRESH_AFTER_MINUTES = 15;
->>>>>>> main
 
 const APEXCHART_LOCALES = [
   {
