@@ -9,6 +9,7 @@ import RegisterView from "./views/RegisterView.vue";
 import TradingIndexView from "./views/TradingIndexView.vue";
 import TradingShowView from "./views/TradingShowView.vue";
 import TradingBuyView from "./views/TradingBuyView.vue";
+import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import AcademyView from "./views/AcademyView.vue";
 import ProfileView from "./views/ProfileView.vue";
@@ -34,7 +35,15 @@ const router = new VueRouter({
       meta: {
         requiresAuth: false,
       },
-    },
+    },  
+    {
+      path: "/reset-password",
+      name: "reset-password",
+      component: ResetPasswordView ,
+      meta: {
+        requiresAuth: false,
+      },
+    },  
     {
       path: "/",
       name: "dashboard",

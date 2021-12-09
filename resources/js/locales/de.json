@@ -25,7 +25,12 @@
         "already_account": "Bereits einen Account?",
         "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
         "login_failed": "Anmeldung fehlgeschlagen!",
-        "register_failed": "Registrierung fehlgeschlagen!"
+        "register_failed": "Registrierung fehlgeschlagen!",
+        "reset_password": "Passwort vergessen?",
+        "mail_for_password": "Gib deine mit dem Konto verknüpfte E-Mail-Adresse an, um ein neues Passwort per Mail zu erhalten.",
+        "reset_passoword_now": "Neues Passwort anfordern!",
+        "mail_failed": "Die angegebene Mail-Adresse ist nicht vergeben.",
+        "remember_password": "Du erinnerst dich an dein Passwort?"
     },
     "dashboard": {
         "title": "Dashboard",
