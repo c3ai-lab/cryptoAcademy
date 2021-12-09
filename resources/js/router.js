@@ -7,6 +7,7 @@ import { SESSION_REFRESH_AFTER_MINUTES } from "./constants";
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
 import DashboardView from "./views/DashboardView.vue";
+import AcademyView from "./views/AcademyView.vue";
 import ProfileView from "./views/ProfileView.vue";
 
 Vue.use(VueRouter);
@@ -40,9 +41,57 @@ const router = new VueRouter({
       },
     },
     {
+      path: "/academy",
+      name: "academy",
+      component: AcademyView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/profile",
       name: "profile",
       component: ProfileView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/academy/how_does_it_work",
+      name: "topic_1",
+      component: AcademyView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/academy/for_beginners",
+      name: "topic_2",
+      component: AcademyView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/academy/top_fuenf_krypto",
+      name: "topic_3",
+      component: AcademyView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/academy/50_krypto",
+      name: "topic_4",
+      component: AcademyView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/academy/glossar",
+      name: "topic_5",
+      component: AcademyView,
       meta: {
         requiresAuth: true,
       },

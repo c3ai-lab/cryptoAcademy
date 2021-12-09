@@ -19,11 +19,13 @@ export default {
       document.getElementById("open-btn").style.display = "none";
       document.getElementById("close-button").style.display = "block";
       document.getElementById("nav-menu").style.display = "block";
+      document.getElementById("background").style.display = "block";
     },
     closeNav() {
       document.getElementById("close-button").style.display = "none";
       document.getElementById("open-btn").style.display = "block";
       document.getElementById("nav-menu").style.display = "none";
+      document.getElementById("background").style.display = "none";
     },
   },
 };
@@ -85,7 +87,9 @@ export default {
         --->
       </div>
     </div>
-    <div id="nav-menu" class="vertical-menu font-heading">
+    <div id="background" class="background d-xxl-none" @click="closeNav">
+      </div>
+    <div id="nav-menu" class="vertical-menu">
       <router-link :to="{ name: 'dashboard' }">
         {{ $t("navigation.dashboard") }}
       </router-link>
@@ -94,9 +98,14 @@ export default {
         {{ $t("navigation.trading") }}
       </router-link>
       <br />
+      <router-link :to="{ name: 'academy' }">
+        {{ $t("navigation.academy") }}
+      </router-link>
+      <br />
       <router-link :to="{ name: 'profile' }">
         {{ $t("navigation.profile") }}
       </router-link>
+    
     </div>
   </header>
 </template>
@@ -117,6 +126,14 @@ export default {
 
 a {
   color: white;
+}
+
+.background
+{
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
 }
 
 .navbar-brand-box
