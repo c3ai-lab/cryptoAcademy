@@ -1,5 +1,25 @@
 version: "3.9"
 services:
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        restart: unless-stopped
+        volumes:
+            - ./data/nginx:/etc/nginx/conf.d
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+        ports:
+            - 80:80
+            - 443:443
+        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    certbot:
+        container_name: certbot
+        image: certbot/certbot
+        restart: unless-stopped
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     crypto-app:
         container_name: crypto-app
         restart: always
@@ -8,14 +28,9 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
             - crypto_app_data:/var/www/html/storage
-        ports:
-            - 80:80
-            - 443:443
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
-        networks:
-            crypto-net:
     scheduler:
         container_name: scheduler
         restart: always
@@ -24,21 +39,14 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
             - crypto_app_data:/var/www/html/storage
-        ports:
-            - 80:80
-            - 443:443
         environment:
             APP_ENV: production
             CONTAINER_ROLE: scheduler
-        networks:
-            crypto-net:
 
     crypto-app_db:
         container_name: crypto-app_db
         image: mysql:8
         restart: always
-        networks:
-            crypto-net:
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: cryptocademy
@@ -62,8 +70,6 @@ services:
             - PMA_HOST=crypto-app_db
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
-        networks:
-            crypto-net:
         ports:
             - 8080:80
     mailhog:
@@ -73,8 +79,6 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-        networks:
-            crypto-net:
         ports:
             - 8025:8025
 volumes:
@@ -84,6 +88,6 @@ volumes:
         name: crypto_app_data
 
 networks:
-    crypto-net:
+    default:
         name: crypto-net
         driver: bridge
