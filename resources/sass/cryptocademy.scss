@@ -1,0 +1,17 @@
+@import "cryptocademy-variables";
+
+.padded {
+  padding: 10px;
+}
+
+@include media-breakpoint-up(md) {
+  .padded {
+    padding: 16px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .padded {
+    padding: 20px
+  }
+}

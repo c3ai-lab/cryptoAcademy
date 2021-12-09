@@ -13,9 +13,21 @@ import tinymce from "vue-tinymce-editor";
 // import * as VueGoogleMaps from "vue2-google-maps";
 // import VueSweetalert2 from "vue-sweetalert2";
 
+
+//Filters:
+import './filters.js';
+
+
 Vue.use(BootstrapVue);
 Vue.component("apexchart", VueApexCharts);
 Vue.component("tinymce", tinymce);
+
+
+// Custom global components
+import NicePrice from './components/NicePrice.vue'
+
+Vue.component('NicePrice', NicePrice);
+
 // Vue.use(vClickOutside);
 // Vue.use(VueMask);
 // Vue.use(Vuelidate);
@@ -46,6 +58,8 @@ import i18n from "./i18n";
 
 import LoginLayout from "./layouts/LoginLayout.vue";
 import MainLayout from "./layouts/MainLayout.vue";
+
+store.dispatch('coinDetails/init');
 
 const app = new Vue({
   el: "#app",

@@ -17,7 +17,7 @@ const getters = {
 
 const actions = {
   fetchLatest({ commit, rootGetters }) {
-    fetch("/api/auth/news-feed?limit=3&offset=0", {
+    fetch("/api/news-feed?limit=3&offset=0", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,

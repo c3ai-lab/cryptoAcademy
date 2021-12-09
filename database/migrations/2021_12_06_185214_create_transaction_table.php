@@ -15,14 +15,13 @@ class CreateTransactionTable extends Migration
   {
     Schema::create('transaction', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('user_id')->unsigned();
-      $table->float('quantity');
-      $table->unsignedBigInteger('symbol_id')->unsigned();
-      $table->float('price');
+      $table->foreignId('symbol_id');
+      $table->foreignId('user_id');
+      $table->unsignedDouble('quantity');
+      $table->unsignedDouble('price');
+      $table->unsignedDouble('exchange_price');
       $table->enum('action', ['sell', 'buy']);
       $table->timestamps();
-      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-      $table->foreign('symbol_id')->references('id')->on('symbols')->onDelete('cascade');
     });
   }
 
