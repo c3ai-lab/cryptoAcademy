@@ -48,16 +48,20 @@ class TransactionController extends Controller
     $symbol = Symbol::where(["api_symbol" => $request->symbol])->first();
     $model = TransactionModel::where([["user_id", $user->id], ["symbol_id", $symbol->id]]);
     if ($model->count() != 0) {
-      $sell = 0;
-      $buy = 0;
-      $symbol->get()->each(function ($val) use ($sell, $buy) {
-        if ($val->action == TransactionModel::ACTION_BUY)
-          $sell += $val->quantity;
-        elseif ($val->action == TransactionModel::ACTION_BUY)
-          $buy += $val->quantity;
-      });
-      var_dump($sell, $buy);
-      die();
+      /** @todo
+       * balance = €
+       * quantity*$price (in Euro)
+       */
+//      $sell = 0;
+//      $buy = 0;
+//      $symbol->get()->each(function ($val) use ($sell, $buy) {
+//        if ($val->action == TransactionModel::ACTION_BUY)
+//          $sell += $val->quantity;
+//        elseif ($val->action == TransactionModel::ACTION_BUY)
+//          $buy += $val->quantity;
+//      });
+//      var_dump($sell, $buy);
+//      die();
     } else
       return response()->json("You can't sell stuff you don't own", 400);
 
