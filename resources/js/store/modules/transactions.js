@@ -15,10 +15,6 @@ const actions = {
         "Content-Type": "application/json",
         'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
       },
-      body: JSON.stringify({
-        symbol: symbol,
-        quantity: quantity,
-      }),
     })
       .then((response) => {
         if (response.ok === true) {
@@ -46,7 +42,6 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
-          commit('setFavoriteForSymbol', { id, isFavorite: true });
           return response.json();
         }
         return null;
@@ -69,7 +64,6 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
-          commit('setFavoriteForSymbol', { id, isFavorite: true });
           return response.json();
         }
         return null;

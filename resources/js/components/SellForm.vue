@@ -1,11 +1,11 @@
 <template>
 <div>
-  <div class="float-end ms-2">
+  <div v-if="0" class="float-end ms-2">
       <h5 class="font-size-14">
           <i
               class="bx bx-wallet text-primary font-size-16 align-middle me-1"
           ></i>
-          $4235.23
+          {{balance}}
       </h5>
   </div>
   <h5 class="font-size-14 mb-4">Buy Coin</h5>
@@ -83,8 +83,13 @@ export default {
       quantity: null,
     }
   },
+  computed: {
+    balance() {
+      return this.$store.getters['user/getUser']().balance;
+    },
+  },
   mounted() {
-    console.log(this.$route, location);
+    console.log(this.$store.getters['user/getUser']());
   },
   methods: {
     buy() {
