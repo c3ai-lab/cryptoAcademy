@@ -53,7 +53,6 @@ COPY start.sh /usr/local/bin/start
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod u+x /usr/local/bin/start \
-    && a2enmod rewrite headers ssl \
-    && a2ensite default-ssl
+    && a2enmod rewrite headers
 
 CMD ["/usr/local/bin/start"]
