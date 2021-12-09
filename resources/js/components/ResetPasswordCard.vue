@@ -14,7 +14,7 @@
       <div class="card-body pt-1 row justify-content-center">
         <div class="p-1 col-lg-6">
           <b-alert
-            v-model="registerFailed"
+            v-model="resetPasswordFailed"
             variant="danger"
             class="mt-3"
             dismissible
@@ -38,18 +38,16 @@
               ></b-form-input>
             </b-form-group>
 
-            
             <div class="mt-3 d-grid">
               <b-button
                 type="submit"
                 variant="primary"
                 class="btn-block"
-                @click="reset_password()"
+                @click="resetPassword()"
               >
                 {{ $t("auth.reset_passoword_now") }}
               </b-button>
             </div>
-            
           </b-form>
         </div>
       </div>
@@ -67,18 +65,16 @@ export default Vue.extend({
     return {
       email: "",
 
-      registerFailed: null,
+      resetPasswordFailed: false,
     };
   },
 
   methods: {
-    reset_password: function () {
+    resetPassword() {
       this.$store
-        .dispatch("user/password/reset", {
-          email: this.email
-        })
+        .dispatch("user/resetPassword", this.email)
         .then(() => this.$router.push({ name: "login" }))
-       
+        .catch(() => (this.resetPasswordFailed = true));
     },
   },
 });
