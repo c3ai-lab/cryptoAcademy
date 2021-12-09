@@ -43,16 +43,21 @@ RUN apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN a2enmod rewrite
+RUN a2enmod headers
+
+RUN service apache2 restart
+
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2"]
 EXPOSE 80 443
-
+USER root
 COPY start.sh /usr/local/bin/start
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod u+x /usr/local/bin/start \
-    && a2enmod rewrite headers
+RUN chown www-data:www-data -R /var/www/html
+RUN chmod u+x /usr/local/bin/start
+
 
 CMD ["/usr/local/bin/start"]

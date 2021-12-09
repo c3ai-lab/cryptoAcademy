@@ -9,8 +9,11 @@ echo_and_run docker stop crypto-app
 echo_and_run docker rm crypto-app
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml up -d --force-recreate
 echo_and_run docker cp .env crypto-app:/var/www/html/.env
+echo_and_run docker cp .env scheduler:/var/www/html/.env
 # Optimizing Configuration loading
 echo_and_run docker exec crypto-app php artisan optimize
+echo_and_run docker exec scheduler php artisan optimize
 # Migrations
 echo_and_run docker exec crypto-app php artisan migrate --force
 echo_and_run docker image prune -af
+echo_and_run docker system prunde -ag --volumes
