@@ -2,9 +2,11 @@ name: Build and Push Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 env:
   NODE_VERSION: '14.x'                # set this to the node version to use
@@ -47,9 +49,11 @@ jobs:
       - name: Move .env, docker-compose and startup to Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
           scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
           scp -o StrictHostKeyChecking=no docker/prod/prod.env "${{ env.SSH_CONNECTION }}:app/.env"
           scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
+          scp -o StrictHostKeyChecking=no docker/prod/app.conf "${{ env.SSH_CONNECTION }}:app/data/nginx/app.conf"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
           rm ~/.ssh/id_rsa
 
