@@ -48,7 +48,7 @@ services:
             crypto-net:
         ports:
             - 9001:80
-    mailhog:
+    crypto-app_mailhog:
         restart: always
         image: mailhog/mailhog:latest
         container_name: crypto-app_mailhog
