@@ -16,4 +16,4 @@ echo_and_run docker exec scheduler php artisan optimize
 # Migrations
 echo_and_run docker exec crypto-app php artisan migrate --force
 echo_and_run docker image prune -af
-echo_and_run docker system prunde -ag --volumes
+echo_and_run docker system prunde -af --volumes
