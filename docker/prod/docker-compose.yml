@@ -1,7 +1,7 @@
 version: "3.9"
 services:
     nginx:
-        container_name: nginx:1.19.1
+        container_name: nginx
         image: nginx:latest
         restart: unless-stopped
         volumes:
