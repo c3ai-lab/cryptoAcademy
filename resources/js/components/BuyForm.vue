@@ -1,23 +1,12 @@
 <template>
 <div>
-  <div class="float-end ms-2">
-      <h5 class="font-size-14">
-          <i
-              class="bx bx-wallet text-primary font-size-16 align-middle me-1"
-          ></i>
-          $4235.23
-      </h5>
-  </div>
-  <h5 class="font-size-14 mb-4">Buy Coin</h5>
-
   <div>
 
 
       <div>
-          <label>Add Amount :</label>
           <div class="input-group mb-3">
               <label class="input-group-text"
-                  >Amount</label
+                  >Menge</label
               >
               <input
                   v-model="quantity"
@@ -36,6 +25,8 @@
                   >
               </div>
               <input
+              disabled
+              :value="price"
                   type="text"
                   class="form-control"
               />
@@ -57,8 +48,10 @@
                   >
               </div>
               <input
+                  :value="total"
+                  disabled
                   type="text"
-                  class="form-control"
+                  class="form-control disabled"
               />
           </div>
       </div>
@@ -78,9 +71,15 @@
 
 <script>
 export default {
+  props: ['price'],
   data() {
     return {
-      quantity: null,
+      quantity: 0,
+    }
+  },
+  computed: {
+    total() {
+      return this.quantity * this.price
     }
   },
   mounted() {

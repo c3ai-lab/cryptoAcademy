@@ -1,14 +1,5 @@
 <template>
 <div>
-  <div v-if="0" class="float-end ms-2">
-      <h5 class="font-size-14">
-          <i
-              class="bx bx-wallet text-primary font-size-16 align-middle me-1"
-          ></i>
-          {{balance}}
-      </h5>
-  </div>
-  <h5 class="font-size-14 mb-4">Buy Coin</h5>
 
   <div>
 
@@ -36,6 +27,8 @@
                   >
               </div>
               <input
+              disabled
+              :value="price"
                   type="text"
                   class="form-control"
               />
@@ -57,6 +50,8 @@
                   >
               </div>
               <input
+                disabled
+                :value="total"
                   type="text"
                   class="form-control"
               />
@@ -78,12 +73,16 @@
 
 <script>
 export default {
+  props: ['price'],
   data() {
     return {
-      quantity: null,
+      quantity: 0,
     }
   },
   computed: {
+    total() {
+      return this.quantity * this.price
+    },
     balance() {
       return this.$store.getters['user/getUser']().balance;
     },
