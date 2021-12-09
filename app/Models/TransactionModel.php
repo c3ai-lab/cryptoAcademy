@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+# TODO rename to 'Transaction'
 class TransactionModel extends Model
 {
   use HasFactory;
@@ -33,5 +34,16 @@ class TransactionModel extends Model
   public function getApiSymbolAttribute()
   {
     return $this->getSymbol()->value("api_symbol");
+  }
+
+  public function getQuantityAttribute()
+  {
+    return 0;
+
+    # TODO figure out why $this->quantity is undefined
+    if ($this->action === self::ACTION_SELL) {
+      return $this->quantity * (-1);
+    }
+    return $this->quantity;
   }
 }

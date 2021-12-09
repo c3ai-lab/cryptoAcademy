@@ -26,6 +26,7 @@ class SymbolUserResource extends JsonResource
       'name' => $this->name,
       'symbol' => $this->api_symbol,
       'is_favorite' => $this->is_favorite,
+      'user_balance' => $this->user_balance,
     ];
   }
 }

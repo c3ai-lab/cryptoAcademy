@@ -8,6 +8,7 @@ import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
 import TradingIndexView from "./views/TradingIndexView.vue";
 import TradingShowView from "./views/TradingShowView.vue";
+import TradingBuyView from "./views/TradingBuyView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
 
@@ -61,6 +62,15 @@ const router = new VueRouter({
       path: "/trading/:symbol",
       name: "trading.show",
       component: TradingShowView,
+      props: true,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/trading/:symbol/buy',
+      name: 'trading.buy',
+      component: TradingBuyView,
       props: true,
       meta: {
         requiresAuth: true,

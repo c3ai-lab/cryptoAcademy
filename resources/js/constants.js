@@ -152,32 +152,32 @@ export const APEXCHART_OPTIONS = {
 
 export const DIMENSION_MAP = {
   [Dimension.ONE_DAY]: {
-    'interval': '30m',
-    'limit': 48,
+    interval: "30m",
+    limit: 48,
   },
   [Dimension.ONE_WEEK]: {
-    'interval': '4h',
-    'limit': 42,
+    interval: "4h",
+    limit: 42,
   },
   [Dimension.ONE_MONTH]: {
-    'interval': '12h',
-    'limit': 62,
+    interval: "12h",
+    limit: 62,
   },
   [Dimension.ONE_YEAR]: {
-    'interval': '1w',
-    'limit': 52,
+    interval: "1w",
+    limit: 52,
   },
   [Dimension.ALL]: {
-    'interval': '1w',
+    interval: "1w",
   },
-}
+};
 
 export const DIMENSION_MAP_LOW_RES = {
   [Dimension.ONE_DAY]: {
-    'interval': '1h',
-    'limit': 24,
+    interval: "1h",
+    limit: 24,
   },
-}
+};
 
 export const DIMENSION_TIMEFRAME_MTS_MAP = {
   [Dimension.ONE_DAY]: 1_800_000,
@@ -185,4 +185,4 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
   [Dimension.ONE_MONTH]: 14_400_000,
   [Dimension.ONE_YEAR]: 201_600_000,
   [Dimension.ALL]: 201_600_000,
-}
+};

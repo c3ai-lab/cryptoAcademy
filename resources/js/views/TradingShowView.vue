@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <div>
+    <div
+      style="display: flex; flex-wrap: wrap;"
+    >
+          <div style="width: 100%">
             <h1>
               {{symbol}}
             </h1>
@@ -17,12 +19,14 @@
               :series="series"
               :mtsPerTimestep="mtsPerCandle"
             />
-            <div style="display: flex; justify-content: space-evenly;">
+            <div style="display: flex; justify-content: space-evenly; width: 100%">
                 <button v-for="(dimension, i) in dimensions" :key="i" class="btn" @click="setDimension(dimension)">
                     {{dimension}}
                 </button>
             </div>
-            {{activeDimension}}
+        </div>
+        <div style="width: 100%;" class="mt-2">
+          <b-button class="btn-block" variant="primary" style="width: 100%" @click="buy">Trade</b-button>
         </div>
     </div>
 </template>
@@ -46,13 +50,7 @@ export default {
           hasLoadedSeries: false,
           hasLoadedPrice: false,
           activeDimension: Dimension.ONE_DAY,
-          dimensions: [
-              '1D',
-              '1W',
-              '1M',
-              '1Y',
-              'All',
-          ],
+          dimensions: Object.values(Dimension),
       }
   },
 
@@ -67,6 +65,9 @@ export default {
       return this.series.length > 0;
     },
     price() {
+      if (this.seriesLoaded) {
+        return this.series[this.series.length - 1][1];
+      }
       return 0;
     },
     mtsPerCandle() {
@@ -77,6 +78,7 @@ export default {
     // },
   },
   mounted() {
+    console.log(this);
     this.$store.dispatch('coinDetails/subscribe', { symbol: this.symbol, dimension: this.activeDimension })
   },
   methods: {
@@ -84,6 +86,9 @@ export default {
       this.activeDimension = dimension
       this.$store.dispatch('coinDetails/subscribe', { symbol: this.symbol, dimension: this.activeDimension })
     },
+    buy() {
+      this.$router.push({ name: 'trading.buy', params: { symbol: this.symbol } })
+    }
   },
 }
 </script>
