@@ -44,11 +44,12 @@ const processUserResponse = ({
 const getters = {
   accessToken: (state) => () =>
     state.accessToken !== null &&
-    state.accessToken.expiresAt > new Date().getTime()
+      state.accessToken.expiresAt > new Date().getTime()
       ? state.accessToken.token
       : null,
   sessionExpiresAt: (state) => () =>
     state.accessToken === null ? null : state.accessToken.expiresAt,
+  getUser: (state) => () => state.user,
 };
 
 const actions = {
