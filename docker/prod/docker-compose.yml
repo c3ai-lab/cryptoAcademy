@@ -1,7 +1,7 @@
 version: "3.9"
 services:
     nginx:
-        #        image: nginx:1.15-alpine
+        container_name: nginx
         image: nginx:latest
         restart: unless-stopped
         volumes:
@@ -13,6 +13,7 @@ services:
             - 443:443
         command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     certbot:
+        container_name: certbot
         image: certbot/certbot
         restart: unless-stopped
         volumes:
@@ -30,8 +31,6 @@ services:
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
-        networks:
-            crypto-net:
     scheduler:
         container_name: scheduler
         restart: always
@@ -43,15 +42,11 @@ services:
         environment:
             APP_ENV: production
             CONTAINER_ROLE: scheduler
-        networks:
-            crypto-net:
 
     crypto-app_db:
         container_name: crypto-app_db
         image: mysql:8
         restart: always
-        networks:
-            crypto-net:
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: cryptocademy
@@ -75,8 +70,6 @@ services:
             - PMA_HOST=crypto-app_db
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
-        networks:
-            crypto-net:
         ports:
             - 8080:80
     mailhog:
@@ -86,8 +79,6 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-        networks:
-            crypto-net:
         ports:
             - 8025:8025
 volumes:
@@ -97,6 +88,6 @@ volumes:
         name: crypto_app_data
 
 networks:
-    crypto-net:
+    default:
         name: crypto-net
         driver: bridge

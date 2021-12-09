@@ -51,7 +51,7 @@ jobs:
           scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
           scp -o StrictHostKeyChecking=no docker/prod/prod.env "${{ env.SSH_CONNECTION }}:app/.env"
           scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
-          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
+          scp -o StrictHostKeyChecking=no docker/prod/app.conf "${{ env.SSH_CONNECTION }}:app/data/nginx/app.conf"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
           rm ~/.ssh/id_rsa
 
