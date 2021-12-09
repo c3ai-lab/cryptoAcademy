@@ -33,8 +33,7 @@ export default {
   <header id="page-topbar">
     <div>
       <div class="d-flex">
-
-         <button
+        <button
           id="open-btn"
           type="button"
           class="open btn btn-sm px-3 font-size-16 header-item"
@@ -56,19 +55,21 @@ export default {
         <div class="navbar-brand-box d-none d-lg-block">
           <a href="/" class="logo">
             <span>
-              <img src="/images/cryptocademy.svg" style="width: 100%;" />
+              <img src="/images/cryptocademy.svg" style="width: 100%" />
             </span>
           </a>
         </div>
-       <div class="d-block d-lg-none " style="width: 35px;">
-         <a href="/" class="logo">
+        <div class="d-block d-lg-none" style="width: 35px">
+          <a href="/" class="logo">
             <span>
-              <img src="/images/cryptocademy_coin.svg" style="height: 35px;" class="px-2" />
+              <img
+                src="/images/cryptocademy_coin.svg"
+                style="height: 35px"
+                class="px-2"
+              />
             </span>
           </a>
-       </div>
-
-       
+        </div>
 
         <!---
       Setting Button in Navbar
@@ -86,15 +87,15 @@ export default {
       </div>
     </div>
     <div id="nav-menu" class="vertical-menu font-heading">
-      <router-link :to="{ name: 'dashboard' }">
+      <router-link :to="{ name: 'dashboard' }" @click.native="closeNav()">
         {{ $t("navigation.dashboard") }}
       </router-link>
       <br />
-      <router-link :to="{ name: 'trading' }">
+      <router-link :to="{ name: 'trading' }" @click.native="closeNav()">
         {{ $t("navigation.trading") }}
       </router-link>
       <br />
-      <router-link :to="{ name: 'profile' }">
+      <router-link :to="{ name: 'profile' }" @click.native="closeNav()">
         {{ $t("navigation.profile") }}
       </router-link>
     </div>
@@ -110,8 +111,7 @@ export default {
   background-color: #2a3042;
 }
 
-.vertical-menu
-{
+.vertical-menu {
   width: 180px;
 }
 
@@ -119,8 +119,7 @@ a {
   color: white;
 }
 
-.navbar-brand-box
-{
+.navbar-brand-box {
   padding: 0;
 }
 </style>

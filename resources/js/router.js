@@ -50,16 +50,16 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/trading',
-      name: 'trading',
+      path: "/trading",
+      name: "trading",
       component: TradingIndexView,
       meta: {
         requiresAuth: true,
       },
     },
     {
-      path: '/trading/:symbol',
-      name: 'trading.show',
+      path: "/trading/:symbol",
+      name: "trading.show",
       component: TradingShowView,
       props: true,
       meta: {
