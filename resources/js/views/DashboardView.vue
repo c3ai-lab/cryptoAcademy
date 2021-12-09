@@ -8,24 +8,41 @@
       />
     </div>
     <div class="col-lg-6 mb-4">
-      <h2>{{ $t("dashboard.coins") }}</h2>
-      <CoinCard :coin="Coin.BTC" />
-      <CoinCard :coin="Coin.ETH" />
+      <h2>{{ $t("dashboard.favorites") }}</h2>
+      <div v-if="favoriteCoins.length === 0">
+        <p class="text-center">{{ $t("dashboard.no_favorites") }}</p>
+      </div>
+      <div v-if="favoriteCoins.length > 0">
+        <CoinCardRealData
+          v-for="coin in favoriteCoins"
+          :key="coin.id"
+          :id="coin.id"
+          :name="coin.name"
+          :symbol="coin.symbol"
+          :series="coin.series"
+          :isFavorite="coin.is_favorite"
+        />
+      </div>
     </div>
     <div class="col-lg-6">
       <h2>{{ $t("dashboard.news") }}</h2>
-      <NewsCard
-        v-for="article in latestNews"
-        :key="article.id"
-        :article="article"
-      />
+      <div v-if="latestNews.length === 0">
+        <p class="text-center">{{ $t("dashboard.no_news") }}</p>
+      </div>
+      <div v-if="latestNews.length > 0">
+        <NewsCard
+          v-for="article in latestNews"
+          :key="article.id"
+          :article="article"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ApexChartCard from "../components/ApexChartCard.vue";
-import CoinCard from "../components/CoinCard.vue";
+import CoinCardRealData from "../components/CoinCardRealData.vue";
 import NewsCard from "../components/NewsCard.vue";
 
 import { Coin } from "../enums";
@@ -36,11 +53,11 @@ export default {
 
   components: {
     ApexChartCard,
-    CoinCard,
+    CoinCardRealData,
     NewsCard,
   },
 
-  data: function () {
+  data() {
     return {
       Coin,
 
@@ -49,13 +66,17 @@ export default {
   },
 
   computed: {
-    latestNews: function () {
+    latestNews() {
       return this.$store.getters["news/latest"](3);
+    },
+    favoriteCoins() {
+      return this.$store.getters["coinIndex/favorites"]();
     },
   },
 
   created() {
     this.$store.dispatch("news/fetchLatest");
+    this.$store.dispatch("coinIndex/fetchSymbols");
   },
 };
 </script>

@@ -31,7 +31,9 @@
         "title": "Dashboard",
         "portfolio_value": "Portfoliowert",
         "news": "Neuigkeiten",
-        "coins": "Coins"
+        "no_news": "Es gibt aktuell keine Neuigkeiten",
+        "favorites": "Favoriten",
+        "no_favorites": "Es sind keine Coins als Favoriten markiert"
     },
     "profile": {
         "title": "Profil",

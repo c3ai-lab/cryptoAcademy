@@ -1,32 +1,40 @@
 <template>
-  <div class="card" v-if="hasLoadedData">
+  <div class="card" v-if="hasLoadedData" @click="showDetails">
     <div class="card-body">
-      <div
-        class="row"
-        style="font-size: 24px;"
-      >
-        <div class="col-6" style="display: flex" @click="showDetails">
-          {{tradeSymbol}}
+      <div class="row" style="font-size: 24px">
+        <div class="col-6" style="display: flex">
+          {{ tradeSymbol }}
           <span
             class="text-muted"
             style="font-size: 13px; margin-top: 9px; margin-left: 6px"
-          >{{ name }}
+            >{{ name }}
           </span>
         </div>
-        <div class="col-6" style="display: flex; justify-content: space-between; align-items: center">
+        <div
+          class="col-6"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
           <div
             class="text-muted text-truncate mb-0"
             style="font-size: 13px; margin-top: 1px"
           >
             {{ absoluteChange >= 0 ? `+${absoluteChange}` : absoluteChange }}
             (
-            {{ relativeChange >= 0 ? `+${relativeChange}` : relativeChange }}%
-            )
+            {{ relativeChange >= 0 ? `+${relativeChange}` : relativeChange }}% )
             <i class="mdi ml-1" :class="[arrowClasses]" />
           </div>
 
           <div style="margin-top: -6px">
-            <i @click.prevent="favoriteMethod" class="mdi ml-4" :class="[favoriteClasses]" style="font-size: 24px;"/>
+            <i
+              @click.stop="favoriteMethod"
+              class="mdi ml-4"
+              :class="[favoriteClasses]"
+              style="font-size: 24px"
+            />
           </div>
         </div>
       </div>
@@ -39,17 +47,22 @@
               :value="currentValue"
               currency="usd"
             />
-
           </div>
         </div>
         <div class="col-6">
-          <div style="position: relative">
-          </div>
+          <div style="position: relative"></div>
         </div>
       </div>
     </div>
     <div
-      style="position: absolute; width: 100%; left: 0; right: 0; bottom: 0; border-radius: 2em"
+      style="
+        position: absolute;
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 2em;
+      "
     >
       <apexchart
         class="apex-charts"
@@ -61,6 +74,21 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.card {
+  cursor: pointer;
+  margin: 16px 8px;
+  border-radius: 0em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 1px 2px rgba(95, 95, 95, 0.2);
+}
+
+.card-body {
+  padding: 8px 12px 8px 12px;
+}
+</style>
 
 <script>
 import { COIN_CARD_APEXCHART_OPTIONS } from "../constants";
@@ -75,14 +103,14 @@ export default {
     isFavorite: Boolean,
   },
   created() {
-    this.$store.dispatch('coinIndex/getLowResPriceData', this.symbol);
+    this.$store.dispatch("coinIndex/getLowResPriceData", this.symbol);
   },
   computed: {
     hasLoadedData() {
-      return this.series.length > 0
+      return this.series.length > 0;
     },
     tradeSymbol() {
-      return this.symbol.split('USDT')[0];
+      return this.symbol.split("USDT")[0];
     },
     currentValue() {
       if (this.hasLoadedData) {
@@ -98,12 +126,12 @@ export default {
         return absoluteChange.toFixed(2);
       }
       return null;
-
     },
     relativeChange() {
       if (this.hasLoadedData) {
         const data = this.series[0].data;
-        const relativeChange = (data[data.length - 1][1] / data[0][1] - 1) * 100;
+        const relativeChange =
+          (data[data.length - 1][1] / data[0][1] - 1) * 100;
         return relativeChange.toFixed(2);
       }
       return null;
@@ -155,30 +183,21 @@ export default {
     },
     favoriteMethod() {
       return this.isFavorite ? this.removeFavorite : this.setFavorite;
-    }
+    },
   },
   methods: {
     setFavorite() {
-      this.$store.dispatch('coinIndex/addFavorite', this.id);
+      this.$store.dispatch("coinIndex/addFavorite", this.id);
     },
     removeFavorite() {
-      this.$store.dispatch('coinIndex/removeFavorite', this.id);
+      this.$store.dispatch("coinIndex/removeFavorite", this.id);
     },
     showDetails() {
-      this.$router.push({ name: 'trading.show', params: { symbol: this.symbol } })
-    }
-  }
+      this.$router.push({
+        name: "trading.show",
+        params: { symbol: this.symbol },
+      });
+    },
+  },
 };
 </script>
-<style scoped>
-.card-body{
-  padding: 8px 12px 8px 12px;
-}
-.card {
-  margin: 16px 8px;
-  border-radius: 0em;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: 0 1px 2px rgba(95, 95, 95, 0.2);
-}
-</style>
