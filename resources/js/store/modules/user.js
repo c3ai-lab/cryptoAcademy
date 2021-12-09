@@ -126,6 +126,20 @@ const actions = {
     });
   },
 
+  resetPassword({}, email) {
+    return new Promise((resolve, reject) => {
+      fetch("/api/user/password/reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      }).then((response) => (response.ok === true ? resolve() : reject()));
+    });
+  },
+
   logout({ commit, dispatch, rootGetters }, callback) {
     fetch("/api/auth/logout", {
       method: "POST",
