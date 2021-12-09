@@ -78,6 +78,7 @@ export default {
     // },
   },
   mounted() {
+    console.log(this);
     this.$store.dispatch('coinDetails/subscribe', { symbol: this.symbol, dimension: this.activeDimension })
   },
   methods: {
@@ -85,8 +86,6 @@ export default {
       this.activeDimension = dimension
       this.$store.dispatch('coinDetails/subscribe', { symbol: this.symbol, dimension: this.activeDimension })
     },
-  },
-  methods: {
     buy() {
       this.$router.push({ name: 'trading.buy', params: { symbol: this.symbol } })
     }

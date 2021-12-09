@@ -37,6 +37,8 @@ class TransactionController extends Controller
   public function sell(Request $request)
   {
     $user = auth()->user();
+    // TODO Validate if given quantity/symbol combination is possible by checking the sum of the transactions
+    // E.G. as attribute 'quantity' or 'balance' on Symbol Model
     $validator = Validator::make($request->all(), [
       'quantity' => 'required|min:1',
       'symbol' => 'required|min:1|exists:symbols,api_symbol'
@@ -56,8 +58,8 @@ class TransactionController extends Controller
         elseif ($val->action == TransactionModel::ACTION_BUY)
           $buy += $val->quantity;
       });
-      var_dump($sell, $buy);
-      die();
+      // var_dump($sell, $buy);
+      // die();
     } else
       return response()->json("You can't sell stuff you don't own", 400);
 
@@ -94,6 +96,9 @@ class TransactionController extends Controller
       $transactionModel->quantity = $request->quantity;
       $transactionModel->price = $this->getBinanceApi()->price($request->symbol);
       $transactionModel->action = $action;
+      // TODO calculate EUR price
+      // TODO subtract from / add to user balance
+      $transactionModel->exchange_price = 0.;
       $transactionModel->save();
     } catch (\Exception $e) {
       throw $e;
