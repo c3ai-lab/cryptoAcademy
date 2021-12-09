@@ -11,6 +11,25 @@ services:
         ports:
             - 80:80
             - 443:443
+        environment:
+            APP_ENV: production
+            CONTAINER_ROLE: app
+        networks:
+            crypto-net:
+    scheduler:
+        container_name: scheduler
+        restart: always
+        image: mats9798/cryptocademy:latest
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+            - crypto_app_data:/var/www/html/storage
+        ports:
+            - 80:80
+            - 443:443
+        environment:
+            APP_ENV: production
+            CONTAINER_ROLE: scheduler
         networks:
             crypto-net:
 

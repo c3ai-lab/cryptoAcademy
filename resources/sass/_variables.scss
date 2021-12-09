@@ -475,8 +475,9 @@ $aspect-ratios: (
 //
 // Font, line-height, and color for body text, headings, and more.
 
-// stylelint-disable value-keyword-case
-$font-family-sans-serif:      'Poppins', sans-serif;
+// stylelint-disable value-keyword-case  Futura-Medium, Futura
+$font-family-heading:         'Poppins', sans-serif;
+$font-family-sans-serif:      'Open Sans', sans-serif;
 $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
 // stylelint-enable value-keyword-case
@@ -521,7 +522,7 @@ $font-sizes: (
 // scss-docs-end font-sizes
 
 $headings-margin-bottom:      $spacer / 2;
-$headings-font-family:        null;
+$headings-font-family:        $font-family-heading;
 $headings-font-style:         null;
 $headings-font-weight:        500;
 $headings-line-height:        1.2;
