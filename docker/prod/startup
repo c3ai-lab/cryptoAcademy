@@ -14,6 +14,6 @@ echo_and_run docker cp .env scheduler:/var/www/html/.env
 echo_and_run docker exec crypto-app php artisan optimize
 echo_and_run docker exec scheduler php artisan optimize
 # Migrations
-echo_and_run docker exec crypto-app php artisan migrate --force
+echo_and_run docker exec crypto-app php artisan migrate --force --seed
 echo_and_run docker image prune -af
 echo_and_run docker system prune -af --volumes
