@@ -28,4 +28,4 @@ echo_and_run docker exec -it crypto-app php artisan optimize
 # Migrations
 echo_and_run docker exec crypto-app php artisan migrate --force
 
-#echo_and_run docker exec crypto-app php artisan schedule:work
+#echo_and_run docker exec crypto-app php artisan schedule:run

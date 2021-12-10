@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\TransactionResource;
 use App\Models\Symbol;
 use App\Models\TransactionModel;
-use Binance\API;
+use App\Service\BianceApiService;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -75,34 +75,32 @@ class TransactionController extends Controller
     }
   }
 
-  private function getBinanceApi(): API
-  {
-    $api = new API(config('api.binance_api_key'), config('api.binance_secret_key'));
-    $api->caOverride = true;
-    return $api;
-  }
-
   /**
    * @throws \Exception
    */
   private function createTransaction(Request $request, string $action): void
   {
-    $user = auth()->user();
-    /** @todo
-     * balance = €
-     * quantity*$price (in Euro)
-     */
     try {
+      $user = auth()->user();
+      /** @todo
+       * balance = €
+       * quantity*$price (in Euro)
+       */
+      $bianceService = new BianceApiService();
+//      $ecbService = new EcbExchangeRatesApiService();
+      $symbolPrice = $bianceService->getRateOfSymbol($request->symbol);
+//      $exchange_price = $ecbService->getCurrentUsdToEuroExchangeRate();
       $symbol = Symbol::where(["api_symbol" => $request->symbol])->first();
       $transactionModel = new TransactionModel;
       $transactionModel->user_id = $user->id;
       $transactionModel->symbol_id = $symbol->id;
       $transactionModel->quantity = $request->quantity;
-      $transactionModel->price = $this->getBinanceApi()->price($request->symbol);
+      $transactionModel->price = $symbolPrice;
       $transactionModel->action = $action;
       // TODO calculate EUR price
       // TODO subtract from / add to user balance
-      $transactionModel->exchange_price = 0.;
+//      $transactionModel->exchange_price = $exchange_price;
+      $transactionModel->exchange_price = 0.0;
       $transactionModel->save();
     } catch (\Exception $e) {
       throw $e;
