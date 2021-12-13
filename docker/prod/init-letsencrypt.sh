@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(cryptocademy.app www.cryptocademy.app pma.cryptocademy.app mailhog.cryptocademy.app)
+domains=(cryptocademy.app www.cryptocademy.app pma.cryptocademy.app mailhog.cryptocademy.app mail.cryptocademy.app)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="magdalena.tsolaki@gmail.com" # Adding a valid address is strongly recommended

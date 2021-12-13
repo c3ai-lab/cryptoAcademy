@@ -8,7 +8,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
             - ./data/nginx:/etc/nginx/conf.d
-            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/conf:/etc/letsencrypt:ro
             - ./data/certbot/www:/var/www/certbot
         ports:
             - 80:80
@@ -74,18 +74,48 @@ services:
             - PMA_HOST=crypto-app_db
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
-    mailhog:
-        restart: always
-        image: mailhog/mailhog:latest
-        container_name: crypto-app_mailhog
+
+    mailserver:
+        image: docker.io/mailserver/docker-mailserver:latest
+        hostname: mail
+        domainname: cryptocademy.app
+        container_name: mailserver
+        dns:
+            - 8.8.8.8
         volumes:
+            - crypto_maildata:/var/mail
+            - crypto_mailstate:/var/mail-state
+            - crypto_maillogs:/var/log/mail
+            - ./data/mailserver/config/:/tmp/docker-mailserver/
+            - ./data/certbot/conf:/etc/letsencrypt:ro
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
+        environment:
+            - PERMIT_DOCKER=host
+            - ONE_DIR=1
+            - DMS_DEBUG=0
+            - SMTP_ONLY=1
+            - SSL_TYPE=letsencrypt
+            - VIRTUAL_HOST=mail.cryptocademy.app
+            - LETSENCRYPT_HOST=mail.cryptocademy.app
+            - POSTMASTER_ADDRESS=magdalena.tsolaki@gmail.com
+            - ENABLE_UPDATE_CHECK=1
+            - UPDATE_CHECK_INTERVAL=1d
+        restart: always
+        cap_add:
+            - NET_ADMIN
+            - SYS_PTRACE
 volumes:
     crypto_mysql_data:
         name: crypto_mysql_data
     crypto_app_data:
         name: crypto_app_data
+    crypto_maildata:
+        name: crypto_maildata
+    crypto_mailstate:
+        name: crypto_mailstate
+    crypto_maillogs:
+        name: crypto_maillogs
 
 networks:
     default:
