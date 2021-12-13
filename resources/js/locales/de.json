@@ -33,7 +33,7 @@
         "remember_password": "Du erinnerst dich an dein Passwort?",
         "register_success": "Du hast dich erfolgreich registriert. Bitte bestätige die Registrierungsmail, bevor du dich einloggen kannst.",
         "new_password": "Du hast erfolgreich dein Passwort geändert. Du wurdest automatisch ausgeloggt und kannst dich jetzt mit deinem neuen Passwort einloggen.",
-        "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht hat und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
+        "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
     },
     "dashboard": {
         "title": "Dashboard",
