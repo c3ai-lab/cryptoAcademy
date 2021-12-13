@@ -1,5 +1,6 @@
 <template>
 <div>
+    <NavBarLogin />
     <div class="container px-lg-5 mt-5">
         <div class="row">
             <div class="col-12 mt-3">
@@ -11,10 +12,10 @@
 </template>
 
 <script>
-
+import NavBarLogin from "../components/NavBarLogin";
 
 export default {
-    components: { },
+    components: { NavBarLogin },
     name: "LoginLayout",
 
 }

@@ -10,7 +10,11 @@
     <div class="col-lg-6 mb-4">
       <h2>{{ $t("dashboard.favorites") }}</h2>
       <div v-if="favoriteCoins.length === 0">
-        <p class="text-center">{{ $t("dashboard.no_favorites") }}</p>
+        <p class="text-center">{{ $t("dashboard.no_favorites") }}<br>
+           <router-link to="trading">
+             {{ $t("dashboard.add_favorites") }}
+             </router-link>
+        </p>
       </div>
       <div v-if="favoriteCoins.length > 0">
         <CoinCardRealData
@@ -37,13 +41,15 @@
         />
       </div>
     </div>
-  </div>
+    <WelcomeModal />
+     </div>
 </template>
 
 <script>
 import ApexChartCard from "../components/ApexChartCard.vue";
 import CoinCardRealData from "../components/CoinCardRealData.vue";
 import NewsCard from "../components/NewsCard.vue";
+import WelcomeModal from "../components/WelcomeModal.vue";
 
 import { Coin } from "../enums";
 import { generateSampleSeries } from "../utils";
@@ -55,6 +61,7 @@ export default {
     ApexChartCard,
     CoinCardRealData,
     NewsCard,
+    WelcomeModal,
   },
 
   data() {
