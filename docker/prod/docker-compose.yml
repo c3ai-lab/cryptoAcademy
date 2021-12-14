@@ -80,7 +80,7 @@ services:
             - /etc/timezone:/etc/timezone:ro
         environment:
             - PMA_ABSOLUTE_URI=http://pma.developer.local
-            - PMA_HOST=crypto-app_db
+            - PMA_HOST=database
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
 
