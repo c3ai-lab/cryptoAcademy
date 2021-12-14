@@ -36,7 +36,7 @@ jobs:
           version: 2
           dev: no
           args: --no-interaction --optimize-autoloader
-        run: composer install
+      - run: composer install
 
   npm:
     name: Build NPM
@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         with:
           node-version: ${{ env.NODE_VERSION }}
-          run: npm install --production
+      - run: npm install --production
 
   envfile:
     name: Build ENV File
@@ -88,18 +88,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-#      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Install SSH Key
         uses: actions/checkout@v2
         with:
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-#      - name: COPY Files TO PRODUCTION-SERVER
-#        run: |
-#          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
-#          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
-#          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
-#          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
-#          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
-#          scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
-#          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
+        - run: |
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
+          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
 
