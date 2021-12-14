@@ -37,69 +37,69 @@ jobs:
           dev: no
           args: --no-interaction --optimize-autoloader
       - run: composer install
-
-  npm:
-    name: Build NPM
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ./node_modules
-      - name: Install dependencies
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - run: npm install --production
-
-  envfile:
-    name: Build ENV File
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cache ENV FILE
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: docker/prod/laravel.env
-      - name: Build ENV File
-        run: |
-          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
-          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
-  #          sed -ri -e "s!MWORD=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
-  #          sed -ri -e "s!MWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
-  dockerize:
-    needs: [ composer, npm, envfile ]
-    name: Dockerize
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - uses: actions/checkout@v2
-      - name: Dockerize
-        run: |
-          docker build --no-cache . --tag mats9798/cryptocademy:latest
-          docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
-          docker push mats9798/cryptocademy:latest
-  deploy:
-    needs: [ dockerize ]
-    name: Deploy TO PRODUCTION-SERVER
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Install SSH Key
-        uses: actions/checkout@v2
-        with:
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Deploy to Server
-        run: |
-          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
-          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
-          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
+#
+#  npm:
+#    name: Build NPM
+#    runs-on: ubuntu-latest
+#    environment: production
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Cache dependencies
+#        id: cache
+#        uses: actions/cache@v2
+#        with:
+#          path: ./node_modules
+#      - name: Install dependencies
+#        with:
+#          node-version: ${{ env.NODE_VERSION }}
+#      - run: npm install --production
+#
+#  envfile:
+#    name: Build ENV File
+#    runs-on: ubuntu-latest
+#    environment: production
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Cache ENV FILE
+#        id: cache
+#        uses: actions/cache@v2
+#        with:
+#          path: docker/prod/laravel.env
+#      - name: Build ENV File
+#        run: |
+#          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
+#          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
+#  #          sed -ri -e "s!MWORD=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
+#  #          sed -ri -e "s!MWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
+#  dockerize:
+#    needs: [ composer, npm, envfile ]
+#    name: Dockerize
+#    runs-on: ubuntu-latest
+#    environment: production
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Dockerize
+#        run: |
+#          docker build --no-cache . --tag mats9798/cryptocademy:latest
+#          docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
+#          docker push mats9798/cryptocademy:latest
+#  deploy:
+#    needs: [ dockerize ]
+#    name: Deploy TO PRODUCTION-SERVER
+#    runs-on: ubuntu-latest
+#    environment: production
+#    steps:
+#      - name: Install SSH Key
+#        uses: actions/checkout@v2
+#        with:
+#          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+#      - name: Deploy to Server
+#        run: |
+#          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
+#          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
+#          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
+#          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
+#          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
+#          scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
+#          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
 
