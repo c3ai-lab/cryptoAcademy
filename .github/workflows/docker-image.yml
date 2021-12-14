@@ -30,47 +30,47 @@ jobs:
         with:
           path: ./vendor
       - name: Install dependencies
-        uses: php-actions/composer@v8.0
+        uses: php-actions/composer@latest
         with:
           php_version: 8.0
           version: 2
           dev: no
           args: --no-interaction --optimize-autoloader
       - run: composer install
-#
-#  npm:
-#    name: Build NPM
-#    runs-on: ubuntu-latest
-#    environment: production
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Cache dependencies
-#        id: cache
-#        uses: actions/cache@v2
-#        with:
-#          path: ./node_modules
-#      - name: Install dependencies
-#        with:
-#          node-version: ${{ env.NODE_VERSION }}
-#      - run: npm install --production
-#
-#  envfile:
-#    name: Build ENV File
-#    runs-on: ubuntu-latest
-#    environment: production
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Cache ENV FILE
-#        id: cache
-#        uses: actions/cache@v2
-#        with:
-#          path: docker/prod/laravel.env
-#      - name: Build ENV File
-#        run: |
-#          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
-#          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
-#  #          sed -ri -e "s!MWORD=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
-#  #          sed -ri -e "s!MWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
+
+  npm:
+    name: Build NPM
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+      - name: Install dependencies
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm install --production
+
+  envfile:
+    name: Build ENV File
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache ENV FILE
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: docker/prod/laravel.env
+      - name: Build ENV File
+        run: |
+          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
+          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
+  #          sed -ri -e "s!MWORD=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
+  #          sed -ri -e "s!MWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
 #  dockerize:
 #    needs: [ composer, npm, envfile ]
 #    name: Dockerize
