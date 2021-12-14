@@ -88,12 +88,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - uses: actions/checkout@v2
       - name: Install SSH Key
         uses: actions/checkout@v2
         with:
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: COPY Files TO PRODUCTION-SERVER
-        uses: actions/checkout@v2
         run: |
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
           scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
