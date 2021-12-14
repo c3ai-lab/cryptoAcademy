@@ -94,6 +94,7 @@ jobs:
     environment: production
     steps:
       - name: Deploy TO PRODUCTION-SERVER
+        uses: actions/checkout@v2
         with:
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
