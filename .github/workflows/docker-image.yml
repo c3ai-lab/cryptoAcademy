@@ -29,10 +29,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ./vendor
-          key: vendor-${{ hashFiles('composer.json') }}
-
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         uses: php-actions/composer@v8.0
         with:
           php_version: 8.0
@@ -52,9 +49,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: ${{ env.NODE_VERSION }}
           run: npm install --production
@@ -82,26 +77,24 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Build the Docker image
-        run: |
-          docker build --no-cache . --tag mats9798/cryptocademy:latest
-          docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
-          docker push mats9798/cryptocademy:latest
+      - run: |
+        docker build --no-cache . --tag mats9798/cryptocademy:latest
+        docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
+        docker push mats9798/cryptocademy:latest
   deploy:
     needs: [ dockerize ]
-    name: Dockerize
+    name: Deploy TO PRODUCTION-SERVER
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Deploy TO PRODUCTION-SERVER
-        uses: actions/checkout@v2
-        with:
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
-          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
-          scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
-          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
+      - uses: actions/checkout@v2
+      with:
+        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
+        scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
+        scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
+        scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
+        scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
+        scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
+        ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
