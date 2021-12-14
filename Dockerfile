@@ -4,7 +4,7 @@ LABEL maintainer="Magdalena Tsolaki"
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN apt-get update && rm -r /var/lib/apt/lists/* \
+RUN apt-get update && rm -r /var/lib/apt/lists/*
 
 RUN set -ex; \
     { \
