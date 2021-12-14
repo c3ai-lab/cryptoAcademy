@@ -4,6 +4,11 @@ services:
         container_name: nginx
         image: nginx:latest
         restart: unless-stopped
+        depends_on:
+            - app
+            - mailhog
+            - phpmyadmin
+            - mailserver
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
@@ -24,14 +29,16 @@ services:
             - ./data/certbot/conf:/etc/letsencrypt
             - ./data/certbot/www:/var/www/certbot
         entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    crypto-app:
-        container_name: crypto-app
+    app:
+        container_name: app
         restart: always
         image: mats9798/cryptocademy:latest
+        depends_on:
+            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - crypto_app_data:/var/www/html/storage
+            - appdata:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
@@ -39,16 +46,18 @@ services:
         container_name: scheduler
         restart: always
         image: mats9798/cryptocademy:latest
+        depends_on:
+            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - crypto_app_data:/var/www/html/storage
+            - appdata:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: scheduler
 
-    crypto-app_db:
-        container_name: crypto-app_db
+    database:
+        container_name: database
         image: mysql:8
         restart: always
         environment:
@@ -57,7 +66,7 @@ services:
             MYSQL_USER: cryptocademy
             MYSQL_PASSWORD: cryptocademy
         volumes:
-            - crypto_mysql_data:/var/lib/mysql
+            - mysqldata:/var/lib/mysql
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
     phpmyadmin:
@@ -65,7 +74,7 @@ services:
         container_name: phpmyadmin
         restart: always
         depends_on:
-            - crypto-app_db
+            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
@@ -75,47 +84,46 @@ services:
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
 
-#    mailserver:
-#        image: docker.io/mailserver/docker-mailserver:latest
-#        hostname: mail
-#        domainname: cryptocademy.app
-#        container_name: mailserver
-#        dns:
-#            - 8.8.8.8
-#        volumes:
-#            - crypto_maildata:/var/mail
-#            - crypto_mailstate:/var/mail-state
-#            - crypto_maillogs:/var/log/mail
-#            - ./data/mailserver/config/:/tmp/docker-mailserver/
-#            - ./data/certbot/conf:/etc/letsencrypt:ro
-#            - /etc/localtime:/etc/localtime:ro
-#            - /etc/timezone:/etc/timezone:ro
-#        environment:
-#            - PERMIT_DOCKER=host
-#            - ONE_DIR=1
-#            - DMS_DEBUG=0
-#            - SMTP_ONLY=1
-#            - SSL_TYPE=letsencrypt
-#            - VIRTUAL_HOST=mail.cryptocademy.app
-#            - LETSENCRYPT_HOST=mail.cryptocademy.app
-#            - POSTMASTER_ADDRESS=magdalena.tsolaki@gmail.com
-#            - ENABLE_UPDATE_CHECK=1
-#            - UPDATE_CHECK_INTERVAL=1d
-#        restart: always
-#        cap_add:
-#            - NET_ADMIN
-#            - SYS_PTRACE
+    mailhog:
+        restart: always
+        image: mailhog/mailhog:latest
+        container_name: mailhog
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+
+    mailserver:
+        image: docker.io/mailserver/docker-mailserver:latest
+        hostname: mail
+        domainname: cryptocademy.app
+        container_name: mailserver
+        volumes:
+            - maildata:/var/mail
+            - mailstate:/var/mail-state
+            - maillogs:/var/log/mail
+            - ./data/mailserver/config/:/tmp/docker-mailserver/
+            - ./data/certbot/conf:/etc/letsencrypt:ro
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        env_file: mailserver.env
+        restart: always
+        #        ports:
+        #            - "25:25"
+        #            - "587:587"
+        cap_add:
+            - NET_ADMIN
+            - SYS_PTRACE
 volumes:
-    crypto_mysql_data:
-        name: crypto_mysql_data
-    crypto_app_data:
-        name: crypto_app_data
-#    crypto_maildata:
-#        name: crypto_maildata
-#    crypto_mailstate:
-#        name: crypto_mailstate
-#    crypto_maillogs:
-#        name: crypto_maillogs
+    mysqldata:
+        name: mysqldata
+    appdata:
+        name: appdata
+    maildata:
+        name: maildata
+    mailstate:
+        name: mailstate
+    maillogs:
+        name: maillogs
 
 networks:
     default:

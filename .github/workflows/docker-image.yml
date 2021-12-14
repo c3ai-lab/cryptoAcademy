@@ -15,54 +15,75 @@ on:
 env:
   NODE_VERSION: '14.x'                # set this to the node version to use
   SSH_CONNECTION: 'root@cryptocademy.app'
+  SUB_DIR: 'app'
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  composer:
+    name: Build Composer
     runs-on: ubuntu-latest
     environment: production
     steps:
       - uses: actions/checkout@v2
-
-      - name: Test
-        run: ls -la app/Http/Controllers/
-      - name: Composer install
-        run: composer install --no-interaction --optimize-autoloader --no-dev
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v2
+      - name: Build Composer
+      uses: php-actions/composer@v8.0
+      with:
+        php_version: 8.0
+        version: 2
+        dev: no
+        args: --no-interaction --optimize-autoloader
+  npm:
+    name: Build NPM
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Build NPM
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: npm install, build, and test
+      - run: npm install --production
+  envfile:
+    name: Build ENV File
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Build ENV File
+      - uses: actions/checkout@v2
         run: |
-          # Build and test the project
-          npm install --production
-          npm run build --if-present
-          npm run test --if-present
-
+          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
+          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
+      #          sed -ri -e "s!MWORD=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
+      #          sed -ri -e "s!MWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
+  dockerize:
+    needs: [ composer, npm, envfile ]
+    name: Dockerize
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
       - name: Build the Docker image
         run: |
           docker build --no-cache . --tag mats9798/cryptocademy:latest
           docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
           docker push mats9798/cryptocademy:latest
-      - name: .env
+  deploy:
+    needs: [ dockerize ]
+    name: Dockerize
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Build the Docker image
         run: |
-          sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/prod.env
-          sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/prod.env
-          sed -ri -e "s!MAIL_USERNAME=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/prod.env
-          sed -ri -e "s!MAIL_PASSWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/prod.env
-      - name: Move .env, docker-compose and startup to Prod-Server
+          docker build --no-cache . --tag mats9798/cryptocademy:latest
+          docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
+          docker push mats9798/cryptocademy:latest
+      - name: Deploy TO PRODUCTION-SERVER
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p app/data/nginx"
-          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/docker-compose.yml"
-          scp -o StrictHostKeyChecking=no docker/prod/prod.env "${{ env.SSH_CONNECTION }}:app/.env"
-          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/startup"
-          scp -o StrictHostKeyChecking=no docker/prod/app.conf "${{ env.SSH_CONNECTION }}:app/data/nginx/app.conf"
-          scp -o StrictHostKeyChecking=no docker/prod/pma.conf "${{ env.SSH_CONNECTION }}:app/data/nginx/pma.conf"
-          scp -o StrictHostKeyChecking=no docker/prod/mailhog.conf "${{ env.SSH_CONNECTION }}:app/data/nginx/mailhog.conf"
-          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/data/nginx/init-letsencrypt.sh"
+          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/init-letsencrypt.sh "${{ env.SSH_CONNECTION }}:app/"
+          scp -o StrictHostKeyChecking=no docker/prod/nginx/ "${{ env.SSH_CONNECTION }}:app/data/nginx/"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd app/ && bash startup"
           rm ~/.ssh/id_rsa
-
