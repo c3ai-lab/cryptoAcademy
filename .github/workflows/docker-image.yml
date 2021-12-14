@@ -88,7 +88,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v2
       - name: Install SSH Key
         uses: actions/checkout@v2
         with:
