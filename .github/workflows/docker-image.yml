@@ -78,7 +78,8 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v2
-      - run: |
+      - name: Dockerize
+        run: |
           docker build --no-cache . --tag mats9798/cryptocademy:latest
           docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
           docker push mats9798/cryptocademy:latest
