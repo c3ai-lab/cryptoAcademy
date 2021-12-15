@@ -49,6 +49,8 @@ class PasswordResetMail extends Notification
       ->line('Hallo ' . $this->user->name)
       ->line('Ihr neues Passwort: ' . $this->password)
       ->line('Danke, dass Sie diese Applikation nutzen!');
+
+
   }
 
   /**

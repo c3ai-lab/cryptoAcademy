@@ -5,6 +5,7 @@ namespace App\Notifications;
 use App\Models\User;
 use App\Models\UserVerifications;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -43,7 +44,7 @@ class VerificationMail extends Notification
    */
   public function toMail($notifiable)
   {
-
+    $this->locale("de");
     $userVerification = UserVerifications::find($this->user->id);
     return (new MailMessage)
       ->subject('Bitte verifizieren Sie Ihre E-Mail Adresse.')
