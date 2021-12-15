@@ -45,10 +45,10 @@ class PasswordResetMail extends Notification
   public function toMail($notifiable)
   {
     return (new MailMessage)
-      ->subject('Password Reset.')
-      ->line('Hi ' . $this->user->name)
-      ->line('Your new password: ' . $this->password)
-      ->line('Thank you for using our application!');
+      ->subject('Passwort zurücksetzen.')
+      ->line('Hallo ' . $this->user->name)
+      ->line('Ihr neues Passwort: ' . $this->password)
+      ->line('Danke, dass Sie diese Applikation nutzen!');
   }
 
   /**

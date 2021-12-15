@@ -38,8 +38,6 @@ class TransactionModel extends Model
 
   public function getQuantityAttribute()
   {
-    return 0;
-
     # TODO figure out why $this->quantity is undefined
     if ($this->action === self::ACTION_SELL) {
       return $this->quantity * (-1);
