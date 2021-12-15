@@ -102,7 +102,7 @@ ___
 
 ```json
 {
-  "message": "User change successfully.",
+  "message": "User changed successfully.",
   "user": {
     "id": 1,
     "name": "mmuster",
@@ -161,6 +161,37 @@ ___
 
 ___
 
+### RESET Current User
+
+**URL** : `/api/user/resetAll`
+**Method** : `POST`
+**Auth required** : `YES`
+
+Es wird die Balance des Users auf den Startwert zurückgesetzt, alle Transaktionen und Favoriten des Users werden gelöscht. 
+
+**Header constraints**
+
+```json
+{
+  "Authorization": "Bearer __JWT__"
+}
+```
+
+##### Success Response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+```json
+
+{
+  "message": "User reseted successfully"
+}
+```
+
+___
+
 ### Reset Password
 
 wird automatisch zurückgesetzt und das neue Password an die genannte Emailadresse gesendet
@@ -186,7 +217,7 @@ wird automatisch zurückgesetzt und das neue Password an die genannte Emailadres
 ```json
 
 {
-  "message": "Password reset successfully"
+  "message": "Password reseted successfully"
 }
 ```
 
@@ -224,7 +255,7 @@ ___
 
 ```json
 {
-  "message": "Password change successfully."
+  "message": "Password changed successfully."
 }
 
 ```

@@ -31,6 +31,7 @@ Route::group(['prefix' => 'user'], function () {
   Route::delete('/', [UserController::class, 'deleteCurrentUser']);
   Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
   Route::post('/password/reset', [UserController::class, 'resetCurrentUserPassword']);
+  Route::post('/resetAll', [UserController::class, 'resetCurrentUser']);
 
   Route::group(['prefix' => 'favorites'], function () {
     Route::get('/', [SymbolUserController::class, 'index']);

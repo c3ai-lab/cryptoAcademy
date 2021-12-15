@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\MessageCodes;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -34,7 +35,7 @@ class AuthController extends Controller
 
 
     if (!$token = auth()->attempt(array_merge($validator->validated(), $credentials))) {
-      return response()->json(['message' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 401);
+      return response()->json(['msgcode' => MessageCodes::USER_NOT_FOUND], 401);
     }
 
     return $this->createNewToken($token);
@@ -50,7 +51,7 @@ class AuthController extends Controller
   {
     auth()->logout();
 
-    return response()->json(['message' => 'Successfully logged out']);
+    return response()->json(['msgcode' => MessageCodes::LOGOUT_SUCCESS]);
   }
 
   /**
