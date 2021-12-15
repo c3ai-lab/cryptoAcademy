@@ -6,6 +6,7 @@ use App\Http\Resources\TransactionResource;
 use App\Models\Symbol;
 use App\Models\TransactionModel;
 use App\Service\BianceApiService;
+use App\Service\EcbExchangeRatesApiService;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -87,9 +88,9 @@ class TransactionController extends Controller
        * quantity*$price (in Euro)
        */
       $bianceService = new BianceApiService();
-//      $ecbService = new EcbExchangeRatesApiService();
+      $ecbService = new EcbExchangeRatesApiService();
       $symbolPrice = $bianceService->getRateOfSymbol($request->symbol);
-//      $exchange_price = $ecbService->getCurrentUsdToEuroExchangeRate();
+      $exchange_price = $ecbService->getCurrentUsdToEuroExchangeRate();
       $symbol = Symbol::where(["api_symbol" => $request->symbol])->first();
       $transactionModel = new TransactionModel;
       $transactionModel->user_id = $user->id;
@@ -97,10 +98,7 @@ class TransactionController extends Controller
       $transactionModel->quantity = $request->quantity;
       $transactionModel->price = $symbolPrice;
       $transactionModel->action = $action;
-      // TODO calculate EUR price
-      // TODO subtract from / add to user balance
-//      $transactionModel->exchange_price = $exchange_price;
-      $transactionModel->exchange_price = 0.0;
+      $transactionModel->exchange_price = $exchange_price;
       $transactionModel->save();
     } catch (\Exception $e) {
       throw $e;

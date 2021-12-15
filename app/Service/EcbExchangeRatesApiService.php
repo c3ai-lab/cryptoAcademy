@@ -2,27 +2,19 @@
 
 namespace App\Service;
 
-use Richardds\ECBAPI\ECBConverter;
-use Richardds\ECBAPI\ECBException;
+use AmrShawky\Currency;
 
 class EcbExchangeRatesApiService
 {
   /**
-   * @var ECBConverter
+   * @return mixed|null
+   * @throws \Exception
    */
-  private $api;
-
-  public function __construct()
+  public function getCurrentUsdToEuroExchangeRate()
   {
-    $this->api = new ECBConverter("/var/www/html/.ecb_cache");
-  }
-
-  /**
-   * @param int $amount
-   * @throws ECBException
-   */
-  public function getCurrentUsdToEuroExchangeRate(int $amount = 1)
-  {
-    return $this->api->toEuro($amount, 'USD', 3);
+    return Currency::convert()
+      ->from('USD')
+      ->to('EUR')
+      ->get();
   }
 }
