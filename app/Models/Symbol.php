@@ -11,6 +11,7 @@ class Symbol extends Model
 
   protected $appends = [
     'is_favorite',
+    'user_quantity',
     'user_balance',
   ];
 
@@ -22,7 +23,7 @@ class Symbol extends Model
     return false;
   }
 
-  public function getUserBalanceAttribute()
+  public function getUserQuantityAttribute()
   {
     if (auth()->user()->transactions->count() === 0) {
       return 0;
@@ -38,3 +39,12 @@ class Symbol extends Model
       );
   }
 }
+
+/*
+ [
+    BITCOIN => 0.0,
+    ETH => 0.0,
+    METH => 0.0,
+    SCHAF => 0.0,
+  ]
+*/
