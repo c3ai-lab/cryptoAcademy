@@ -25,7 +25,7 @@ class BianceApiService
   /**
    * @throws \Exception
    */
-  public function getRateOfSymbol(string $symbol): float
+  public function getPriceOfSymbol(string $symbol): float
   {
     return $this->api->price($symbol);
   }

@@ -15,6 +15,11 @@ class Symbol extends Model
     'user_balance',
   ];
 
+  public function getUserSymbolById($id)
+  {
+    return auth()->user()->favorites->find($id);
+  }
+
   public function getIsFavoriteAttribute()
   {
     if (auth()->user()) {
