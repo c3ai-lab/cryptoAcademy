@@ -1,4 +1,5 @@
 <template>
+<padded-layout>
   <div class="row">
     <div class="col-12 mb-4">
       <h1>{{ $t("dashboard.title") }}</h1>
@@ -38,6 +39,7 @@
       </div>
     </div>
   </div>
+</padded-layout>
 </template>
 
 <script>
@@ -46,6 +48,7 @@ import CoinCardRealData from "../components/CoinCardRealData.vue";
 import NewsCard from "../components/NewsCard.vue";
 
 import { Coin } from "../enums";
+import PaddedLayout from '../layouts/PaddedLayout.vue';
 import { generateSampleSeries } from "../utils";
 
 export default {
@@ -55,6 +58,7 @@ export default {
     ApexChartCard,
     CoinCardRealData,
     NewsCard,
+    PaddedLayout,
   },
 
   data() {

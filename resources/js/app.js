@@ -25,8 +25,10 @@ Vue.component("tinymce", tinymce);
 
 // Custom global components
 import NicePrice from './components/NicePrice.vue'
+import PaddedLayout from "./layouts/PaddedLayout.vue";
 
 Vue.component('NicePrice', NicePrice);
+Vue.component('PaddedLayout', PaddedLayout);
 
 // Vue.use(vClickOutside);
 // Vue.use(VueMask);
