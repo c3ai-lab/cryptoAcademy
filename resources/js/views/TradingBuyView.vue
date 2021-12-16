@@ -1,5 +1,4 @@
 <template>
-<padded-layout>
   <div class="card">
       <div class="card-body">
           <h4 class="card-title mb-4">Buy / Sell</h4>
@@ -22,7 +21,6 @@
           </b-tabs>
       </div>
   </div>
-</padded-layout>
 </template>
 
 <script>
