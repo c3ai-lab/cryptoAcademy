@@ -39,3 +39,7 @@ Vue.filter('eur', function (value) {
     });
     return formatter.format(value);
 });
+
+Vue.filter('symbol', function (value) {
+  return value.split('USDT')[0];
+});
