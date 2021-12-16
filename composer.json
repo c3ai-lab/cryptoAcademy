@@ -7,7 +7,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "adrifkat/cryptopanic": "^1.0",
-        "amrshawky/laravel-currency": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "jaggedsoft/php-binance-api": "^0.5.28",

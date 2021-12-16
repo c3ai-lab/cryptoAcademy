@@ -13,7 +13,6 @@ use Validator;
 
 class TransactionController extends Controller
 {
-
   /**
    * @var float
    */
@@ -40,14 +39,13 @@ class TransactionController extends Controller
     }
     try {
       $bianceService = new BianceApiService();
-      $ecbService = new EcbExchangeRatesApiService();
 
       $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
-      $this->exchangeRate = $ecbService->getCurrentUsdToEuroExchangeRate();
+      $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
 
       if ($this->isUserBalanceSufficient()) {
         $this->createTransaction($request, TransactionModel::ACTION_BUY);
-        $balance = $user->balance - $this->symbolPrice * $this->exchangeRate * $request->quantity;
+        $balance = $user->balance - $this->symbolPrice / $this->exchangeRate * $request->quantity;
         $user->balance = $balance;
         $user->save();
 
@@ -78,12 +76,10 @@ class TransactionController extends Controller
     }
 
     $bianceService = new BianceApiService();
-    $ecbService = new EcbExchangeRatesApiService();
-
     $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
-    $this->exchangeRate = $ecbService->getCurrentUsdToEuroExchangeRate();
+    $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
 
-    $user->balance = $user->balance + $this->symbolPrice * $this->exchangeRate * $request->quantity;
+    $user->balance = $user->balance + $this->symbolPrice / $this->exchangeRate * $request->quantity;
     $user->save();
 
     try {
@@ -117,7 +113,7 @@ class TransactionController extends Controller
 
   private function isUserBalanceSufficient(): bool
   {
-    return ($this->symbolPrice * $this->exchangeRate) <= auth()->user()->balance;
+    return ($this->symbolPrice / $this->exchangeRate) <= auth()->user()->balance;
   }
 
   private function getCurrentSymbolAmount(string $symbol)

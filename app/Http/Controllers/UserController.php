@@ -89,6 +89,10 @@ class UserController extends Controller
 
   public function deleteCurrentUser()
   {
+    $user = auth()->user();
+    $user->userVerification()->delete();
+    $user->transactions()->delete();
+    $user->favorites()->detach();
     User::find(auth()->user()->id)->delete();
     auth()->logout();
     return response()->json(['msgcode' => MessageCodes::USER_DELETE]);
@@ -97,6 +101,7 @@ class UserController extends Controller
   public function resetCurrentUser()
   {
     $user = auth()->user();
+    $user->userVerification()->delete();
     $user->transactions()->delete();
     $user->favorites()->detach();
     $user->balance = self::Init_BALANCE;
