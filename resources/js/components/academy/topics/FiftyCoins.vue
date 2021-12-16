@@ -557,7 +557,9 @@ h2 img {
 </style>
 
 <script>
+import { AcademyTopic } from "../../../enums";
+
 export default {
-  name: "AcademyTopicFiftyCoins",
+  name: AcademyTopic.FIFTY_COINS__LIST,
 };
 </script>

@@ -203,10 +203,6 @@ export const ACADEMY = {
   [AcademyTopic.TOP_FIVE_COINS]: {
     subTopics: {},
   },
-  [AcademyTopic.FIFTY_COINS]: {
-    subTopics: {},
-  },
-  [AcademyTopic.GLOSSAR]: {
-    subTopics: {},
-  },
+  [AcademyTopic.FIFTY_COINS__LIST]: {},
+  [AcademyTopic.GLOSSAR]: {},
 };

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { AcademySubTopic } from "../../../enums";
+import { AcademyTopic, AcademySubTopic } from "../../../enums";
 
 Vue.component(
   AcademySubTopic.CRYPTO__INTRO,
@@ -7,6 +7,6 @@ Vue.component(
 );
 
 Vue.component(
-  AcademySubTopic.CRYPTO__BLOCKCHAIN,
-  require("./testy/Lol.vue").default
+  AcademyTopic.FIFTY_COINS__LIST,
+  require("./FiftyCoins.vue").default
 );
