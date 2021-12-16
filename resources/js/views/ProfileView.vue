@@ -1,122 +1,134 @@
 <template>
-<padded-layout>
-  <div>
-    <h1>{{ $t("profile.title") }}</h1>
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-sm-3 col-12 d-flex justify-content-center">
-            <div class="avatar-box">
-              <Avatar :username="user.username" class="avatar"  />
+  <padded-layout>
+    <div>
+      <h1>{{ $t("profile.title") }}</h1>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3 col-12 d-flex justify-content-center">
+              <div class="avatar-box">
+                <Avatar :username="user.username" class="avatar"/>
+              </div>
             </div>
-          </div>
-          <div class="col-12 col-sm-9 align-self-center">
-            <h5
-              class="
+            <div class="col-12 col-sm-9 align-self-center">
+              <h5
+                class="
                 d-flex
                 justify-content-center justify-content-sm-start
                 mt-3
               "
-            >
-              <b>{{ user.username }}</b>
-            </h5>
-            <h6 class="d-flex justify-content-center justify-content-sm-start">
-              {{ user.email }}
-            </h6>
-            <i
-              class="
+              >
+                <b>{{ user.username }}</b>
+              </h5>
+              <h6 class="d-flex justify-content-center justify-content-sm-start">
+                {{ user.email }}
+              </h6>
+              <i
+                class="
                 mdi mdi-logout
                 text-danger
                 d-flex
                 justify-content-center justify-content-sm-start
               "
-              @click="logout()"
-            ></i>
-          </div>
-        </div>
-
-        <hr class="my-4" />
-        <div class="row">
-          <p
-            class="
-              col-12 col-md-4
-              justify-content-center 
-              d-flex
-            "
-            v-if="!user.sso && !changePassword && !deleteAccount"
-          >
-            <button class="btn btn-primary" @click="changePassword = true">
-              {{ $t("profile.change_password") }}
-            </button>
-          </p>
-          <div v-if="changePassword">
-            <h2>{{ $t("profile.change_password") }}</h2>
-            <form class="form-horizontal">
-              <b-form-group
-                class="mb-3"
-                :label="$t('profile.new_password')"
-                label-for="new-password"
-              >
-                <b-form-input id="new-password" />
-              </b-form-group>
-              <b-form-group
-                class="mb-3"
-                :label="$t('profile.repeat_new_password')"
-                label-for="new-password2"
-              >
-                <b-form-input id="new-password2" />
-              </b-form-group>
-            </form>
-            <button class="btn btn-success" @click="changePassword = false">
-              {{ $t("common.save") }}
-            </button>
-            <button class="btn btn-danger" @click="changePassword = false">
-              {{ $t("common.abort") }}
-            </button>
+                @click="logout()"
+              ></i>
+            </div>
           </div>
 
-          <p
-            class="
+          <hr class="my-4"/>
+          <div class="row">
+            <p
+              class="
               col-12 col-md-4
-              justify-content-center 
+              justify-content-center
               d-flex
             "
-            v-if="!changePassword && !deleteAccount"
-          >
-            <button class="btn btn-danger" @click="deleteAccount = true">
-              {{ $t("profile.delete_account") }}
-            </button>
-          </p>
-          <div v-if="deleteAccount">
-            <h2>{{ $t("profile.delete_account") }}</h2>
-            <p class="text-danger">
-              {{ $t("profile.delete_account_question") }}
+              v-if="!user.sso && !changePassword && !deleteAccount  && !resetAccount"
+            >
+              <button class="btn btn-primary" @click="changePassword = true">
+                {{ $t("profile.change_password") }}
+              </button>
             </p>
-            <button class="btn btn-danger" @click="deleteAccount = false">
-              {{ $t("common.yes") }}
-            </button>
-            <button class="btn btn-secondary" @click="deleteAccount = false">
-              {{ $t("common.no") }}
-            </button>
-          </div>
+            <div v-if="changePassword">
+              <h2>{{ $t("profile.change_password") }}</h2>
+              <form class="form-horizontal">
+                <b-form-group
+                  class="mb-3"
+                  :label="$t('profile.new_password')"
+                  label-for="new-password"
+                >
+                  <b-form-input id="new-password"/>
+                </b-form-group>
+                <b-form-group
+                  class="mb-3"
+                  :label="$t('profile.repeat_new_password')"
+                  label-for="new-password2"
+                >
+                  <b-form-input id="new-password2"/>
+                </b-form-group>
+              </form>
+              <button class="btn btn-success" @click="changePassword = false">
+                {{ $t("common.save") }}
+              </button>
+              <button class="btn btn-danger" @click="changePassword = false">
+                {{ $t("common.abort") }}
+              </button>
+            </div>
 
             <p
-            class="
+              class="
               col-12 col-md-4
-              justify-content-center 
+              justify-content-center
               d-flex
             "
-            v-if="!changePassword && !deleteAccount"
-          >
-            <button class="btn btn-secondary" @click="changePassword = true">
-              {{ $t("profile.account_reset") }}
-            </button>
+              v-if="!changePassword && !deleteAccount  && !resetAccount"
+            >
+              <button class="btn btn-danger" @click="deleteAccount = true">
+                {{ $t("profile.delete_account") }}
+              </button>
             </p>
+            <div v-if="deleteAccount">
+              <h2>{{ $t("profile.delete_account") }}</h2>
+              <p class="text-danger">
+                {{ $t("profile.delete_account_question") }}
+              </p>
+              <button class="btn btn-danger" @click="deleteAccount = false">
+                {{ $t("common.yes") }}
+              </button>
+              <button class="btn btn-secondary" @click="deleteAccount = false">
+                {{ $t("common.no") }}
+              </button>
+            </div>
+
+            <p
+              class="
+              col-12 col-md-4
+              justify-content-center
+              d-flex
+            "
+              v-if="!changePassword && !deleteAccount  && !resetAccount"
+            >
+              <button class="btn btn-secondary" @click="resetAccount = true">
+                {{ $t("profile.account_reset") }}
+              </button>
+            </p>
+            <div v-if="resetAccount">
+              <h2>{{ $t("profile.account_reset") }}</h2>
+              <p class="text-danger">
+                {{ $t("profile.account_reset_question") }}
+              </p>
+              <button class="btn btn-danger" @click="resetAccount = false">
+                {{ $t("common.yes") }}
+              </button>
+              <button class="btn btn-secondary" @click="resetAccount = false">
+                {{ $t("common.no") }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</padded-layout>
+  </padded-layout>
 </template>
 
 <style lang="scss" scoped>
@@ -160,13 +172,14 @@ export default {
 
       changePassword: false,
       deleteAccount: false,
+      resetAccount: false,
     };
   },
 
   methods: {
     logout() {
       this.$store.dispatch("user/logout", () =>
-        this.$router.push({ name: "login" })
+        this.$router.push({name: "login"})
       );
     },
   },

@@ -47,7 +47,8 @@
         "new_password": "Neues Passwort",
         "repeat_new_password": "Neues Passwort wiederholen",
         "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",
-        "account_reset": "Account zurücksetzen"
+        "account_reset": "Account zurücksetzen",
+        "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?"
     },
     "datetime": {
         "month_short": "M",
@@ -71,8 +72,8 @@
     "academy": {
         "title": "Crypto Academy",
         "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        "topic_1": 
-            { 
+        "topic_1":
+            {
                 "name": "How does it work?",
                 "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "subtopic_1": "Einführung",
@@ -86,8 +87,8 @@
                 "subtopic_3_1_1": "Wie funktioniert Mining bei Proof-of-Work?",
                 "subtopic_3_2": "Proof-of-Stake"
             },
-            "topic_2": 
-            { 
+            "topic_2":
+            {
                 "name": "For Beginners",
                 "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 "subtopic_1": "Wallet",
@@ -97,22 +98,22 @@
                 "subtopic_1_4": "Hardware Wallet",
                 "subtopic_2": "Smart Contract"
             },
-            "topic_3": 
-            { 
+            "topic_3":
+            {
                 "name": "Top fünf Kryptowährungen",
                 "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
             },
-            "topic_4": 
-            { 
-                "name": "50 Kryptowährungen - Kurz beschrieben", 
+            "topic_4":
+            {
+                "name": "50 Kryptowährungen - Kurz beschrieben",
                 "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
             },
-    
-            "topic_5": 
-            { 
-                "name": "Glossar", 
+
+            "topic_5":
+            {
+                "name": "Glossar",
                 "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
             }
-    
+
     }
 }
