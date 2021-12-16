@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100">
+  <div class="w-100" style="max-height: 400px; overflow: scroll;">
     <div
       v-for="(t, i) of transactions"
       :key="i"
