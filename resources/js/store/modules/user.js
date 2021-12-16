@@ -18,12 +18,12 @@ const state = () => {
 };
 
 const processUserResponse = ({
-  response,
-  commit,
-  dispatch,
-  resolve,
-  reject,
-}) => {
+                               response,
+                               commit,
+                               dispatch,
+                               resolve,
+                               reject,
+                             }) => {
   response
     .then((response) => {
       if (response.ok === true) {
@@ -58,7 +58,7 @@ const getters = {
 };
 
 const actions = {
-  login({ commit, dispatch }, data) {
+  login({commit, dispatch}, data) {
     return new Promise((resolve, reject) => {
       const response = fetch("/api/auth/login", {
         method: "POST",
@@ -81,7 +81,7 @@ const actions = {
     });
   },
 
-  refreshSession({ commit, dispatch, getters }) {
+  refreshSession({commit, dispatch, getters}) {
     return new Promise((resolve, reject) => {
       const response = fetch("/api/auth/refresh", {
         method: "POST",
@@ -99,8 +99,34 @@ const actions = {
       });
     });
   },
+  refreshUserdata({commit, dispatch, rootGetters}, callback) {
+    return new Promise((resolve, reject) => {
+      fetch("/api/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            return null;
+          }
+        })
+        .then((data) => {
+          if (data === null) {
+            reject();
+          } else {
+            commit("setUser", data);
+            resolve();
+          }
+        });
+    });
+  },
 
-  register({ commit }, data) {
+  register({commit}, data) {
     return new Promise((resolve, reject) => {
       fetch("/api/user", {
         method: "POST",
@@ -146,7 +172,7 @@ const actions = {
     });
   },
 
-  logout({ commit, dispatch, rootGetters }, callback) {
+  logout({commit, dispatch, rootGetters}, callback) {
     fetch("/api/auth/logout", {
       method: "POST",
       headers: {
@@ -161,7 +187,7 @@ const actions = {
     });
   },
 
-  save({ state }) {
+  save({state}) {
     localStorage.setItem("user", JSON.stringify(state.user));
     localStorage.setItem("accessToken", JSON.stringify(state.accessToken));
   },
@@ -175,7 +201,7 @@ const mutations = {
   setUser(state, user) {
     state.user = user;
   },
-  setAccessToken(state, { token, expiresIn }) {
+  setAccessToken(state, {token, expiresIn}) {
     state.accessToken = {
       token: token,
       expiresAt: new Date().getTime() + expiresIn * 1000,
