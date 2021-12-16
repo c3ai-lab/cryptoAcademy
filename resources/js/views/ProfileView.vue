@@ -39,8 +39,8 @@
         <div class="row">
           <p
             class="
-              col-12 col-sm-6
-              justify-content-center justify-content-sm-end
+              col-12 col-md-4
+              justify-content-center 
               d-flex
             "
             v-if="!user.sso && !changePassword && !deleteAccount"
@@ -77,8 +77,8 @@
 
           <p
             class="
-              col-12 col-sm-6
-              justify-content-center justify-content-sm-start
+              col-12 col-md-4
+              justify-content-center 
               d-flex
             "
             v-if="!changePassword && !deleteAccount"
@@ -99,6 +99,19 @@
               {{ $t("common.no") }}
             </button>
           </div>
+
+            <p
+            class="
+              col-12 col-md-4
+              justify-content-center 
+              d-flex
+            "
+            v-if="!changePassword && !deleteAccount"
+          >
+            <button class="btn btn-secondary" @click="changePassword = true">
+              {{ $t("profile.account_reset") }}
+            </button>
+            </p>
         </div>
       </div>
     </div>

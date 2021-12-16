@@ -37,7 +37,7 @@ export default {
         <button
           id="open-btn"
           type="button"
-          class="open btn btn-sm px-3 font-size-16 header-item"
+          class="open btn btn-sm px-3 font-size-16 header-item col-1"
           @click="openNav"
         >
           <i class="fa fa-fw fa-bars"></i>
@@ -47,20 +47,20 @@ export default {
           id="close-button"
           type="button"
           style="display: none"
-          class="close btn btn-sm px-3 font-size-16 header-item"
+          class="close btn btn-sm px-3 font-size-16 header-item col-1"
           @click="closeNav"
         >
           <i class="fa fa-fw fa-bars"></i>
         </button>
         <!-- LOGO -->
-        <div class="navbar-brand-box d-none d-lg-block">
+        <div class="navbar-brand-box d-none d-lg-block col-2">
           <a href="/" class="logo">
             <span>
               <img src="/images/cryptocademy.svg" style="width: 100%"/>
             </span>
           </a>
         </div>
-        <div class="d-block d-lg-none" style="width: 35px">
+        <div class="d-block d-lg-none" style="width: 100%">
           <a href="/" class="logo">
             <span>
               <img
@@ -71,8 +71,10 @@ export default {
             </span>
           </a>
         </div>
-        <div class="d-block balance">
-          {{ (this.$store.getters['user/getUser']().balance).toFixed(2) }}€
+        <div class="col-md-7 col-2">
+          </div>
+        <div class="d-flex balance p-4 justify-content-end">
+          <span style="line-height: 1"> Balance: <b>{{ (this.$store.getters['user/getUser']().balance).toFixed(2) }}€</b></span>
         </div>
 
         <!---
@@ -141,5 +143,11 @@ a {
 
 .navbar-brand-box {
   padding: 0;
+}
+
+.balance
+{
+  float:right;
+  right: 0;
 }
 </style>
