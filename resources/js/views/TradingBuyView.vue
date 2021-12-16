@@ -1,4 +1,5 @@
 <template>
+<padded-layout>
   <div class="card">
       <div class="card-body">
           <h4 class="card-title mb-4">Buy / Sell</h4>
@@ -21,12 +22,14 @@
           </b-tabs>
       </div>
   </div>
+</padded-layout>
 </template>
 
 <script>
 import { MainClient, WebsocketClient } from 'binance';
 import BuyForm from '../components/BuyForm.vue'
 import SellForm from '../components/SellForm.vue'
+import PaddedLayout from '../layouts/PaddedLayout.vue';
 
 const binanceWs = new WebsocketClient({
   beautify: true,
@@ -35,7 +38,8 @@ const binanceWs = new WebsocketClient({
 export default {
   components: {
     BuyForm,
-    SellForm
+    SellForm,
+    PaddedLayout
   },
   data() {
     return {
