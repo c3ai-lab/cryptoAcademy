@@ -4,7 +4,9 @@ const state = {
 
 const getters = {
   getTransactions: () => () => { },
-  getTransactionsBySymbol: () => () => { },
+  getTransactionsBySymbol: (state) => (symbol) => {
+    return state.transactions.filter(t => t.api_symbol === symbol)
+  },
 };
 
 const actions = {
@@ -18,11 +20,12 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
-          console.log(response);
-          commit('setTransactions', response.data);
           return response.json();
         }
         return null;
+      })
+      .then((data) => {
+        commit('setTransactions', data);
       })
       .catch((error) => {
         console.log(error);
@@ -40,11 +43,16 @@ const actions = {
         quantity: quantity,
       }),
     })
-      .then((response) => {
-        if (response.ok === true) {
-          return response.json();
+      .then((data) => {
+        if (data === null) {
+          reject();
+        } else {
+          commit(
+            "setTransactions",
+            data
+          );
+          resolve();
         }
-        return null;
       })
       .catch((error) => {
         console.log(error);
