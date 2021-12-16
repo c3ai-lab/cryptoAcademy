@@ -14,7 +14,6 @@
           :class="
             `font-size-22 text-${t.color}`
           "
-          style="margin-right: 8px"
         >
           <i
             :class="{
@@ -28,7 +27,9 @@
           />
         </div>
 
-        <div>
+        <div
+          style="margin: 0 8px"
+        >
           <div>
             {{ t.date }}
           </div>
@@ -38,13 +39,13 @@
           </div>
         </div>
 
-        <div class="flex-grow-1 text-center">
-          {{ t.text }}
+        <div class="flex-grow-1">
+          <b>{{ t.text }}</b>
         </div>
 
         <div
           class="flex-grow-1 text-right"
-          style="text-align: right;"
+          style="text-align: right; margin-right: 12px"
           :class="
             `text-${t.color}`
           "
