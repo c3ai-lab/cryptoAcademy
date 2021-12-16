@@ -172,6 +172,24 @@ const actions = {
     });
   },
 
+  resetAccount({commit, dispatch, rootGetters}, callback) {
+    return new Promise((resolve, reject) => {
+      fetch("/api/user/resetAll", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          dispatch("user/refreshUserdata", null, {root: true});
+          resolve()
+        } else
+          reject()
+      });
+    });
+  },
+
   logout({commit, dispatch, rootGetters}, callback) {
     fetch("/api/auth/logout", {
       method: "POST",
@@ -184,6 +202,39 @@ const actions = {
         dispatch("save");
         callback();
       }
+    });
+  },
+
+  deleteAccount({commit, dispatch, rootGetters}, callback) {
+    fetch("/api/user", {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+    }).then((response) => {
+      if (response.ok === true) {
+        commit("clear");
+        dispatch("save");
+        callback();
+      }
+    });
+  },
+
+  changePassword({commit, dispatch, rootGetters}, data) {
+    return new Promise((resolve, reject) => {
+      const response = fetch("/api/user/password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+        },
+        body: JSON.stringify({
+          password: data.oldPassword,
+          new_password: data.newPassword,
+          new_password_confirmation: data.newPassword2
+        }),
+      }).then((response) => (response.ok === true ? resolve(response) : reject(response)));
+
     });
   },
 
