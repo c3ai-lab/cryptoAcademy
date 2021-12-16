@@ -1,4 +1,5 @@
 <template>
+<padded-layout>
   <div>
     <h1>{{ $t("profile.title") }}</h1>
     <div class="card">
@@ -102,6 +103,7 @@
       </div>
     </div>
   </div>
+</padded-layout>
 </template>
 
 <style lang="scss" scoped>
@@ -125,12 +127,14 @@ i.mdi-logout {
 
 <script>
 import Avatar from "../components/Avatar.vue";
+import PaddedLayout from '../layouts/PaddedLayout.vue';
 
 export default {
   name: "ProfileView",
 
   components: {
     Avatar,
+    PaddedLayout,
   },
 
   data: function () {

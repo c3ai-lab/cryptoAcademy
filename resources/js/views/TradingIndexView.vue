@@ -1,28 +1,32 @@
 <template>
   <!-- <div style="background: #f5f5f5"> -->
-    <div>
-    <div
-      v-for="(coin, i) in all"
-      :key="i"
-    >
-      <coin-card-real-data
-        :name="coin.name"
-        :symbol="coin.symbol"
-        :series="coin.series"
-        :isFavorite="coin.is_favorite"
-        :id="coin.id"
-      />
+    <padded-layout>
+      <div>
+      <div
+        v-for="(coin, i) in all"
+        :key="i"
+      >
+        <coin-card-real-data
+          :name="coin.name"
+          :symbol="coin.symbol"
+          :series="coin.series"
+          :isFavorite="coin.is_favorite"
+          :id="coin.id"
+        />
+      </div>
     </div>
-  </div>
+  </padded-layout>
 </template>
 
 <script>
 import CoinCardRealData from '../components/CoinCardRealData.vue';
 import { mapState } from 'vuex'
+import PaddedLayout from '../layouts/PaddedLayout.vue';
 
 export default {
   components: {
     CoinCardRealData,
+    PaddedLayout,
   },
   created() {
     this.$store.dispatch('coinIndex/fetchSymbols');
