@@ -125,6 +125,7 @@ const actions = {
           if (data === null) {
             reject();
           } else {
+            console.log(data.user);
             commit("setUser", data.user);
             resolve();
           }

@@ -1,4 +1,3 @@
-
 <script>
 /**
  * Nav-bar Component
@@ -57,7 +56,7 @@ export default {
         <div class="navbar-brand-box d-none d-lg-block">
           <a href="/" class="logo">
             <span>
-              <img src="/images/cryptocademy.svg" style="width: 100%" />
+              <img src="/images/cryptocademy.svg" style="width: 100%"/>
             </span>
           </a>
         </div>
@@ -72,6 +71,9 @@ export default {
             </span>
           </a>
         </div>
+        <div class="d-block balance">
+          {{ (this.$store.getters['user/getUser']().balance).toFixed(2) }}€
+        </div>
 
         <!---
       Setting Button in Navbar
@@ -82,7 +84,7 @@ export default {
             @click="toggleRightSidebar"
           >
             <i class="bx bx-cog bx-spin toggle-right"></i>
-          
+
           </button>
         </div>
         --->
@@ -97,15 +99,15 @@ export default {
       <router-link :to="{ name: 'dashboard' }" @click.native="closeNav()">
         {{ $t("navigation.dashboard") }}
       </router-link>
-      <br />
+      <br/>
       <router-link :to="{ name: 'trading' }" @click.native="closeNav()">
         {{ $t("navigation.trading") }}
       </router-link>
-      <br />
+      <br/>
       <router-link :to="{ name: 'academy' }" @click.native="closeNav()">
         {{ $t("navigation.academy") }}
       </router-link>
-      <br />
+      <br/>
       <router-link :to="{ name: 'profile' }" @click.native="closeNav()">
         {{ $t("navigation.profile") }}
       </router-link>
