@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-sm-3 col-12 d-flex justify-content-center">
               <div class="avatar-box">
-                <Avatar :username="user.username" class="avatar"/>
+                <Avatar :username="username" class="avatar"/>
               </div>
             </div>
             <div class="col-12 col-sm-9 align-self-center">
@@ -18,10 +18,10 @@
                 mt-3
               "
               >
-                <b>{{ user.username }}</b>
+                <b>{{ username }}</b>
               </h5>
               <h6 class="d-flex justify-content-center justify-content-sm-start">
-                {{ user.email }}
+                {{ email }}
               </h6>
               <i
                 class="
@@ -162,11 +162,17 @@ export default {
     PaddedLayout,
   },
 
+  computed: {
+    username() {
+      return this.$store.getters['user/getUser']().name
+    },
+    email() {
+      return this.$store.getters['user/getUser']().email
+    }
+  },
   data: function () {
     return {
       user: {
-        username: "SomeAwesomeUsername",
-        email: "fancy.name@provider.tld",
         sso: false,
       },
 
