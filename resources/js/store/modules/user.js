@@ -187,6 +187,24 @@ const actions = {
     });
   },
 
+  changePassword({commit, dispatch, rootGetters}, data) {
+    return new Promise((resolve, reject) => {
+      const response = fetch("/api/user/password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+        },
+        body: JSON.stringify({
+          password: data.oldPassword,
+          new_password: data.newPassword,
+          new_password_confirmation: data.newPassword2
+        }),
+      }).then((response) => (response.ok === true ? resolve(response) : reject(response)));
+
+    });
+  },
+
   save({state}) {
     localStorage.setItem("user", JSON.stringify(state.user));
     localStorage.setItem("accessToken", JSON.stringify(state.accessToken));

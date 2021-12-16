@@ -74,7 +74,7 @@ export default {
         <div class="col-md-7 col-2">
         </div>
         <div class="d-flex balance p-4 justify-content-end">
-          <span style="line-height: 1"> Balance: <b>{{ balance }}€</b></span>
+          <span style="line-height: 1"> Konto: <b>{{ balance }}€</b></span>
         </div>
 
         <!---

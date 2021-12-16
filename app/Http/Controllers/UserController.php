@@ -118,7 +118,7 @@ class UserController extends Controller
     ]);
 
     if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
+      return response()->json(['msgcode' => MessageCodes::PASSWORD_CHANGE_FAIL], 422);
     }
     User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
 

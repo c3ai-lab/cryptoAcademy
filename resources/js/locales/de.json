@@ -44,6 +44,7 @@
         "title": "Profil",
         "change_password": "Passwort ändern",
         "delete_account": "Account löschen",
+        "old_password": "Altes Passwort",
         "new_password": "Neues Passwort",
         "repeat_new_password": "Neues Passwort wiederholen",
         "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",

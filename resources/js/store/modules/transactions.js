@@ -12,7 +12,7 @@ const getters = {
 
 const actions = {
   fetchTransactions({commit, rootGetters}) {
-    fetch(`${location.origin}/api/user/transaction/`, {
+    fetch(`${location.origin}/api/user/transaction`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

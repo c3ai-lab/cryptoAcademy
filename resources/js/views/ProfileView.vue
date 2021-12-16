@@ -37,90 +37,79 @@
 
           <hr class="my-4"/>
           <div class="row">
-            <p
-              class="
-              col-12 col-md-4
-              justify-content-center
-              d-flex
-            "
-              v-if="!user.sso && !changePassword && !deleteAccount  && !resetAccount"
-            >
-              <button class="btn btn-primary" @click="changePassword = true">
+            <p class="col-12 col-md-4 justify-content-center d-flex"
+               v-if="!showChangePassword && !showResetAccount && !showDeleteAccount">
+              <button class="btn btn-primary" @click="showChangePassword = true">
                 {{ $t("profile.change_password") }}
               </button>
             </p>
-            <div v-if="changePassword">
+            <div v-if="showChangePassword">
               <h2>{{ $t("profile.change_password") }}</h2>
-              <form class="form-horizontal">
+              <form class="form-horizontal" @submit.prevent="changePassword">
+                <b-form-group
+                  class="mb-3"
+                  :label="$t('profile.old_password')"
+                  label-for="old-password"
+                >
+                  <b-form-input v-model="changePasswordObj.oldPassword" id="old-password" minlength="6" required/>
+                </b-form-group>
                 <b-form-group
                   class="mb-3"
                   :label="$t('profile.new_password')"
                   label-for="new-password"
                 >
-                  <b-form-input id="new-password"/>
+                  <b-form-input v-model="changePasswordObj.newPassword" id="new-password" minlength="6" required/>
                 </b-form-group>
                 <b-form-group
                   class="mb-3"
                   :label="$t('profile.repeat_new_password')"
                   label-for="new-password2"
                 >
-                  <b-form-input id="new-password2"/>
+                  <b-form-input v-model="changePasswordObj.newPassword2" id="new-password2" minlength="6" required/>
                 </b-form-group>
+                <button class="btn btn-success" type="submit">
+                  {{ $t("common.save") }}
+                </button>
+                <button class="btn btn-danger" @click="showChangePassword = false">
+                  {{ $t("common.abort") }}
+                </button>
               </form>
-              <button class="btn btn-success" @click="changePassword = false">
-                {{ $t("common.save") }}
-              </button>
-              <button class="btn btn-danger" @click="changePassword = false">
-                {{ $t("common.abort") }}
-              </button>
             </div>
 
-            <p
-              class="
-              col-12 col-md-4
-              justify-content-center
-              d-flex
-            "
-              v-if="!changePassword && !deleteAccount  && !resetAccount"
-            >
-              <button class="btn btn-danger" @click="deleteAccount = true">
+            <p class="col-12 col-md-4 justify-content-center d-flex"
+               v-if="!showChangePassword && !showResetAccount && !showDeleteAccount">
+              <button class="btn btn-danger" type="submit" @click="showDeleteAccount = true">
                 {{ $t("profile.delete_account") }}
               </button>
             </p>
-            <div v-if="deleteAccount">
+            <div v-if="showDeleteAccount">
               <h2>{{ $t("profile.delete_account") }}</h2>
               <p class="text-danger">
                 {{ $t("profile.delete_account_question") }}
               </p>
-              <button class="btn btn-danger" @click="deleteAccount = false">
+              <button class="btn btn-danger" @click="deleteAccount()">
                 {{ $t("common.yes") }}
               </button>
-              <button class="btn btn-secondary" @click="deleteAccount = false">
+              <button class="btn btn-secondary" @click="showDeleteAccount = false">
                 {{ $t("common.no") }}
               </button>
             </div>
 
-            <p
-              class="
-              col-12 col-md-4
-              justify-content-center
-              d-flex
-            "
-              v-if="!changePassword && !deleteAccount  && !resetAccount"
-            >
-              <button class="btn btn-secondary" @click="resetAccount = true">
+            <p class="col-12 col-md-4 justify-content-center d-flex"
+               v-if="!showChangePassword && !showResetAccount && !showDeleteAccount">
+              <button class="btn btn-secondary" @click="showResetAccount = true">
                 {{ $t("profile.account_reset") }}
               </button>
             </p>
-            <div v-if="resetAccount">
+            <div v-if="showResetAccount">
               <h2>{{ $t("profile.account_reset") }}</h2>
               <p class="text-danger">
                 {{ $t("profile.account_reset_question") }}
               </p>
-              <button class="btn btn-danger" @click="resetAccount = false">
+              <button class="btn btn-danger" @click="resetAccount()">
                 {{ $t("common.yes") }}
               </button>
-              <button class="btn btn-secondary" @click="resetAccount = false">
+              <button class="btn btn-secondary" @click="showResetAccount = false">
                 {{ $t("common.no") }}
               </button>
             </div>
@@ -161,7 +150,6 @@ export default {
     Avatar,
     PaddedLayout,
   },
-
   computed: {
     username() {
       return this.$store.getters['user/getUser']().name
@@ -172,17 +160,44 @@ export default {
   },
   data: function () {
     return {
+      changePasswordObj: {
+        oldPassword: null,
+        newPassword: null,
+        newPassword2: null
+      },
       user: {
         sso: false,
       },
-
-      changePassword: false,
-      deleteAccount: false,
-      resetAccount: false,
+      showChangePassword: false,
+      showDeleteAccount: false,
+      showResetAccount: false,
     };
   },
-
   methods: {
+    changePassword() {
+      if (this.changePasswordObj.newPassword !== this.changePasswordObj.newPassword2) {
+        alert("Neue Passwörter stimmen nicht überein");
+        return false;
+      }
+      // TODO: Antworten von Api abfangen und dem User die entsprechende Meldung anzeigen
+      this.$store.dispatch("user/changePassword", this.changePasswordObj)
+        .then(() => {
+          alert("geändert");
+          this.showChangePassword = false
+          this.changePasswordObj.oldPassword = null
+          this.changePasswordObj.newPassword = null
+          this.changePasswordObj.newPassword2 = null
+        })
+        .catch(() => {
+          alert("nicht geändert, FEHLER");
+        });
+    },
+    deleteAccount() {
+      this.showDeleteAccount = true
+    },
+    resetAccount() {
+      this.showResetAccount = true
+    },
     logout() {
       this.$store.dispatch("user/logout", () =>
         this.$router.push({name: "login"})
