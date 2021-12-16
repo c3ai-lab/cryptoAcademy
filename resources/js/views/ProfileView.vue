@@ -165,9 +165,6 @@ export default {
         newPassword: null,
         newPassword2: null
       },
-      user: {
-        sso: false,
-      },
       showChangePassword: false,
       showDeleteAccount: false,
       showResetAccount: false,
@@ -193,10 +190,16 @@ export default {
         });
     },
     deleteAccount() {
-      this.showDeleteAccount = true
+      // TODO: dem User mitteilen, dass sein Account erfolgreich geloescht wurde oder auch nicht
+      this.$store.dispatch("user/deleteAccount", () =>
+        this.$router.push({name: "login"})
+      );
     },
     resetAccount() {
-      this.showResetAccount = true
+      // TODO: Meldung an den User weitergeben
+      this.$store.dispatch("user/resetAccount", () =>
+        this.showResetAccount = false
+      );
     },
     logout() {
       this.$store.dispatch("user/logout", () =>

@@ -172,9 +172,42 @@ const actions = {
     });
   },
 
+  resetAccount({commit, dispatch, rootGetters}, callback) {
+    return new Promise((resolve, reject) => {
+      fetch("/api/user/resetAll", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          dispatch("user/refreshUserdata", null, {root: true});
+          resolve()
+        } else
+          reject()
+      });
+    });
+  },
+
   logout({commit, dispatch, rootGetters}, callback) {
     fetch("/api/auth/logout", {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+    }).then((response) => {
+      if (response.ok === true) {
+        commit("clear");
+        dispatch("save");
+        callback();
+      }
+    });
+  },
+
+  deleteAccount({commit, dispatch, rootGetters}, callback) {
+    fetch("/api/user", {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
       },
