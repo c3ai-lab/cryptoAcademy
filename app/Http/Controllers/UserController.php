@@ -31,7 +31,7 @@ class UserController extends Controller
    */
   public function getCurrentUser()
   {
-    return new (auth()->user());
+    return new UserResource((auth()->user()));
   }
 
   /**
