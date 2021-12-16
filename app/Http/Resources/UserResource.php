@@ -31,7 +31,7 @@ class UserResource extends JsonResource
       'created_at' => $this->created_at,
       'updated_at' => $this->updated_at,
       'favorites' => count($this->favorites) ? $this->favorites() : [],
-      "transactions" => count($this->transactions) ? $this->transactions : [],
+
     ];
   }
 }
