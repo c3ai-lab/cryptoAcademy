@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import {store} from "../store/main";
+
 export default {
   props: ['price'],
   data() {

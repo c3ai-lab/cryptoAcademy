@@ -8,7 +8,11 @@ export default {
       name: "NavBar",
     };
   },
-
+  computed: {
+    balance() {
+      return (this.$store.getters['user/getUser']().balance).toFixed(2)
+    }
+  },
   methods: {
     openNav() {
       document.getElementById("open-btn").style.display = "none";
@@ -68,9 +72,9 @@ export default {
           </a>
         </div>
         <div class="col-md-7 col-2">
-          </div>
+        </div>
         <div class="d-flex balance p-4 justify-content-end">
-          <span style="line-height: 1"> Balance: <b>{{ (this.$store.getters['user/getUser']().balance).toFixed(2) }}€</b></span>
+          <span style="line-height: 1"> Balance: <b>{{ balance }}€</b></span>
         </div>
 
         <!---
@@ -141,9 +145,8 @@ a {
   padding: 0;
 }
 
-.balance
-{
-  float:right;
+.balance {
+  float: right;
   right: 0;
 }
 </style>

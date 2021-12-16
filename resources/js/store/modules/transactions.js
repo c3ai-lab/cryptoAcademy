@@ -3,12 +3,14 @@ const state = {
 };
 
 const getters = {
-  getTransactions: () => () => { },
-  getTransactionsBySymbol: () => () => { },
+  getTransactions: () => () => {
+  },
+  getTransactionsBySymbol: () => () => {
+  },
 };
 
 const actions = {
-  fetchTransactions({ commit, rootGetters }) {
+  fetchTransactions({commit, rootGetters}) {
     fetch(`${location.origin}/api/user/transaction/`, {
       method: "GET",
       headers: {
@@ -28,7 +30,7 @@ const actions = {
         console.log(error);
       });
   },
-  buy({ commit, rootGetters }, { symbol, quantity }) {
+  buy({commit, dispatch, rootGetters}, {symbol, quantity}) {
     fetch(`${location.origin}/api/user/transaction/buy`, {
       method: "POST",
       headers: {
@@ -42,6 +44,7 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
+          dispatch("user/refreshUserdata", null, {root: true});
           return response.json();
         }
         return null;
@@ -50,7 +53,7 @@ const actions = {
         console.log(error);
       });
   },
-  sell({ commit, rootGetters }, { symbol, quantity }) {
+  sell({commit, dispatch, rootGetters}, {symbol, quantity}) {
     fetch(`${location.origin}/api/user/transaction/sell`, {
       method: "POST",
       headers: {
@@ -64,6 +67,8 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
+
+          dispatch("user/refreshUserdata", null, {root: true});
           return response.json();
         }
         return null;
