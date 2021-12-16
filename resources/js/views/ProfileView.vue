@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-sm-3 col-12 d-flex justify-content-center">
             <div class="avatar-box">
-              <Avatar :username="user.username" class="avatar" />
+              <Avatar :username="user.username" class="avatar"  />
             </div>
           </div>
           <div class="col-12 col-sm-9 align-self-center">

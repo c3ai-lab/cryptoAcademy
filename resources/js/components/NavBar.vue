@@ -9,10 +9,6 @@ export default {
     };
   },
 
-  data: function () {
-    return {};
-  },
-
   methods: {
     openNav() {
       document.getElementById("open-btn").style.display = "none";
