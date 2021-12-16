@@ -1,7 +1,14 @@
 <template>
 
     <div
-      style="display: flex; flex-wrap: wrap; padding-top: 80px; background-color: white; width: 100%"
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 80px;
+        background-color: white;
+        width: 100%;
+        justify-content: center;
+      "
     >
           <div style="width: 100%;">
             <div style="padding: 0 28px">
@@ -31,7 +38,7 @@
         <div v-if="0" style="width: 100%;" class="mt-2">
           <b-button class="btn-block" variant="primary" style="width: 100%" @click="buy">Trade</b-button>
         </div>
-        <div style="padding: 14px 28px;" class="w-100" v-if="1">
+        <div style="padding: 14px 28px;" class="" v-if="1">
           <trading-buy-view v-if="1"/>
           <transaction-list :symbol="symbol" v-if="1" />
         </div>
