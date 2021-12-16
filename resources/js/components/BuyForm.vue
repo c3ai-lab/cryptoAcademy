@@ -6,7 +6,7 @@
       <div>
         <div class="input-group mb-3">
           <label class="input-group-text"
-          >Menge</label
+          >{{ $t('trade.amount') }}</label
           >
           <input
             v-model="quantity"
@@ -23,31 +23,28 @@
           >
             <label
               class="input-group-text"
-            >Price</label
+            >{{ $t('trade.price') }}</label
             >
           </div>
           <input
             disabled
-            :value="price"
+            :value="price.toFixed(2)"
             type="text"
             class="form-control"
           />
           <div class="input-group-append">
             <label
               class="input-group-text"
-            >$</label
+            >{{ $t('trade.euro') }}</label
             >
           </div>
         </div>
 
         <div class="input-group mb-3">
-          <div
-            class="input-group-prepend"
-          >
-            <label
-              class="input-group-text"
-            >Total</label
-            >
+          <div class="input-group-prepend">
+            <label class="input-group-text">
+              {{ $t('trade.total') }}
+            </label>
           </div>
           <input
             :value="total"
@@ -55,6 +52,12 @@
             type="text"
             class="form-control disabled"
           />
+          <div class="input-group-append">
+            <label
+              class="input-group-text"
+            >{{ $t('trade.euro') }}</label
+            >
+          </div>
         </div>
       </div>
 
@@ -82,7 +85,7 @@ export default {
   },
   computed: {
     total() {
-      return this.quantity * this.price
+      return (this.quantity * this.price).toFixed(2)
     }
   },
   mounted() {

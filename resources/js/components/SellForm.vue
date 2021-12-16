@@ -5,10 +5,9 @@
 
 
       <div>
-        <label>Add Amount :</label>
         <div class="input-group mb-3">
           <label class="input-group-text"
-          >Amount</label
+          >{{ $t('trade.amount') }}</label
           >
           <input
             v-model="quantity"
@@ -20,25 +19,20 @@
         </div>
 
         <div class="input-group mb-3">
-          <div
-            class="input-group-prepend"
-          >
+          <div class="input-group-prepend">
             <label
               class="input-group-text"
-            >Price</label
+            >{{ $t('trade.price') }}</label
             >
           </div>
           <input
             disabled
-            :value="price"
+            :value="price.toFixed(2)"
             type="text"
             class="form-control"
           />
           <div class="input-group-append">
-            <label
-              class="input-group-text"
-            >$</label
-            >
+            <label class="input-group-text">{{ $t('trade.euro') }}</label>
           </div>
         </div>
 
@@ -48,7 +42,7 @@
           >
             <label
               class="input-group-text"
-            >Total</label
+            >{{ $t('trade.total') }}</label
             >
           </div>
           <input
@@ -57,6 +51,12 @@
             type="text"
             class="form-control"
           />
+          <div class="input-group-append">
+            <label
+              class="input-group-text"
+            >{{ $t('trade.euro') }}</label
+            >
+          </div>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
           type="button"
           class="btn btn-danger w-md"
         >
-          Verkaufen
+          {{ $t('trade.sell') }}
         </button>
       </div>
     </div>
@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     total() {
-      return this.quantity * this.price
+      return (this.quantity * this.price).toFixed(2)
     },
     balance() {
       return this.$store.getters['user/getUser']().balance;

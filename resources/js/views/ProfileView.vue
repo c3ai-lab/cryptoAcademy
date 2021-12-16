@@ -42,20 +42,23 @@
             {{ $t("profile.x_axis") }}
 
             <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
-              <b-tab title="An" v-bind:active="xAxis === 1"
-                     @click="(() => {xAxisActiv = true; updateUserdata()})"></b-tab>
-              <b-tab title="Aus" v-bind:active="xAxis === 0"
-                     @click="(() => {xAxisActiv = false; updateUserdata()})"></b-tab>
+              <b-tab id="xaxison" title="An" v-bind:active="xAxis === 1"
+                     @click="xAxisActiv = true"></b-tab>
+              <b-tab id="xaxisoff" title="Aus" v-bind:active="xAxis === 0"
+                     @click="xAxisActiv = false"></b-tab>
             </b-tabs>
 
             {{ $t("profile.y_axis") }}
 
             <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
-              <b-tab title="An" v-bind:active="yAxis === 1"
-                     @click="(() => {yAxisActiv = true; updateUserdata()})"></b-tab>
-              <b-tab title="Aus" v-bind:active="yAxis === 0"
-                     @click="(() => {yAxisActiv = false; updateUserdata()})"></b-tab>
+              <b-tab id="yaxison" title="An" v-bind:active="yAxis === 1"
+                     @click="yAxisActiv = true"></b-tab>
+              <b-tab id="yaxisoff" title="Aus" v-bind:active="yAxis === 0"
+                     @click="yAxisActiv = false"></b-tab>
             </b-tabs>
+            <button class="btn btn-success" @click="updateUserdata">
+              {{ $t("common.save") }}
+            </button>
           </div>
 
           <hr class="my-4"/>
@@ -140,7 +143,6 @@
           </div>
         </div>
       </div>
-    </div>
     </div>
   </padded-layout>
 </template>

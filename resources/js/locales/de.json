@@ -74,12 +74,14 @@
         "profile": "Profil"
     },
     "trade": {
+        "euro": "€",
         "all": "Alle",
         "bought": "Gekauft",
         "sold": "Verkauft",
         "buy": "Kaufe",
         "sell": "Verkaufe",
         "price": "Preis",
+        "total": "Gesamt",
         "value": "Wert",
         "amount": "Menge"
     },

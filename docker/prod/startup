@@ -18,7 +18,6 @@ echo_and_run docker exec php artisan optimize
 echo_and_run docker exec app php artisan migrate --force
 # Housekeeping
 echo_and_run docker image prune -af
-echo_and_run docker system prune -af --volumes
 
 ###init
 ## docker run --rm -v "${PWD}/data/mailserver/config/:/tmp/docker-mailserver/" docker.io/mailserver/docker-mailserver setup email add app@cryptocademy.app LUfBdixKYX5tma39xy7yJWn
