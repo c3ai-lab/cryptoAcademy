@@ -70,8 +70,10 @@ class UserController extends Controller
   public function updateCurrentUser(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required|string|between:2,100|unique:users',
-      'email' => 'required|string|email|max:100|unique:users'
+//      'name' => 'required|string|between:2,100|unique:users',
+//      'email' => 'required|string|email|max:100|unique:users',
+      'x_axis' => 'required|int',
+      'y_axis' => 'required|int',
     ]);
 
     if ($validator->fails()) {
@@ -79,7 +81,8 @@ class UserController extends Controller
       return response()->json($validator->errors(), 400);
     }
 
-    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email]);
+    User::find(auth()->user()->id)->update(['x_axis' => $request->x_axis, 'y_axis' => $request->y_axis]);
+//    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email, 'x_axis' => $request->x_axis, 'y_axis' => $request->y_axis]);
 
     return response()->json([
       'msgcode' => MessageCodes::USERDATA_CHANGE_SUCCESS,

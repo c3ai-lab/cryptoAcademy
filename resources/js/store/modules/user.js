@@ -237,6 +237,35 @@ const actions = {
 
     });
   },
+  updateUserdata({commit, dispatch, rootGetters}, data) {
+    return new Promise((resolve, reject) => {
+      const response = fetch("/api/user", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+        },
+        body: JSON.stringify({
+          // email: data.email,
+          // username: data.username,
+          x_axis: Number(data.x_axis),
+          y_axis: Number(data.y_axis)
+        }),
+      }).then((response) => {
+        if (response.ok === true) {
+          return response.json();
+        }
+        return null;
+      }).then((data) => {
+        if (data === null) {
+          reject();
+        } else {
+          commit("setUser", data.user);
+          resolve();
+        }
+      });
+    });
+  },
 
   save({state}) {
     localStorage.setItem("user", JSON.stringify(state.user));

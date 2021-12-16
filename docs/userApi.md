@@ -90,7 +90,9 @@ ___
 ```json
 {
   "name": "mmuster",
-  "email": "max.muster@trading.local"
+  "email": "max.muster@trading.local",
+  "x_axis": 1,
+  "y_axis": 0
 }
 ```
 
@@ -167,7 +169,8 @@ ___
 **Method** : `POST`
 **Auth required** : `YES`
 
-Es wird die Balance des Users auf den Startwert zurückgesetzt, alle Transaktionen und Favoriten des Users werden gelöscht. 
+Es wird die Balance des Users auf den Startwert zurückgesetzt, alle Transaktionen und Favoriten des Users werden
+gelöscht.
 
 **Header constraints**
 

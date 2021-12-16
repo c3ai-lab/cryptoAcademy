@@ -36,6 +36,30 @@
           </div>
 
           <hr class="my-4"/>
+          <div class="row">{{ $t("profile.chart_info") }}</div>
+          <div class="row">
+
+            {{ $t("profile.x_axis") }}
+
+            <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
+              <b-tab title="An" v-bind:active="xAxis === 1"
+                     @click="(() => {xAxisActiv = true; updateUserdata()})"></b-tab>
+              <b-tab title="Aus" v-bind:active="xAxis === 0"
+                     @click="(() => {xAxisActiv = false; updateUserdata()})"></b-tab>
+            </b-tabs>
+
+            {{ $t("profile.y_axis") }}
+
+            <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
+              <b-tab title="An" v-bind:active="yAxis === 1"
+                     @click="(() => {yAxisActiv = true; updateUserdata()})"></b-tab>
+              <b-tab title="Aus" v-bind:active="yAxis === 0"
+                     @click="(() => {yAxisActiv = false; updateUserdata()})"></b-tab>
+            </b-tabs>
+          </div>
+
+          <hr class="my-4"/>
+
           <div class="row">
             <p class="col-12 col-md-4 justify-content-center d-flex"
                v-if="!showChangePassword && !showResetAccount && !showDeleteAccount">
@@ -117,6 +141,7 @@
         </div>
       </div>
     </div>
+    </div>
   </padded-layout>
 </template>
 
@@ -156,6 +181,12 @@ export default {
     },
     email() {
       return this.$store.getters['user/getUser']().email
+    },
+    xAxis() {
+      return this.$store.getters['user/getUser']().axis.x
+    },
+    yAxis() {
+      return this.$store.getters['user/getUser']().axis.y
     }
   },
   data: function () {
@@ -168,9 +199,30 @@ export default {
       showChangePassword: false,
       showDeleteAccount: false,
       showResetAccount: false,
+      // user: {
+      //   username: this.$store.getters['user/getUser']().name,
+      //   email: this.$store.getters['user/getUser']().email,
+      // },
+      xAxisActiv: this.$store.getters['user/getUser']().axis.x,
+      yAxisActiv: this.$store.getters['user/getUser']().axis.y
     };
   },
   methods: {
+    updateUserdata() {
+      // TODO: Antworten von Api abfangen und dem User die entsprechende Meldung anzeigen
+      this.$store.dispatch("user/updateUserdata", {
+        // email: this.user.email,
+        // username: this.user.username,
+        x_axis: this.xAxisActiv,
+        y_axis: this.yAxisActiv
+      })
+        .then(() => {
+          // alert("geändert");
+        })
+        .catch(() => {
+          alert("nicht geändert, FEHLER");
+        });
+    },
     changePassword() {
       if (this.changePasswordObj.newPassword !== this.changePasswordObj.newPassword2) {
         alert("Neue Passwörter stimmen nicht überein");

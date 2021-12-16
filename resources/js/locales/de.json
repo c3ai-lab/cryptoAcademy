@@ -49,7 +49,10 @@
         "repeat_new_password": "Neues Passwort wiederholen",
         "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",
         "account_reset": "Account zurücksetzen",
-        "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?"
+        "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?",
+        "chart_info": "In Grafen möchte ich die Achsen angezeigt bekommen:",
+        "x_axis": "X-Achse",
+        "y_axis": "Y-Achse"
     },
     "datetime": {
         "month_short": "M",
