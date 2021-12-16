@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100" style="max-height: 400px; overflow: scroll;">
+  <div class="w-100 hidden-scroll" style="max-height: 400px; overflow: scroll;">
     <div
       v-for="(t, i) of transactions"
       :key="i"
@@ -112,5 +112,11 @@ export default {
 </script>
 
 <style>
-
+  .hidden-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+  .hidden-scroll::-webkit-scrollbar {
+    display: none;
+  }
 </style>

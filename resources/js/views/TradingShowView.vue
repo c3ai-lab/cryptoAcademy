@@ -32,7 +32,7 @@
           <b-button class="btn-block" variant="primary" style="width: 100%" @click="buy">Trade</b-button>
         </div>
         <div style="padding: 14px 28px;" class="w-100" v-if="1">
-          <trading-buy-view v-if="0"/>
+          <trading-buy-view v-if="1"/>
           <transaction-list :symbol="symbol" v-if="1" />
         </div>
     </div>
