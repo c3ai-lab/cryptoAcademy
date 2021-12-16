@@ -15,7 +15,7 @@ export default {
   components: {
     AcademyOverview,
     AcademyTopics,
-    AcademyContent,
+    AcademyContent
   },
 };
 </script>
