@@ -8,7 +8,7 @@
       :options="chartOptions"
       ref="chart"
     />
-    <b-checkbox v-model="showAxis">Zeige Achsen</b-checkbox>
+    <b-checkbox v-model="showAxis" style="padding-left: 28px"> <i>(DEMO)</i> Show Axis</b-checkbox>
   </div>
 </template>
 
@@ -132,7 +132,9 @@ export default {
           legend: {
             show: false,
           },
-
+          grid: {
+            show: false,
+          },
           animations: {
               enabled: false,
           },
