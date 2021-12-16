@@ -11,7 +11,7 @@
               v-if="price"
               style="font-size: 20px"
               :value="price"
-              currency="usd"
+              currency="eur"
             />
             </div>
             <main-chart

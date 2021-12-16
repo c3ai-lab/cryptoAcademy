@@ -8,6 +8,7 @@
       :options="chartOptions"
       ref="chart"
     />
+    <b-checkbox v-model="showAxis">Zeige Achsen</b-checkbox>
   </div>
 </template>
 
@@ -16,6 +17,17 @@ export default {
   props: {
     series: Array,
     mtsPerTimestep: Number,
+  },
+  data() {
+    return {
+      showAxis: true,
+    }
+  },
+
+  watch: {
+    showAxis() {
+      this.$refs.chart.updateOptions(this.chartOptions)
+    }
   },
 
   computed: {
@@ -83,12 +95,44 @@ export default {
 
       return {
           chart: {
-              type: "line",
-              height: '400px',
-              sparkline: {
-                  enabled: true
+            yaxis: {
+              show: true,
+            },
+            type: "line",
+            height: '400px',
+            sparkline: {
+              enabled: !this.showAxis,
+            },
+            toolbar: {
+              show: false,
+              tools: {
+                download: false,
+                selection: false,
+                zoom: false,
+                zoomin: false,
+                zoomout: false,
+                pan: false,
               },
+            },
           },
+          yaxis: {
+            labels: {
+              formatter: (value) => this.$options.filters['eur'](value),
+            },
+          },
+          xaxis: {
+            type: 'datetime',
+            datetimeFormatter: {
+              year: 'yyyy',
+              month: "MMM 'yy",
+              day: 'dd MMM',
+              hour: 'HH:mm',
+            },
+          },
+          legend: {
+            show: false,
+          },
+
           animations: {
               enabled: false,
           },
