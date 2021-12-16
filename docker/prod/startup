@@ -13,7 +13,7 @@ echo_and_run docker cp laravel.env app:/var/www/html/.env
 echo_and_run docker cp laravel.env scheduler:/var/www/html/.env
 # Optimizing Configuration loading
 echo_and_run docker exec app php artisan optimize
-echo_and_run docker exec php artisan optimize
+echo_and_run docker exec app php artisan optimize
 # Migrations
 echo_and_run docker exec app php artisan migrate --force
 # Housekeeping
