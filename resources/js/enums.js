@@ -23,7 +23,7 @@ export const Dimension = {
   ALL: "All",
 };
 
-export const AcademyTopic = {
+export const AcademyCategory = {
   CRYPTO: "CRYPTO",
   TRADING: "TRADING",
   TOP_FIVE_COINS: "TOP_FIVE_COINS",
@@ -31,7 +31,7 @@ export const AcademyTopic = {
   GLOSSAR: "GLOSSAR",
 };
 
-export const AcademySubTopic = {
+export const AcademyTopic = {
   CRYPTO__INTRO: "CRYPTO__INTRO",
   CRYPTO__BLOCKCHAIN: "CRYPTO__BLOCKCHAIN",
   CRYPTO__BLOCKCHAIN__TRANSACTIONS: "CRYPTO__BLOCKCHAIN__TRANSACTIONS",

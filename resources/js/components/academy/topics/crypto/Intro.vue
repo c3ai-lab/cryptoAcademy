@@ -44,9 +44,9 @@
 </template>
 
 <script>
-import { AcademySubTopic } from "../../../../enums";
+import { AcademyTopic } from "../../../../enums";
 
 export default {
-  name: AcademySubTopic.CRYPTO__INTRO,
+  name: AcademyTopic.CRYPTO__INTRO,
 };
 </script>

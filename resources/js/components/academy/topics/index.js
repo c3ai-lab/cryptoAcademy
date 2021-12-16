@@ -1,12 +1,12 @@
 import Vue from "vue";
-import { AcademyTopic, AcademySubTopic } from "../../../enums";
+import { AcademyCategory, AcademyTopic } from "../../../enums";
 
 Vue.component(
-  AcademySubTopic.CRYPTO__INTRO,
+  AcademyTopic.CRYPTO__INTRO,
   require("./crypto/Intro.vue").default
 );
 
 Vue.component(
-  AcademyTopic.FIFTY_COINS__LIST,
+  AcademyCategory.FIFTY_COINS__LIST,
   require("./FiftyCoins.vue").default
 );

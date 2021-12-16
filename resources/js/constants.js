@@ -1,4 +1,4 @@
-import { AcademySubTopic, AcademyTopic, Dimension } from "./enums";
+import { AcademyCategory, AcademyTopic, Dimension } from "./enums";
 
 export const SESSION_REFRESH_AFTER_MINUTES = 15;
 
@@ -187,22 +187,41 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
   [Dimension.ALL]: 201_600_000,
 };
 
+/**
+ * ACADEMY = {
+ *    "KATEGORIE": {
+ *      "TOPIC": [
+ *        "SUB_TOPIC1",
+ *        "SUB_TOPIC1",
+ *      ]
+ *    }
+ * }
+ *
+ * WICHTIG! Wenn man auf der linken Seite eines Doppelpunktes einen Wert
+ * von "AcademyTopic" oder "AcademySubTopic" verwenden möchte, muss man
+ * diesen in eckige Klammern setzen!
+ *
+ * ACADEMY = {
+ *    [AcademyTopic.KATEGORIE]: {
+ *      [AcademySubTopic.TOPIC]": [
+ *        AcademySubTopic.TOPIC__SUB_TOPIC1,
+ *        AcademySubTopic.TOPIC__SUB_TOPIC2,
+ *      ]
+ *    }
+ * }
+ */
+
 export const ACADEMY = {
-  [AcademyTopic.CRYPTO]: {
-    // Kategorie listet Topics in geschweiften Klammern auf
-    [AcademySubTopic.CRYPTO__INTRO]: [],
-    [AcademySubTopic.CRYPTO__BLOCKCHAIN]: [
-      AcademySubTopic.CRYPTO__BLOCKCHAIN__TRANSACTIONS,
-      AcademySubTopic.CRYPTO__BLOCKCHAIN__FEES,
-      AcademySubTopic.CRYPTO__BLOCKCHAIN__ADVANCED,
+  [AcademyCategory.CRYPTO]: {
+    [AcademyTopic.CRYPTO__INTRO]: [],
+    [AcademyTopic.CRYPTO__BLOCKCHAIN]: [
+      AcademyTopic.CRYPTO__BLOCKCHAIN__TRANSACTIONS,
+      AcademyTopic.CRYPTO__BLOCKCHAIN__FEES,
+      AcademyTopic.CRYPTO__BLOCKCHAIN__ADVANCED,
     ],
   },
-  [AcademyTopic.TRADING]: {
-    subTopics: {},
-  },
-  [AcademyTopic.TOP_FIVE_COINS]: {
-    subTopics: {},
-  },
-  [AcademyTopic.FIFTY_COINS__LIST]: {},
-  [AcademyTopic.GLOSSAR]: {},
+  [AcademyCategory.TRADING]: {},
+  [AcademyCategory.TOP_FIVE_COINS]: {},
+  [AcademyCategory.FIFTY_COINS__LIST]: {},
+  [AcademyCategory.GLOSSAR]: {},
 };
