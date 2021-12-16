@@ -3,7 +3,7 @@
     <h1>{{ $t("academy.title") }}</h1>
     <div class="card">
       <div class="card-body">
-        <p>{{ $t("academy.intro") }}</p>
+        <p v-html="$t('academy.description')"></p>
       </div>
     </div>
     <div class="card">
@@ -11,7 +11,7 @@
         <router-link
           v-for="topic in topics"
           :key="topic"
-          :to="{ name: 'academy', params: { topic: getRoute(topic) } }"
+          :to="{ name: 'academy', params: getRouteParams(topic) }"
         >
           <h2 class="academy-link">
             {{ $t(`academy.${topic}.name`) }}
@@ -41,21 +41,23 @@ h2.no-border {
 </style>
 
 <script>
-import { AcademyTopic } from "../../enums";
 import { ACADEMY } from "../../constants";
+import { enumKeyToRouteParam } from "../../utils";
 
 export default {
   name: "AcademyOverview",
 
   methods: {
-    getRoute(topic) {
-      return ACADEMY[topic].route;
+    getRouteParams(topic) {
+      return {
+        target: enumKeyToRouteParam(topic),
+      };
     },
   },
 
   computed: {
     topics() {
-      return Object.keys(AcademyTopic);
+      return Object.keys(ACADEMY);
     },
   },
 };

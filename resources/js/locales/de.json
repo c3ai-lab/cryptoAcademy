@@ -3,7 +3,8 @@
         "yes": "Ja",
         "no": "Nein",
         "save": "Speichern",
-        "abort": "Abbrechen"
+        "abort": "Abbrechen",
+        "back": "Zurück"
     },
     "auth": {
         "welcome": "Herzlich willkommen!",
@@ -69,26 +70,31 @@
     },
     "academy": {
         "title": "Crypto Academy",
-        "intro": "Willkommen auf der Academy-Seite von Cryptocademy. Hier sind zahlreiche Informationen zu Kryptowährungen zu finden. Die Academy bietet Neulingen im Bereich der Kryptowährungen Erklärungen zu den wichtigsten Grundlagen und Funktionsweisen. Doch auch erfahrene Trader können hier noch etwas zu den technischen Hintergründen von Blockchains und co. lernen. Technisch tiefergehende Kapitel sind mit dem Zusatz (Advanced) gekennzeichnet.",
-        "HOW_DOES_IT_WORK": {
-            "name": "How does it work?",
-            "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        "description": "Willkommen auf der Academy-Seite von Cryptocademy. Hier sind zahlreiche Informationen zu Kryptowährungen zu finden. Die Academy bietet Neulingen im Bereich der Kryptowährungen Erklärungen zu den wichtigsten Grundlagen und Funktionsweisen. Doch auch erfahrene Trader können hier noch etwas zu den technischen Hintergründen von Blockchains und co. lernen. Technisch tiefergehende Kapitel sind mit dem Zusatz (Advanced) gekennzeichnet.",
+        "CRYPTO": {
+            "name": "Krypto",
+            "description": "<i>How does it work?</i> bietet einen einfach erklärten Überblick über Kryptowährungen im Allgemeinen. Auch ist hier eine einfache sowie eine fortgeschrittene Erklärung zur Funktionsweise von Blockchains und Transaktionen zu finden sowie Informationen zum Thema Konsens und Konsens Mechanismen."
         },
-        "FOR_BEGINNERS": {
-            "name": "For Beginners",
-            "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        "CRYPTO__INTRO": "Einführung",
+        "CRYPTO__BLOCKCHAIN": "Blockchain",
+        "CRYPTO__BLOCKCHAIN__TRANSACTIONS": "Transaktionen",
+        "CRYPTO__BLOCKCHAIN__FEES": "Transaktionsgebühren",
+        "CRYPTO__BLOCKCHAIN__ADVANCED": "Advanced",
+        "TRADING": {
+            "name": "Trading",
+            "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         },
         "TOP_FIVE_COINS": {
             "name": "Top fünf Kryptowährungen",
-            "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+            "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         },
         "FIFTY_COINS": {
             "name": "50 Kryptowährungen - Kurz beschrieben",
-            "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+            "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         },
         "GLOSSAR": {
             "name": "Glossar",
-            "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+            "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         }
     }
 }

@@ -53,7 +53,7 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/academy/:topic?/",
+      path: "/academy/:target?",
       name: "academy",
       component: AcademyView,
       meta: {

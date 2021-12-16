@@ -1,4 +1,4 @@
-import { AcademyTopic, Dimension } from "./enums";
+import { AcademySubTopic, AcademyTopic, Dimension } from "./enums";
 
 export const SESSION_REFRESH_AFTER_MINUTES = 15;
 
@@ -188,19 +188,25 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
 };
 
 export const ACADEMY = {
-  [AcademyTopic.HOW_DOES_IT_WORK]: {
-    route: "how-does-it-work",
+  [AcademyTopic.CRYPTO]: {
+    // Kategorie listet Topics in geschweiften Klammern auf
+    [AcademySubTopic.CRYPTO__INTRO]: [],
+    [AcademySubTopic.CRYPTO__BLOCKCHAIN]: [
+      AcademySubTopic.CRYPTO__BLOCKCHAIN__TRANSACTIONS,
+      AcademySubTopic.CRYPTO__BLOCKCHAIN__FEES,
+      AcademySubTopic.CRYPTO__BLOCKCHAIN__ADVANCED,
+    ],
   },
-  [AcademyTopic.FOR_BEGINNERS]: {
-    route: "for-beginners",
+  [AcademyTopic.TRADING]: {
+    subTopics: {},
   },
   [AcademyTopic.TOP_FIVE_COINS]: {
-    route: "top-five-coins",
+    subTopics: {},
   },
   [AcademyTopic.FIFTY_COINS]: {
-    route: "fifty-coins",
+    subTopics: {},
   },
   [AcademyTopic.GLOSSAR]: {
-    route: "glossar",
+    subTopics: {},
   },
 };
