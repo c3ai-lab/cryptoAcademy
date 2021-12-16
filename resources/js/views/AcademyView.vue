@@ -1,10 +1,6 @@
 <template>
   <div>
     <AcademyOverview />
-    <hr />
-    <AcademyTopics />
-    <hr />
-    <AcademyContent />
   </div>
 </template>
 
@@ -23,4 +19,3 @@ export default {
   },
 };
 </script>
-

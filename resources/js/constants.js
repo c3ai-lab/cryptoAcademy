@@ -1,4 +1,4 @@
-import { Dimension } from "./enums";
+import { AcademyTopic, Dimension } from "./enums";
 
 export const SESSION_REFRESH_AFTER_MINUTES = 15;
 
@@ -185,4 +185,22 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
   [Dimension.ONE_MONTH]: 14_400_000,
   [Dimension.ONE_YEAR]: 201_600_000,
   [Dimension.ALL]: 201_600_000,
+};
+
+export const ACADEMY = {
+  [AcademyTopic.HOW_DOES_IT_WORK]: {
+    route: "how-does-it-work",
+  },
+  [AcademyTopic.FOR_BEGINNERS]: {
+    route: "for-beginners",
+  },
+  [AcademyTopic.TOP_FIVE_COINS]: {
+    route: "top-five-coins",
+  },
+  [AcademyTopic.FIFTY_COINS]: {
+    route: "fifty-coins",
+  },
+  [AcademyTopic.GLOSSAR]: {
+    route: "glossar",
+  },
 };

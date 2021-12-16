@@ -21,4 +21,12 @@ export const Dimension = {
   ONE_MONTH: "1M",
   ONE_YEAR: "1Y",
   ALL: "All",
-}
+};
+
+export const AcademyTopic = {
+  HOW_DOES_IT_WORK: "HOW_DOES_IT_WORK",
+  FOR_BEGINNERS: "FOR_BEGINNERS",
+  TOP_FIVE_COINS: "TOP_FIVE_COINS",
+  FIFTY_COINS: "FIFTY_COINS",
+  GLOSSAR: "GLOSSAR",
+};
