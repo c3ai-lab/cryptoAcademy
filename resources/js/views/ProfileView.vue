@@ -197,9 +197,8 @@ export default {
     },
     resetAccount() {
       // TODO: Meldung an den User weitergeben
-      this.$store.dispatch("user/resetAccount", () =>
-        this.showResetAccount = false
-      );
+      this.$store.dispatch("user/resetAccount")
+        .then(() => this.showResetAccount = false);
     },
     logout() {
       this.$store.dispatch("user/logout", () =>
