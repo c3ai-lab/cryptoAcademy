@@ -28,6 +28,26 @@ const actions = {
         console.log(error);
       });
   },
+  fetchReturns({ commit, rootGetters }) {
+    fetch(`${location.origin}/api/user/returns/1`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok === true) {
+          console.log(response);
+          // commit('setTransactions', response.data);
+          return response.json();
+        }
+        return null;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   buy({ commit, rootGetters }, { symbol, quantity }) {
     fetch(`${location.origin}/api/user/transaction/buy`, {
       method: "POST",

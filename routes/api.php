@@ -5,6 +5,7 @@ use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\SymbolUserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserSymbolTransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,10 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/', [TransactionController::class, 'index']);
     Route::post('/buy', [TransactionController::class, 'buy']);
     Route::post('/sell', [TransactionController::class, 'sell']);
+  });
+
+  Route::group(['prefix' => 'returns'], function () {
+    Route::get('/{symbol}', [UserSymbolTransactionController::class, 'show']);
   });
 });
 
