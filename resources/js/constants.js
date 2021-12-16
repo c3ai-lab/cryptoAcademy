@@ -198,14 +198,14 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
  * }
  *
  * WICHTIG! Wenn man auf der linken Seite eines Doppelpunktes einen Wert
- * von "AcademyTopic" oder "AcademySubTopic" verwenden möchte, muss man
+ * von "AcademyCategory" oder "AcademyTopic" verwenden möchte, muss man
  * diesen in eckige Klammern setzen!
  *
  * ACADEMY = {
- *    [AcademyTopic.KATEGORIE]: {
- *      [AcademySubTopic.TOPIC]": [
- *        AcademySubTopic.TOPIC__SUB_TOPIC1,
- *        AcademySubTopic.TOPIC__SUB_TOPIC2,
+ *    [AcademyCategory.KATEGORIE]: {
+ *      [AcademyTopic.TOPIC]": [
+ *        AcademyTopic.TOPIC__SUB_TOPIC1,
+ *        AcademyTopic.TOPIC__SUB_TOPIC2,
  *      ]
  *    }
  * }
