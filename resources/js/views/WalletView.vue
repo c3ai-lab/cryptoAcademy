@@ -16,7 +16,7 @@
 
 <script>
 import Vue from "vue";
-import TransactionCard from '../components/TransactionCard.vue';
+import TransactionCard from '../components/TransactionCard';
 import WalletSymbolList from "../components/WalletSymbolList";
 
 export default Vue.extend({

@@ -10,6 +10,7 @@ use App\Models\Symbol;
 use App\Models\User;
 use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
+use App\Service\BianceApiService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -39,8 +40,20 @@ class UserController extends Controller
   public function getCurrentUserWallet(Request $request)
   {
     $collection = Symbol::all();
+    return SymbolUserResource::collection($collection);
     $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
-    return SymbolUserResource::collection($filtered->all());
+
+    $apiService = new BianceApiService();
+//    $rate = $apiService->getPriceOfEuroToUsd();
+    $rate = 1.11;
+
+    $coll = $filtered->map(function ($item) use($rate, $apiService){
+//      $item->user_balance = $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate;
+      $item->user_balance = $item->user_quantity * 1234.2 / $rate;
+      return $item;
+    });
+
+    return SymbolUserResource::collection($coll);
   }
 
   /**
