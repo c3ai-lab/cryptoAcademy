@@ -26,6 +26,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'user'], function () {
   Route::get('/', [UserController::class, 'getCurrentUser']);
+  Route::get('/wallet', [UserController::class, 'getCurrentUserWallet']);
   Route::post('/', [UserController::class, 'createUser']);
   Route::put('/', [UserController::class, 'updateCurrentUser']);
   Route::delete('/', [UserController::class, 'deleteCurrentUser']);

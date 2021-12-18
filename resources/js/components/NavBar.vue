@@ -102,6 +102,10 @@ export default {
         {{ $t("navigation.dashboard") }}
       </router-link>
       <br/>
+      <router-link :to="{ name: 'wallet' }" @click.native="closeNav()">
+        {{ $t("navigation.wallet") }}
+      </router-link>
+      <br/>
       <router-link :to="{ name: 'trading' }" @click.native="closeNav()">
         {{ $t("navigation.trading") }}
       </router-link>

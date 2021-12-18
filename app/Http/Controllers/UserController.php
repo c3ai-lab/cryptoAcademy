@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Enum\MessageCodes;
+use App\Http\Resources\SymbolUserResource;
 use App\Http\Resources\UserResource;
+use App\Models\Symbol;
 use App\Models\User;
 use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
@@ -32,6 +34,13 @@ class UserController extends Controller
   public function getCurrentUser()
   {
     return new UserResource((auth()->user()));
+  }
+
+  public function getCurrentUserWallet(Request $request)
+  {
+    $collection = Symbol::all();
+    $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
+    return SymbolUserResource::collection($filtered->all());
   }
 
   /**

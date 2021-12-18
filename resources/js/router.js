@@ -13,6 +13,7 @@ import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import AcademyView from "./views/AcademyView.vue";
 import ProfileView from "./views/ProfileView.vue";
+import WalletView from "./views/WalletView.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,14 @@ const router = new VueRouter({
       component: RegisterView,
       meta: {
         requiresAuth: false,
+      },
+    },
+    {
+      path: "/wallet",
+      name: "wallet",
+      component: WalletView,
+      meta: {
+        requiresAuth: true,
       },
     },
     {

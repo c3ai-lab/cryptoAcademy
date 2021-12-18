@@ -40,7 +40,7 @@
         </div>
         <div style="padding: 14px 28px;" class="" v-if="1">
           <trading-buy-view v-if="1"/>
-          <transaction-list :symbol="symbol" v-if="1" />
+          <transaction-card :symbol="symbol" v-if="1" />
         </div>
     </div>
 </template>
@@ -50,7 +50,7 @@ import { Dimension } from '../enums';
 import { DIMENSION_MAP_LOW_RES, DIMENSION_TIMEFRAME_MTS_MAP } from '../constants';
 import { mapGetters } from 'vuex';
 import MainChart from '../components/MainChart.vue';
-import TransactionList from '../components/TransactionCard.vue';
+import TransactionCard from '../components/TransactionCard.vue';
 import PaddedLayout from '../layouts/PaddedLayout.vue';
 import TradingBuyView from './TradingBuyView.vue';
 
@@ -60,7 +60,7 @@ export default {
   },
   components: {
     MainChart,
-    TransactionList,
+    TransactionCard,
     PaddedLayout,
     TradingBuyView,
   },

@@ -3,7 +3,8 @@ const state = {
 };
 
 const getters = {
-  getTransactions: () => () => {
+  getTransactions: (state) => {
+    return state.transactions
   },
   getTransactionsBySymbol: (state) => (symbol) => {
     return state.transactions.filter(t => t.api_symbol === symbol)
