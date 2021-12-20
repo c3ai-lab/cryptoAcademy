@@ -48,7 +48,6 @@ export default {
       sortDesc: true,
       fields: [
         {key: "name", sortable: true, label: "Name"},
-        {key: "symbol", sortable: true, label: "Symbol"},
         {key: "user_balance_eur", sortable: true, label: "Summe"},
         {key: "user_quantity", sortable: true, label: "Menge"},
       ],

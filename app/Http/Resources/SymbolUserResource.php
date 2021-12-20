@@ -29,7 +29,7 @@ class SymbolUserResource extends JsonResource
       'is_favorite' => $this->is_favorite,
       'user_quantity' => $this->user_quantity,
       'user_balance' => $this->user_balance,
-      'user_balance_eur' => round($this->user_balance, 6) . " €",
+      'user_balance_eur' => round($this->user_balance, 2) . " €",
     ];
   }
 }

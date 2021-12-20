@@ -40,7 +40,6 @@ export default {
   computed: {
     transactions() {
       let request = this.symbol === "all" ? this.$store.getters['transactions/getTransactions'] : this.$store.getters['transactions/getTransactionsBySymbol'](this.symbol);
-      console.log(request)
       return request.map(t => ({
         ...t,
         color: t.quantity >= 0 ? 'success' : 'danger',

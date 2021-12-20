@@ -24,7 +24,7 @@ class TransactionController extends Controller
 
   public function index(Request $request)
   {
-    return TransactionResource::collection(auth()->user()->transactions);
+    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id',"desc")->get());
   }
 
   public function buy(Request $request)
