@@ -1,27 +1,70 @@
 <template>
-  <div class="w-100 hidden-scroll" style="max-height: 400px; overflow: scroll;">
-    <div
-      v-for="walletsymbol of walletsymbols"
-      class="d-flex flex-wrap justify-content-between text-muted"
-      role="button"
-    >
-      <div>{{ walletsymbol.user_quantity }}</div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive mt-3 mb-0">
+            <b-table
+              :items="walletsymbolData"
+              :fields="fields"
+              responsive="sm"
+              :current-page="currentPage"
+              :sort-by.sync="sortBy"
+              :sort-desc.sync="sortDesc"
+            ></b-table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 
+import {tableData} from "../../../skote/resources/js/views/tables/dataAdvancedtable";
+
 export default {
+
+
   data() {
     return {
-      "walletsymbols": this.$store.getters["wallet/walletsymbol"]
-    }
+      tableData: tableData,
+      title: "Advanced Table",
+      items: [
+        {
+          text: "Tables",
+          href: "/",
+        },
+        {
+          text: "Advanced",
+          active: true,
+        },
+      ],
+      currentPage: 1,
+      filter: null,
+      filterOn: [],
+      sortBy: "age",
+      sortDesc: false,
+      fields: [
+        {key: "name", sortable: true, label: "Name"},
+        {key: "symbol", sortable: true, label: "Symbol"},
+        {key: "user_balance", sortable: true, label: "Balance"},
+        {key: "user_quantity", sortable: true, label: "Menge"},
+      ],
+    };
   },
-  created() {
-    this.walletsymbols = this.$store.dispatch('wallet/walletsymbol');
-    console.log(this.walletsymbols.length)
-  }
+  computed: {
+    /**
+     * Total no. of records
+     */
+    walletsymbolData: function () {
+      return this.$store.getters["wallet/getWalletsymbol"];
+    },
+  },
+  mounted() {
+    // Set the initial number of items
+    this.$store.dispatch("wallet/fetchWalletsymbol");
+  },
 }
 </script>
 

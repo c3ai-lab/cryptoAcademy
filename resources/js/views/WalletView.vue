@@ -9,6 +9,7 @@
     <div style="padding: 14px 28px; margin-top: 70px;" v-if="1">
       <h1>{{ $t('wallet.all_transactions') }}</h1>
       <wallet-symbol-list/>
+      <h1>{{ $t('wallet.all_transactions') }}</h1>
       <transaction-card :symbol="symbol"/>
     </div>
   </div>

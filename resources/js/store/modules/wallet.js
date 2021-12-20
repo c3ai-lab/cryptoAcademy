@@ -3,11 +3,12 @@ const state = {
 };
 
 const getters = {
-  walletsymbol: (state) => () =>
-    state.walletsymbol
+  getWalletsymbol: (state) => {
+    return state.walletsymbol
+  }
 };
 const actions = {
-  walletsymbol({ commit, rootGetters }) {
+  fetchWalletsymbol({commit, rootGetters}) {
     fetch(`${location.origin}/api/user/wallet`, {
       method: "GET",
       headers: {
@@ -17,16 +18,13 @@ const actions = {
     })
       .then((response) => response.json())
       .then((data) =>
-        data
-        // commit("walletsymbol", data)
-        // console.log(data)
+        commit("setWalletsymbol", data)
       );
   }
 };
 
 const mutations = {
-  walletsymbol(state, walletsymbol) {
-    console.log(state.walletsymbol);
+  setWalletsymbol(state, walletsymbol) {
     state.walletsymbol = walletsymbol;
   },
 };
