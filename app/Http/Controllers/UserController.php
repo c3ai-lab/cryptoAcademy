@@ -40,16 +40,13 @@ class UserController extends Controller
   public function getCurrentUserWallet(Request $request)
   {
     $collection = Symbol::all();
-    return SymbolUserResource::collection($collection);
     $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
 
     $apiService = new BianceApiService();
-//    $rate = $apiService->getPriceOfEuroToUsd();
-    $rate = 1.11;
-
-    $coll = $filtered->map(function ($item) use($rate, $apiService){
-//      $item->user_balance = $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate;
-      $item->user_balance = $item->user_quantity * 1234.2 / $rate;
+    $rate = $apiService->getPriceOfEuroToUsd();
+    $coll = $filtered->map(function ($item) use ($rate, $apiService) {
+      $balance = $item->user_quantity > 0 ? $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate : 0;
+      $item->user_balance = round($balance, 6) . " €";
       return $item;
     });
 

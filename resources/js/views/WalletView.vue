@@ -8,7 +8,7 @@
     </div>
     <div style="padding: 14px 28px; margin-top: 70px;" v-if="1">
       <h1>{{ $t('wallet.all_transactions') }}</h1>
-      <wallet-symbol-list/>
+      <wallet-symbol-list :walletsymbolData="walletsymbolData"/>
       <h1>{{ $t('wallet.all_transactions') }}</h1>
       <transaction-card :symbol="symbol"/>
     </div>
@@ -30,6 +30,19 @@ export default Vue.extend({
   components: {
     WalletSymbolList,
     TransactionCard,
+  },
+
+  computed: {
+    /**
+     * Total no. of records
+     */
+    walletsymbolData: function () {
+      return this.$store.getters["wallet/getWalletsymbol"];
+    },
+  },
+  mounted() {
+    // Set the initial number of items
+    this.$store.dispatch("wallet/fetchWalletsymbol");
   },
 });
 </script>

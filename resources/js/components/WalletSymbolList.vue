@@ -24,8 +24,9 @@
 import {tableData} from "../../../skote/resources/js/views/tables/dataAdvancedtable";
 
 export default {
-
-
+  props: {
+    walletsymbolData: [],
+  },
   data() {
     return {
       tableData: tableData,
@@ -43,8 +44,8 @@ export default {
       currentPage: 1,
       filter: null,
       filterOn: [],
-      sortBy: "age",
-      sortDesc: false,
+      sortBy: "user_quantity",
+      sortDesc: true,
       fields: [
         {key: "name", sortable: true, label: "Name"},
         {key: "symbol", sortable: true, label: "Symbol"},
@@ -52,18 +53,6 @@ export default {
         {key: "user_quantity", sortable: true, label: "Menge"},
       ],
     };
-  },
-  computed: {
-    /**
-     * Total no. of records
-     */
-    walletsymbolData: function () {
-      return this.$store.getters["wallet/getWalletsymbol"];
-    },
-  },
-  mounted() {
-    // Set the initial number of items
-    this.$store.dispatch("wallet/fetchWalletsymbol");
   },
 }
 </script>
