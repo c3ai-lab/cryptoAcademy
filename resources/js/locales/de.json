@@ -87,7 +87,7 @@
     "amount": "Menge"
   },
   "wallet": {
-    "total_wallet": "Gesamtwert Wallet",
+    "total_wallet": "Walletwert ",
     "all_transactions": "Verlauf Vorgänge"
   },
   "academy": {

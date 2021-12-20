@@ -4,7 +4,7 @@
       <h1>{{ $t('wallet.total_wallet') }}: {{ totalwallet | eur }}</h1>
     </div>
     <div style="padding: 14px 28px;" v-if="1">
-      <h1>Summe pro Symbol</h1>
+      <h1>Crypto-Coin Übersicht</h1>
       <wallet-symbol-list :walletsymbolData="walletsymbolData"/>
       <h1>{{ $t('wallet.all_transactions') }}</h1>
       <transaction-card :symbol="symbol"/>
