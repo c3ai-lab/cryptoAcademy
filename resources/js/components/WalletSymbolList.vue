@@ -44,7 +44,7 @@ export default {
       currentPage: 1,
       filter: null,
       filterOn: [],
-      sortBy: "user_quantity",
+      sortBy: "user_balance_eur",
       sortDesc: true,
       fields: [
         {key: "name", sortable: true, label: "Name"},
