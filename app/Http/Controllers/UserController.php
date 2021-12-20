@@ -46,7 +46,7 @@ class UserController extends Controller
     $rate = $apiService->getPriceOfEuroToUsd();
     $coll = $filtered->map(function ($item) use ($rate, $apiService) {
       $balance = $item->user_quantity > 0 ? $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate : 0;
-      $item->user_balance = round($balance, 6) . " €";
+      $item->user_balance = $balance;
       return $item;
     });
 
