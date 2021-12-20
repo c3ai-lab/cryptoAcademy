@@ -33,7 +33,6 @@ export default Vue.extend({
     totalwallet: function () {
       let temp = 0;
       this.walletsymbolData.forEach(function (item) {
-        console.log(item.user_balance)
         temp += item.user_balance;
       });
       return temp;
