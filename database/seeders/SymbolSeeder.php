@@ -40,7 +40,7 @@ class SymbolSeeder extends Seeder
         'api_symbol' => 'XRPUSDT',
       ],
       [
-        'name' => 'Pokaldot',
+        'name' => 'Polkadot',
         'api_symbol' => 'DOTUSDT',
       ],
       [

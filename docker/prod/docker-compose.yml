@@ -4,11 +4,16 @@ services:
         container_name: nginx
         image: nginx:latest
         restart: unless-stopped
+        depends_on:
+            - app
+            - mailhog
+            - phpmyadmin
+            - mailserver
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
             - ./data/nginx:/etc/nginx/conf.d
-            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/conf:/etc/letsencrypt:ro
             - ./data/certbot/www:/var/www/certbot
         ports:
             - 80:80
@@ -24,14 +29,16 @@ services:
             - ./data/certbot/conf:/etc/letsencrypt
             - ./data/certbot/www:/var/www/certbot
         entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    crypto-app:
-        container_name: crypto-app
+    app:
+        container_name: app
         restart: always
         image: mats9798/cryptocademy:latest
+        depends_on:
+            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - crypto_app_data:/var/www/html/storage
+            - appdata:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
@@ -39,16 +46,18 @@ services:
         container_name: scheduler
         restart: always
         image: mats9798/cryptocademy:latest
+        depends_on:
+            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - crypto_app_data:/var/www/html/storage
+            - appdata:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: scheduler
 
-    crypto-app_db:
-        container_name: crypto-app_db
+    database:
+        container_name: database
         image: mysql:8
         restart: always
         environment:
@@ -57,7 +66,7 @@ services:
             MYSQL_USER: cryptocademy
             MYSQL_PASSWORD: cryptocademy
         volumes:
-            - crypto_mysql_data:/var/lib/mysql
+            - mysqldata:/var/lib/mysql
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
     phpmyadmin:
@@ -65,27 +74,56 @@ services:
         container_name: phpmyadmin
         restart: always
         depends_on:
-            - crypto-app_db
+            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
         environment:
             - PMA_ABSOLUTE_URI=http://pma.developer.local
-            - PMA_HOST=crypto-app_db
+            - PMA_HOST=database
             - PMA_VERBOSE=CryptoAcademy
             - UPLOAD_LIMIT=2500M
+
     mailhog:
         restart: always
         image: mailhog/mailhog:latest
-        container_name: crypto-app_mailhog
+        container_name: mailhog
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
+
+    mailserver:
+        image: docker.io/mailserver/docker-mailserver:latest
+        hostname: mail
+        domainname: cryptocademy.app
+        container_name: mailserver
+        volumes:
+            - maildata:/var/mail
+            - mailstate:/var/mail-state
+            - maillogs:/var/log/mail
+            - ./data/mailserver/config/:/tmp/docker-mailserver/
+            - ./data/certbot/conf:/etc/letsencrypt:ro
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        env_file: mailserver.env
+        restart: always
+        #        ports:
+        #            - "25:25"
+        #            - "587:587"
+        cap_add:
+            - NET_ADMIN
+            - SYS_PTRACE
 volumes:
-    crypto_mysql_data:
-        name: crypto_mysql_data
-    crypto_app_data:
-        name: crypto_app_data
+    mysqldata:
+        name: mysqldata
+    appdata:
+        name: appdata
+    maildata:
+        name: maildata
+    mailstate:
+        name: mailstate
+    maillogs:
+        name: maillogs
 
 networks:
     default:

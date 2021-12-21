@@ -1,40 +1,30 @@
 <template>
   <div>
     <NavBar />
-    <div class="container px-lg-5 mt-5">
-      <div class="row">
-        <div class="col-12 mt-3">
-          <router-view class="my-lg-4 my-3"></router-view>
-        </div>
-      </div>
-    </div>
+    <router-view class="my-lg-4 my-3"></router-view>
   </div>
 </template>
 
 <script>
-
 import NavBar from "../components/NavBar";
 
 export default {
-    components: { NavBar },
-    name: "MainLayout",
-
-}
+  name: "MainLayout",
+  components: {
+    NavBar,
+  },
+};
 </script>
 
 <style scoped>
-    div.container
-    {
-        border-radius: 0.4rem;
-    }
-
-
+div.container {
+  border-radius: 0.4rem;
+}
 </style>
 
 
 <style>
-    .card-body
-    {
-        padding: 1rem;
-    }
+.card-body {
+  padding: 1rem;
+}
 </style>

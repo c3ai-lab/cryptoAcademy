@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Enum\MessageCodes;
+use App\Http\Resources\SymbolUserResource;
 use App\Http\Resources\UserResource;
+use App\Models\Symbol;
 use App\Models\User;
 use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
+use App\Service\BianceApiService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -16,6 +20,8 @@ use Validator;
 
 class UserController extends Controller
 {
+  const Init_BALANCE = 1000000;
+
   public function __construct()
   {
     $this->middleware('jwt.verify', ['except' => ['createUser', 'verifyUser', 'resetCurrentUserPassword']]);
@@ -28,7 +34,23 @@ class UserController extends Controller
    */
   public function getCurrentUser()
   {
-    return new (auth()->user());
+    return new UserResource((auth()->user()));
+  }
+
+  public function getCurrentUserWallet(Request $request)
+  {
+    $collection = Symbol::all();
+    $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
+
+    $apiService = new BianceApiService();
+    $rate = $apiService->getPriceOfEuroToUsd();
+    $coll = $filtered->map(function ($item) use ($rate, $apiService) {
+      $balance = $item->user_quantity > 0 ? $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate : 0;
+      $item->user_balance = $balance;
+      return $item;
+    });
+
+    return SymbolUserResource::collection($coll);
   }
 
   /**
@@ -50,7 +72,7 @@ class UserController extends Controller
 
     $user = User::create(array_merge(
       $validator->validated(),
-      ['password' => bcrypt($request->password), "balance" => "1000000"]
+      ['password' => bcrypt($request->password), "balance" => self::Init_BALANCE]
     ));
 
     $verification_code = Str::random(30); //Generate verification code
@@ -59,7 +81,7 @@ class UserController extends Controller
     event(new Registered($user));
 
     return response()->json([
-      'message' => 'Thanks for signing up! Please check your email to complete your registration.',
+      'msgcode' => MessageCodes::REGISTER_SUCCESS,
       'user' => new UserResource($user)
     ], 201);
   }
@@ -67,8 +89,10 @@ class UserController extends Controller
   public function updateCurrentUser(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required|string|between:2,100|unique:users',
-      'email' => 'required|string|email|max:100|unique:users'
+//      'name' => 'required|string|between:2,100|unique:users',
+//      'email' => 'required|string|email|max:100|unique:users',
+      'x_axis' => 'required|int',
+      'y_axis' => 'required|int',
     ]);
 
     if ($validator->fails()) {
@@ -76,19 +100,36 @@ class UserController extends Controller
       return response()->json($validator->errors(), 400);
     }
 
-    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email]);
+    User::find(auth()->user()->id)->update(['x_axis' => $request->x_axis, 'y_axis' => $request->y_axis]);
+//    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email, 'x_axis' => $request->x_axis, 'y_axis' => $request->y_axis]);
 
     return response()->json([
-      'message' => 'User change successfully.',
+      'msgcode' => MessageCodes::USERDATA_CHANGE_SUCCESS,
       'user' => new UserResource(User::find(auth()->user()->id))
     ], 201);
   }
 
   public function deleteCurrentUser()
   {
+    $user = auth()->user();
+    $user->userVerification()->delete();
+    $user->transactions()->delete();
+    $user->favorites()->detach();
     User::find(auth()->user()->id)->delete();
     auth()->logout();
-    return response()->json(['message' => 'User deleted successfully.']);
+    return response()->json(['msgcode' => MessageCodes::USER_DELETE]);
+  }
+
+  public function resetCurrentUser()
+  {
+    $user = auth()->user();
+    $user->userVerification()->delete();
+    $user->transactions()->delete();
+    $user->favorites()->detach();
+    $user->balance = self::Init_BALANCE;
+    $user->save();
+
+    return response()->json(['msgcode' => MessageCodes::USER_RESET]);
   }
 
   public function updateCurrentUserPassword(Request $request)
@@ -99,11 +140,11 @@ class UserController extends Controller
     ]);
 
     if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
+      return response()->json(['msgcode' => MessageCodes::PASSWORD_CHANGE_FAIL], 422);
     }
     User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
 
-    return response()->json(['message' => 'Password change successfully.']);
+    return response()->json(['msgcode' => MessageCodes::PASSWORD_CHANGE_SUCCESS]);
   }
 
   public function resetCurrentUserPassword(Request $request)
@@ -121,9 +162,9 @@ class UserController extends Controller
     if (!is_null($user)) {
       $user->notify(new PasswordResetMail($user, $password));
       $user->update(['password' => bcrypt($password)]);
-      return response()->json(['message' => 'Password reset successfully.']);
+      return response()->json(['msgcode' => MessageCodes::PASSWORD_RESET_SUCCESS]);
     }
-    return response()->json(['message' => 'Account doesn\'t exist.'], 400);
+    return response()->json(['msgcode' => MessageCodes::ACCOUNT_DOESNT_EXIST], 400);
   }
 
   public function verifyUser($verification_code)
@@ -135,7 +176,7 @@ class UserController extends Controller
 
       if ($user->is_verified == 1) {
         return response()->json([
-          'message' => 'Account already verified.'
+          'msgcode' => MessageCodes::ACCOUNT_ALREADY_VERIFIED
         ]);
       }
 
@@ -143,10 +184,10 @@ class UserController extends Controller
       DB::table('user_verifications')->where('token', $verification_code)->delete();
 
       return response()->json([
-        'message' => 'You have successfully verified your email address. '
+        'msgcode' => MessageCodes::VERIFY_EMAIL_SUCCESS
       ]);
     }
 
-    return response()->json(['message' => "Verification code is invalid."], 400);
+    return response()->json(['msgcode' => MessageCodes::VERIFY_EMAIL_FAIL], 400);
   }
 }

@@ -16,3 +16,8 @@ export const generateSampleSeries = (name) => {
     },
   ];
 };
+
+export const enumKeyToRouteParam = (key) =>
+  key.toLowerCase().replaceAll("_", "-");
+export const routeParamToEnumKey = (key) =>
+  key.toUpperCase().replaceAll("-", "_");

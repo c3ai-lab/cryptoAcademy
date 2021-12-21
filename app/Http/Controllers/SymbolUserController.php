@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\MessageCodes;
 use App\Http\Resources\SymbolUserResource;
 use App\Models\Symbol;
 use App\Models\SymbolUser;
@@ -29,7 +30,7 @@ class SymbolUserController extends Controller
 
     $model = SymbolUser::where([["user_id", $user->id], ["symbol_id", $symbol->id]]);
     if ($model->count() > 0) {
-      return response()->json(["message" => "This symbol already exists in the favoritecollection."], 422);
+      return response()->json(["msgcode" => MessageCodes::SYMBOL_ALREADY_FAV], 422);
     }
 
     $user->favorites()->attach($symbol);
@@ -49,7 +50,7 @@ class SymbolUserController extends Controller
 
     $model = SymbolUser::where([["user_id", $user->id], ["symbol_id", $symbol->id]]);
     if ($model->count() == 0) {
-      return response()->json(["message" => "This symbol doesn't exists in the favoritecollection."], 422);
+      return response()->json(["msgcode" => MessageCodes::SYMBOL_ISNOT_IN_FAV], 422);
     }
 
     auth()->user()->favorites()->detach($symbol);

@@ -1,128 +1,134 @@
 {
-    "common": {
-        "yes": "Ja",
-        "no": "Nein",
-        "save": "Speichern",
-        "abort": "Abbrechen"
-    },
-    "auth": {
-        "welcome": "Herzlich willkommen!",
-        "welcome_back": "Willkommen zurück!",
-        "register_for_free": "Registriere dich um mitzumachen.",
-        "login_to_continue": "Melde dich an um fortzufahren.",
-        "email": "E-Mail",
-        "username": "Benutzername",
-        "password": "Passwort",
-        "enter_email": "E-Mail eingeben",
-        "enter_username": "Benutzername eingeben",
-        "enter_password": "Passwort eingeben",
-        "register_now": "Jetzt registrieren!",
-        "register_with": "Registrieren mit",
-        "login_now": "Jetzt einloggen!",
-        "login_with": "Einloggen mit",
-        "forgot_password": "Passwort vergessen?",
-        "no_account": "Noch keinen Account?",
-        "already_account": "Bereits einen Account?",
-        "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
-        "login_failed": "Anmeldung fehlgeschlagen!",
-        "register_failed": "Registrierung fehlgeschlagen!",
-        "reset_password": "Passwort vergessen?",
-        "mail_for_password": "Gib deine mit dem Konto verknüpfte E-Mail-Adresse an, um ein neues Passwort per Mail zu erhalten.",
-        "reset_passoword_now": "Neues Passwort anfordern!",
-        "mail_failed": "Die angegebene Mail-Adresse ist nicht vergeben.",
-        "remember_password": "Du erinnerst dich an dein Passwort?",
-        "register_success": "Du hast dich erfolgreich registriert. Bitte bestätige die Registrierungsmail, bevor du dich einloggen kannst.",
-        "new_password": "Du hast erfolgreich dein Passwort geändert. Du wurdest automatisch ausgeloggt und kannst dich jetzt mit deinem neuen Passwort einloggen.",
-        "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
-    },
-    "dashboard": {
-        "title": "Dashboard",
-        "portfolio_value": "Portfoliowert",
-        "news": "Neuigkeiten",
-        "no_news": "Es gibt aktuell keine Neuigkeiten",
-        "favorites": "Favoriten",
-        "no_favorites": "Es sind keine Coins als Favoriten markiert.",
-        "add_favorites": "Füge jetzt Coins hinzu.",
-        "welcome_modal": {
-            "hello": "Hallo ",
-            "trading": "Herzlich Willkommen bei CryptoCademy, deiner gamifizierten Crypto-Trading-App. Zum Start wurden dir 10.000€ gutgeschrieben, die du in Kryptowährungen investieren kannst.",
-            "trade_now": "Zum Trading",
-            "academy": "Wenn du dich noch nicht gut mit Kryptowährungen auskennst oder noch mehr zu dem Thema lernen möchtest, schaue doch mal in unserer Crypto Academy vorbei, wo du Informationen zu den relevantesten Themen Rund um bestimmte Crypto-Coins, Blockchain-Technologien und Trading findest.",
-            "academy_now": "Zur Academy"
-        }
-    },
-    "profile": {
-        "title": "Profil",
-        "change_password": "Passwort ändern",
-        "delete_account": "Account löschen",
-        "new_password": "Neues Passwort",
-        "repeat_new_password": "Neues Passwort wiederholen",
-        "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?"
-    },
-    "datetime": {
-        "month_short": "M",
-        "year_short": "J",
-        "all": "Gesamt"
-    },
-    "coins": {
-        "BTC": {
-            "name": "Bitcoin"
-        },
-        "ETH": {
-            "name": "Ethereum"
-        }
-    },
-    "navigation": {
-        "dashboard": "Dashboard",
-        "trading": "Trading",
-        "academy": "Academy",
-        "profile": "Profil"
-    },
-    "academy": {
-        "title": "Crypto Academy",
-        "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        "topic_1": 
-            { 
-                "name": "How does it work?",
-                "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "subtopic_1": "Einführung",
-                "subtopic_2": "Blockchain und Transaktionen",
-                "subtopic_2_1": "Transaktionen",
-                "subtopic_2_2": "Transaktionskosten",
-                "subtopic_2_3": "Wie funktioniert die Technologie dahinter? (Advanced)",
-                "subtopic_2_3_1": "Merkle Tree und Root",
-                "subtopic_3": "Konsens",
-                "subtopic_3_1": "Proof-of-Work",
-                "subtopic_3_1_1": "Wie funktioniert Mining bei Proof-of-Work?",
-                "subtopic_3_2": "Proof-of-Stake"
-            },
-            "topic_2": 
-            { 
-                "name": "For Beginners",
-                "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "subtopic_1": "Wallet",
-                "subtopic_1_1": "Software Wallet",
-                "subtopic_1_2": "Web Wallet / Hot Wallet",
-                "subtopic_1_3": "Paper Wallet",
-                "subtopic_1_4": "Hardware Wallet",
-                "subtopic_2": "Smart Contract"
-            },
-            "topic_3": 
-            { 
-                "name": "Top fünf Kryptowährungen",
-                "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-            },
-            "topic_4": 
-            { 
-                "name": "50 Kryptowährungen - Kurz beschrieben", 
-                "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-            },
-    
-            "topic_5": 
-            { 
-                "name": "Glossar", 
-                "intro": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-            }
-    
+  "common": {
+    "yes": "Ja",
+    "no": "Nein",
+    "save": "Speichern",
+    "abort": "Abbrechen",
+    "back": "Zurück"
+  },
+  "auth": {
+    "welcome": "Herzlich willkommen!",
+    "welcome_back": "Willkommen zurück!",
+    "register_for_free": "Registriere dich um mitzumachen.",
+    "login_to_continue": "Melde dich an um fortzufahren.",
+    "email": "E-Mail",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "enter_email": "E-Mail eingeben",
+    "enter_username": "Benutzername eingeben",
+    "enter_password": "Passwort eingeben",
+    "register_now": "Jetzt registrieren!",
+    "register_with": "Registrieren mit",
+    "login_now": "Jetzt einloggen!",
+    "login_with": "Einloggen mit",
+    "forgot_password": "Passwort vergessen?",
+    "no_account": "Noch keinen Account?",
+    "already_account": "Bereits einen Account?",
+    "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
+    "login_failed": "Anmeldung fehlgeschlagen!",
+    "register_failed": "Registrierung fehlgeschlagen!",
+    "reset_password": "Passwort vergessen?",
+    "mail_for_password": "Gib deine mit dem Konto verknüpfte E-Mail-Adresse an, um ein neues Passwort per Mail zu erhalten.",
+    "reset_passoword_now": "Neues Passwort anfordern!",
+    "mail_failed": "Die angegebene Mail-Adresse ist nicht vergeben.",
+    "remember_password": "Du erinnerst dich an dein Passwort?",
+    "register_success": "Du hast dich erfolgreich registriert. Bitte bestätige die Registrierungsmail, bevor du dich einloggen kannst.",
+    "new_password": "Du hast erfolgreich dein Passwort geändert. Du wurdest automatisch ausgeloggt und kannst dich jetzt mit deinem neuen Passwort einloggen.",
+    "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "portfolio_value": "Portfoliowert",
+    "news": "Neuigkeiten",
+    "no_news": "Es gibt aktuell keine Neuigkeiten",
+    "favorites": "Favoriten",
+    "no_favorites": "Es sind keine Coins als Favoriten markiert.",
+    "add_favorites": "Füge jetzt Coins hinzu.",
+    "welcome_modal": {
+      "hello": "Hallo ",
+      "trading": "Herzlich Willkommen bei CryptoCademy, deiner gamifizierten Crypto-Trading-App. Zum Start wurden dir 10.000€ gutgeschrieben, die du in Kryptowährungen investieren kannst.",
+      "trade_now": "Zum Trading",
+      "academy": "Wenn du dich noch nicht gut mit Kryptowährungen auskennst oder noch mehr zu dem Thema lernen möchtest, schaue doch mal in unserer Crypto Academy vorbei, wo du Informationen zu den relevantesten Themen Rund um bestimmte Crypto-Coins, Blockchain-Technologien und Trading findest.",
+      "academy_now": "Zur Academy"
     }
+  },
+  "profile": {
+    "title": "Profil",
+    "change_password": "Passwort ändern",
+    "delete_account": "Account löschen",
+    "old_password": "Altes Passwort",
+    "new_password": "Neues Passwort",
+    "repeat_new_password": "Neues Passwort wiederholen",
+    "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",
+    "account_reset": "Account zurücksetzen",
+    "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?",
+    "chart_info": "In Grafen möchte ich die Achsen angezeigt bekommen:",
+    "x_axis": "X-Achse",
+    "y_axis": "Y-Achse"
+  },
+  "datetime": {
+    "month_short": "M",
+    "year_short": "J",
+    "all": "Gesamt"
+  },
+  "coins": {
+    "BTC": {
+      "name": "Bitcoin"
+    },
+    "ETH": {
+      "name": "Ethereum"
+    }
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "wallet": "Wallet",
+    "trading": "Trading",
+    "academy": "Academy",
+    "profile": "Profil"
+  },
+  "trade": {
+    "euro": "€",
+    "all": "Alle",
+    "bought": "Gekauft",
+    "sold": "Verkauft",
+    "buy": "Kaufe",
+    "sell": "Verkaufe",
+    "price": "Preis",
+    "total": "Gesamt",
+    "value": "Wert",
+    "amount": "Menge"
+  },
+  "wallet": {
+    "total_wallet": "Walletwert ",
+    "all_transactions": "Verlauf Vorgänge"
+  },
+  "academy": {
+    "title": "Crypto Academy",
+    "description": "Willkommen auf der Academy-Seite von Cryptocademy. Hier sind zahlreiche Informationen zu Kryptowährungen zu finden. Die Academy bietet Neulingen im Bereich der Kryptowährungen Erklärungen zu den wichtigsten Grundlagen und Funktionsweisen. Doch auch erfahrene Trader können hier noch etwas zu den technischen Hintergründen von Blockchains und co. lernen. Technisch tiefergehende Kapitel sind mit dem Zusatz (Advanced) gekennzeichnet.",
+    "CRYPTO": {
+      "name": "Krypto",
+      "description": "<i>How does it work?</i> bietet einen einfach erklärten Überblick über Kryptowährungen im Allgemeinen. Auch ist hier eine einfache sowie eine fortgeschrittene Erklärung zur Funktionsweise von Blockchains und Transaktionen zu finden sowie Informationen zum Thema Konsens und Konsens Mechanismen."
+    },
+    "CRYPTO__INTRO": "Einführung",
+    "CRYPTO__BLOCKCHAIN": "Blockchain",
+    "CRYPTO__BLOCKCHAIN__TRANSACTIONS": "Transaktionen",
+    "CRYPTO__BLOCKCHAIN__FEES": "Transaktionsgebühren",
+    "CRYPTO__BLOCKCHAIN__ADVANCED": "Advanced",
+    "TRADING": {
+      "name": "Trading",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    },
+    "TOP_FIVE_COINS": {
+      "name": "Top fünf Kryptowährungen",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    },
+    "FIFTY_COINS__LIST": {
+      "name": "50 Kryptowährungen - Kurz beschrieben",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    },
+    "GLOSSAR": {
+      "name": "Glossar",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    }
+  }
 }

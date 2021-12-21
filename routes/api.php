@@ -26,11 +26,13 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'user'], function () {
   Route::get('/', [UserController::class, 'getCurrentUser']);
+  Route::get('/wallet', [UserController::class, 'getCurrentUserWallet']);
   Route::post('/', [UserController::class, 'createUser']);
   Route::put('/', [UserController::class, 'updateCurrentUser']);
   Route::delete('/', [UserController::class, 'deleteCurrentUser']);
   Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
   Route::post('/password/reset', [UserController::class, 'resetCurrentUserPassword']);
+  Route::post('/resetAll', [UserController::class, 'resetCurrentUser']);
 
   Route::group(['prefix' => 'favorites'], function () {
     Route::get('/', [SymbolUserController::class, 'index']);

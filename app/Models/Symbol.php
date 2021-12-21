@@ -11,8 +11,14 @@ class Symbol extends Model
 
   protected $appends = [
     'is_favorite',
+    'user_quantity',
     'user_balance',
   ];
+
+  public function getUserSymbolById($id)
+  {
+    return auth()->user()->favorites->find($id);
+  }
 
   public function getIsFavoriteAttribute()
   {
@@ -22,7 +28,7 @@ class Symbol extends Model
     return false;
   }
 
-  public function getUserBalanceAttribute()
+  public function getUserQuantityAttribute()
   {
     if (auth()->user()->transactions->count() === 0) {
       return 0;
@@ -33,8 +39,23 @@ class Symbol extends Model
       ->get()
       ->pluck('quantity')
       ->reduce(
-        fn ($carry, $next) => $carry + $next,
+        fn($carry, $next) => $carry + $next,
         0
       );
   }
+//  public function getUserBalanceAttribute()
+//  {
+//    if (auth()->user()->transactions->count() === 0) {
+//      return 0;
+//    }
+//
+//    return auth()->user()->transactions()
+//      ->where('symbol_id', $this->id)
+//      ->get()
+//      ->pluck('quantity')
+//      ->reduce(
+//        fn($carry, $next) => $carry + $next,
+//        0
+//      );
+//  }
 }

@@ -17,7 +17,11 @@ export default {
     series: Array,
     mtsPerTimestep: Number,
   },
-
+  data() {
+    return {
+      showAxis: this.$store.getters['user/getUser']().axis.x || this.$store.getters['user/getUser']().axis.y,
+    }
+  },
   computed: {
     loaded() {
       return this.series.length > 0;
@@ -27,9 +31,9 @@ export default {
         return [];
       }
       const newSeries = [
-        { data: this.series},
-        { data: this.series.map(x => [x[0], x[1]*1.003]) },
-        { data: this.series.map(x => [x[0], x[1]*0.995]) },
+        {data: this.series},
+        {data: this.series.map(x => [x[0], x[1] * 1.003])},
+        {data: this.series.map(x => [x[0], x[1] * 0.995])},
       ];
 
       return newSeries
@@ -82,74 +86,108 @@ export default {
       if (!this.loaded) return null;
 
       return {
-          chart: {
-              type: "line",
-              height: '400px',
-              sparkline: {
-                  enabled: true
-              },
+        chart: {
+          yaxis: {
+            show: true,
           },
-          animations: {
-              enabled: false,
+          type: "line",
+          height: '400px',
+          sparkline: {
+            enabled: !this.showAxis,
           },
-          stroke: {
-              curve: "smooth",
-              width: 2
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+              selection: false,
+              zoom: false,
+              zoomin: false,
+              zoomout: false,
+              pan: false,
+            },
           },
-          colors: ["#f1b44c","#f1b44c00","#f1b44c00"],
+        },
+        yaxis: {
+          labels: {
+            formatter: (value) => this.$options.filters['eur'](value),
+          },
+        },
+        xaxis: {
+          type: 'datetime',
+          datetimeFormatter: {
+            year: 'yyyy',
+            month: "MMM 'yy",
+            day: 'dd MMM',
+            hour: 'HH:mm',
+          },
+        },
+        legend: {
+          show: false,
+        },
+        grid: {
+          show: false,
+        },
+        animations: {
+          enabled: false,
+        },
+        stroke: {
+          curve: "smooth",
+          width: 2
+        },
+        colors: ["#f1b44c", "#f1b44c00", "#f1b44c00"],
 
-          tooltip: {
-              custom: ({series, seriesIndex, dataPointIndex, w}) =>  {
-                return `
+        tooltip: {
+          custom: ({series, seriesIndex, dataPointIndex, w}) => {
+            return `
                 <div class="arrow_box"><span>
                 ${
-                  this.$options.filters.eur(
-                    series[seriesIndex][dataPointIndex]
-                  )
-                }
+              this.$options.filters.eur(
+                series[seriesIndex][dataPointIndex]
+              )
+            }
                 </span></div>
                 `
-              },
-              enabledOnSeries: [0],
           },
-          annotations: {
-              points: [
-                  {
-                      x: this.lowIsInFirstHalf ? Math.max(this.low[0], this.minMts) : Math.min(this.low[0], this.maxMts),
-                      y: this.low[1],
-                      marker: {
-                        size: 0,
-                      },
-                      label: {
-                        borderColor: "#00000000",
-                        offsetY: 26,
-                        style: {
-                          color: "#00000000",
-                          background: "#00000000"
-                        },
-                        text: this.$options.filters.eur(this.low[1])
-                      }
-                  },
-                  {
-                      x: this.highIsInFirstHalf ? Math.max(this.high[0], this.minMts) : Math.min(this.high[0], this.maxMts),
-                      y: this.high[1],
-                      marker: {
-                        size: 0,
-                      },
-                      label: {
-                        borderColor: "#00000000",
-                        offsetY: 4,
-                        style: {
-                          color: "#00000000",
-                          background: "#00000000"
-                        },
-                        text: this.$options.filters.eur(this.high[1])
-                      }
-                  },
-              ]
-          }
+          enabledOnSeries: [0],
+        },
+        annotations: {
+          points: [
+            {
+              x: this.lowIsInFirstHalf ? Math.max(this.low[0], this.minMts) : Math.min(this.low[0], this.maxMts),
+              y: this.low[1],
+              marker: {
+                size: 0,
+              },
+              label: {
+                borderColor: "#00000000",
+                offsetY: 26,
+                style: {
+                  color: "#00000000",
+                  background: "#00000000"
+                },
+                text: this.$options.filters.eur(this.low[1])
+              }
+            },
+            {
+              x: this.highIsInFirstHalf ? Math.max(this.high[0], this.minMts) : Math.min(this.high[0], this.maxMts),
+              y: this.high[1],
+              marker: {
+                size: 0,
+              },
+              label: {
+                borderColor: "#00000000",
+                offsetY: 4,
+                style: {
+                  color: "#00000000",
+                  background: "#00000000"
+                },
+                text: this.$options.filters.eur(this.high[1])
+              }
+            },
+          ]
         }
-      },
+      }
     },
+  },
 }
 </script>
