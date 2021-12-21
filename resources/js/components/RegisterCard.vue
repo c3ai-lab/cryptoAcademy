@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="card-body pt-1 row justify-content-center">
-        <div class="p-1 col-lg-6">
+        <div class="p-1 col-lg-8 col-xl-6">
           <b-alert
             v-model="registerFailed"
             variant="danger"
@@ -21,8 +21,8 @@
           >
             {{ $t("auth.register_failed") }}
           </b-alert>
-          <b-form class="p-2"  @submit.prevent="register">
-            <slot/>
+          <b-form class="p-2" @submit.prevent="register">
+            <slot />
             <b-form-group
               id="input-group-1"
               :label="$t('auth.email')"
@@ -72,7 +72,6 @@
               ></b-form-input>
 
               <div class="mt-4 text-center">
-
                 <p class="mb-0">
                   <b-form-checkbox
                     id="input-3"
@@ -80,22 +79,20 @@
                     value="accepted"
                     unchecked-value="not_accepted"
                     required
-                  >&nbsp; {{ $t("auth.accept_by_registration") }}
-                    <router-link to="terms-of-use" class="fw-medium text-primary">
+                    >&nbsp; {{ $t("auth.accept_by_registration") }}
+                    <router-link
+                      to="terms-of-use"
+                      class="fw-medium text-primary"
+                    >
                       AGBs
                     </router-link>
                     !
                   </b-form-checkbox>
                 </p>
               </div>
-
             </b-form-group>
             <div class="mt-3 d-grid">
-              <b-button
-                type="submit"
-                variant="primary"
-                class="btn-block"
-              >
+              <b-button type="submit" variant="primary" class="btn-block">
                 {{ $t("auth.register_now") }}
               </b-button>
             </div>
@@ -134,7 +131,6 @@
                 </li>
               </ul>
             </div>
-
           </b-form>
         </div>
       </div>
@@ -166,7 +162,7 @@ export default Vue.extend({
           password: this.password,
           password_confirmation: this.password,
         })
-        .then(() => this.$router.push({name: "login"}))
+        .then(() => this.$router.push({ name: "login" }))
         .catch(() => (this.registerFailed = true));
     },
   },
