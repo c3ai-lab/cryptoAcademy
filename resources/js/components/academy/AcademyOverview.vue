@@ -3,38 +3,18 @@
     <h1>{{ $t("academy.title") }}</h1>
     <div class="card">
       <div class="card-body">
-        <p>{{ $t("academy.intro") }}</p>
+        <p v-html="$t('academy.description')"></p>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
-        <router-link :to="{ name: 'topic_1' }">
+        <router-link
+          v-for="topic in topics"
+          :key="topic"
+          :to="{ name: 'academy', params: getRouteParams(topic) }"
+        >
           <h2 class="academy-link">
-            {{ $t("academy.topic_1.name") }}
-            <i class="dripicons-chevron-right"></i>
-          </h2>
-        </router-link>
-        <router-link :to="{ name: 'topic_2' }">
-          <h2 class="academy-link">
-            {{ $t("academy.topic_2.name") }}
-            <i class="dripicons-chevron-right"></i>
-          </h2>
-        </router-link>
-        <router-link :to="{ name: 'topic_3' }">
-          <h2 class="academy-link">
-            {{ $t("academy.topic_3.name") }}
-            <i class="dripicons-chevron-right"></i>
-          </h2>
-        </router-link>
-        <router-link :to="{ name: 'topic_4' }">
-          <h2 class="academy-link">
-            {{ $t("academy.topic_4.name") }}
-            <i class="dripicons-chevron-right"></i>
-          </h2>
-        </router-link>
-        <router-link :to="{ name: 'topic_5' }">
-          <h2 class="academy-link no-border">
-            {{ $t("academy.topic_5.name") }}
+            {{ $t(`academy.${topic}.name`) }}
             <i class="dripicons-chevron-right"></i>
           </h2>
         </router-link>
@@ -42,12 +22,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "AcademyOverview",
-};
-</script>
 
 <style lang="scss" scoped>
 h2.academy-link {
@@ -60,12 +34,31 @@ h2.academy-link {
   }
 }
 
-h2.no-border 
-{
-  border-bottom: none!important;
+h2.no-border {
+  border-bottom: none !important;
   padding-bottom: 0.2rem;
 }
-
-
-
 </style>
+
+<script>
+import { ACADEMY } from "../../constants";
+import { enumKeyToRouteParam } from "../../utils";
+
+export default {
+  name: "AcademyOverview",
+
+  methods: {
+    getRouteParams(topic) {
+      return {
+        target: enumKeyToRouteParam(topic),
+      };
+    },
+  },
+
+  computed: {
+    topics() {
+      return Object.keys(ACADEMY);
+    },
+  },
+};
+</script>

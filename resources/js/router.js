@@ -62,7 +62,7 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/academy",
+      path: "/academy/:target?",
       name: "academy",
       component: AcademyView,
       meta: {
@@ -95,55 +95,14 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/trading/:symbol/buy',
-      name: 'trading.buy',
+      path: "/trading/:symbol/buy",
+      name: "trading.buy",
       component: TradingBuyView,
       props: true,
       meta: {
         requiresAuth: true,
       },
     },
-    {
-      path: "/academy/how_does_it_work",
-      name: "topic_1",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/for_beginners",
-      name: "topic_2",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/top_fuenf_krypto",
-      name: "topic_3",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/50_krypto",
-      name: "topic_4",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/glossar",
-      name: "topic_5",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-
   ],
 });
 

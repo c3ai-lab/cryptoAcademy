@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="card-body pt-1 row justify-content-center">
-        <div class="p-1 col-lg-6">
+        <div class="p-1 col-lg-8 col-xl-6">
           <b-alert
             v-model="loginFailed"
             variant="danger"
