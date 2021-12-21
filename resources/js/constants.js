@@ -221,7 +221,9 @@ export const ACADEMY = {
     ],
   },
   [AcademyCategory.TRADING]: {},
-  [AcademyCategory.TOP_FIVE_COINS]: {},
+  [AcademyCategory.TOP_FIVE_COINS]: {
+    [AcademyTopic.TOP_FIVE_COINS__BTC]: [],
+  },
   [AcademyCategory.FIFTY_COINS__LIST]: {},
   [AcademyCategory.GLOSSAR]: {},
 };

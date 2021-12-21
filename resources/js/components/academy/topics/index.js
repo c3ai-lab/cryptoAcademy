@@ -10,3 +10,8 @@ Vue.component(
   AcademyCategory.FIFTY_COINS__LIST,
   require("./FiftyCoins.vue").default
 );
+
+Vue.component(
+  AcademyTopic.TOP_FIVE_COINS__BTC,
+  require("./top_five_coins/Btc.vue").default
+);

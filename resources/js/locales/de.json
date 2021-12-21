@@ -103,14 +103,15 @@
     "CRYPTO__BLOCKCHAIN__TRANSACTIONS": "Transaktionen",
     "CRYPTO__BLOCKCHAIN__FEES": "Transaktionsgebühren",
     "CRYPTO__BLOCKCHAIN__ADVANCED": "Advanced",
+    "TOP_FIVE_COINS__BTC": "Bitcoin",
     "TRADING": {
       "name": "Trading",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
     },
     "TOP_FIVE_COINS": {
       "name": "Top fünf Kryptowährungen",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    },
+      "description": "Die Anzahl an verschiedenen Kryptowährungen ist gewaltig und es ist leicht, hier den Überblick zu verlieren. Unter <i>Top 5 Kryptowährungen</i> ist eine kurze Übersicht über die derzeit größten Kryptowährungen zu finden. Hier sind Informationen zu Währungen wie Bitcoin und Ethereum zu finden, sowie ihre jeweiligen Vor- und Nachteile. So kann jeder für sich selber entscheiden, welche die richtige Kryptowährung für sich selbst ist."
+    }, 
     "FIFTY_COINS__LIST": {
       "name": "50 Kryptowährungen - Kurz beschrieben",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
