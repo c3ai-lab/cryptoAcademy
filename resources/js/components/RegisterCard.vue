@@ -160,21 +160,25 @@ export default Vue.extend({
       email: "",
       username: "",
       password: "",
-      registerFailed: null,
+
+      registerFailed: false,
     };
   },
 
   methods: {
-    register: function () {
-      this.$store
-        .dispatch("user/register", {
-          email: this.email,
-          username: this.username,
-          password: this.password,
-          password_confirmation: this.password,
-        })
-        .then(() => this.$router.push({ name: "register-success" }))
-        .catch(() => (this.registerFailed = true));
+    async register() {
+      const response = await this.$store.dispatch("user/register", {
+        email: this.email,
+        username: this.username,
+        password: this.password,
+        password_confirmation: this.password,
+      });
+
+      if (response === true) {
+        this.$router.push({ name: "register-success" });
+      } else {
+        this.registerFailed = true;
+      }
     },
   },
 });

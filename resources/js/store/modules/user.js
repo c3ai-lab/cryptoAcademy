@@ -17,33 +17,18 @@ const state = () => {
   return state;
 };
 
-const processUserResponse = ({
-                               response,
-                               commit,
-                               dispatch,
-                               resolve,
-                               reject,
-                             }) => {
-  response
-    .then((response) => {
-      if (response.ok === true) {
-        return response.json();
-      }
-      return null;
-    })
-    .then((data) => {
-      if (data === null) {
-        reject();
-      } else {
-        commit("setUser", data.user);
-        commit("setAccessToken", {
-          token: data.access_token,
-          expiresIn: data.expires_in,
-        });
-        dispatch("save");
-        resolve();
-      }
+const processUserResponse = async ({ response, commit, dispatch }) => {
+  if (response.ok === true) {
+    const data = await response.json();
+    commit("setUser", data.user);
+    commit("setAccessToken", {
+      token: data.access_token,
+      expiresIn: data.expires_in,
     });
+    dispatch("save");
+    return true;
+  }
+  return false;
 };
 
 const getters = {
@@ -58,104 +43,69 @@ const getters = {
 };
 
 const actions = {
-  login({commit, dispatch}, data) {
-    return new Promise((resolve, reject) => {
-      const response = fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
-      });
-
-      processUserResponse({
-        response,
-        commit,
-        dispatch,
-        resolve,
-        reject,
-      });
+  async login({ commit, dispatch }, data) {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
     });
+
+    return await processUserResponse({ response, commit, dispatch });
   },
 
-  refreshSession({commit, dispatch, getters}) {
-    return new Promise((resolve, reject) => {
-      const response = fetch("/api/auth/refresh", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${getters["accessToken"]()}`,
-        },
-      });
+  async refreshSession({ commit, dispatch, getters }) {
+    const response = await fetch("/api/auth/refresh", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getters["accessToken"]()}`,
+      },
+    });
 
-      processUserResponse({
-        response,
-        commit,
-        dispatch,
-        resolve,
-        reject,
-      });
-    });
-  },
-  refreshUserdata({commit, dispatch, rootGetters}, callback) {
-    return new Promise((resolve, reject) => {
-      fetch("/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            return null;
-          }
-        })
-        .then((data) => {
-          if (data === null) {
-            reject();
-          } else {
-            commit("setUser", data);
-            resolve();
-          }
-        });
-    });
+    return await processUserResponse({ response, commit, dispatch });
   },
 
-  register({commit}, data) {
-    return new Promise((resolve, reject) => {
-      fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: data.email,
-          name: data.username,
-          password: data.password,
-          password_confirmation: data.password_confirmation,
-        }),
-      })
-        .then((response) => {
-          if (response.status === 201) {
-            return response.json();
-          } else {
-            return null;
-          }
-        })
-        .then((data) => {
-          if (data === null) {
-            reject();
-          } else {
-            commit("setUser", data.user);
-            resolve();
-          }
-        });
+  async refreshUserData({ commit, rootGetters }) {
+    const response = await fetch("/api/user", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
     });
+
+    if (response.ok === true) {
+      const data = await response.json();
+      commit("setUser", data);
+      return true;
+    }
+    return false;
+  },
+
+  async register({ commit }, data) {
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        name: data.username,
+        password: data.password,
+        password_confirmation: data.password_confirmation,
+      }),
+    });
+
+    if (response.status === 201) {
+      const data = await response.json();
+      commit("setUser", data.user);
+      return true;
+    }
+    return false;
   },
 
   resetPassword({}, email) {
@@ -172,102 +122,89 @@ const actions = {
     });
   },
 
-  resetAccount({commit, dispatch, rootGetters}, callback) {
-    return new Promise((resolve, reject) => {
-      fetch("/api/user/resetAll", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-        },
-      }).then((response) => {
-        if (response.ok) {
-          dispatch("user/refreshUserdata", null, {root: true});
-          resolve()
-        } else
-          reject()
-      });
+  async resetAccount({ dispatch, rootGetters }) {
+    const response = await fetch("/api/user/resetAll", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
     });
+
+    if (response.ok === true) {
+      dispatch("user/refreshUserData", null, { root: true });
+      return true;
+    }
+    return false;
   },
 
-  logout({commit, dispatch, rootGetters}, callback) {
-    fetch("/api/auth/logout", {
+  async logout({ commit, dispatch, rootGetters }) {
+    const response = await fetch("/api/auth/logout", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
       },
-    }).then((response) => {
-      if (response.ok === true) {
-        commit("clear");
-        dispatch("save");
-        callback();
-      }
     });
+
+    if (response.ok === true) {
+      commit("clear");
+      dispatch("save");
+      return true;
+    }
+    return false;
   },
 
-  deleteAccount({commit, dispatch, rootGetters}, callback) {
-    fetch("/api/user", {
+  async deleteAccount({ commit, dispatch, rootGetters }, callback) {
+    const response = await fetch("/api/user", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
       },
-    }).then((response) => {
-      if (response.ok === true) {
-        commit("clear");
-        dispatch("save");
-        callback();
-      }
     });
+
+    if (response.ok === true) {
+      commit("clear");
+      dispatch("save");
+      callback();
+    }
   },
 
-  changePassword({commit, dispatch, rootGetters}, data) {
-    return new Promise((resolve, reject) => {
-      const response = fetch("/api/user/password", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-        },
-        body: JSON.stringify({
-          password: data.oldPassword,
-          new_password: data.newPassword,
-          new_password_confirmation: data.newPassword2
-        }),
-      }).then((response) => (response.ok === true ? resolve(response) : reject(response)));
+  async changePassword({ commit, dispatch, rootGetters }, data) {
+    const response = await fetch("/api/user/password", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+      body: JSON.stringify({
+        password: data.oldPassword,
+        new_password: data.newPassword,
+        new_password_confirmation: data.newPassword2,
+      }),
+    });
 
-    });
-  },
-  updateUserdata({commit, dispatch, rootGetters}, data) {
-    return new Promise((resolve, reject) => {
-      const response = fetch("/api/user", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-        },
-        body: JSON.stringify({
-          // email: data.email,
-          // username: data.username,
-          x_axis: Number(data.x_axis),
-          y_axis: Number(data.y_axis)
-        }),
-      }).then((response) => {
-        if (response.ok === true) {
-          return response.json();
-        }
-        return null;
-      }).then((data) => {
-        if (data === null) {
-          reject();
-        } else {
-          commit("setUser", data.user);
-          resolve();
-        }
-      });
-    });
+    if (response.ok === true) return response;
   },
 
-  save({state}) {
+  async updateUserData({ commit, rootGetters }, newData) {
+    const response = await fetch("/api/user", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+      body: JSON.stringify(newData),
+    });
+
+    if (response.ok === true) {
+      const data = await response.json();
+      commit("setUser", data.user);
+      return true;
+    }
+    return false;
+  },
+
+  save({ state }) {
     localStorage.setItem("user", JSON.stringify(state.user));
     localStorage.setItem("accessToken", JSON.stringify(state.accessToken));
   },
@@ -281,7 +218,7 @@ const mutations = {
   setUser(state, user) {
     state.user = user;
   },
-  setAccessToken(state, {token, expiresIn}) {
+  setAccessToken(state, { token, expiresIn }) {
     state.accessToken = {
       token: token,
       expiresAt: new Date().getTime() + expiresIn * 1000,

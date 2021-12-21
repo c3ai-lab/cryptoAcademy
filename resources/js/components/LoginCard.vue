@@ -105,7 +105,6 @@
                 {{ $t("auth.forgot_password") }}
               </router-link>
             </div>
-            
           </b-form>
         </div>
       </div>
@@ -129,14 +128,17 @@ export default Vue.extend({
   },
 
   methods: {
-    login: function () {
-      this.$store
-        .dispatch("user/login", {
-          email: this.email,
-          password: this.password,
-        })
-        .then(() => this.$router.push({ name: "dashboard" }))
-        .catch(() => (this.loginFailed = true));
+    async login() {
+      const response = await this.$store.dispatch("user/login", {
+        email: this.email,
+        password: this.password,
+      });
+
+      if (response === true) {
+        this.$router.push({ name: "dashboard" });
+      } else {
+        this.loginFailed = true;
+      }
     },
   },
 });

@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import {store} from "./store/main";
+import { store } from "./store/main";
 
-import {SESSION_REFRESH_AFTER_MINUTES} from "./constants";
+import { SESSION_REFRESH_AFTER_MINUTES } from "./constants";
 
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
@@ -67,7 +67,7 @@ const router = new VueRouter({
     {
       path: "/new-password",
       name: "new-password",
-      component: NewPasswordView ,
+      component: NewPasswordView,
       meta: {
         requiresAuth: false,
       },
@@ -75,7 +75,7 @@ const router = new VueRouter({
     {
       path: "/delete-account",
       name: "delete-account",
-      component: DeleteAccountView ,
+      component: DeleteAccountView,
       meta: {
         requiresAuth: false,
       },
@@ -134,10 +134,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
   const sessionExpiresAt = store.getters["user/sessionExpiresAt"]();
   const refreshData = () => !["login", "register"].includes(to.name);
-  const refreshToken = () => (sessionExpiresAt < new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000);
+  const refreshToken = () =>
+    sessionExpiresAt <
+    new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000;
+
   if (refreshToken() && refreshData()) {
     store.dispatch("user/refreshSession");
   }
@@ -145,15 +147,13 @@ router.beforeEach((to, from, next) => {
   const accessToken = store.getters["user/accessToken"]();
   if (to.meta.requiresAuth === true && accessToken === null) {
     // store original target and redirect user to it after login / registration
-    next({name: "login"});
+    next({ name: "login" });
   } else if (to.meta.requiresAuth === false && accessToken !== null) {
-    next({name: "dashboard"});
+    next({ name: "dashboard" });
   } else {
-    if (refreshData())
-      store.dispatch("user/refreshUserdata");
+    if (refreshData()) store.dispatch("user/refreshUserData");
     next();
   }
-})
-;
+});
 
 export default router;

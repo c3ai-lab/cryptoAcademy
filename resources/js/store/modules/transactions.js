@@ -4,20 +4,20 @@ const state = {
 
 const getters = {
   getTransactions: (state) => {
-    return state.transactions
+    return state.transactions;
   },
   getTransactionsBySymbol: (state) => (symbol) => {
-    return state.transactions.filter(t => t.api_symbol === symbol)
+    return state.transactions.filter((t) => t.api_symbol === symbol);
   },
 };
 
 const actions = {
-  fetchTransactions({commit, rootGetters}) {
+  fetchTransactions({ commit, rootGetters }) {
     fetch(`${location.origin}/api/user/transaction`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
       },
     })
       .then((response) => {
@@ -27,18 +27,18 @@ const actions = {
         return null;
       })
       .then((data) => {
-        commit('setTransactions', data);
+        commit("setTransactions", data);
       })
       .catch((error) => {
         console.log(error);
       });
   },
-  buy({commit, dispatch, rootGetters}, {symbol, quantity}) {
+  buy({ commit, dispatch, rootGetters }, { symbol, quantity }) {
     fetch(`${location.origin}/api/user/transaction/buy`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
       },
       body: JSON.stringify({
         symbol: symbol,
@@ -47,7 +47,7 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
-          dispatch("user/refreshUserdata", null, {root: true});
+          dispatch("user/refreshUserData", null, { root: true });
           return response.json();
         }
         return null;
@@ -56,12 +56,12 @@ const actions = {
         console.log(error);
       });
   },
-  sell({commit, dispatch, rootGetters}, {symbol, quantity}) {
+  sell({ commit, dispatch, rootGetters }, { symbol, quantity }) {
     fetch(`${location.origin}/api/user/transaction/sell`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
       },
       body: JSON.stringify({
         symbol: symbol,
@@ -70,7 +70,7 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
-          dispatch("user/refreshUserdata", null, {root: true});
+          dispatch("user/refreshUserData", null, { root: true });
           return response.json();
         }
         return null;
