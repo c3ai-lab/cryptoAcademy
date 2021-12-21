@@ -1,16 +1,19 @@
 <template>
-  <div>
+  <PaddedLayout>
     <AcademyOverview v-if="category == null && page == null" />
     <AcademyCategory v-else-if="category != null" :category="category" />
     <AcademyContent v-else :page="page" />
-  </div>
+  </PaddedLayout>
 </template>
 
 <script>
+import { routeParamToEnumKey } from "../utils";
+
+import PaddedLayout from "../layouts/PaddedLayout.vue";
+
 import AcademyOverview from "../components/academy/AcademyOverview.vue";
 import AcademyCategory from "../components/academy/AcademyCategory.vue";
 import AcademyContent from "../components/academy/AcademyContent.vue";
-import { routeParamToEnumKey } from "../utils";
 
 export default {
   name: "AcademyView",
@@ -19,6 +22,7 @@ export default {
     AcademyOverview,
     AcademyCategory,
     AcademyContent,
+    PaddedLayout,
   },
 
   computed: {

@@ -13,7 +13,6 @@ use Validator;
 
 class TransactionController extends Controller
 {
-
   /**
    * @var float
    */
@@ -25,7 +24,7 @@ class TransactionController extends Controller
 
   public function index(Request $request)
   {
-    return TransactionResource::collection(auth()->user()->transactions);
+    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id',"desc")->get());
   }
 
   public function buy(Request $request)
@@ -40,14 +39,13 @@ class TransactionController extends Controller
     }
     try {
       $bianceService = new BianceApiService();
-      $ecbService = new EcbExchangeRatesApiService();
 
       $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
-      $this->exchangeRate = $ecbService->getCurrentUsdToEuroExchangeRate();
+      $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
 
       if ($this->isUserBalanceSufficient()) {
         $this->createTransaction($request, TransactionModel::ACTION_BUY);
-        $balance = $user->balance - $this->symbolPrice * $this->exchangeRate * $request->quantity;
+        $balance = $user->balance - $this->symbolPrice / $this->exchangeRate * $request->quantity;
         $user->balance = $balance;
         $user->save();
 
@@ -72,18 +70,15 @@ class TransactionController extends Controller
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
     }
-
     if ($this->getCurrentSymbolAmount($request->symbol) < $request->quantity) {
       return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_SYMBOL_AMOUNT], 400);
     }
 
     $bianceService = new BianceApiService();
-    $ecbService = new EcbExchangeRatesApiService();
-
     $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
-    $this->exchangeRate = $ecbService->getCurrentUsdToEuroExchangeRate();
+    $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
 
-    $user->balance = $user->balance + $this->symbolPrice * $this->exchangeRate * $request->quantity;
+    $user->balance = $user->balance + $this->symbolPrice / $this->exchangeRate * $request->quantity;
     $user->save();
 
     try {
@@ -117,13 +112,13 @@ class TransactionController extends Controller
 
   private function isUserBalanceSufficient(): bool
   {
-    return ($this->symbolPrice * $this->exchangeRate) <= auth()->user()->balance;
+    return ($this->symbolPrice / $this->exchangeRate) <= auth()->user()->balance;
   }
 
   private function getCurrentSymbolAmount(string $symbol)
   {
     $symbol = Symbol::where(["api_symbol" => $symbol])->first();
-    return (int)auth()->user()->transactions()
+    return auth()->user()->transactions()
       ->where('symbol_id', $symbol->id)
       ->get()
       ->pluck('quantity')

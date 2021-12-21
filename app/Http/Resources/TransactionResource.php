@@ -27,6 +27,7 @@ class TransactionResource extends JsonResource
       'symbol' => $this->symbol,
       'api_symbol' => $this->api_symbol,
       'price' => $this->price,
+      'price_euro' => $this->price / $this->exchange_price,
       'action' => $this->action,
       'bought_at' => $this->created_at,
     ];

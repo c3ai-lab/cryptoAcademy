@@ -30,7 +30,9 @@ class UserResource extends JsonResource
       'balance' => $this->balance,
       'created_at' => $this->created_at,
       'updated_at' => $this->updated_at,
-      'favorites' => $this->favorites(),
+      'axis' => ['x' => $this->x_axis, 'y' => $this->y_axis],
+      'favorites' => count($this->favorites) ? $this->favorites() : [],
+
     ];
   }
 }

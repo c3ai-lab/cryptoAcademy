@@ -12,20 +12,20 @@
 <style lang="scss" scoped>
 .main {
   cursor: pointer;
-  
+
 
 :hover
 {
   background-color: #2a3042;
   color: white;
   border-radius: 0.25rem;
-  
+
   h4.card-title
   {
     color: white;
   }
 }
-  
+
 }
 
 </style>
@@ -49,7 +49,8 @@ export default {
       return this.article.newsitem.url;
     },
     publishedAt: function () {
-      const publishedAtTimestamp = this.article.newsitem.publishedAt;
+      // const publishedAtTimestamp = this.article.newsitem.publishedAt;
+      const publishedAtTimestamp = this.article.created_at;
       if (publishedAtTimestamp == null) return "null";
       return new Date(publishedAtTimestamp).toLocaleString("de-DE");
     },

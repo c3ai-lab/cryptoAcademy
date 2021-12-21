@@ -17,7 +17,6 @@ import tinymce from "vue-tinymce-editor";
 //Filters:
 import './filters.js';
 
-
 Vue.use(BootstrapVue);
 Vue.component("apexchart", VueApexCharts);
 Vue.component("tinymce", tinymce);
@@ -25,8 +24,10 @@ Vue.component("tinymce", tinymce);
 
 // Custom global components
 import NicePrice from './components/NicePrice.vue'
+import PaddedLayout from "./layouts/PaddedLayout.vue";
 
 Vue.component('NicePrice', NicePrice);
+Vue.component('PaddedLayout', PaddedLayout);
 
 // Vue.use(vClickOutside);
 // Vue.use(VueMask);

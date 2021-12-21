@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Enum\MessageCodes;
+use App\Http\Resources\SymbolUserResource;
 use App\Http\Resources\UserResource;
+use App\Models\Symbol;
 use App\Models\User;
 use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
+use App\Service\BianceApiService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -31,7 +34,23 @@ class UserController extends Controller
    */
   public function getCurrentUser()
   {
-    return new (auth()->user());
+    return new UserResource((auth()->user()));
+  }
+
+  public function getCurrentUserWallet(Request $request)
+  {
+    $collection = Symbol::all();
+    $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
+
+    $apiService = new BianceApiService();
+    $rate = $apiService->getPriceOfEuroToUsd();
+    $coll = $filtered->map(function ($item) use ($rate, $apiService) {
+      $balance = $item->user_quantity > 0 ? $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate : 0;
+      $item->user_balance = $balance;
+      return $item;
+    });
+
+    return SymbolUserResource::collection($coll);
   }
 
   /**
@@ -70,8 +89,10 @@ class UserController extends Controller
   public function updateCurrentUser(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required|string|between:2,100|unique:users',
-      'email' => 'required|string|email|max:100|unique:users'
+//      'name' => 'required|string|between:2,100|unique:users',
+//      'email' => 'required|string|email|max:100|unique:users',
+      'x_axis' => 'required|int',
+      'y_axis' => 'required|int',
     ]);
 
     if ($validator->fails()) {
@@ -79,7 +100,8 @@ class UserController extends Controller
       return response()->json($validator->errors(), 400);
     }
 
-    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email]);
+    User::find(auth()->user()->id)->update(['x_axis' => $request->x_axis, 'y_axis' => $request->y_axis]);
+//    User::find(auth()->user()->id)->update(['name' => $request->name, 'email' => $request->email, 'x_axis' => $request->x_axis, 'y_axis' => $request->y_axis]);
 
     return response()->json([
       'msgcode' => MessageCodes::USERDATA_CHANGE_SUCCESS,
@@ -89,6 +111,10 @@ class UserController extends Controller
 
   public function deleteCurrentUser()
   {
+    $user = auth()->user();
+    $user->userVerification()->delete();
+    $user->transactions()->delete();
+    $user->favorites()->detach();
     User::find(auth()->user()->id)->delete();
     auth()->logout();
     return response()->json(['msgcode' => MessageCodes::USER_DELETE]);
@@ -97,6 +123,7 @@ class UserController extends Controller
   public function resetCurrentUser()
   {
     $user = auth()->user();
+    $user->userVerification()->delete();
     $user->transactions()->delete();
     $user->favorites()->detach();
     $user->balance = self::Init_BALANCE;
@@ -113,7 +140,7 @@ class UserController extends Controller
     ]);
 
     if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
+      return response()->json(['msgcode' => MessageCodes::PASSWORD_CHANGE_FAIL], 422);
     }
     User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
 

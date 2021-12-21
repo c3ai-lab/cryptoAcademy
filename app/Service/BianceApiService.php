@@ -27,6 +27,14 @@ class BianceApiService
    */
   public function getPriceOfSymbol(string $symbol): float
   {
-    return $this->api->price($symbol);
+    return (float)$this->api->price($symbol);
+  }
+
+  /**
+   * @throws \Exception
+   */
+  public function getPriceOfEuroToUsd(): float
+  {
+    return (float)$this->api->price("EURUSDT");
   }
 }
