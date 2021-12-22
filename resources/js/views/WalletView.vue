@@ -1,49 +1,40 @@
 <template>
-  <div>
-    <div style="padding: 14px 28px; margin-top: 70px;" v-if="1">
-      <h1>{{ $t('wallet.total_wallet') }}: {{ totalwallet | eur }}</h1>
-    </div>
-    <div style="padding: 14px 28px;" v-if="1">
-      <h1>Crypto-Coin Übersicht</h1>
-      <wallet-symbol-list :walletsymbolData="walletsymbolData"/>
-      <h1>{{ $t('wallet.all_transactions') }}</h1>
-      <transaction-card :symbol="symbol"/>
-    </div>
-  </div>
+  <PaddedLayout>
+    <h2>{{ $t("wallet.total_value") }}</h2>
+    <TotalBalanceCard />
+
+    <h2>{{ $t("wallet.wallet_list") }}</h2>
+    <WalletSymbolList :wallets="wallets" />
+
+    <h2>{{ $t("wallet.transaction_histroy") }}</h2>
+    <TransactionCard :symbol="'all'" />
+  </PaddedLayout>
 </template>
 
 <script>
-import Vue from "vue";
-import TransactionCard from '../components/TransactionCard';
-import WalletSymbolList from "../components/WalletSymbolList";
+import PaddedLayout from "../layouts/PaddedLayout.vue";
+import TotalBalanceCard from "../components/TotalBalanceCard.vue";
+import TransactionCard from "../components/TransactionCard.vue";
+import WalletSymbolList from "../components/WalletSymbolList.vue";
 
-export default Vue.extend({
+export default {
   name: "WalletView",
-  data() {
-    return {
-      symbol: "all"
-    }
-  },
+
   components: {
-    WalletSymbolList,
+    PaddedLayout,
+    TotalBalanceCard,
     TransactionCard,
+    WalletSymbolList,
   },
 
   computed: {
-    totalwallet: function () {
-      let temp = 0;
-      this.walletsymbolData.forEach(function (item) {
-        temp += item.user_balance;
-      });
-      return temp;
-    },
-    walletsymbolData: function () {
-      return this.$store.getters["wallet/getWalletsymbol"];
+    wallets() {
+      return this.$store.getters["wallets/all"]();
     },
   },
-  mounted() {
-    // Set the initial number of items
-    this.$store.dispatch("wallet/fetchWalletsymbol");
+
+  created() {
+    this.$store.dispatch("wallets/fetchAll");
   },
-});
+};
 </script>

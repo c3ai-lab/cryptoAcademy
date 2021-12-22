@@ -3,16 +3,22 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <div class="table-responsive mt-3 mb-0">
-            <b-table
-              :items="walletsymbolData"
-              :fields="fields"
-              responsive="sm"
-              :current-page="currentPage"
-              :sort-by.sync="sortBy"
-              :sort-desc.sync="sortDesc"
-            ></b-table>
-          </div>
+          <b-table
+            responsive="sm"
+            :items="nonEmptyWallets"
+            :fields="fields"
+            :current-page="currentPage"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+          >
+            <template #cell(user_balance)="data">
+              {{ data.value | eur }}
+            </template>
+
+            <template #cell(user_quantity)="data">
+              {{ data.value | crypto }}
+            </template>
+          </b-table>
         </div>
       </div>
     </div>
@@ -20,43 +26,51 @@
 </template>
 
 <script>
-
-import {tableData} from "../../../skote/resources/js/views/tables/dataAdvancedtable";
-
 export default {
   props: {
-    walletsymbolData: [],
+    wallets: Array,
   },
+
   data() {
     return {
-      tableData: tableData,
-      title: "Advanced Table",
-      items: [
+      fields: [
         {
-          text: "Tables",
-          href: "/",
+          key: "name",
+          label: "Name",
+          sortable: true,
         },
         {
-          text: "Advanced",
-          active: true,
+          key: "user_balance",
+          label: "Summe",
+          sortable: true,
+          tdClass: "right",
+        },
+        {
+          key: "user_quantity",
+          label: "Menge",
+          sortable: true,
+          tdClass: "right",
         },
       ],
       currentPage: 1,
-      filter: null,
-      filterOn: [],
       sortBy: "user_balance_eur",
       sortDesc: true,
-      fields: [
-        {key: "name", sortable: true, label: "Name"},
-        {key: "user_balance_eur", sortable: true, label: "Summe"},
-        {key: "user_quantity", sortable: true, label: "Menge"},
-      ],
     };
   },
-}
+
+  computed: {
+    nonEmptyWallets() {
+      return this.wallets.filter((v) => v.user_balance > 0);
+    },
+  },
+};
 </script>
 
 <style>
+td.right {
+  text-align: right;
+}
+
 .hidden-scroll {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

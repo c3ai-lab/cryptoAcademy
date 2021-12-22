@@ -1,35 +1,3 @@
-<script>
-/**
- * Nav-bar Component
- */
-export default {
-  data() {
-    return {
-      name: "NavBar",
-    };
-  },
-  computed: {
-    balance() {
-      return (this.$store.getters['user/getUser']().balance).toFixed(2)
-    }
-  },
-  methods: {
-    openNav() {
-      document.getElementById("open-btn").style.display = "none";
-      document.getElementById("close-button").style.display = "block";
-      document.getElementById("nav-menu").style.display = "block";
-      document.getElementById("background").style.display = "block";
-    },
-    closeNav() {
-      document.getElementById("close-button").style.display = "none";
-      document.getElementById("open-btn").style.display = "block";
-      document.getElementById("nav-menu").style.display = "none";
-      document.getElementById("background").style.display = "none";
-    },
-  },
-};
-</script>
-
 <template>
   <header id="page-topbar">
     <div>
@@ -56,7 +24,7 @@ export default {
         <div class="navbar-brand-box d-none d-lg-block col-2">
           <a href="/" class="logo">
             <span>
-              <img src="/images/cryptocademy.svg" style="width: 100%"/>
+              <img src="/images/cryptocademy.svg" style="width: 100%" />
             </span>
           </a>
         </div>
@@ -71,10 +39,11 @@ export default {
             </span>
           </a>
         </div>
-        <div class="col-md-7 col-2">
-        </div>
+        <div class="col-md-7 col-2"></div>
         <div class="d-flex balance p-4 justify-content-end">
-          <span style="line-height: 1"> Konto: <b>{{ balance }}€</b></span>
+          <span style="line-height: 1">
+            Konto: <b>{{ balance | eur }}</b></span
+          >
         </div>
 
         <!---
@@ -101,25 +70,53 @@ export default {
       <router-link :to="{ name: 'dashboard' }" @click.native="closeNav()">
         {{ $t("navigation.dashboard") }}
       </router-link>
-      <br/>
+      <br />
       <router-link :to="{ name: 'wallet' }" @click.native="closeNav()">
         {{ $t("navigation.wallet") }}
       </router-link>
-      <br/>
+      <br />
       <router-link :to="{ name: 'trading' }" @click.native="closeNav()">
         {{ $t("navigation.trading") }}
       </router-link>
-      <br/>
+      <br />
       <router-link :to="{ name: 'academy' }" @click.native="closeNav()">
         {{ $t("navigation.academy") }}
       </router-link>
-      <br/>
+      <br />
       <router-link :to="{ name: 'profile' }" @click.native="closeNav()">
         {{ $t("navigation.profile") }}
       </router-link>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  name: "NavBar",
+
+  computed: {
+    balance() {
+      return this.$store.getters["user/getUser"]().balance;
+    },
+  },
+
+  methods: {
+    openNav() {
+      document.getElementById("open-btn").style.display = "none";
+      document.getElementById("close-button").style.display = "block";
+      document.getElementById("nav-menu").style.display = "block";
+      document.getElementById("background").style.display = "block";
+    },
+
+    closeNav() {
+      document.getElementById("close-button").style.display = "none";
+      document.getElementById("open-btn").style.display = "block";
+      document.getElementById("nav-menu").style.display = "none";
+      document.getElementById("background").style.display = "none";
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 #nav-menu {
