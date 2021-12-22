@@ -24,14 +24,20 @@
     "forgot_password": "Passwort vergessen?",
     "no_account": "Noch keinen Account?",
     "already_account": "Bereits einen Account?",
-    "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
-    "login_failed": "Anmeldung fehlgeschlagen!",
+    "accept_terms_of_use": "Ich akzeptiere mit der Registrierung die",
+    "invalid_email": "Ungültige E-Mail-Adresse",
+    "invalid_username": "Ungültiger Benutzername (2 bis 100 Zeichen)",
+    "invalid_password": "Ungültiges Password (mindestens 6 Zeichen)",
+    "login_failed": "Passwort passt nicht zur E-Mail-Adresse",
     "register_failed": "Registrierung fehlgeschlagen!",
     "reset_password": "Passwort vergessen?",
     "mail_for_password": "Gib deine mit dem Konto verknüpfte E-Mail-Adresse an, um ein neues Passwort per Mail zu erhalten.",
     "reset_passoword_now": "Neues Passwort anfordern!",
     "mail_failed": "Die angegebene Mail-Adresse ist nicht vergeben.",
-    "remember_password": "Du erinnerst dich an dein Passwort?"
+    "remember_password": "Du erinnerst dich an dein Passwort?",
+    "register_success": "Du hast dich erfolgreich registriert. Bitte bestätige die Registrierungsmail, bevor du dich einloggen kannst.",
+    "new_password": "Du hast erfolgreich dein Passwort geändert. Du wurdest automatisch ausgeloggt und kannst dich jetzt mit deinem neuen Passwort einloggen.",
+    "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
   },
   "dashboard": {
     "title": "Dashboard",
@@ -39,7 +45,15 @@
     "news": "Neuigkeiten",
     "no_news": "Es gibt aktuell keine Neuigkeiten",
     "favorites": "Favoriten",
-    "no_favorites": "Es sind keine Coins als Favoriten markiert"
+    "no_favorites": "Es sind keine Coins als Favoriten markiert.",
+    "add_favorites": "Füge jetzt Coins hinzu.",
+    "welcome_modal": {
+      "hello": "Hallo ",
+      "trading": "Herzlich Willkommen bei CryptoCademy, deiner gamifizierten Crypto-Trading-App. Zum Start wurden dir 10.000€ gutgeschrieben, die du in Kryptowährungen investieren kannst.",
+      "trade_now": "Zum Trading",
+      "academy": "Wenn du dich noch nicht gut mit Kryptowährungen auskennst oder noch mehr zu dem Thema lernen möchtest, schaue doch mal in unserer Crypto Academy vorbei, wo du Informationen zu den relevantesten Themen Rund um bestimmte Crypto-Coins, Blockchain-Technologien und Trading findest.",
+      "academy_now": "Zur Academy"
+    }
   },
   "profile": {
     "title": "Profil",
