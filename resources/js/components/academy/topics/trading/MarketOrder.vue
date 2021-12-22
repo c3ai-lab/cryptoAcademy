@@ -28,7 +28,7 @@
 <script>
   import {
     AcademyTopic
-  } from "../../../../../enums";
+  } from "../../../../enums";
 
   export default {
     name: AcademyTopic.TRADING__MARKET_ORDER,

@@ -11,7 +11,7 @@
       <div class="card-body" ref="container">
         <p>Angenommen es gäbe zwei Töpfe mit Salz und Pfeffer in einer WG-Küche. In beiden sind 1000g. Jemand möchte 100g Salz gegen Pfeffer tauschen. Er füllt die 100g Salz in den Salz-Topf. Die Eingabe beträgt 10%. Er nimmt sich 10% aus dem Pfeffer-Topf, also 100g Pfeffer.
           Jetzt kommt ein zweiter, um wieder 100g Salz gegen Pfeffer zu tauschen. Er schüttet 100g Salz zum Salz. Seine Beitrag zum Salz entspricht jetzt nur noch ~9,09% vom Salz. Er darf sich deshalb nur 9,09% vom Pfeffer nehmen. Da nur noch 900g Pfeffer übrig sind, bekommt er nur 81,81g Pfeffer zurück. </p>
-        <p>Wenn sich dieser Vorgang oft genug wiederholt, steigt der Preis von Pfeffer gemessen in Salz immer weiter an. Sofern niemand zufällig Pfeffer gegen Salz tauscht und sich über das günstige Tauschverhältnis freut, lockt das Ungleichgewicht irgendwann einen Pfeffer-Salz-Arbitrage-Händler an, der sich einen Haufen Salz für eine Prise Pfeffer sichern kann. Mit dem Salz kann er unter Umständen in einer anderen WG einen Pfeffer-Überschuss so günstig eintauschen, dass er am Ende von beiden Gewürzen etwas übrig hat.
+        <p>Wenn sich dieser Vorgang oft genug wiederholt, steigt der Preis von Pfeffer gemessen in Salz immer weiter an. Sofern niemand zufällig Pfeffer gegen Salz tauscht und sich über das günstige Tauschverhältnis freut, lockt das Ungleichgewicht irgendwann einen Pfeffer-Salz-Arbitrage-Händler an, der sich einen Haufen Salz für eine Prise Pfeffer sichern kann. Mit dem Salz kann er unter Umständen in einer anderen WG einen Pfeffer-Überschuss so günstig eintauschen, dass er am Ende von beiden Gewürzen etwas übrig hat.</p>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
 <script>
   import {
     AcademyTopic
-  } from "../../../../../enums";
+  } from "../../../../enums";
 
   export default {
     name: AcademyTopic.TRADING__AMM,
