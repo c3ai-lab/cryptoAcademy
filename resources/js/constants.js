@@ -229,7 +229,14 @@ export const ACADEMY = {
       AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_STAKE,
     ],
   },
-  [AcademyCategory.TRADING]: {},
+  [AcademyCategory.TRADING]: {
+    [AcademyTopic.TRADING__MARKET_ORDER]: [],
+    [AcademyTopic.TRADING__LIMIT_ORDER]: [],
+    [AcademyTopic.TRADING__PRICE]: [],
+    [AcademyTopic.TRADING__AMM]: [],
+    [AcademyTopic.TRADING__SLIPPAGE]: [],
+    [AcademyTopic.TRADING__TAXES]: [],
+  },
   [AcademyCategory.TOP_FIVE_COINS]: {
     [AcademyTopic.TOP_FIVE_COINS__BTC]: [],
     [AcademyTopic.TOP_FIVE_COINS__ETH]: [],

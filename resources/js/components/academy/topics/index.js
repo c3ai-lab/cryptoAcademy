@@ -61,6 +61,36 @@ Vue.component(
 );
 
 Vue.component(
+  AcademyTopic.TRADING__MARKET_ORDER,
+  require("./crypto/trading/MarketOrder.vue").default
+);
+
+Vue.component(
+  AcademyTopic.TRADING__LIMIT_ORDER,
+  require("./crypto/trading/LimitOrder.vue").default
+);
+
+Vue.component(
+  AcademyTopic.TRADING__PRICE,
+  require("./crypto/trading/Price.vue").default
+);
+
+Vue.component(
+  AcademyTopic.TRADING__AMM,
+  require("./crypto/trading/Amm.vue").default
+);
+
+Vue.component(
+  AcademyTopic.TRADING__SLIPPAGE,
+  require("./crypto/trading/Slippage.vue").default
+);
+
+Vue.component(
+  AcademyTopic.TRADING__TAXES,
+  require("./crypto/trading/Taxes.vue").default
+);
+
+Vue.component(
   AcademyCategory.FIFTY_COINS__LIST,
   require("./FiftyCoins.vue").default
 );

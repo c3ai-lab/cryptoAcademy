@@ -110,14 +110,20 @@
     "CRYPTO__ADVANCED__CONSENSUS": "Konsens",
     "CRYPTO__ADVANCED__PROOF_OF_WORK": "Proof of Work",
     "CRYPTO__ADVANCED__PROOF_OF_STAKE": "Proof of Stake",
+    "TRADING__MARKET_ORDER": "Market Order",
+    "TRADING__LIMIT_ORDER": "Limit Order",
+    "TRADING__PRICE": "Preisfindung",
+    "TRADING__AMM": "Automated Market Maker",
+    "TRADING__SLIPPAGE": "Slippage",
+    "TRADING__TAXES": "Steuern",
     "TOP_FIVE_COINS__BTC": "Bitcoin",
     "TOP_FIVE_COINS__ETH": "Ethereum",
     "TOP_FIVE_COINS__BNB": "Binance Coin",
     "TOP_FIVE_COINS__USDT": "Tether",
     "TOP_FIVE_COINS__SOL": "Solana",
     "TRADING": {
-      "name": "Trading",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "name": "Handel",
+      "description": "In diesem Bereich finden sich Informationen zum Handel mit Kryptowährungen. Viele Prinzipien entsprechen denen auf Aktienbörsen, manche Mechanismen sind jedoch auch kryptospezifisch."
     },
     "TOP_FIVE_COINS": {
       "name": "Top fünf Kryptowährungen",
