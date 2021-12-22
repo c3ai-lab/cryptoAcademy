@@ -17,20 +17,6 @@ const state = () => {
   return state;
 };
 
-const processUserResponse = async ({ response, commit, dispatch }) => {
-  if (response.ok === true) {
-    const data = await response.json();
-    commit("setUser", data.user);
-    commit("setAccessToken", {
-      token: data.access_token,
-      expiresIn: data.expires_in,
-    });
-    dispatch("save");
-    return true;
-  }
-  return false;
-};
-
 const getters = {
   accessToken: (state) => () =>
     state.accessToken !== null &&
@@ -55,7 +41,35 @@ const actions = {
       }),
     });
 
-    return await processUserResponse({ response, commit, dispatch });
+    const result = {
+      success: false,
+      emailError: null,
+      passwordError: null,
+    };
+
+    if (response.ok === true) {
+      const data = await response.json();
+      commit("setUser", data.user);
+      commit("setAccessToken", {
+        token: data.access_token,
+        expiresIn: data.expires_in,
+      });
+      dispatch("save");
+
+      result.success = true;
+    } else if (response.status === 401) {
+      const data = await response.json();
+    } else if (response.status === 422) {
+      const data = await response.json();
+      if (data.email != null && data.email.length > 0) {
+        result.emailError = data.email[0];
+      }
+      if (data.password != null && data.password.length > 0) {
+        result.passwordError = data.password[0];
+      }
+    }
+
+    return result;
   },
 
   async refreshSession({ commit, dispatch, getters }) {
@@ -66,7 +80,17 @@ const actions = {
       },
     });
 
-    return await processUserResponse({ response, commit, dispatch });
+    if (response.ok === true) {
+      const data = await response.json();
+      commit("setUser", data.user);
+      commit("setAccessToken", {
+        token: data.access_token,
+        expiresIn: data.expires_in,
+      });
+      dispatch("save");
+      return true;
+    }
+    return false;
   },
 
   async refreshUserData({ commit, rootGetters }) {
