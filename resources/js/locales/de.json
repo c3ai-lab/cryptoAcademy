@@ -124,25 +124,43 @@
       "description": "<i>How does it work?</i> bietet einen einfach erklärten Überblick über Kryptowährungen im Allgemeinen. Auch ist hier eine einfache sowie eine fortgeschrittene Erklärung zur Funktionsweise von Blockchains und Transaktionen zu finden sowie Informationen zum Thema Konsens und Konsens Mechanismen."
     },
     "CRYPTO__INTRO": "Einführung",
+    "CRYPTO__INTRO__WALLETS": "Wallets",
+    "CRYPTO__INTRO__SMART_CONTRACTS": "Smart Contracts",
     "CRYPTO__BLOCKCHAIN": "Blockchain",
     "CRYPTO__BLOCKCHAIN__TRANSACTIONS": "Transaktionen",
     "CRYPTO__BLOCKCHAIN__FEES": "Transaktionsgebühren",
-    "CRYPTO__BLOCKCHAIN__ADVANCED": "Advanced",
+    "CRYPTO__ADVANCED": "Fortgeschrittene Themen",
+    "CRYPTO__ADVANCED__TRANSACTIONS": "Transaktionen",
+    "CRYPTO__ADVANCED__MERKLETREE": "Merkle Trees und Merkle Roots",
+    "CRYPTO__ADVANCED__CONSENSUS": "Konsens",
+    "CRYPTO__ADVANCED__PROOF_OF_WORK": "Proof of Work",
+    "CRYPTO__ADVANCED__PROOF_OF_STAKE": "Proof of Stake",
+    "TRADING__MARKET_ORDER": "Market Order",
+    "TRADING__LIMIT_ORDER": "Limit Order",
+    "TRADING__PRICE": "Preisfindung",
+    "TRADING__AMM": "Automated Market Maker",
+    "TRADING__SLIPPAGE": "Slippage",
+    "TRADING__TAXES": "Steuern",
+    "TOP_FIVE_COINS__BTC": "Bitcoin",
+    "TOP_FIVE_COINS__ETH": "Ethereum",
+    "TOP_FIVE_COINS__BNB": "Binance Coin",
+    "TOP_FIVE_COINS__USDT": "Tether",
+    "TOP_FIVE_COINS__SOL": "Solana",
     "TRADING": {
-      "name": "Trading",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "name": "Handel",
+      "description": "In diesem Bereich finden sich Informationen zum Handel mit Kryptowährungen. Viele Prinzipien entsprechen denen auf Aktienbörsen, manche Mechanismen sind jedoch auch kryptospezifisch."
     },
     "TOP_FIVE_COINS": {
       "name": "Top fünf Kryptowährungen",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    },
+      "description": "Die Anzahl an verschiedenen Kryptowährungen ist gewaltig und es ist leicht, hier den Überblick zu verlieren. Unter <i>Top 5 Kryptowährungen</i> ist eine kurze Übersicht über die derzeit größten Kryptowährungen zu finden. Hier sind Informationen zu Währungen wie Bitcoin und Ethereum zu finden, sowie ihre jeweiligen Vor- und Nachteile. So kann jeder für sich selber entscheiden, welche die richtige Kryptowährung für sich selbst ist."
+    }, 
     "FIFTY_COINS__LIST": {
       "name": "50 Kryptowährungen - Kurz beschrieben",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Hier ist eine grobe Übersicht über die 50 Kryptowährungen mit dem aktuell größten Marktwert. <i>50 Kryptowährungen - Kurz beschrieben</i> bietet schnelle, vereinfachte Informationen zu diesen Währungen. Auf der Website von CoinMarketCap können bei Bedarf noch umfangreichere Informationen zu den einzelnen Währungen gefunden werden."
     },
-    "GLOSSAR": {
+    "GLOSSAR__LIST": {
       "name": "Glossar",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Im Glossar werden alle im Umfang der Academy aufgegriffenen Begriffe rund um Kryptowährungen noch einmal kurz erklärt."
     }
   }
 }
