@@ -52,7 +52,7 @@
         <div style="padding: 14px 28px;" class="" v-if="1">
           <b-card>
             <div class="text-muted pa-0 ma-0">
-              {{$t('you.have')}}
+              {{$t('trade.amount')}}
             </div>
             <div class="font-size-22 w-100" style="text-align: right">
                 <b>
@@ -145,6 +145,9 @@ export default {
     background-color: #eff2f7 !important;
     border: none;
     color: var(--bs-gray-500) !important;
+  }
+  .dim-btn:focus, .dim-btn:focus-visible {
+    outline: none !important;
   }
   .active-dimension {
     background-color: #eff2f760  !important;

@@ -151,6 +151,10 @@ export const APEXCHART_OPTIONS = {
 };
 
 export const DIMENSION_MAP = {
+  [Dimension.ONE_HOUR]: {
+    interval: "1m",
+    limit: 60,
+  },
   [Dimension.ONE_DAY]: {
     interval: "30m",
     limit: 48,
