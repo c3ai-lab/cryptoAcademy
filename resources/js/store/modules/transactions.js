@@ -3,15 +3,17 @@ const state = {
 };
 
 const getters = {
-  getTransactions: () => () => { },
+  getTransactions: (state) => {
+    return state.transactions
+  },
   getTransactionsBySymbol: (state) => (symbol) => {
     return state.transactions.filter(t => t.api_symbol === symbol)
   },
 };
 
 const actions = {
-  fetchTransactions({ commit, rootGetters }) {
-    fetch(`${location.origin}/api/user/transaction/`, {
+  fetchTransactions({commit, rootGetters}) {
+    fetch(`${location.origin}/api/user/transaction`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +53,7 @@ const actions = {
         console.log(error);
       });
   },
-  buy({ commit, rootGetters }, { symbol, quantity }) {
+  buy({commit, dispatch, rootGetters}, {symbol, quantity}) {
     fetch(`${location.origin}/api/user/transaction/buy`, {
       method: "POST",
       headers: {
@@ -63,22 +65,18 @@ const actions = {
         quantity: quantity,
       }),
     })
-      .then((data) => {
-        if (data === null) {
-          reject();
-        } else {
-          commit(
-            "setTransactions",
-            data
-          );
-          resolve();
+      .then((response) => {
+        if (response.ok === true) {
+          dispatch("user/refreshUserdata", null, {root: true});
+          return response.json();
         }
+        return null;
       })
       .catch((error) => {
         console.log(error);
       });
   },
-  sell({ commit, rootGetters }, { symbol, quantity }) {
+  sell({commit, dispatch, rootGetters}, {symbol, quantity}) {
     fetch(`${location.origin}/api/user/transaction/sell`, {
       method: "POST",
       headers: {
@@ -92,6 +90,7 @@ const actions = {
     })
       .then((response) => {
         if (response.ok === true) {
+          dispatch("user/refreshUserdata", null, {root: true});
           return response.json();
         }
         return null;

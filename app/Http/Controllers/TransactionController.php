@@ -24,7 +24,7 @@ class TransactionController extends Controller
 
   public function index(Request $request)
   {
-    return TransactionResource::collection(auth()->user()->transactions);
+    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id',"desc")->get());
   }
 
   public function buy(Request $request)
@@ -70,7 +70,6 @@ class TransactionController extends Controller
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
     }
-
     if ($this->getCurrentSymbolAmount($request->symbol) < $request->quantity) {
       return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_SYMBOL_AMOUNT], 400);
     }
@@ -119,7 +118,7 @@ class TransactionController extends Controller
   private function getCurrentSymbolAmount(string $symbol)
   {
     $symbol = Symbol::where(["api_symbol" => $symbol])->first();
-    return (int)auth()->user()->transactions()
+    return auth()->user()->transactions()
       ->where('symbol_id', $symbol->id)
       ->get()
       ->pluck('quantity')

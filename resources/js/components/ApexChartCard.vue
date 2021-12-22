@@ -67,8 +67,8 @@
 <script>
 import Vue from "vue";
 
-import { TimeFrame } from "../enums";
-import { APEXCHART_OPTIONS } from "../constants";
+import {TimeFrame} from "../enums";
+import {APEXCHART_OPTIONS} from "../constants";
 
 export default Vue.extend({
   name: "ApexChartCard",
@@ -97,6 +97,7 @@ export default Vue.extend({
       TimeFrame,
 
       timeFrame: TimeFrame.ONE_MONTH,
+      arrowClasses: ""
     };
   },
 

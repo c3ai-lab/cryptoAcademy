@@ -43,19 +43,19 @@ class Symbol extends Model
         0
       );
   }
-  public function getUserBalanceAttribute()
-  {
-    if (auth()->user()->transactions->count() === 0) {
-      return 0;
-    }
-
-    return auth()->user()->transactions()
-      ->where('symbol_id', $this->id)
-      ->get()
-      ->pluck('quantity')
-      ->reduce(
-        fn($carry, $next) => $carry + $next,
-        0
-      );
-  }
+//  public function getUserBalanceAttribute()
+//  {
+//    if (auth()->user()->transactions->count() === 0) {
+//      return 0;
+//    }
+//
+//    return auth()->user()->transactions()
+//      ->where('symbol_id', $this->id)
+//      ->get()
+//      ->pluck('quantity')
+//      ->reduce(
+//        fn($carry, $next) => $carry + $next,
+//        0
+//      );
+//  }
 }

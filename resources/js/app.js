@@ -17,7 +17,6 @@ import tinymce from "vue-tinymce-editor";
 //Filters:
 import './filters.js';
 
-
 Vue.use(BootstrapVue);
 Vue.component("apexchart", VueApexCharts);
 Vue.component("tinymce", tinymce);

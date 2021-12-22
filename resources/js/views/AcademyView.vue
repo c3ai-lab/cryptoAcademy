@@ -1,30 +1,42 @@
 <template>
-  <padded-layout>
-    <div>
-      <AcademyOverview />
-      <hr />
-      <AcademyTopics />
-      <hr />
-      <AcademyContent />
-    </div>
-  </padded-layout>
+  <PaddedLayout>
+    <AcademyOverview v-if="category == null && page == null" />
+    <AcademyCategory v-else-if="category != null" :category="category" />
+    <AcademyContent v-else :page="page" />
+  </PaddedLayout>
 </template>
 
 <script>
+import { routeParamToEnumKey } from "../utils";
+
+import PaddedLayout from "../layouts/PaddedLayout.vue";
+
 import AcademyOverview from "../components/academy/AcademyOverview.vue";
-import AcademyTopics from "../components/academy/AcademyTopics.vue";
+import AcademyCategory from "../components/academy/AcademyCategory.vue";
 import AcademyContent from "../components/academy/AcademyContent.vue";
-import PaddedLayout from '../layouts/PaddedLayout.vue';
 
 export default {
   name: "AcademyView",
 
   components: {
     AcademyOverview,
-    AcademyTopics,
+    AcademyCategory,
     AcademyContent,
     PaddedLayout,
   },
+
+  computed: {
+    category() {
+      const routeTarget = this.$route.params.target;
+      if (routeTarget == null || routeTarget.includes("--")) return null;
+      return routeParamToEnumKey(routeTarget);
+    },
+
+    page() {
+      const routeTarget = this.$route.params.target;
+      if (routeTarget == null || !routeTarget.includes("--")) return null;
+      return routeTarget.toUpperCase().replaceAll("-", "_");
+    },
+  },
 };
 </script>
-
