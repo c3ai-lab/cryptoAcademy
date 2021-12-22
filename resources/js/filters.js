@@ -43,3 +43,15 @@ Vue.filter('eur', function (value) {
 Vue.filter('symbol', function (value) {
   return value.split('USDT')[0];
 });
+
+Vue.filter('crypto', function (value) {
+  if (typeof value !== "number") {
+    return value;
+}
+
+var formatter = new Intl.NumberFormat('de-DE', {
+    minimumFractionDigits: 8,
+    maximumFractionDigits: 8,
+});
+return formatter.format(value);
+});

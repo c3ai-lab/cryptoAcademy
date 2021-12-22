@@ -16,6 +16,7 @@ export const Coin = {
 };
 
 export const Dimension = {
+  ONE_HOUR: "1H",
   ONE_DAY: "1D",
   ONE_WEEK: "1W",
   ONE_MONTH: "1M",

@@ -51,7 +51,7 @@
     "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",
     "account_reset": "Account zurücksetzen",
     "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?",
-    "chart_info": "In Grafen möchte ich die Achsen angezeigt bekommen:",
+    "chart_info": "Zeige Achsen in Graphen",
     "x_axis": "X-Achse",
     "y_axis": "Y-Achse"
   },
@@ -59,6 +59,14 @@
     "month_short": "M",
     "year_short": "J",
     "all": "Gesamt"
+  },
+  "dimension": {
+    "1H": "1S",
+    "1D": "1D",
+    "1W": "1W",
+    "1M": "1M",
+    "1Y": "12M",
+    "All": "Gesamt"
   },
   "coins": {
     "BTC": {
@@ -80,8 +88,8 @@
     "all": "Alle",
     "bought": "Gekauft",
     "sold": "Verkauft",
-    "buy": "Kaufe",
-    "sell": "Verkaufe",
+    "buy": "Kaufen",
+    "sell": "Verkaufen",
     "price": "Preis",
     "total": "Gesamt",
     "value": "Wert",
@@ -90,6 +98,9 @@
   "wallet": {
     "total_wallet": "Walletwert ",
     "all_transactions": "Verlauf Vorgänge"
+  },
+  "you": {
+    "have": "Du hast"
   },
   "academy": {
     "title": "Crypto Academy",

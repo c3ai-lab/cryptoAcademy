@@ -67,7 +67,7 @@
           type="button"
           class="btn btn-success w-md"
         >
-          Kaufen
+          {{ $t('trade.buy') }}
         </button>
       </div>
     </div>
@@ -94,6 +94,8 @@ export default {
   methods: {
     buy() {
       this.$store.dispatch('transactions/buy', {quantity: this.quantity, symbol: this.$route.params.symbol})
+      this.$store.dispatch('coinIndex/fetchSymbols')
+      this.$store.dispatch('transactions/fetchTransactions')
     }
   },
 }
