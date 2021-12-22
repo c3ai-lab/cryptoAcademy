@@ -213,11 +213,20 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
 
 export const ACADEMY = {
   [AcademyCategory.CRYPTO]: {
-    [AcademyTopic.CRYPTO__INTRO]: [],
+    [AcademyTopic.CRYPTO__INTRO]: [
+      AcademyTopic.CRYPTO__INTRO__WALLETS,
+      AcademyTopic.CRYPTO__INTRO__SMART_CONTRACTS,
+    ],
     [AcademyTopic.CRYPTO__BLOCKCHAIN]: [
       AcademyTopic.CRYPTO__BLOCKCHAIN__TRANSACTIONS,
       AcademyTopic.CRYPTO__BLOCKCHAIN__FEES,
-      AcademyTopic.CRYPTO__BLOCKCHAIN__ADVANCED,
+    ],
+    [AcademyTopic.CRYPTO__ADVANCED]: [
+      AcademyTopic.CRYPTO__ADVANCED__TRANSACTIONS,
+      AcademyTopic.CRYPTO__ADVANCED__MERKLETREE,
+      AcademyTopic.CRYPTO__ADVANCED__CONSENSUS,
+      AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_WORK,
+      AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_STAKE,
     ],
   },
   [AcademyCategory.TRADING]: {},

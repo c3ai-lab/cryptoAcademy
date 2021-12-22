@@ -448,13 +448,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  h2 img {
-    width: 25px;
-  }
-
-</style>
-
 <script>
   import {
     AcademyCategory

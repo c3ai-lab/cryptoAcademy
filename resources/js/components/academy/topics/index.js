@@ -3,7 +3,61 @@ import { AcademyCategory, AcademyTopic } from "../../../enums";
 
 Vue.component(
   AcademyTopic.CRYPTO__INTRO,
-  require("./crypto/Intro.vue").default
+  require("./crypto/intro/Intro.vue").default
+);
+Vue.component(
+  AcademyTopic.CRYPTO__INTRO__WALLETS,
+  require("./crypto/intro/Wallets.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__INTRO__SMART_CONTRACTS,
+  require("./crypto/intro/SmartContracts.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__BLOCKCHAIN,
+  require("./crypto/blockchain/Blockchain.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__BLOCKCHAIN__TRANSACTIONS,
+  require("./crypto/blockchain/Transactions.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__BLOCKCHAIN__FEES,
+  require("./crypto/blockchain/Fees.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__ADVANCED,
+  require("./crypto/advanced/Advanced.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__ADVANCED__TRANSACTIONS,
+  require("./crypto/advanced/BlockchainTransactions.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__ADVANCED__MERKLETREE,
+  require("./crypto/advanced/MerkleTree.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__ADVANCED__CONSENSUS,
+  require("./crypto/advanced/Consensus.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_WORK,
+  require("./crypto/advanced/ProofOfWork.vue").default
+);
+
+Vue.component(
+  AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_STAKE,
+  require("./crypto/advanced/ProofOfStake.vue").default
 );
 
 Vue.component(
