@@ -34,9 +34,12 @@
                 name="email"
                 v-model="email"
                 type="text"
+                :state="emailState"
                 :placeholder="$t('auth.enter_email')"
-                required
-              ></b-form-input>
+              />
+              <b-form-invalid-feedback>
+                {{ $t("auth.invalid_email") }}
+              </b-form-invalid-feedback>
             </b-form-group>
 
             <b-form-group
@@ -50,9 +53,12 @@
                 name="username"
                 v-model="username"
                 type="text"
+                :state="usernameState"
                 :placeholder="$t('auth.enter_username')"
-                required
-              ></b-form-input>
+              />
+              <b-form-invalid-feedback>
+                {{ $t("auth.invalid_username") }}
+              </b-form-invalid-feedback>
             </b-form-group>
 
             <b-form-group
@@ -66,30 +72,28 @@
                 v-model="password"
                 name="password"
                 type="password"
+                :state="passwordState"
                 :placeholder="$t('auth.enter_password')"
-                minlength="6"
-                required
-              ></b-form-input>
-
-              <div class="mt-4 text-center">
-                <p class="mb-0">
-                  <b-form-checkbox
-                    id="input-3"
-                    name="terms-of-use"
-                    value="accepted"
-                    unchecked-value="not_accepted"
-                    required
-                    >&nbsp; {{ $t("auth.accept_by_registration") }}
-                    <router-link
-                      to="terms-of-use"
-                      class="fw-medium text-primary"
-                    >
-                      AGBs
-                    </router-link>
-                    !
-                  </b-form-checkbox>
-                </p>
-              </div>
+              />
+              <b-form-invalid-feedback>
+                {{ $t("auth.invalid_password") }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+            <b-form-group id="input-group-3" class="mt-4 text-center">
+              <p class="mb-0">
+                <b-form-checkbox
+                  id="input-3"
+                  name="terms-of-use"
+                  value="accepted"
+                  unchecked-value="not_accepted"
+                  required
+                  >&nbsp; {{ $t("auth.accept_terms_of_use") }}
+                  <router-link to="terms-of-use" class="fw-medium text-primary">
+                    AGBs
+                  </router-link>
+                  !
+                </b-form-checkbox>
+              </p>
             </b-form-group>
             <div class="mt-3 d-grid">
               <b-button type="submit" variant="primary" class="btn-block">
@@ -133,15 +137,6 @@
               </ul>
             </div>
             --->
-            <div class="mt-4 text-center">
-              <p class="mb-0">
-                {{ $t("auth.accept_by_registration") }}
-                <router-link to="terms-of-use" class="fw-medium text-primary">
-                  AGBs
-                </router-link>
-                !
-              </p>
-            </div>
           </b-form>
         </div>
       </div>
@@ -162,6 +157,9 @@ export default Vue.extend({
       password: "",
 
       registerFailed: false,
+      emailState: null,
+      usernameState: null,
+      passwordState: null,
     };
   },
 
@@ -174,10 +172,22 @@ export default Vue.extend({
         password_confirmation: this.password,
       });
 
-      if (response === true) {
+      if (response.success === true) {
         this.$router.push({ name: "register-success" });
-      } else {
+      } else if (
+        response.emailError === null &&
+        response.usernameError === null &&
+        response.passwordError === null
+      ) {
         this.registerFailed = true;
+        this.emailState = true;
+        this.usernameState = true;
+        this.passwordState = true;
+      } else {
+        this.registerFailed = false;
+        this.emailState = response.emailError === null;
+        this.usernameState = response.usernameError === null;
+        this.passwordState = response.passwordError === null;
       }
     },
   },

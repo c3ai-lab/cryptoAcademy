@@ -57,12 +57,52 @@ const actions = {
       dispatch("save");
 
       result.success = true;
-    } else if (response.status === 401) {
-      const data = await response.json();
     } else if (response.status === 422) {
       const data = await response.json();
       if (data.email != null && data.email.length > 0) {
         result.emailError = data.email[0];
+      }
+      if (data.password != null && data.password.length > 0) {
+        result.passwordError = data.password[0];
+      }
+    }
+
+    return result;
+  },
+
+  async register({ commit }, data) {
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        name: data.username,
+        password: data.password,
+        password_confirmation: data.password_confirmation,
+      }),
+    });
+
+    const result = {
+      success: false,
+      emailError: null,
+      usernameError: null,
+      passwordError: null,
+    };
+
+    if (response.status === 201) {
+      const data = await response.json();
+      commit("setUser", data.user);
+
+      result.success = true;
+    } else if (response.status === 400) {
+      const data = await response.json();
+      if (data.email != null && data.email.length > 0) {
+        result.emailError = data.email[0];
+      }
+      if (data.name != null && data.name.length > 0) {
+        result.usernameError = data.name[0];
       }
       if (data.password != null && data.password.length > 0) {
         result.passwordError = data.password[0];
@@ -110,40 +150,18 @@ const actions = {
     return false;
   },
 
-  async register({ commit }, data) {
-    const response = await fetch("/api/user", {
+  async resetPassword({}, email) {
+    const response = await fetch("/api/user/password/reset", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: data.email,
-        name: data.username,
-        password: data.password,
-        password_confirmation: data.password_confirmation,
+        email: email,
       }),
     });
 
-    if (response.status === 201) {
-      const data = await response.json();
-      commit("setUser", data.user);
-      return true;
-    }
-    return false;
-  },
-
-  resetPassword({}, email) {
-    return new Promise((resolve, reject) => {
-      fetch("/api/user/password/reset", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-        }),
-      }).then((response) => (response.ok === true ? resolve() : reject()));
-    });
+    return response.ok;
   },
 
   async resetAccount({ dispatch, rootGetters }) {
