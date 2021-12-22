@@ -223,6 +223,10 @@ export const ACADEMY = {
   [AcademyCategory.TRADING]: {},
   [AcademyCategory.TOP_FIVE_COINS]: {
     [AcademyTopic.TOP_FIVE_COINS__BTC]: [],
+    [AcademyTopic.TOP_FIVE_COINS__ETH]: [],
+    [AcademyTopic.TOP_FIVE_COINS__BNB]: [],
+    [AcademyTopic.TOP_FIVE_COINS__USDT]: [],
+    [AcademyTopic.TOP_FIVE_COINS__SOL]: [],
   },
   [AcademyCategory.FIFTY_COINS__LIST]: {},
   [AcademyCategory.GLOSSAR]: {},

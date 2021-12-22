@@ -104,6 +104,10 @@
     "CRYPTO__BLOCKCHAIN__FEES": "Transaktionsgebühren",
     "CRYPTO__BLOCKCHAIN__ADVANCED": "Advanced",
     "TOP_FIVE_COINS__BTC": "Bitcoin",
+    "TOP_FIVE_COINS__ETH": "Ethereum",
+    "TOP_FIVE_COINS__BNB": "Binance Coin",
+    "TOP_FIVE_COINS__USDT": "Tether",
+    "TOP_FIVE_COINS__SOL": "Solana",
     "TRADING": {
       "name": "Trading",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
@@ -114,11 +118,11 @@
     }, 
     "FIFTY_COINS__LIST": {
       "name": "50 Kryptowährungen - Kurz beschrieben",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Hier ist eine grobe Übersicht über die 50 Kryptowährungen mit dem aktuell größten Marktwert. <i>50 Kryptowährungen - Kurz beschrieben</i> bietet schnelle, vereinfachte Informationen zu diesen Währungen. Auf der Website von CoinMarketCap können bei Bedarf noch umfangreichere Informationen zu den einzelnen Währungen gefunden werden."
     },
     "GLOSSAR": {
       "name": "Glossar",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Im Glossar werden alle im Umfang der Academy aufgegriffenen Begriffe rund um Kryptowährungen noch einmal kurz erklärt."
     }
   }
 }
