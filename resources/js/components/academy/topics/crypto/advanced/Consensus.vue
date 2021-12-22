@@ -24,7 +24,7 @@
     <div class="card">
       <div class="card-body">
         <h2>Weiterführende Informationen:</h2>
-        <a href="/academy/crypto--advanced--proof-of-work">Proof-of-Work</a>
+        <a href="/academy/crypto--advanced--proof-of-work">Proof-of-Work</a><br/>
         <a href="/academy/crypto--advanced--proof-of-stake">Proof-of-Stake</a>
       </div>
     </div>

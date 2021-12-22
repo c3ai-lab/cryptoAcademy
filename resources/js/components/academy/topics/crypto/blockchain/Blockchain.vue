@@ -16,8 +16,8 @@
     <div class="card">
       <div class="card-body">
         <h2>Weiterführende Informationen:</h2>
-        <a href="/academy/crypto--blockchain--transactions">Transaktionen</a>
-        <a href="/academy/crypto--blockchain--fees">Transaktionsgebühren</a>
+        <a href="/academy/crypto--blockchain--transactions">Transaktionen</a><br/>
+        <a href="/academy/crypto--blockchain--fees">Transaktionsgebühren</a><br/>
         <a href="/academy/crypto--blockchain--advanced">Fortgeschrittene Themen</a>
       </div>
     </div>

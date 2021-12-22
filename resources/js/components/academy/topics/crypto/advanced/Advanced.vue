@@ -12,10 +12,10 @@
     <div class="card">
       <div class="card-body">
         <h2>Weiterführende Informationen:</h2>
-        <a href="/academy/crypto--advanced--transactions">Transaktionen</a>
-        <a href="/academy/crypto--advanced--merkle_trees">Merkle Trees und Merkle Roots</a>
-        <a href="/academy/crypto--advanced--consensus">Konsens</a>
-        <a href="/academy/crypto--advanced--proof-of-work">Proof-of-Work</a>
+        <a href="/academy/crypto--advanced--transactions">Transaktionen</a><br/>
+        <a href="/academy/crypto--advanced--merkle_trees">Merkle Trees und Merkle Roots</a><br/>
+        <a href="/academy/crypto--advanced--consensus">Konsens</a><br/>
+        <a href="/academy/crypto--advanced--proof-of-work">Proof-of-Work</a><br/>
         <a href="/academy/crypto--advanced--proof-of-stake">Proof-of-Stake</a>
         
       </div>

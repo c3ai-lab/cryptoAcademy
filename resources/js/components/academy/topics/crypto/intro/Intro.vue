@@ -40,7 +40,8 @@
     <div class="card">
       <div class="card-body">
         <h2>Weiterführende Informationen:</h2>
-        <a href="/academy/crypto--blockchain">Blockchain</a>
+        <a href="/academy/crypto--intro--wallets">Wallets</a><br/>
+        <a href="/academy/crypto--intro--smart-contracts">Smart Contracts</a>
       </div>
     </div>
   </div>
