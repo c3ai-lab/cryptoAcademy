@@ -22,39 +22,26 @@ const getters = {
 };
 
 const actions = {
-  fetchSymbols({ commit, rootGetters }) {
-    return new Promise((resolve, reject) => {
-      fetch("/api/user/favorites", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-        },
-      })
-        .then((response) => {
-          if (response.ok === true) {
-            return response.json();
-          }
-          return null;
-        })
-        .then((data) => {
-          if (data === null) {
-            reject();
-          } else {
-            commit(
-              "setSymbols",
-              data.map(
-                (x) => ({ ...x, series: [] }) // needed for reactivity
-              )
-            );
-            resolve();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  async fetchSymbols({ commit, rootGetters }) {
+    const response = await fetch("/api/user/favorites", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
     });
+
+    if (response.ok === true) {
+      const data = await response.json();
+      commit(
+        "setSymbols",
+        data.map(
+          (x) => ({ ...x, series: [] }) // needed for reactivity
+        )
+      );
+    }
   },
+
   getLowResPriceData({ commit }, symbol) {
     binanceRest
       .getKlines({
@@ -69,7 +56,7 @@ const actions = {
       )
       .catch((error) => alert(error));
   },
-  fetchFavorites({ commit }) {},
+
   addFavorite({ commit, rootGetters }, id) {
     fetch(`/api/user/favorites/${id}`, {
       method: "POST",
@@ -89,6 +76,7 @@ const actions = {
         console.log(error);
       });
   },
+
   removeFavorite({ commit, rootGetters }, id) {
     fetch(`/api/user/favorites/${id}`, {
       method: "DELETE",
