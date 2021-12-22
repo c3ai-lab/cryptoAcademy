@@ -29,10 +29,16 @@
               :series="series"
               :mtsPerTimestep="mtsPerCandle"
             />
+            <div v-else class="d-flex justify-content-center align-items-center position-relative" style="height: 300px;">
+                <b-spinner class="position-absolute" variant="primary" style="width: 5rem; height: 5rem;"></b-spinner>
+            </div>
             <div style="display: flex; justify-content: space-between; width: 100%; padding: 0 28px">
-                <button v-for="(dimension, i) in dimensions" :key="i" class="btn" @click="setDimension(dimension)">
+              <b-button-group>
+
+                <b-button v-for="(dimension, i) in dimensions" :key="i" class="min-w-20" @click="setDimension(dimension)">
                     {{dimension}}
-                </button>
+                </b-button>
+              </b-button-group>
             </div>
         </div>
         <div v-if="0" style="width: 100%;" class="mt-2">
