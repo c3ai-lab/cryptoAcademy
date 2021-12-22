@@ -67,7 +67,7 @@
           type="button"
           class="btn btn-success w-md"
         >
-          Kaufen
+          {{ $t('trade.buy') }}
         </button>
       </div>
     </div>
