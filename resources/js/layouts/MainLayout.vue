@@ -11,9 +11,6 @@ import NavBar from "../components/NavBar";
 export default {
     components: { NavBar },
     name: "MainLayout",
-    mounted() {
-      this.$store.dispatch('transactions/fetchReturns');
-    }
 }
 </script>
 
