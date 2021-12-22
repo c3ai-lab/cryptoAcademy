@@ -28,7 +28,7 @@ export const AcademyCategory = {
   TRADING: "TRADING",
   TOP_FIVE_COINS: "TOP_FIVE_COINS",
   FIFTY_COINS__LIST: "FIFTY_COINS__LIST",
-  GLOSSAR: "GLOSSAR",
+  GLOSSAR__LIST: "GLOSSAR__LIST",
 };
 
 export const AcademyTopic = {

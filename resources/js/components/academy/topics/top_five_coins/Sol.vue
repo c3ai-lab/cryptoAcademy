@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/sol.png" />$SOL</h2>
+        <h2><img src="/images/coins/sol.png" /> $SOL</h2>
         <p>Währung der Solana-Blockchain, einer alternativen Smart-Contract-Chain.</p>
         <ul>
           <li>Kürzel SOL / Zirkulierende Menge ~304 Millionen von 508 Millionen</li>

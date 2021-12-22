@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/eth.png" />$ETH</h2>
+        <h2><img src="/images/coins/eth.png" /> $ETH</h2>
         <p> Währung der Ethereum Blockchain, eines dezentralen Computers bzw. einer “State-Machine”.</p>
         <ul>
           <li>Kürzel Eth / Zirkulierende Menge ~118 Millionen ohne Obergrenze der Anzahl</li>

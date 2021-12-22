@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/usdt.png" />$USDT</h2>
+        <h2><img src="/images/coins/usdt.png" /> $USDT</h2>
         <p>Ein Coin der den Wert eines US-Dollars repräsentiert. Erste Stablecoin.</p>
         <ul>
           <li>Kürzel USDT / Zirkulierende Menge ~73 Milliarden ohne Obergrenze</li>

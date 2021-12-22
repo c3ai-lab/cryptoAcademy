@@ -12,6 +12,11 @@ Vue.component(
 );
 
 Vue.component(
+  AcademyCategory.GLOSSAR__LIST,
+  require("./Glossar.vue").default
+);
+
+Vue.component(
   AcademyTopic.TOP_FIVE_COINS__BTC,
   require("./top_five_coins/Btc.vue").default
 );

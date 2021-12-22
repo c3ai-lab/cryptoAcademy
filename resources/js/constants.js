@@ -229,5 +229,5 @@ export const ACADEMY = {
     [AcademyTopic.TOP_FIVE_COINS__SOL]: [],
   },
   [AcademyCategory.FIFTY_COINS__LIST]: {},
-  [AcademyCategory.GLOSSAR]: {},
+  [AcademyCategory.GLOSSAR__LIST]: {},
 };

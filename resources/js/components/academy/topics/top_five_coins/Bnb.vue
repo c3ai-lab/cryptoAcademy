@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/bnb.png" />$BNB</h2>
+        <h2><img src="/images/coins/bnb.png" /> $BNB</h2>
         <p>Ein Platform-Coin der Kryptobörse Binance</p>
         <ul>
           <li>Kürzel BNB / Zirkulierende Menge ~168 Millionen von ~168 Millionen</li>

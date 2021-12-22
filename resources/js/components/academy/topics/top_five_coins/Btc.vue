@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/btc.png" />$BTC</h2>
+        <h2><img src="/images/coins/btc.png" /> $BTC</h2>
         <p>Bitcoin ermöglicht sichere digitale Zahlungen zwischen zwei Personen ohne Hilfe einer Bank.</p>
         <ul>
           <li>Kürzel BTC / Zirkulierende Menge ~19 Millionen von 21 Millionen</li>
