@@ -7,6 +7,7 @@
       :series="_series"
       :options="chartOptions"
       ref="chart"
+      height="300px"
     />
   </div>
 </template>
@@ -79,7 +80,7 @@ export default {
         this.$options.filters.eur(this.high).length,
         this.$options.filters.eur(this.low).length,
       )
-      const offset = 0.2 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.015 : 0)
+      const offset = 0.25 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.02 : 0)
       return Math.ceil(this.series.length * offset) * this.mtsPerTimestep
     },
     chartOptions() {

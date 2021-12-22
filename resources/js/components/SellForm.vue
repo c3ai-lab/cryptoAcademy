@@ -62,7 +62,7 @@
 
       <div class="text-center">
         <button
-          @click="buy"
+          @click="sell"
           type="button"
           class="btn btn-danger w-md"
         >
@@ -93,8 +93,10 @@ export default {
     console.log(this.$store.getters['user/getUser']());
   },
   methods: {
-    buy() {
+    sell() {
       this.$store.dispatch('transactions/sell', {quantity: this.quantity, symbol: this.$route.params.symbol})
+      this.$store.dispatch('coinIndex/fetchSymbols')
+      this.$store.dispatch('transactions/fetchTransactions')
     }
   },
 }
