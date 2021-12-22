@@ -51,7 +51,7 @@
     "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",
     "account_reset": "Account zurücksetzen",
     "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?",
-    "chart_info": "In Grafen möchte ich die Achsen angezeigt bekommen:",
+    "chart_info": "Zeige Achsen in Graphen",
     "x_axis": "X-Achse",
     "y_axis": "Y-Achse"
   },
