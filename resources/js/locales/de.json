@@ -60,6 +60,14 @@
     "year_short": "J",
     "all": "Gesamt"
   },
+  "dimension": {
+    "1H": "1S",
+    "1D": "1D",
+    "1W": "1W",
+    "1M": "1M",
+    "1Y": "12M",
+    "All": "Gesamt"
+  },
   "coins": {
     "BTC": {
       "name": "Bitcoin"
@@ -90,6 +98,9 @@
   "wallet": {
     "total_wallet": "Walletwert ",
     "all_transactions": "Verlauf Vorgänge"
+  },
+  "you": {
+    "have": "Du hast"
   },
   "academy": {
     "title": "Crypto Academy",
