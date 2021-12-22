@@ -6,11 +6,11 @@
         flex-wrap: wrap;
         padding-top: 80px;
         background-color: white;
-        width: 100%;
         justify-content: center;
       "
+      class="row"
     >
-          <div style="width: 100%;">
+          <div style="width: 100%;" class="col-12 col-md-6">
             <div style="padding: 0 28px">
               <h1>
                 {{symbol}}

@@ -1,14 +1,18 @@
 <template>
 <div>
+    <padded-layout>
   <router-view class="my-lg-4 my-3"></router-view>
+  </padded-layout>
 </div>
 </template>
 
 <script>
-
+import PaddedLayout from '../layouts/PaddedLayout.vue';
 
 export default {
-    components: { },
+    components: { 
+        PaddedLayout
+    },
     name: "LoginLayout",
 
 }

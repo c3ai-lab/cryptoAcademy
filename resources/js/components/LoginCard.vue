@@ -62,6 +62,7 @@
                 {{ $t("auth.login_now") }}
               </b-button>
             </div>
+            <!---
             <div class="mt-4 text-center">
               <h5 class="font-size-14 mb-3">{{ $t("auth.login_with") }}</h5>
 
@@ -97,6 +98,7 @@
                 </li>
               </ul>
             </div>
+            --->
             <div class="mt-4 text-center">
               <router-link to="reset-password" class="text-muted">
                 <i class="mdi mdi-lock mr-1"></i>

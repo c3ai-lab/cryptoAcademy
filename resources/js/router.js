@@ -13,6 +13,9 @@ import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import AcademyView from "./views/AcademyView.vue";
 import ProfileView from "./views/ProfileView.vue";
+import RegisterSuccessView from "./views/RegisterSuccessView";
+import NewPasswordView from "./views/NewPasswordView";
+import DeleteAccountView from "./views/DeleteAccountView";
 
 Vue.use(VueRouter);
 
@@ -32,6 +35,30 @@ const router = new VueRouter({
       path: "/register",
       name: "register",
       component: RegisterView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/register-success",
+      name: "register-success",
+      component: RegisterSuccessView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/new-password",
+      name: "new-password",
+      component: NewPasswordView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/delete-account",
+      name: "delete-account",
+      component: DeleteAccountView,
       meta: {
         requiresAuth: false,
       },

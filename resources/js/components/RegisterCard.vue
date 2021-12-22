@@ -99,6 +99,7 @@
                 {{ $t("auth.register_now") }}
               </b-button>
             </div>
+            <!---
             <div class="mt-4 text-center">
               <h5 class="font-size-14 mb-3">{{ $t("auth.register_with") }}</h5>
 
@@ -134,7 +135,7 @@
                 </li>
               </ul>
             </div>
-
+          --->
           </b-form>
         </div>
       </div>
@@ -166,7 +167,7 @@ export default Vue.extend({
           password: this.password,
           password_confirmation: this.password,
         })
-        .then(() => this.$router.push({name: "login"}))
+        .then(() => this.$router.push({name: "register-success"}))
         .catch(() => (this.registerFailed = true));
     },
   },
