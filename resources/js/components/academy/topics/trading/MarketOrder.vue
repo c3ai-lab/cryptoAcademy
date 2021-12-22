@@ -3,7 +3,7 @@
     <h1>Market-Order</h1>
     <div class="card">
       <div class="card-body" ref="container">
-        <p>Eine Markt-Order wird sofort zum gegenwärtigen Bestpreis ausgeführt. Sofern das Orderbuch ausreichende Tiefe hat, kann man mit einem fairen Kaufpreis rechnen. Es kann zu mehreren Teilausführungen kommen, sofern der erste Handelspartner weniger Volumen handeln möchte als in der eigenen Order beauftragt ist. In diesem Fall wird der Rest der Order zu den zweitbesten Kondidionen ausgeführt. Falls auch der zweitbeste Prreis ein zu kleines Volumen bietet, wird jeweils das nächstbeste Angebot angenommen, bis das gesamte Ordervolumen gehandelt wurde. Wer eine Marktorder ausführt wird auch "Taker" genannt, weil er das Preisangebot eines anderen annimmt. Im Einsteiger-Modus kann in der App nur dieser Ordertyp genutzt werden.</p>
+        <p>Eine Market-Order wird sofort zum gegenwärtigen Bestpreis ausgeführt. Sofern das Orderbuch ausreichende Tiefe hat, kann man mit einem fairen Kaufpreis rechnen. Es kann zu mehreren Teilausführungen kommen, sofern der erste Handelspartner weniger Volumen handeln möchte als in der eigenen Order beauftragt ist. In diesem Fall wird der Rest der Order zu den zweitbesten Konditionen ausgeführt. Falls auch der zweitbeste Prreis ein zu kleines Volumen bietet, wird jeweils das nächstbeste Angebot angenommen, bis das gesamte Ordervolumen gehandelt wurde. Wer eine Marktorder ausführt wird auch "Taker" genannt, weil er das Preisangebot eines anderen annimmt. Im Einsteiger-Modus kann in der App nur dieser Ordertyp genutzt werden.</p>
       </div>
     </div>
 
