@@ -13,14 +13,6 @@
       </div>
       <div class="card-body pt-1 row justify-content-center">
         <div class="p-1 col-lg-8 col-xl-6">
-          <b-alert
-            v-model="loginFailed"
-            variant="danger"
-            class="mt-3"
-            dismissible
-          >
-            {{ $t("auth.login_failed") }}
-          </b-alert>
           <b-form class="p-2" v-on:submit.prevent>
             <b-form-group
               id="input-group-1"
@@ -36,7 +28,7 @@
                 :state="emailState"
                 :placeholder="$t('auth.enter_email')"
               />
-              <b-form-invalid-feedback id="input-1-live-feedback">
+              <b-form-invalid-feedback>
                 {{ $t("auth.invalid_email") }}
               </b-form-invalid-feedback>
             </b-form-group>
@@ -55,7 +47,11 @@
                 :state="passwordState"
                 :placeholder="$t('auth.enter_password')"
               />
-              <b-form-invalid-feedback id="input-2-live-feedback">
+
+              <b-form-invalid-feedback v-if="loginFailed === true">
+                {{ $t("auth.login_failed") }}
+              </b-form-invalid-feedback>
+              <b-form-invalid-feedback v-else>
                 {{ $t("auth.invalid_password") }}
               </b-form-invalid-feedback>
             </b-form-group>
@@ -150,8 +146,8 @@ export default Vue.extend({
         response.passwordError === null
       ) {
         this.loginFailed = true;
-        this.emailState = null;
-        this.passwordState = null;
+        this.emailState = true;
+        this.passwordState = false;
       } else {
         this.loginFailed = false;
         this.emailState = response.emailError === null;
