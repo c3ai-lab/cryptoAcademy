@@ -169,6 +169,7 @@ export const DIMENSION_MAP = {
   },
   [Dimension.ALL]: {
     interval: "1w",
+    limit: 100,
   },
 };
 
