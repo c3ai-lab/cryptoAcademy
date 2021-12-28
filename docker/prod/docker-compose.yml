@@ -4,8 +4,6 @@ services:
         container_name: cryptocademy_app
         restart: always
         image: mats9798/cryptocademy:latest
-        depends_on:
-            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
@@ -17,8 +15,6 @@ services:
         container_name: cryptocademy_scheduler
         restart: always
         image: mats9798/cryptocademy:latest
-        depends_on:
-            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
