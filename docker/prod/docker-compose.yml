@@ -13,8 +13,6 @@ services:
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
-        networks:
-            - bridge
     scheduler:
         container_name: cryptocademy_scheduler
         restart: always
@@ -31,3 +29,7 @@ services:
 volumes:
     cryptocademy_appdata:
         name: cryptocademy_appdata
+networks:
+    default:
+        name: docker-net
+        driver: bridge
