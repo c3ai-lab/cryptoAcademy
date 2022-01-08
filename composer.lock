@@ -1108,16 +1108,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.77.0",
+            "version": "v8.77.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "148b0df9eaac9f89bebb6b6fbbb0e9874e62ecc7"
+                "reference": "994dbac5c6da856c77c81a411cff5b7d31519ca8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/148b0df9eaac9f89bebb6b6fbbb0e9874e62ecc7",
-                "reference": "148b0df9eaac9f89bebb6b6fbbb0e9874e62ecc7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/994dbac5c6da856c77c81a411cff5b7d31519ca8",
+                "reference": "994dbac5c6da856c77c81a411cff5b7d31519ca8",
                 "shasum": ""
             },
             "require": {
@@ -1276,7 +1276,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-12-21T16:22:37+00:00"
+            "time": "2021-12-21T20:22:29+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1476,16 +1476,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "b3e804559bf3973ecca160a4ae1068e6c7c167c6"
+                "reference": "9a1e52442dd238647905b98d773d59e438eb9f9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/b3e804559bf3973ecca160a4ae1068e6c7c167c6",
-                "reference": "b3e804559bf3973ecca160a4ae1068e6c7c167c6",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/9a1e52442dd238647905b98d773d59e438eb9f9d",
+                "reference": "9a1e52442dd238647905b98d773d59e438eb9f9d",
                 "shasum": ""
             },
             "require": {
@@ -1531,9 +1531,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v3.4.0"
+                "source": "https://github.com/laravel/ui/tree/v3.4.1"
             },
-            "time": "2021-11-30T16:22:00+00:00"
+            "time": "2021-12-22T10:40:50+00:00"
         },
         {
             "name": "lcobucci/jwt",

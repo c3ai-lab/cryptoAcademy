@@ -12,17 +12,8 @@
         </div>
       </div>
       <div class="card-body pt-1 row justify-content-center">
-        <div class="p-1 col-lg-6">
-          <b-alert
-            v-model="loginFailed"
-            variant="danger"
-            class="mt-3"
-            dismissible
-          >
-            {{ $t("auth.login_failed") }}
-          </b-alert>
+        <div class="p-1 col-lg-8 col-xl-6">
           <b-form class="p-2" v-on:submit.prevent>
-            <slot />
             <b-form-group
               id="input-group-1"
               :label="$t('auth.email')"
@@ -34,8 +25,12 @@
                 name="email"
                 v-model="email"
                 type="text"
+                :state="emailState"
                 :placeholder="$t('auth.enter_email')"
-              ></b-form-input>
+              />
+              <b-form-invalid-feedback>
+                {{ $t("auth.invalid_email") }}
+              </b-form-invalid-feedback>
             </b-form-group>
 
             <b-form-group
@@ -49,8 +44,16 @@
                 v-model="password"
                 name="password"
                 type="password"
+                :state="passwordState"
                 :placeholder="$t('auth.enter_password')"
-              ></b-form-input>
+              />
+
+              <b-form-invalid-feedback v-if="loginFailed === true">
+                {{ $t("auth.login_failed") }}
+              </b-form-invalid-feedback>
+              <b-form-invalid-feedback v-else>
+                {{ $t("auth.invalid_password") }}
+              </b-form-invalid-feedback>
             </b-form-group>
             <div class="mt-3 d-grid">
               <b-button
@@ -124,18 +127,32 @@ export default Vue.extend({
       password: "",
 
       loginFailed: null,
+      emailState: null,
+      passwordState: null,
     };
   },
 
   methods: {
-    login: function () {
-      this.$store
-        .dispatch("user/login", {
-          email: this.email,
-          password: this.password,
-        })
-        .then(() => this.$router.push({ name: "dashboard" }))
-        .catch(() => (this.loginFailed = true));
+    async login() {
+      const response = await this.$store.dispatch("user/login", {
+        email: this.email,
+        password: this.password,
+      });
+
+      if (response.success === true) {
+        this.$router.push({ name: "dashboard" });
+      } else if (
+        response.emailError === null &&
+        response.passwordError === null
+      ) {
+        this.loginFailed = true;
+        this.emailState = true;
+        this.passwordState = false;
+      } else {
+        this.loginFailed = false;
+        this.emailState = response.emailError === null;
+        this.passwordState = response.passwordError === null;
+      }
     },
   },
 });

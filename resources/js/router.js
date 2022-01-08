@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import {store} from "./store/main";
+import { store } from "./store/main";
 
-import {SESSION_REFRESH_AFTER_MINUTES} from "./constants";
+import { SESSION_REFRESH_AFTER_MINUTES } from "./constants";
 
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
@@ -13,9 +13,10 @@ import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import AcademyView from "./views/AcademyView.vue";
 import ProfileView from "./views/ProfileView.vue";
-import RegisterSuccessView from "./views/RegisterSuccessView";
-import NewPasswordView from "./views/NewPasswordView";
-import DeleteAccountView from "./views/DeleteAccountView";
+import RegisterSuccessView from "./views/RegisterSuccessView.vue";
+import NewPasswordView from "./views/NewPasswordView.vue";
+import DeleteAccountView from "./views/DeleteAccountView.vue";
+import WalletView from "./views/WalletView.vue";
 
 Vue.use(VueRouter);
 
@@ -64,9 +65,33 @@ const router = new VueRouter({
       },
     },
     {
+      path: "/wallet",
+      name: "wallet",
+      component: WalletView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/reset-password",
       name: "reset-password",
       component: ResetPasswordView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/new-password",
+      name: "new-password",
+      component: NewPasswordView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/delete-account",
+      name: "delete-account",
+      component: DeleteAccountView,
       meta: {
         requiresAuth: false,
       },
@@ -80,7 +105,7 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/academy",
+      path: "/academy/:target?",
       name: "academy",
       component: AcademyView,
       meta: {
@@ -113,63 +138,24 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/trading/:symbol/buy',
-      name: 'trading.buy',
+      path: "/trading/:symbol/buy",
+      name: "trading.buy",
       component: TradingBuyView,
       props: true,
       meta: {
         requiresAuth: true,
       },
     },
-    {
-      path: "/academy/how_does_it_work",
-      name: "topic_1",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/for_beginners",
-      name: "topic_2",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/top_fuenf_krypto",
-      name: "topic_3",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/50_krypto",
-      name: "topic_4",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: "/academy/glossar",
-      name: "topic_5",
-      component: AcademyView,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-
   ],
 });
 
 router.beforeEach((to, from, next) => {
-
   const sessionExpiresAt = store.getters["user/sessionExpiresAt"]();
   const refreshData = () => !["login", "register"].includes(to.name);
-  const refreshToken = () => (sessionExpiresAt < new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000);
+  const refreshToken = () =>
+    sessionExpiresAt <
+    new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000;
+
   if (refreshToken() && refreshData()) {
     store.dispatch("user/refreshSession");
   }
@@ -177,15 +163,13 @@ router.beforeEach((to, from, next) => {
   const accessToken = store.getters["user/accessToken"]();
   if (to.meta.requiresAuth === true && accessToken === null) {
     // store original target and redirect user to it after login / registration
-    next({name: "login"});
+    next({ name: "login" });
   } else if (to.meta.requiresAuth === false && accessToken !== null) {
-    next({name: "dashboard"});
+    next({ name: "dashboard" });
   } else {
-    if (refreshData())
-      store.dispatch("user/refreshUserdata");
+    if (refreshData()) store.dispatch("user/refreshUserData");
     next();
   }
-})
-;
+});
 
 export default router;

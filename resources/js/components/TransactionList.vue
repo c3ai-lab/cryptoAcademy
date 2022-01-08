@@ -7,8 +7,8 @@
       role="button"
       v-b-toggle="`collapse-${i}`"
     >
-    <div>
-    </div>
+      <div>
+      </div>
       <div class="w-100 d-flex justify-content-between align-items-center">
         <div
           :class="
@@ -50,9 +50,9 @@
             `text-${t.color}`
           "
         >
-            <div class="text-muted font-size-12">
-              {{$t('trade.amount')}}
-            </div>
+          <div class="text-muted font-size-12">
+            {{ $t('trade.amount') }}
+          </div>
           <b>
             {{ t.quantity > 0 ? '+' : '-' }}
             {{ Math.abs(t.quantity) }}
@@ -76,7 +76,7 @@
         <div class="d-flex justify-content-between">
           <div>
             <div class="text-muted font-size-12">
-              {{$t('trade.price')}}
+              {{ $t('trade.price') }}
             </div>
             {{ t.price_euro | eur }}
           </div>
@@ -84,21 +84,21 @@
             :class="t.quantity < 0 ? 'text-success' : 'text-danger'"
           >
             <div class="text-muted font-size-12">
-              {{$t('trade.value')}}
+              {{ $t('trade.value') }}
             </div>
             {{ t.quantity < 0 ? '+' : '-' }}
-            {{ Math.abs(t.price_euro * t.quantity) | eur  }}
+            {{ Math.abs(t.price_euro * t.quantity) | eur }}
           </div>
         </div>
       </b-collapse>
-    <div
-      v-if="i < transactions.length - 1"
-      style="
+      <div
+        v-if="i < transactions.length - 1"
+        style="
         height: 1px;
         width: 100%;
         background-color: #88888822;
       "
-    />
+      />
     </div>
   </div>
 </template>
@@ -106,17 +106,18 @@
 <script>
 export default {
   props: {
-    transactions: Array,
+    transactions: [],
   },
 }
 </script>
 
 <style>
-  .hidden-scroll {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-  }
-  .hidden-scroll::-webkit-scrollbar {
-    display: none;
-  }
+.hidden-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hidden-scroll::-webkit-scrollbar {
+  display: none;
+}
 </style>

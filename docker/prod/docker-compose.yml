@@ -1,131 +1,31 @@
 version: "3.9"
 services:
-    nginx:
-        container_name: nginx
-        image: nginx:latest
-        restart: unless-stopped
-        depends_on:
-            - app
-            - mailhog
-            - phpmyadmin
-            - mailserver
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - /etc/timezone:/etc/timezone:ro
-            - ./data/nginx:/etc/nginx/conf.d
-            - ./data/certbot/conf:/etc/letsencrypt:ro
-            - ./data/certbot/www:/var/www/certbot
-        ports:
-            - 80:80
-            - 443:443
-        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    certbot:
-        container_name: certbot
-        image: certbot/certbot
-        restart: unless-stopped
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - /etc/timezone:/etc/timezone:ro
-            - ./data/certbot/conf:/etc/letsencrypt
-            - ./data/certbot/www:/var/www/certbot
-        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     app:
-        container_name: app
+        container_name: cryptocademy
         restart: always
         image: mats9798/cryptocademy:latest
-        depends_on:
-            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - appdata:/var/www/html/storage
+            - cryptocademy_appdata:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
     scheduler:
-        container_name: scheduler
+        container_name: cryptocademy_scheduler
         restart: always
         image: mats9798/cryptocademy:latest
-        depends_on:
-            - database
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - appdata:/var/www/html/storage
+            - cryptocademy_appdata:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: scheduler
-
-    database:
-        container_name: database
-        image: mysql:8
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: cryptocademy
-            MYSQL_USER: cryptocademy
-            MYSQL_PASSWORD: cryptocademy
-        volumes:
-            - mysqldata:/var/lib/mysql
-            - /etc/localtime:/etc/localtime:ro
-            - /etc/timezone:/etc/timezone:ro
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: phpmyadmin
-        restart: always
-        depends_on:
-            - database
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - /etc/timezone:/etc/timezone:ro
-        environment:
-            - PMA_ABSOLUTE_URI=http://pma.developer.local
-            - PMA_HOST=database
-            - PMA_VERBOSE=CryptoAcademy
-            - UPLOAD_LIMIT=2500M
-
-    mailhog:
-        restart: always
-        image: mailhog/mailhog:latest
-        container_name: mailhog
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - /etc/timezone:/etc/timezone:ro
-
-    mailserver:
-        image: docker.io/mailserver/docker-mailserver:latest
-        hostname: mail
-        domainname: cryptocademy.app
-        container_name: mailserver
-        volumes:
-            - maildata:/var/mail
-            - mailstate:/var/mail-state
-            - maillogs:/var/log/mail
-            - ./data/mailserver/config/:/tmp/docker-mailserver/
-            - ./data/certbot/conf:/etc/letsencrypt:ro
-            - /etc/localtime:/etc/localtime:ro
-            - /etc/timezone:/etc/timezone:ro
-        env_file: mailserver.env
-        restart: always
-        #        ports:
-        #            - "25:25"
-        #            - "587:587"
-        cap_add:
-            - NET_ADMIN
-            - SYS_PTRACE
 volumes:
-    mysqldata:
-        name: mysqldata
-    appdata:
-        name: appdata
-    maildata:
-        name: maildata
-    mailstate:
-        name: mailstate
-    maillogs:
-        name: maillogs
-
+    cryptocademy_appdata:
+        name: cryptocademy_appdata
 networks:
     default:
-        name: crypto-net
+        name: docker-net
         driver: bridge

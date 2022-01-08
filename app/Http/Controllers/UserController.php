@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Enum\MessageCodes;
+use App\Http\Resources\SymbolUserResource;
 use App\Http\Resources\UserResource;
+use App\Models\Symbol;
 use App\Models\User;
 use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
+use App\Service\BianceApiService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -32,6 +35,22 @@ class UserController extends Controller
   public function getCurrentUser()
   {
     return new UserResource((auth()->user()));
+  }
+
+  public function getCurrentUserWallet(Request $request)
+  {
+    $collection = Symbol::all();
+    $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
+
+    $apiService = new BianceApiService();
+    $rate = $apiService->getPriceOfEuroToUsd();
+    $coll = $filtered->map(function ($item) use ($rate, $apiService) {
+      $balance = $item->user_quantity > 0 ? $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate : 0;
+      $item->user_balance = $balance;
+      return $item;
+    });
+
+    return SymbolUserResource::collection($coll);
   }
 
   /**
