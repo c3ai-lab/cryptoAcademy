@@ -21,36 +21,15 @@
         >
           <header id="modal-lg___BV_modal_header_" class="modal-header">
             <h5 id="modal-lg___BV_modal_title_" class="modal-title font-18">
-              {{ $t("dashboard.welcome_modal.hello") }} {{ username }}
+              {{ $t("profile.change_password_modal.title") }} 
             </h5>
             <button type="button" class="close" @click="close">×</button>
           </header>
           <div id="modal-lg___BV_modal_body_" class="modal-body">
             <p>
-              {{ $t("dashboard.welcome_modal.trading") }}
+              {{ $t("profile.change_password_modal.message") }}
             </p>
             
-            <router-link to="trading" class="fw-medium text-primary d-flex justify-content-center">
-              <b-button
-                variant="primary"
-                class="btn-block mb-3 "
-              >
-                {{ $t("dashboard.welcome_modal.trade_now") }} 
-              </b-button>
-            
-          </router-link>
-            <p>
-              {{ $t("dashboard.welcome_modal.academy") }}
-            </p>
-            <router-link to="academy" class="fw-medium text-primary d-flex justify-content-center">
-              <b-button
-                variant="primary"
-                class="btn-block mb-3"
-              >
-                {{ $t("dashboard.welcome_modal.academy_now") }} 
-              </b-button>
-            
-          </router-link>
           </div>
           <!---->
         </div>
@@ -63,18 +42,12 @@
 
 <script>
 export default {
-  name: "WelcomeModal",
-computed: {
-    username() {
-      return this.$store.getters["user/getUser"]().name;
-    },
-    },
+  name: "ChangePasswordModal",
+
  methods: {
     close() {
       document.getElementById("modal-lg___BV_modal_outer_").style.display = "none";
     },
-
-    
   },
   };
 </script>
