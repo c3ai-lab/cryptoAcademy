@@ -24,9 +24,10 @@
 
 <script>
 import {WebsocketClient} from 'binance';
-import BuyForm from '../components/BuyForm.vue'
-import SellForm from '../components/SellForm.vue'
+import BuyForm from '../components/BuyForm.vue';
+import SellForm from '../components/SellForm.vue';
 import PaddedLayout from '../layouts/PaddedLayout.vue';
+
 
 const binanceWs = new WebsocketClient({
   beautify: true,
@@ -36,7 +37,7 @@ export default {
   components: {
     BuyForm,
     SellForm,
-    PaddedLayout
+    PaddedLayout,
   },
   data() {
     return {

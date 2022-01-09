@@ -115,7 +115,19 @@
     "price": "Preis",
     "total": "Gesamt",
     "value": "Wert",
-    "amount": "Menge"
+    "amount": "Menge",
+    "buy_success_modal": {
+      "title": "Du hast erfolgreich Coins gekauft",
+      "text1": "Deinem Wallet wurden die folgenden Coins gutgeschrieben: ",
+      "text2": "Kurswert: ",
+      "text3": "Kaufpreis: "
+    },
+    "sell_success_modal": {
+      "title": "Du hast erfolgreich Coins verkauft",
+      "text1": "Die folgenden Coins wurden verkauft:  ",
+      "text2": "Kurswert: ",
+      "text3": "Verkaufspreis: "
+    }
   },
   "wallet": {
     "total_value": "Gesamtwert aller Wallets",

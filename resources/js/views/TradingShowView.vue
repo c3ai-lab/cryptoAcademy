@@ -102,6 +102,7 @@
       <trading-buy-view v-if="1" />
       <transaction-card :symbol="symbol" v-if="1" />
     </div>
+    
   </div>
 </template>
 
