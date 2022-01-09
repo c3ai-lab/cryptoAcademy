@@ -1,6 +1,7 @@
 <template>
   <!-- <div style="background: #f5f5f5"> -->
     <padded-layout>
+      <h1>{{ $t("navigation.trading") }}</h1>
       <div class="row">
       <div
         v-for="(coin, i) in all"
