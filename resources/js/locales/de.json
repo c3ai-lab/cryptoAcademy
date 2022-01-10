@@ -75,8 +75,8 @@
     "all": "Gesamt"
   },
   "dimension": {
-    "1H": "1S",
-    "1D": "1D",
+    "1H": "1H",
+    "1D": "1T",
     "1W": "1W",
     "1M": "1M",
     "1Y": "12M",
@@ -114,7 +114,7 @@
     "all_transactions": "Verlauf Vorgänge"
   },
   "you": {
-    "have": "Du hast"
+    "have": "In deiner Wallet"
   },
   "academy": {
     "title": "Crypto Academy",
@@ -153,7 +153,7 @@
     "TOP_FIVE_COINS": {
       "name": "Top fünf Kryptowährungen",
       "description": "Die Anzahl an verschiedenen Kryptowährungen ist gewaltig und es ist leicht, hier den Überblick zu verlieren. Unter <i>Top 5 Kryptowährungen</i> ist eine kurze Übersicht über die derzeit größten Kryptowährungen zu finden. Hier sind Informationen zu Währungen wie Bitcoin und Ethereum zu finden, sowie ihre jeweiligen Vor- und Nachteile. So kann jeder für sich selber entscheiden, welche die richtige Kryptowährung für sich selbst ist."
-    }, 
+    },
     "FIFTY_COINS__LIST": {
       "name": "50 Kryptowährungen - Kurz beschrieben",
       "description": "Hier ist eine grobe Übersicht über die 50 Kryptowährungen mit dem aktuell größten Marktwert. <i>50 Kryptowährungen - Kurz beschrieben</i> bietet schnelle, vereinfachte Informationen zu diesen Währungen. Auf der Website von CoinMarketCap können bei Bedarf noch umfangreichere Informationen zu den einzelnen Währungen gefunden werden."
