@@ -105,9 +105,12 @@
     "buy": "Kaufen",
     "sell": "Verkaufen",
     "price": "Preis",
+    "pricePerAsset": "Einzelpreis",
     "total": "Gesamt",
     "value": "Wert",
-    "amount": "Menge"
+    "amount": "Menge",
+    "yourAmount": "In deinem Wallet",
+    "balance": "Konto"
   },
   "wallet": {
     "total_wallet": "Walletwert ",
