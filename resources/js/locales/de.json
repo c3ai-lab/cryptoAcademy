@@ -75,8 +75,8 @@
     "all": "Gesamt"
   },
   "dimension": {
-    "1H": "1S",
-    "1D": "1D",
+    "1H": "1H",
+    "1D": "1T",
     "1W": "1W",
     "1M": "1M",
     "1Y": "12M",
@@ -105,9 +105,12 @@
     "buy": "Kaufen",
     "sell": "Verkaufen",
     "price": "Preis",
+    "pricePerAsset": "Einzelpreis",
     "total": "Gesamt",
     "value": "Wert",
-    "amount": "Menge"
+    "amount": "Menge",
+    "yourAmount": "In deinem Wallet",
+    "balance": "Konto"
   },
   "wallet": {
     "total_value": "Gesamtwert aller Wallets",
@@ -115,7 +118,7 @@
     "transaction_histroy": "Transaktionsverlauf"
   },
   "you": {
-    "have": "Du hast"
+    "have": "In deiner Wallet"
   },
   "academy": {
     "title": "Crypto Academy",
