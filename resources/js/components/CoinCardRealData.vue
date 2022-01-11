@@ -44,7 +44,7 @@
           <div>
             <nice-price
               style="font-size: 20px"
-              :value="currentValue"
+              :value="currentPrice"
               currency="usd"
             />
           </div>
@@ -112,7 +112,7 @@ export default {
     tradeSymbol() {
       return this.symbol.split("USDT")[0];
     },
-    currentValue() {
+    currentPrice() {
       if (this.hasLoadedData) {
         const data = this.series[0].data;
         return data[data.length - 1][1];

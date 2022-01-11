@@ -88,7 +88,7 @@
           <span>{{ symbol | symbol }}</span>
         </div>
       </b-card>
-      <trading-buy-view v-if="1" />
+      <trading-buy-view v-if="1" :price="price"/>
       <transaction-card :symbol="symbol" v-if="1" />
     </div>
   </div>
