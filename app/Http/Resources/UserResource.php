@@ -32,7 +32,7 @@ class UserResource extends JsonResource
       'updated_at' => $this->updated_at,
       'axis' => ['x' => $this->x_axis, 'y' => $this->y_axis],
       'favorites' => count($this->favorites) ? $this->favorites() : [],
-
+      'is_first_visit' => $this->is_first_visit,
     ];
   }
 }

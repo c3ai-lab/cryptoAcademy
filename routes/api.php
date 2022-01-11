@@ -33,6 +33,7 @@ Route::group(['prefix' => 'user'], function () {
   Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
   Route::post('/password/reset', [UserController::class, 'resetCurrentUserPassword']);
   Route::post('/resetAll', [UserController::class, 'resetCurrentUser']);
+  Route::post('/modal-shown', [UserController::class, 'modalShown']);
 
   Route::group(['prefix' => 'favorites'], function () {
     Route::get('/', [SymbolUserController::class, 'index']);
