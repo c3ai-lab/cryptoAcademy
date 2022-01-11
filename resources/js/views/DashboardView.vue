@@ -43,7 +43,7 @@
           />
         </div>
       </div>
-      <WelcomeModal />
+      <WelcomeModal v-if="isFirstVisit"/>
     </div>
   </padded-layout>
 </template>
@@ -84,6 +84,9 @@ export default {
     favoriteCoins() {
       return this.$store.getters["coinIndex/favorites"]();
     },
+    isFirstVisit() {
+      return this.$store.getters["user/getUser"]().is_first_visit;
+    }
   },
 
   created() {

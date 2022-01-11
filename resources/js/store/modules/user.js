@@ -246,6 +246,18 @@ const actions = {
     return false;
   },
 
+  async modalShown({ rootGetters }) {
+    const response = await fetch("/api/user/modal-shown", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
+    });
+
+    return response.ok;
+  },
+
   save({ state }) {
     localStorage.setItem("user", JSON.stringify(state.user));
     localStorage.setItem("accessToken", JSON.stringify(state.accessToken));

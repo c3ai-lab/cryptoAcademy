@@ -29,15 +29,15 @@
             <p>
               {{ $t("dashboard.welcome_modal.trading") }}
             </p>
-            
+
             <router-link to="trading" class="fw-medium text-primary d-flex justify-content-center">
               <b-button
                 variant="primary"
                 class="btn-block mb-3 "
               >
-                {{ $t("dashboard.welcome_modal.trade_now") }} 
+                {{ $t("dashboard.welcome_modal.trade_now") }}
               </b-button>
-            
+
           </router-link>
             <p>
               {{ $t("dashboard.welcome_modal.academy") }}
@@ -47,9 +47,9 @@
                 variant="primary"
                 class="btn-block mb-3"
               >
-                {{ $t("dashboard.welcome_modal.academy_now") }} 
+                {{ $t("dashboard.welcome_modal.academy_now") }}
               </b-button>
-            
+
           </router-link>
           </div>
           <!---->
@@ -65,10 +65,14 @@
 export default {
   name: "WelcomeModal",
 
- methods: {
+  methods: {
     close() {
       document.getElementById("modal-lg___BV_modal_outer_").style.display = "none";
     },
   },
-  };
+
+  created() {
+    this.$store.dispatch("user/modalShown");
+  }
+};
 </script>
