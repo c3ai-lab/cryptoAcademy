@@ -1,17 +1,9 @@
 const state = {
-  leaderboardHour: [],
-  leaderboardDay: [],
-  leaderboardWeek: [],
-  leaderboardYear: [],
-  leaderboardAll: [],
+  leaderboard: [],
 };
 
 const getters = {
-  hour: (state) => () => state.leaderboardHour,
-  day: (state) => () => state.leaderboardDay,
-  week: (state) => () => state.leaderboardWeek,
-  year: (state) => () => state.leaderboardYear,
-  all: (state) => () => state.leaderboardAll,
+  data: (state) => () => state.leaderboard,
 };
 
 const actions = {
@@ -26,7 +18,7 @@ const actions = {
 
     if (response.ok === true) {
       const data = await response.json();
-      commit("setLeaderboardHour", data);
+      commit("setLeaderboard", data);
     }
 
     return false;
@@ -41,7 +33,7 @@ const actions = {
 
     if (response.ok === true) {
       const data = await response.json();
-      commit("setLeaderboardDay", data);
+      commit("setLeaderboard", data);
     }
 
     return false;
@@ -56,7 +48,7 @@ const actions = {
 
     if (response.ok === true) {
       const data = await response.json();
-      commit("setLeaderboardWeek", data);
+      commit("setLeaderboard", data);
     }
 
     return false;
@@ -71,7 +63,7 @@ const actions = {
 
     if (response.ok === true) {
       const data = await response.json();
-      commit("setLeaderboardYear", data);
+      commit("setLeaderboard", data);
     }
 
     return false;
@@ -86,7 +78,7 @@ const actions = {
 
     if (response.ok === true) {
       const data = await response.json();
-      commit("setLeaderboardAll", data);
+      commit("setLeaderboard", data);
     }
 
     return false;
@@ -95,20 +87,8 @@ const actions = {
 };
 
 const mutations = {
-  setLeaderboardHour(state, leaderboard) {
-    state.leaderboardHour = leaderboard;
-  },
-  setLeaderboardDay(state, leaderboard) {
-    state.leaderboardDay = leaderboard;
-  },
-  setLeaderboardWeek(state, leaderboard) {
-    state.leaderboardWeek = leaderboard;
-  },
-  setLeaderboardYear(state, leaderboard) {
-    state.leaderboardYear = leaderboard;
-  },
-  setLeaderboardAll(state, leaderboard) {
-    state.leaderboardAll = leaderboard;
+  setLeaderboard(state, leaderboard) {
+    state.leaderboard = leaderboard;
   },
 };
 

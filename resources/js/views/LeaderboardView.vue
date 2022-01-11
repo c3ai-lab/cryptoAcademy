@@ -1,12 +1,21 @@
 <template>
   <PaddedLayout>
-
     <div class="row">
-      <button @click="clickHour">Std</button>
-      <button @click="clickDay">Tag</button>
-      <button @click="clickWeek">Woche</button>
-      <button @click="clickYear">Jahr</button>
-      <button @click="clickAll">Immer</button>
+      <p class="col col-md justify-content-center d-flex">
+        <button @click="clickHour()" class="btn btn-secondary">Std</button>
+      </p>
+      <p class="col col-md justify-content-center d-flex">
+        <button @click="clickDay()" class="btn btn-secondary">Tag</button>
+      </p>
+      <p class="col col-md justify-content-center d-flex">
+        <button @click="clickWeek()" class="btn btn-secondary">Woche</button>
+      </p>
+      <p class="col col-md justify-content-center d-flex">
+        <button @click="clickYear()" class="btn btn-secondary">Jahr</button>
+      </p>
+      <p class="col col-md justify-content-center d-flex">
+        <button @click="clickAll()" class="btn btn-secondary">Immer</button>
+      </p>
     </div>
     <div class="row">
       <div class="col-lg-12">
@@ -77,26 +86,25 @@ export default {
   },
   methods: {
     clickHour() {
-      return this.$store.getters["leaderboard/fetchHour"]();
+      return this.$store.dispatch("leaderboard/fetchHour");
     },
     clickDay() {
-      return this.$store.getters["leaderboard/fetchDay"]();
+      return this.$store.dispatch("leaderboard/fetchDay");
     },
     clickWeek() {
-      return this.$store.getters["leaderboard/fetchWeek"]();
+      return this.$store.dispatch("leaderboard/fetchWeek");
     },
     clickYear() {
-      return this.$store.getters["leaderboard/fetchYear"]();
+      return this.$store.dispatch("leaderboard/fetchYear");
     },
     clickAll() {
-      return this.$store.getters["leaderboard/fetchAll"]();
+      return this.$store.dispatch("leaderboard/fetchAll");
     },
   },
   computed: {
     highscoreUsers() {
-      return this.$store.getters["leaderboard/fetchDay"]();
+      return this.$store.getters["leaderboard/data"]().filter((v) => v.length > 0);
     },
-
   },
 };
 </script>

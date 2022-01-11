@@ -7,6 +7,7 @@ import news from "./modules/news";
 import transactions from "./modules/transactions";
 import user from "./modules/user";
 import wallets from "./modules/wallets";
+import leaderboard from "./modules/leaderboard";
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export const store = new Vuex.Store({
     transactions,
     user,
     wallets,
+    leaderboard,
   },
 });
