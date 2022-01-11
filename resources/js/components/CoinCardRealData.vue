@@ -45,7 +45,7 @@
             <nice-price
               style="font-size: 20px"
               :value="currentPrice"
-              currency="usd"
+              currency="eur"
             />
           </div>
         </div>
