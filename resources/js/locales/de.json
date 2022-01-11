@@ -119,7 +119,15 @@
     "transaction_histroy": "Transaktionsverlauf"
   },
   "leaderboard": {
-    "title": "Leaderboard"
+    "title": "Leaderboard",
+    "currentSelectedTime": "Ausgewählter Zeitraum",
+    "time": {
+      "hour": "Stunde",
+      "day": "Tag",
+      "week": "Woche",
+      "year": "Jahr",
+      "all": "Immer"
+    }
   },
   "you": {
     "have": "In deiner Wallet"

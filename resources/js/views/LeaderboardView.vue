@@ -2,20 +2,22 @@
   <PaddedLayout>
     <div class="row">
       <p class="col col-md justify-content-center d-flex">
-        <button @click="clickHour()" class="btn btn-secondary">Std</button>
+        <button @click="clickHour()" class="btn btn-secondary">{{ $t("leaderboard.time.hour") }}</button>
       </p>
       <p class="col col-md justify-content-center d-flex">
-        <button @click="clickDay()" class="btn btn-secondary">Tag</button>
+        <button @click="clickDay()" class="btn btn-secondary">{{ $t("leaderboard.time.day") }}</button>
       </p>
       <p class="col col-md justify-content-center d-flex">
-        <button @click="clickWeek()" class="btn btn-secondary">Woche</button>
+        <button @click="clickWeek()" class="btn btn-secondary">{{ $t("leaderboard.time.week") }}</button>
       </p>
       <p class="col col-md justify-content-center d-flex">
-        <button @click="clickYear()" class="btn btn-secondary">Jahr</button>
+        <button @click="clickYear()" class="btn btn-secondary">{{ $t("leaderboard.time.year") }}</button>
       </p>
       <p class="col col-md justify-content-center d-flex">
-        <button @click="clickAll()" class="btn btn-secondary">Immer</button>
+        <button @click="clickAll()" class="btn btn-secondary">{{ $t("leaderboard.time.all") }}</button>
       </p>
+    </div>
+    <div class="row">{{ $t("leaderboard.currentSelectedTime") }}: {{ $t(this.currentSelectedTime) }}
     </div>
     <div class="row">
       <div class="col-lg-12">
@@ -29,10 +31,10 @@
               :sort-by.sync="sortBy"
               :sort-desc.sync="sortDesc"
             >
-              <template #cell(user_balance)="data">
+              <template #cell(growth)="data">
                 {{ data.value | eur }}
               </template>
-              <template #cell(user_balance_eur)="data">
+              <template #cell(balance_eur)="data">
                 {{ data.value | eur }}
               </template>
 
@@ -60,6 +62,7 @@ export default {
 
   data() {
     return {
+      currentSelectedTime: "leaderboard.time.day",
       fields: [
         {
           key: "name",
@@ -67,44 +70,52 @@ export default {
           sortable: true,
         },
         {
-          key: "portfolio_growth",
+          key: "growth",
           label: "Zuwachs",
           sortable: true,
           tdClass: "right",
         },
         {
-          key: "user_balance_eur",
+          key: "balance_eur",
           label: "Portfoliowert",
           sortable: true,
           tdClass: "right",
         },
       ],
       currentPage: 1,
-      sortBy: "user_balance_eur",
+      sortBy: "balance_eur",
       sortDesc: true,
     };
   },
   methods: {
     clickHour() {
+      this.currentSelectedTime = "leaderboard.time.hour";
       return this.$store.dispatch("leaderboard/fetchHour");
     },
     clickDay() {
+      this.currentSelectedTime = "leaderboard.time.day";
       return this.$store.dispatch("leaderboard/fetchDay");
     },
     clickWeek() {
+      this.currentSelectedTime = "leaderboard.time.week";
       return this.$store.dispatch("leaderboard/fetchWeek");
     },
     clickYear() {
+      this.currentSelectedTime = "leaderboard.time.year";
       return this.$store.dispatch("leaderboard/fetchYear");
     },
     clickAll() {
+      this.currentSelectedTime = "leaderboard.time.all";
       return this.$store.dispatch("leaderboard/fetchAll");
     },
   },
   computed: {
     highscoreUsers() {
-      return this.$store.getters["leaderboard/data"]().filter((v) => v.length > 0);
+      return this.$store.getters["leaderboard/data"]();
     },
+  },
+  created() {
+    return this.$store.dispatch("leaderboard/fetchDay");
   },
 };
 </script>

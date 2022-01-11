@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\SymbolUserController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,5 +48,8 @@ Route::group(['prefix' => 'user'], function () {
   });
 });
 
+Route::group(['prefix' => 'leaderboard'], function () {
+  Route::get('/{time}', [LeaderBoardController::class, 'index']);
+});
 
 Route::get('/news-feed', [NewsFeedController::class, 'getAll']);

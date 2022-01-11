@@ -15,10 +15,6 @@ export default {
       return this.$store.getters["wallets/totalBalance"]();
     },
   },
-
-  created() {
-    this.$store.dispatch("wallets/fetchAll");
-  },
 };
 </script>
 
