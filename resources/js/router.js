@@ -17,6 +17,7 @@ import RegisterSuccessView from "./views/RegisterSuccessView.vue";
 import NewPasswordView from "./views/NewPasswordView.vue";
 import DeleteAccountView from "./views/DeleteAccountView.vue";
 import WalletView from "./views/WalletView.vue";
+import LeaderboardView from "./views/LeaderboardView.vue";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,14 @@ const router = new VueRouter({
       component: RegisterSuccessView,
       meta: {
         requiresAuth: false,
+      },
+    },
+    {
+      path: "/leaderboard",
+      name: "leaderboard",
+      component: LeaderboardView,
+      meta: {
+        requiresAuth: true,
       },
     },
     {

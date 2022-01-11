@@ -71,6 +71,10 @@
         {{ $t("navigation.dashboard") }}
       </router-link>
       <br />
+      <router-link :to="{ name: 'leaderboard' }" @click.native="closeNav()">
+        {{ $t("navigation.leaderboard") }}
+      </router-link>
+      <br />
       <router-link :to="{ name: 'wallet' }" @click.native="closeNav()">
         {{ $t("navigation.wallet") }}
       </router-link>

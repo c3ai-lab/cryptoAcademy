@@ -92,6 +92,7 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
+    "leaderboard": "Leaderboard",
     "wallet": "Wallet",
     "trading": "Trading",
     "academy": "Academy",
@@ -116,6 +117,9 @@
     "total_value": "Gesamtwert aller Wallets",
     "wallet_list": "Wallet-Übersicht",
     "transaction_histroy": "Transaktionsverlauf"
+  },
+  "leaderboard": {
+    "title": "Leaderboard"
   },
   "you": {
     "have": "In deiner Wallet"
