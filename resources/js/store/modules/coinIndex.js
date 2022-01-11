@@ -10,6 +10,7 @@ const binanceRest = new MainClient({
 
 const state = {
   all: [],
+  eurUsdt: [],
 };
 
 const getters = {
@@ -22,7 +23,8 @@ const getters = {
 };
 
 const actions = {
-  async fetchSymbols({ commit, rootGetters }) {
+  async fetchSymbols({ commit, dispatch, rootGetters }) {
+
     const response = await fetch("/api/user/favorites", {
       method: "GET",
       headers: {
@@ -42,7 +44,7 @@ const actions = {
     }
   },
 
-  getLowResPriceData({ commit }, symbol) {
+  getLowResPriceData({ commit, state }, symbol) {
     binanceRest
       .getKlines({
         ...DIMENSION_MAP_LOW_RES[DIMENSION],
@@ -51,6 +53,20 @@ const actions = {
       .then((response) =>
         commit("setDataForSymbol", {
           symbol,
+          data: response.map((x, i) => [x[0], Number(x[3]) / Number(state.eurUsdt.data[i][1])]),
+        })
+      )
+      .catch((error) => alert(error));
+  },
+
+  async getExchangeRates({ commit }) {
+    return binanceRest
+      .getKlines({
+        ...DIMENSION_MAP_LOW_RES[DIMENSION],
+        symbol: 'EURUSDT',
+      })
+      .then((response) =>
+        commit("setExchangeRates", {
           data: response.map((x) => [x[0], Number(x[3])]),
         })
       )
@@ -108,6 +124,9 @@ const mutations = {
   setFavoriteForSymbol(state, { id, isFavorite }) {
     state.all.find((x) => x.id === id).is_favorite = isFavorite;
   },
+  setExchangeRates(state, data) {
+    state.eurUsdt = data;
+  }
 };
 
 export default {

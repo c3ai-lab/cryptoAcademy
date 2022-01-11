@@ -28,12 +28,14 @@ export default {
     CoinCardRealData,
     PaddedLayout,
   },
-  created() {
-    this.$store.dispatch('coinIndex/fetchSymbols');
+  async created() {
+    await this.$store.dispatch('coinIndex/getExchangeRates');
+    await this.$store.dispatch('coinIndex/fetchSymbols');
   },
   computed: {
     ...mapState('coinIndex', {
       all: state => state.all,
+      xrate: state => state.eurUsdt,
     }),
   },
 }
