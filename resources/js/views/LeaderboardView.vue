@@ -67,23 +67,23 @@ export default {
         {
           key: "name",
           label: "Name",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "growth",
           label: "Zuwachs",
-          sortable: true,
+          sortable: false,
           tdClass: "right",
         },
         {
           key: "balance_eur",
           label: "Portfoliowert",
-          sortable: true,
+          sortable: false,
           tdClass: "right",
         },
       ],
       currentPage: 1,
-      sortBy: "balance_eur",
+      sortBy: "growth",
       sortDesc: true,
     };
   },

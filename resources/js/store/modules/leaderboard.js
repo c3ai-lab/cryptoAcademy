@@ -8,7 +8,7 @@ const getters = {
 
 const actions = {
   async fetchHour({commit, rootGetters}) {
-    const response = await fetch(`${location.origin}/api/leaderboard/hour?limit=20`, {
+    const response = await fetch(`${location.origin}/api/leaderboard/hour`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ const actions = {
 
     return false;
   }, async fetchDay({commit, rootGetters}) {
-    const response = await fetch(`${location.origin}/api/leaderboard/day?limit=20`, {
+    const response = await fetch(`${location.origin}/api/leaderboard/day`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const actions = {
 
     return false;
   }, async fetchWeek({commit, rootGetters}) {
-    const response = await fetch(`${location.origin}/api/leaderboard/week?limit=20`, {
+    const response = await fetch(`${location.origin}/api/leaderboard/week`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const actions = {
 
     return false;
   }, async fetchYear({commit, rootGetters}) {
-    const response = await fetch(`${location.origin}/api/leaderboard/year?limit=20`, {
+    const response = await fetch(`${location.origin}/api/leaderboard/year`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const actions = {
 
     return false;
   }, async fetchAll({commit, rootGetters}) {
-    const response = await fetch(`${location.origin}/api/leaderboard/all?limit=20`, {
+    const response = await fetch(`${location.origin}/api/leaderboard/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

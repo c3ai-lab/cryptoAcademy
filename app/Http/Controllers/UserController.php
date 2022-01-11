@@ -20,7 +20,7 @@ use Validator;
 
 class UserController extends Controller
 {
-  const Init_BALANCE = 1000000;
+  const Init_BALANCE = 10000;
 
   public function __construct()
   {
