@@ -1,25 +1,25 @@
 <template>
   <b-card>
-    <b-card-text class="balance">
-      {{ totalBalance | eur }}
+    <b-card-text class="value">
+      {{ totalValue | eur }}
     </b-card-text>
   </b-card>
 </template>
 
 <script>
 export default {
-  name: "TotalBalanceCard",
+  name: "TotalCoinValueCard",
 
   computed: {
-    totalBalance() {
-      return this.$store.getters["wallets/totalBalance"]();
+    totalValue() {
+      return this.$store.getters["wallets/totalValue"]();
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.balance {
+.value {
   text-align: center;
   font-size: 2rem;
 }

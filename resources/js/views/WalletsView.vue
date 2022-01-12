@@ -7,7 +7,7 @@
       </b-col>
       <b-col>
         <h1>{{ $t("wallet.user_balance") }}</h1>
-        <UserBalanceCard />
+        <UserCreditCard />
       </b-col>
     </b-row>
 
@@ -22,7 +22,7 @@
 <script>
 import PaddedLayout from "../layouts/PaddedLayout.vue";
 import TotalCoinValueCard from "../components/TotalCoinValueCard.vue";
-import UserBalanceCard from "../components/UserBalanceCard.vue";
+import UserCreditCard from "../components/UserCreditCard.vue";
 import WalletSymbolList from "../components/WalletSymbolList.vue";
 import TransactionCard from "../components/TransactionCard.vue";
 
@@ -32,7 +32,7 @@ export default {
   components: {
     PaddedLayout,
     TotalCoinValueCard,
-    UserBalanceCard,
+    UserCreditCard,
     WalletSymbolList,
     TransactionCard,
   },

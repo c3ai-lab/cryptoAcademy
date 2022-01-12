@@ -5,7 +5,7 @@ const state = {
 const getters = {
   all: (state) => () => state.wallets,
 
-  totalBalance: (state) => () =>
+  totalValue: (state) => () =>
     state.wallets
       .map((v) => v.user_balance)
       .reduce((previous, current) => previous + current, 0),
