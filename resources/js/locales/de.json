@@ -67,7 +67,15 @@
     "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?",
     "chart_info": "Zeige Achsen in Graphen",
     "x_axis": "X-Achse",
-    "y_axis": "Y-Achse"
+    "y_axis": "Y-Achse",
+    "reset_account_modal": {
+      "title": "Du hast erfolgreich deinen Account zurückgesetzt.",
+      "message": "Durch das Zurücksetzen wurden alle deine gekauften Krypotwährungen wieder gelöscht und dir wird wieder ein Startguthaben von 10.000€ gutgeschrieben. Wir wünschen dir viel Erfolg auf deinen neuen Trading-Wegen."
+    },
+    "change_password_modal": {
+      "title": "Du hast erfolgreich dein Passwort geändert.",
+      "message": "Beim nächsten Einloggen, kannst du dich wie gewohnt, mit deinem neuen Passwort anmelden."
+    }
   },
   "datetime": {
     "month_short": "M",
@@ -111,7 +119,19 @@
     "value": "Wert",
     "amount": "Menge",
     "yourAmount": "In deinem Wallet",
-    "balance": "Konto"
+    "balance": "Konto",
+    "buy_success_modal": {
+      "title": "Du hast erfolgreich Coins gekauft",
+      "text1": "Deinem Wallet wurden die folgenden Coins gutgeschrieben: ",
+      "text2": "Kurswert: ",
+      "text3": "Kaufpreis: "
+    },
+    "sell_success_modal": {
+      "title": "Du hast erfolgreich Coins verkauft",
+      "text1": "Die folgenden Coins wurden verkauft:  ",
+      "text2": "Kurswert: ",
+      "text3": "Verkaufspreis: "
+    }
   },
   "wallet": {
     "total_value": "Gesamtwert aller Wallets",

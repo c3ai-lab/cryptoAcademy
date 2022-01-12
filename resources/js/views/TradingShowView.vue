@@ -3,23 +3,34 @@
     style="
       display: flex;
       flex-wrap: wrap;
-      padding-top: 80px;
-      background-color: white;
       width: 100%;
+      margin-top: 80px !important;
+      max-width: 1140px;
       justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
     "
+    class="row px-lg-5"
   >
-    <div style="width: 100%">
-      <div style="padding: 0 28px">
-        <h1>
-          {{ symbol }}
-        </h1>
-        <div style="margin-left: 6px; font-size: 16px">
+    <h1 class="mt-3 px-lg-0">
+      {{ symbol }}
+    </h1>
+    <div
+      class="bg-white p-0"
+      style="
+        box-shadow: 0 1rem 1.5rem rgba(95, 95, 95, 0.13);
+        border: 0 solid #f6f6f6;
+        border-radius: 0.25rem;
+      "
+    >
+      <div>
+        <div>
           <nice-price
             v-if="price"
             style="font-size: 20px"
             :value="price"
             currency="eur"
+            class="px-3"
           />
         </div>
       </div>
@@ -54,7 +65,7 @@
           margin: 0 auto;
         "
       >
-        <b-button-group class="flex-grow-1">
+        <b-button-group class="flex-grow-1 pb-3">
           <b-button
             v-for="(dimension, i) in dimensions"
             :key="i"
@@ -76,7 +87,7 @@
         >Trade</b-button
       >
     </div>
-    <div style="padding: 14px 28px">
+    <div class="mt-4 px-lg-0">
       <b-card>
         <div class="text-muted pa-0 ma-0">
           {{ $t("trade.amount") }}
@@ -91,6 +102,7 @@
       <trading-buy-view v-if="1" :price="price"/>
       <transaction-card :symbol="symbol" v-if="1" />
     </div>
+    
   </div>
 </template>
 

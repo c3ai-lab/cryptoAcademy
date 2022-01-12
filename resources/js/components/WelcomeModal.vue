@@ -21,7 +21,7 @@
         >
           <header id="modal-lg___BV_modal_header_" class="modal-header">
             <h5 id="modal-lg___BV_modal_title_" class="modal-title font-18">
-              {{ $t("dashboard.welcome_modal.hello") }} Benutzername
+              {{ $t("dashboard.welcome_modal.hello") }} {{ username }}
             </h5>
             <button type="button" class="close" @click="close">×</button>
           </header>
@@ -30,27 +30,25 @@
               {{ $t("dashboard.welcome_modal.trading") }}
             </p>
 
-            <router-link to="trading" class="fw-medium text-primary d-flex justify-content-center">
-              <b-button
-                variant="primary"
-                class="btn-block mb-3 "
-              >
+            <router-link
+              to="trading"
+              class="fw-medium text-primary d-flex justify-content-center"
+            >
+              <b-button variant="primary" class="btn-block mb-3">
                 {{ $t("dashboard.welcome_modal.trade_now") }}
               </b-button>
-
-          </router-link>
+            </router-link>
             <p>
               {{ $t("dashboard.welcome_modal.academy") }}
             </p>
-            <router-link to="academy" class="fw-medium text-primary d-flex justify-content-center">
-              <b-button
-                variant="primary"
-                class="btn-block mb-3"
-              >
+            <router-link
+              to="academy"
+              class="fw-medium text-primary d-flex justify-content-center"
+            >
+              <b-button variant="primary" class="btn-block mb-3">
                 {{ $t("dashboard.welcome_modal.academy_now") }}
               </b-button>
-
-          </router-link>
+            </router-link>
           </div>
           <!---->
         </div>
@@ -65,14 +63,20 @@
 export default {
   name: "WelcomeModal",
 
+  computed: {
+    username() {
+      return this.$store.getters["user/getUser"]().name;
+    },
+  },
   methods: {
     close() {
-      document.getElementById("modal-lg___BV_modal_outer_").style.display = "none";
+      document.getElementById("modal-lg___BV_modal_outer_").style.display =
+        "none";
     },
   },
 
   created() {
     this.$store.dispatch("user/modalShown");
-  }
+  },
 };
 </script>

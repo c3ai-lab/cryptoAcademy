@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <b-button @click="$router.go(-1)">{{ $t("common.back") }}</b-button> -->
+    <b-button @click="$router.go(-1)" class="backButton">&#171; {{ $t("common.back") }}</b-button>
 
     <h1>{{ $t(`academy.${category}.name`) }}</h1>
     <div class="card">
@@ -42,12 +42,25 @@
   </div>
 </template>
 
+<style>
+.backButton
+{
+  background-color: var(--bs-gray)!important;
+  color: white!important;
+  border: none;
+  padding: 0 10px!important;
+  margin-bottom: 10px;
+}
+</style>
+
 <style lang="scss" scoped>
 .academy-link {
   border-bottom: 0.5px solid var(--bs-gray-500);
   padding: 0.5rem 0 1rem;
   font-size: 1rem;
 }
+
+
 
 i {
   float: right;

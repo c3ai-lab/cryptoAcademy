@@ -1,6 +1,6 @@
 <template>
   <PaddedLayout>
-    <h2>{{ $t("wallet.total_value") }}</h2>
+    <h1>{{ $t("wallet.total_value") }}</h1>
     <TotalBalanceCard />
 
     <h2>{{ $t("wallet.wallet_list") }}</h2>

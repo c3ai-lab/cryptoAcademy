@@ -1,17 +1,18 @@
 <template>
   <!-- <div style="background: #f5f5f5"> -->
     <padded-layout>
-      <div>
+      <h1>{{ $t("navigation.trading") }}</h1>
+      <div class="row">
       <div
         v-for="(coin, i) in all"
-        :key="i"
+        :key="i" class="col-md-6"
       >
         <coin-card-real-data
           :name="coin.name"
           :symbol="coin.symbol"
           :series="coin.series"
           :isFavorite="coin.is_favorite"
-          :id="coin.id"
+          :id="coin.id" 
         />
       </div>
     </div>

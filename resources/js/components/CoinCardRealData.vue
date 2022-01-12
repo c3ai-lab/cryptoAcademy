@@ -78,7 +78,6 @@
 <style scoped>
 .card {
   cursor: pointer;
-  margin: 16px 8px;
   border-radius: 0em;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
