@@ -1,7 +1,17 @@
 <template>
   <div class="row">
     <div class="col-lg-12">
-      <div class="card">
+      <div v-if="nonEmptyWallets.length === 0">
+        <p class="text-center">
+          {{ $t("wallet.all_wallets_empty") }}
+          <br />
+          <router-link to="trading">
+            {{ $t("wallet.buy_coins") }}
+          </router-link>
+        </p>
+      </div>
+
+      <div class="card" v-else>
         <div class="card-body">
           <b-table
             responsive="sm"

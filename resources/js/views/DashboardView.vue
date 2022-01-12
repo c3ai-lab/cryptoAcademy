@@ -18,7 +18,7 @@
             </router-link>
           </p>
         </div>
-        <div v-if="favoriteCoins.length > 0">
+        <div v-else>
           <CoinCardRealData
             v-for="coin in favoriteCoins"
             :key="coin.id"
@@ -35,7 +35,7 @@
         <div v-if="latestNews.length === 0">
           <p class="text-center">{{ $t("dashboard.no_news") }}</p>
         </div>
-        <div v-if="latestNews.length > 0">
+        <div v-else>
           <NewsCard
             v-for="article in latestNews"
             :key="article.id"
@@ -43,7 +43,7 @@
           />
         </div>
       </div>
-      <WelcomeModal v-if="isFirstVisit"/>
+      <WelcomeModal v-if="isFirstVisit" />
     </div>
   </padded-layout>
 </template>
@@ -86,7 +86,7 @@ export default {
     },
     isFirstVisit() {
       return this.$store.getters["user/getUser"]().is_first_visit;
-    }
+    },
   },
 
   created() {
