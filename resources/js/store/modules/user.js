@@ -20,7 +20,7 @@ const state = () => {
 const getters = {
   accessToken: (state) => () =>
     state.accessToken !== null &&
-    state.accessToken.expiresAt > new Date().getTime()
+      state.accessToken.expiresAt > new Date().getTime()
       ? state.accessToken.token
       : null,
   sessionExpiresAt: (state) => () =>
@@ -150,7 +150,7 @@ const actions = {
     return false;
   },
 
-  async resetPassword({}, email) {
+  async resetPassword({ }, email) {
     const response = await fetch("/api/user/password/reset", {
       method: "POST",
       headers: {
@@ -196,7 +196,7 @@ const actions = {
     return false;
   },
 
-  async deleteAccount({ commit, dispatch, rootGetters }, callback) {
+  async deleteAccount({ commit, dispatch, rootGetters }) {
     const response = await fetch("/api/user", {
       method: "DELETE",
       headers: {
@@ -207,8 +207,10 @@ const actions = {
     if (response.ok === true) {
       commit("clear");
       dispatch("save");
-      callback();
+      return true;
     }
+
+    return false;
   },
 
   async changePassword({ commit, dispatch, rootGetters }, data) {

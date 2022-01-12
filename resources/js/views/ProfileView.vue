@@ -40,43 +40,43 @@
           <hr class="my-4" />
           <div>
             <h4>{{ $t("profile.chart_info") }}</h4>
-            </div>
+          </div>
           <div class="row">
             <div class="col-6">
-            {{ $t("profile.x_axis") }}
+              {{ $t("profile.x_axis") }}
 
-            <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
-              <b-tab
-                id="xaxison"
-                title="An"
-                v-bind:active="xAxis === 1"
-                @click="updateAxis(true, yAxis)"
-              />
-              <b-tab
-                id="xaxisoff"
-                title="Aus"
-                v-bind:active="xAxis === 0"
-                @click="updateAxis(false, yAxis)"
-              />
-            </b-tabs>
+              <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
+                <b-tab
+                  id="xaxison"
+                  title="An"
+                  v-bind:active="xAxis === 1"
+                  @click="updateAxis(true, yAxis)"
+                />
+                <b-tab
+                  id="xaxisoff"
+                  title="Aus"
+                  v-bind:active="xAxis === 0"
+                  @click="updateAxis(false, yAxis)"
+                />
+              </b-tabs>
             </div>
             <div class="col-6">
-            {{ $t("profile.y_axis") }}
+              {{ $t("profile.y_axis") }}
 
-            <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
-              <b-tab
-                id="yaxison"
-                title="An"
-                :active="yAxis === 1"
-                @click="updateAxis(xAxis, true)"
-              />
-              <b-tab
-                id="yaxisoff"
-                title="Aus"
-                :active="yAxis === 0"
-                @click="updateAxis(xAxis, false)"
-              />
-            </b-tabs>
+              <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
+                <b-tab
+                  id="yaxison"
+                  title="An"
+                  :active="yAxis === 1"
+                  @click="updateAxis(xAxis, true)"
+                />
+                <b-tab
+                  id="yaxisoff"
+                  title="Aus"
+                  :active="yAxis === 0"
+                  @click="updateAxis(xAxis, false)"
+                />
+              </b-tabs>
             </div>
           </div>
 
@@ -209,10 +209,10 @@
         </div>
       </div>
       <span v-if="accountResetModal">
-      <AccountResetModal />
+        <AccountResetModal />
       </span>
       <span v-if="changePasswordModal">
-      <ChangePasswordModal />
+        <ChangePasswordModal />
       </span>
     </div>
   </padded-layout>
@@ -316,17 +316,19 @@ export default {
         });
     },
 
-    deleteAccount() {
-      // TODO: dem User mitteilen, dass sein Account erfolgreich geloescht wurde oder auch nicht -> Verlinken auf DeleteAccountView
-      this.$store.dispatch("user/deleteAccount", () =>
-        this.$router.push({ name: "delete-account" })
-      );
+    async deleteAccount() {
+      const success = await this.$store.dispatch("user/deleteAccount");
+      if (success === true) this.$router.push({ name: "delete-account" });
+      else alert("Account konnte nicht gelöscht werden");
     },
 
     resetAccount() {
       this.$store
         .dispatch("user/resetAccount")
-        .then(() => (this.showResetAccount = false), (this.accountResetModal = true));
+        .then(
+          () => (this.showResetAccount = false),
+          (this.accountResetModal = true)
+        );
     },
 
     async logout() {
