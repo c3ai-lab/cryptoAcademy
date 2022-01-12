@@ -43,10 +43,10 @@
     "title": "Dashboard",
     "portfolio_value": "Portfoliowert",
     "news": "Neuigkeiten",
-    "no_news": "Es gibt aktuell keine Neuigkeiten",
+    "no_news": "Es gibt aktuell keine Neuigkeiten.",
     "favorites": "Favoriten",
     "no_favorites": "Es sind keine Coins als Favoriten markiert.",
-    "add_favorites": "Füge jetzt Coins hinzu.",
+    "add_favorites": "Füge jetzt Coins hinzu!",
     "welcome_modal": {
       "hello": "Hallo ",
       "trading": "Herzlich Willkommen bei CryptoCademy, deiner gamifizierten Crypto-Trading-App. Zum Start wurden dir 10.000€ gutgeschrieben, die du in Kryptowährungen investieren kannst.",
@@ -136,7 +136,10 @@
   "wallet": {
     "total_value": "Gesamtwert aller Wallets",
     "wallet_list": "Wallet-Übersicht",
-    "transaction_histroy": "Transaktionsverlauf"
+    "all_wallets_empty": "Alle deine Wallets sind im Moment leer.",
+    "transaction_histroy": "Transaktionsverlauf",
+    "no_transactions": "Du hast noch keine Coins gekauft oder verkauft.",
+    "buy_coins": "Jetzt Coins kaufen!"
   },
   "leaderboard": {
     "title": "Leaderboard",
