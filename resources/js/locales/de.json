@@ -134,7 +134,7 @@
     }
   },
   "wallet": {
-    "total_value": "Gesamtwert aller Wallets",
+    "total_value": "Gesamtwert aller Coins",
     "wallet_list": "Wallet-Übersicht",
     "all_wallets_empty": "Alle deine Wallets sind im Moment leer.",
     "transaction_histroy": "Transaktionsverlauf",
