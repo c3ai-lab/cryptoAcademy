@@ -24,22 +24,36 @@
     "forgot_password": "Passwort vergessen?",
     "no_account": "Noch keinen Account?",
     "already_account": "Bereits einen Account?",
-    "accept_by_registration": "Mit der Registrierung akzeptieren Sie die",
-    "login_failed": "Anmeldung fehlgeschlagen!",
+    "accept_terms_of_use": "Ich akzeptiere mit der Registrierung die",
+    "invalid_email": "Ungültige E-Mail-Adresse",
+    "invalid_username": "Ungültiger Benutzername (2 bis 100 Zeichen)",
+    "invalid_password": "Ungültiges Password (mindestens 6 Zeichen)",
+    "login_failed": "Passwort passt nicht zur E-Mail-Adresse",
     "register_failed": "Registrierung fehlgeschlagen!",
     "reset_password": "Passwort vergessen?",
     "mail_for_password": "Gib deine mit dem Konto verknüpfte E-Mail-Adresse an, um ein neues Passwort per Mail zu erhalten.",
     "reset_passoword_now": "Neues Passwort anfordern!",
     "mail_failed": "Die angegebene Mail-Adresse ist nicht vergeben.",
-    "remember_password": "Du erinnerst dich an dein Passwort?"
+    "remember_password": "Du erinnerst dich an dein Passwort?",
+    "register_success": "Du hast dich erfolgreich registriert. Bitte bestätige die Registrierungsmail, bevor du dich einloggen kannst.",
+    "new_password": "Du hast erfolgreich dein Passwort geändert. Du wurdest automatisch ausgeloggt und kannst dich jetzt mit deinem neuen Passwort einloggen.",
+    "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
   },
   "dashboard": {
     "title": "Dashboard",
     "portfolio_value": "Portfoliowert",
     "news": "Neuigkeiten",
-    "no_news": "Es gibt aktuell keine Neuigkeiten",
+    "no_news": "Es gibt aktuell keine Neuigkeiten.",
     "favorites": "Favoriten",
-    "no_favorites": "Es sind keine Coins als Favoriten markiert"
+    "no_favorites": "Es sind keine Coins als Favoriten markiert.",
+    "add_favorites": "Füge jetzt Coins hinzu!",
+    "welcome_modal": {
+      "hello": "Hallo ",
+      "trading": "Herzlich Willkommen bei CryptoCademy, deiner gamifizierten Crypto-Trading-App. Zum Start wurden dir 10.000€ gutgeschrieben, die du in Kryptowährungen investieren kannst.",
+      "trade_now": "Zum Trading",
+      "academy": "Wenn du dich noch nicht gut mit Kryptowährungen auskennst oder noch mehr zu dem Thema lernen möchtest, schaue doch mal in unserer Crypto Academy vorbei, wo du Informationen zu den relevantesten Themen Rund um bestimmte Crypto-Coins, Blockchain-Technologien und Trading findest.",
+      "academy_now": "Zur Academy"
+    }
   },
   "profile": {
     "title": "Profil",
@@ -51,14 +65,30 @@
     "delete_account_question": "Möchten Sie Ihren Account wirklich endgültig löschen?",
     "account_reset": "Account zurücksetzen",
     "account_reset_question": "Möchten Sie Ihren Account wirklich zurücksetzen?",
-    "chart_info": "In Grafen möchte ich die Achsen angezeigt bekommen:",
+    "chart_info": "Zeige Achsen in Graphen",
     "x_axis": "X-Achse",
-    "y_axis": "Y-Achse"
+    "y_axis": "Y-Achse",
+    "reset_account_modal": {
+      "title": "Du hast erfolgreich deinen Account zurückgesetzt.",
+      "message": "Durch das Zurücksetzen wurden alle deine gekauften Krypotwährungen wieder gelöscht und dir wird wieder ein Startguthaben von 10.000€ gutgeschrieben. Wir wünschen dir viel Erfolg auf deinen neuen Trading-Wegen."
+    },
+    "change_password_modal": {
+      "title": "Du hast erfolgreich dein Passwort geändert.",
+      "message": "Beim nächsten Einloggen, kannst du dich wie gewohnt, mit deinem neuen Passwort anmelden."
+    }
   },
   "datetime": {
     "month_short": "M",
     "year_short": "J",
     "all": "Gesamt"
+  },
+  "dimension": {
+    "1H": "1H",
+    "1D": "1T",
+    "1W": "1W",
+    "1M": "1M",
+    "1Y": "12M",
+    "All": "Gesamt"
   },
   "coins": {
     "BTC": {
@@ -70,7 +100,8 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
-    "wallet": "Wallet",
+    "leaderboard": "Leaderboard",
+    "wallets": "Wallets",
     "trading": "Trading",
     "academy": "Academy",
     "profile": "Profil"
@@ -80,16 +111,49 @@
     "all": "Alle",
     "bought": "Gekauft",
     "sold": "Verkauft",
-    "buy": "Kaufe",
-    "sell": "Verkaufe",
+    "buy": "Kaufen",
+    "sell": "Verkaufen",
     "price": "Preis",
+    "pricePerAsset": "Einzelpreis",
     "total": "Gesamt",
     "value": "Wert",
-    "amount": "Menge"
+    "amount": "Menge",
+    "yourAmount": "In deinem Wallet",
+    "balance": "Konto",
+    "buy_success_modal": {
+      "title": "Du hast erfolgreich Coins gekauft",
+      "text1": "Deinem Wallet wurden die folgenden Coins gutgeschrieben: ",
+      "text2": "Kurswert: ",
+      "text3": "Kaufpreis: "
+    },
+    "sell_success_modal": {
+      "title": "Du hast erfolgreich Coins verkauft",
+      "text1": "Die folgenden Coins wurden verkauft:  ",
+      "text2": "Kurswert: ",
+      "text3": "Verkaufspreis: "
+    }
   },
   "wallet": {
-    "total_wallet": "Walletwert ",
-    "all_transactions": "Verlauf Vorgänge"
+    "total_value": "Gesamtwert aller Coins",
+    "wallet_list": "Wallet-Übersicht",
+    "all_wallets_empty": "Alle deine Wallets sind im Moment leer.",
+    "transaction_histroy": "Transaktionsverlauf",
+    "no_transactions": "Du hast noch keine Coins gekauft oder verkauft.",
+    "buy_coins": "Jetzt Coins kaufen!"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "currentSelectedTime": "Ausgewählter Zeitraum",
+    "time": {
+      "hour": "Stunde",
+      "day": "Tag",
+      "week": "Woche",
+      "year": "Jahr",
+      "all": "Immer"
+    }
+  },
+  "you": {
+    "have": "In deiner Wallet"
   },
   "academy": {
     "title": "Crypto Academy",
@@ -99,25 +163,43 @@
       "description": "<i>How does it work?</i> bietet einen einfach erklärten Überblick über Kryptowährungen im Allgemeinen. Auch ist hier eine einfache sowie eine fortgeschrittene Erklärung zur Funktionsweise von Blockchains und Transaktionen zu finden sowie Informationen zum Thema Konsens und Konsens Mechanismen."
     },
     "CRYPTO__INTRO": "Einführung",
+    "CRYPTO__INTRO__WALLETS": "Wallets",
+    "CRYPTO__INTRO__SMART_CONTRACTS": "Smart Contracts",
     "CRYPTO__BLOCKCHAIN": "Blockchain",
     "CRYPTO__BLOCKCHAIN__TRANSACTIONS": "Transaktionen",
     "CRYPTO__BLOCKCHAIN__FEES": "Transaktionsgebühren",
-    "CRYPTO__BLOCKCHAIN__ADVANCED": "Advanced",
+    "CRYPTO__ADVANCED": "Fortgeschrittene Themen",
+    "CRYPTO__ADVANCED__TRANSACTIONS": "Transaktionen",
+    "CRYPTO__ADVANCED__MERKLETREE": "Merkle Trees und Merkle Roots",
+    "CRYPTO__ADVANCED__CONSENSUS": "Konsens",
+    "CRYPTO__ADVANCED__PROOF_OF_WORK": "Proof of Work",
+    "CRYPTO__ADVANCED__PROOF_OF_STAKE": "Proof of Stake",
+    "TRADING__MARKET_ORDER": "Market Order",
+    "TRADING__LIMIT_ORDER": "Limit Order",
+    "TRADING__PRICE": "Preisfindung",
+    "TRADING__AMM": "Automated Market Maker",
+    "TRADING__SLIPPAGE": "Slippage",
+    "TRADING__TAXES": "Steuern",
+    "TOP_FIVE_COINS__BTC": "Bitcoin",
+    "TOP_FIVE_COINS__ETH": "Ethereum",
+    "TOP_FIVE_COINS__BNB": "Binance Coin",
+    "TOP_FIVE_COINS__USDT": "Tether",
+    "TOP_FIVE_COINS__SOL": "Solana",
     "TRADING": {
-      "name": "Trading",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "name": "Handel",
+      "description": "In diesem Bereich finden sich Informationen zum Handel mit Kryptowährungen. Viele Prinzipien entsprechen denen auf Aktienbörsen, manche Mechanismen sind jedoch auch kryptospezifisch."
     },
     "TOP_FIVE_COINS": {
       "name": "Top fünf Kryptowährungen",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Die Anzahl an verschiedenen Kryptowährungen ist gewaltig und es ist leicht, hier den Überblick zu verlieren. Unter <i>Top 5 Kryptowährungen</i> ist eine kurze Übersicht über die derzeit größten Kryptowährungen zu finden. Hier sind Informationen zu Währungen wie Bitcoin und Ethereum zu finden, sowie ihre jeweiligen Vor- und Nachteile. So kann jeder für sich selber entscheiden, welche die richtige Kryptowährung für sich selbst ist."
     },
     "FIFTY_COINS__LIST": {
       "name": "50 Kryptowährungen - Kurz beschrieben",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Hier ist eine grobe Übersicht über die 50 Kryptowährungen mit dem aktuell größten Marktwert. <i>50 Kryptowährungen - Kurz beschrieben</i> bietet schnelle, vereinfachte Informationen zu diesen Währungen. Auf der Website von CoinMarketCap können bei Bedarf noch umfangreichere Informationen zu den einzelnen Währungen gefunden werden."
     },
-    "GLOSSAR": {
+    "GLOSSAR__LIST": {
       "name": "Glossar",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      "description": "Im Glossar werden alle im Umfang der Academy aufgegriffenen Begriffe rund um Kryptowährungen noch einmal kurz erklärt."
     }
   }
 }

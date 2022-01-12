@@ -20,7 +20,7 @@ use Validator;
 
 class UserController extends Controller
 {
-  const Init_BALANCE = 1000000;
+  const Init_BALANCE = 10000;
 
   public function __construct()
   {
@@ -189,5 +189,19 @@ class UserController extends Controller
     }
 
     return response()->json(['msgcode' => MessageCodes::VERIFY_EMAIL_FAIL], 400);
+  }
+
+  // sry das ist sehr krude...
+  // hatte probleme mit den Events des Packages tymon/JWTAuth, welches auch nicht mehr maintained wird
+  // Eine mögliche Lösung waere der Fork https://github.com/PHP-Open-Source-Saver/jwt-auth
+  // da sind Events wohl vernuenftig implementiert
+  public function modalShown() {
+    $user = auth()->user();
+    $user->is_first_visit = false;
+    $user->save();
+
+    return response()->json([
+      'msgcode' => MessageCodes::MODAL_CLICKED_SUCCESS
+    ]);
   }
 }

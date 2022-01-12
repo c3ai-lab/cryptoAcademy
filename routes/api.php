@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\SymbolUserController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserSymbolTransactionController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'user'], function () {
   Route::put('/password', [UserController::class, 'updateCurrentUserPassword']);
   Route::post('/password/reset', [UserController::class, 'resetCurrentUserPassword']);
   Route::post('/resetAll', [UserController::class, 'resetCurrentUser']);
+  Route::post('/modal-shown', [UserController::class, 'modalShown']);
 
   Route::group(['prefix' => 'favorites'], function () {
     Route::get('/', [SymbolUserController::class, 'index']);
@@ -52,5 +54,8 @@ Route::group(['prefix' => 'user'], function () {
   });
 });
 
+Route::group(['prefix' => 'leaderboard'], function () {
+  Route::get('/{time}', [LeaderBoardController::class, 'index']);
+});
 
 Route::get('/news-feed', [NewsFeedController::class, 'getAll']);

@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import {store} from "./store/main";
+import { store } from "./store/main";
 
-import {SESSION_REFRESH_AFTER_MINUTES} from "./constants";
+import { SESSION_REFRESH_AFTER_MINUTES } from "./constants";
 
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
@@ -13,7 +13,11 @@ import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import AcademyView from "./views/AcademyView.vue";
 import ProfileView from "./views/ProfileView.vue";
-import WalletView from "./views/WalletView.vue";
+import RegisterSuccessView from "./views/RegisterSuccessView.vue";
+import NewPasswordView from "./views/NewPasswordView.vue";
+import DeleteAccountView from "./views/DeleteAccountView.vue";
+import WalletsView from "./views/WalletsView.vue";
+import LeaderboardView from "./views/LeaderboardView.vue";
 
 Vue.use(VueRouter);
 
@@ -38,9 +42,25 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/wallet",
-      name: "wallet",
-      component: WalletView,
+      path: "/register-success",
+      name: "register-success",
+      component: RegisterSuccessView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/leaderboard",
+      name: "leaderboard",
+      component: LeaderboardView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/wallets",
+      name: "wallets",
+      component: WalletsView,
       meta: {
         requiresAuth: true,
       },
@@ -49,6 +69,22 @@ const router = new VueRouter({
       path: "/reset-password",
       name: "reset-password",
       component: ResetPasswordView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/new-password",
+      name: "new-password",
+      component: NewPasswordView,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/delete-account",
+      name: "delete-account",
+      component: DeleteAccountView,
       meta: {
         requiresAuth: false,
       },
@@ -107,10 +143,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
   const sessionExpiresAt = store.getters["user/sessionExpiresAt"]();
   const refreshData = () => !["login", "register"].includes(to.name);
-  const refreshToken = () => (sessionExpiresAt < new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000);
+  const refreshToken = () =>
+    sessionExpiresAt <
+    new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000;
+
   if (refreshToken() && refreshData()) {
     store.dispatch("user/refreshSession");
   }
@@ -118,15 +156,13 @@ router.beforeEach((to, from, next) => {
   const accessToken = store.getters["user/accessToken"]();
   if (to.meta.requiresAuth === true && accessToken === null) {
     // store original target and redirect user to it after login / registration
-    next({name: "login"});
+    next({ name: "login" });
   } else if (to.meta.requiresAuth === false && accessToken !== null) {
-    next({name: "dashboard"});
+    next({ name: "dashboard" });
   } else {
-    if (refreshData())
-      store.dispatch("user/refreshUserdata");
+    if (refreshData()) store.dispatch("user/refreshUserData");
     next();
   }
-})
-;
+});
 
 export default router;

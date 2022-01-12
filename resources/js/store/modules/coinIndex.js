@@ -10,6 +10,7 @@ const binanceRest = new MainClient({
 
 const state = {
   all: [],
+  eurUsdt: [],
 };
 
 const getters = {
@@ -22,40 +23,28 @@ const getters = {
 };
 
 const actions = {
-  fetchSymbols({ commit, rootGetters }) {
-    return new Promise((resolve, reject) => {
-      fetch("/api/user/favorites", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-        },
-      })
-        .then((response) => {
-          if (response.ok === true) {
-            return response.json();
-          }
-          return null;
-        })
-        .then((data) => {
-          if (data === null) {
-            reject();
-          } else {
-            commit(
-              "setSymbols",
-              data.map(
-                (x) => ({ ...x, series: [] }) // needed for reactivity
-              )
-            );
-            resolve();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  async fetchSymbols({ commit, dispatch, rootGetters }) {
+
+    const response = await fetch("/api/user/favorites", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+      },
     });
+
+    if (response.ok === true) {
+      const data = await response.json();
+      commit(
+        "setSymbols",
+        data.map(
+          (x) => ({ ...x, series: [] }) // needed for reactivity
+        )
+      );
+    }
   },
-  getLowResPriceData({ commit }, symbol) {
+
+  getLowResPriceData({ commit, state }, symbol) {
     binanceRest
       .getKlines({
         ...DIMENSION_MAP_LOW_RES[DIMENSION],
@@ -64,12 +53,26 @@ const actions = {
       .then((response) =>
         commit("setDataForSymbol", {
           symbol,
+          data: response.map((x, i) => [x[0], Number(x[3]) / Number(state.eurUsdt.data[i][1])]),
+        })
+      )
+      .catch((error) => alert(error));
+  },
+
+  async getExchangeRates({ commit }) {
+    return binanceRest
+      .getKlines({
+        ...DIMENSION_MAP_LOW_RES[DIMENSION],
+        symbol: 'EURUSDT',
+      })
+      .then((response) =>
+        commit("setExchangeRates", {
           data: response.map((x) => [x[0], Number(x[3])]),
         })
       )
       .catch((error) => alert(error));
   },
-  fetchFavorites({ commit }) {},
+
   addFavorite({ commit, rootGetters }, id) {
     fetch(`/api/user/favorites/${id}`, {
       method: "POST",
@@ -89,6 +92,7 @@ const actions = {
         console.log(error);
       });
   },
+
   removeFavorite({ commit, rootGetters }, id) {
     fetch(`/api/user/favorites/${id}`, {
       method: "DELETE",
@@ -120,6 +124,9 @@ const mutations = {
   setFavoriteForSymbol(state, { id, isFavorite }) {
     state.all.find((x) => x.id === id).is_favorite = isFavorite;
   },
+  setExchangeRates(state, data) {
+    state.eurUsdt = data;
+  }
 };
 
 export default {

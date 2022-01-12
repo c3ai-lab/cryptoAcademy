@@ -44,8 +44,8 @@
           <div>
             <nice-price
               style="font-size: 20px"
-              :value="currentValue"
-              currency="usd"
+              :value="currentPrice"
+              currency="eur"
             />
           </div>
         </div>
@@ -78,7 +78,6 @@
 <style scoped>
 .card {
   cursor: pointer;
-  margin: 16px 8px;
   border-radius: 0em;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -112,7 +111,7 @@ export default {
     tradeSymbol() {
       return this.symbol.split("USDT")[0];
     },
-    currentValue() {
+    currentPrice() {
       if (this.hasLoadedData) {
         const data = this.series[0].data;
         return data[data.length - 1][1];

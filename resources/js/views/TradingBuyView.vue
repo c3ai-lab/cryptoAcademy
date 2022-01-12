@@ -9,12 +9,12 @@
         <!-- <nice-price :value='price' currency='usd' /> -->
         <b-tab :title="$t('trade.buy')" active>
           <b-card-text>
-            <buy-form :price='(price/exchangerate)'/>
+            <buy-form :price='price'/>
           </b-card-text>
         </b-tab>
         <b-tab :title="$t('trade.sell')">
           <b-card-text>
-            <sell-form :price='(price/exchangerate)'/>
+            <sell-form :price='price'/>
           </b-card-text>
         </b-tab>
       </b-tabs>
@@ -24,41 +24,24 @@
 
 <script>
 import {WebsocketClient} from 'binance';
-import BuyForm from '../components/BuyForm.vue'
-import SellForm from '../components/SellForm.vue'
+import BuyForm from '../components/BuyForm.vue';
+import SellForm from '../components/SellForm.vue';
 import PaddedLayout from '../layouts/PaddedLayout.vue';
+
 
 const binanceWs = new WebsocketClient({
   beautify: true,
 });
 
 export default {
+  props: {
+    price: Number,
+  },
   components: {
     BuyForm,
     SellForm,
-    PaddedLayout
+    PaddedLayout,
   },
-  data() {
-    return {
-      price: 0,
-      exchangerate: 1.130, // @todo aus binance api holen
-    }
-  },
-  created() {
-    binanceWs.subscribeKlines(this.$route.params.symbol, '1m', 'spot');
-    binanceWs.on('formattedMessage', (data) => {
-      if (!Array.isArray(data)) {
-        if (data.eventType === 'kline') {
-          this.price = data.kline.close;
-        }
-      }
-    });
-  },
-  computed: {
-    // price() {
-    //   return this.$$store.getters['coinDetails/']
-    // }
-  }
 }
 </script>
 

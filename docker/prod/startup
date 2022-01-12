@@ -8,16 +8,16 @@ DOCKER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml down
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml pull
 echo_and_run docker-compose -f $DOCKER_DIR/docker-compose.yml up -d --force-recreate
+echo_and_run docker restart nginx
+
 # Copy Configuration File Into Container
-echo_and_run docker cp laravel.env app:/var/www/html/.env
-echo_and_run docker cp laravel.env scheduler:/var/www/html/.env
+echo_and_run docker cp laravel.env cryptocademy:/var/www/html/.env
+echo_and_run docker cp laravel.env cryptocademy_scheduler:/var/www/html/.env
 # Optimizing Configuration loading
-echo_and_run docker exec app php artisan optimize
-echo_and_run docker exec scheduler php artisan optimize
+echo_and_run docker exec cryptocademy php artisan optimize
+echo_and_run docker exec cryptocademy_scheduler php artisan optimize
 # Migrations
-echo_and_run docker exec app php artisan migrate --force
-# Housekeeping
-echo_and_run docker image prune -af
+echo_and_run docker exec cryptocademy php artisan migrate --force
 
 ###init
 ## docker run --rm -v "${PWD}/data/mailserver/config/:/tmp/docker-mailserver/" docker.io/mailserver/docker-mailserver setup email add app@cryptocademy.app LUfBdixKYX5tma39xy7yJWn

@@ -76,7 +76,7 @@
         <div class="d-flex justify-content-between">
           <div>
             <div class="text-muted font-size-12">
-              {{ $t('trade.price') }}
+              {{ $t('trade.pricePerAsset') }}
             </div>
             {{ t.price_euro | eur }}
           </div>
@@ -84,7 +84,7 @@
             :class="t.quantity < 0 ? 'text-success' : 'text-danger'"
           >
             <div class="text-muted font-size-12">
-              {{ $t('trade.value') }}
+              {{ $t('trade.balance') }}
             </div>
             {{ t.quantity < 0 ? '+' : '-' }}
             {{ Math.abs(t.price_euro * t.quantity) | eur }}

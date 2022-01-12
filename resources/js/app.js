@@ -13,21 +13,19 @@ import tinymce from "vue-tinymce-editor";
 // import * as VueGoogleMaps from "vue2-google-maps";
 // import VueSweetalert2 from "vue-sweetalert2";
 
-
 //Filters:
-import './filters.js';
+import "./filters.js";
 
 Vue.use(BootstrapVue);
 Vue.component("apexchart", VueApexCharts);
 Vue.component("tinymce", tinymce);
 
-
 // Custom global components
-import NicePrice from './components/NicePrice.vue'
+import NicePrice from "./components/NicePrice.vue";
 import PaddedLayout from "./layouts/PaddedLayout.vue";
 
-Vue.component('NicePrice', NicePrice);
-Vue.component('PaddedLayout', PaddedLayout);
+Vue.component("NicePrice", NicePrice);
+Vue.component("PaddedLayout", PaddedLayout);
 
 // Vue.use(vClickOutside);
 // Vue.use(VueMask);
@@ -60,7 +58,7 @@ import i18n from "./i18n";
 import LoginLayout from "./layouts/LoginLayout.vue";
 import MainLayout from "./layouts/MainLayout.vue";
 
-store.dispatch('coinDetails/init');
+store.dispatch("coinDetails/init");
 
 const app = new Vue({
   el: "#app",

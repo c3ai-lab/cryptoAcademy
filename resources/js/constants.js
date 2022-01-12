@@ -151,6 +151,10 @@ export const APEXCHART_OPTIONS = {
 };
 
 export const DIMENSION_MAP = {
+  [Dimension.ONE_HOUR]: {
+    interval: "1m",
+    limit: 60,
+  },
   [Dimension.ONE_DAY]: {
     interval: "30m",
     limit: 48,
@@ -169,6 +173,7 @@ export const DIMENSION_MAP = {
   },
   [Dimension.ALL]: {
     interval: "1w",
+    limit: 100,
   },
 };
 
@@ -213,15 +218,37 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
 
 export const ACADEMY = {
   [AcademyCategory.CRYPTO]: {
-    [AcademyTopic.CRYPTO__INTRO]: [],
+    [AcademyTopic.CRYPTO__INTRO]: [
+      AcademyTopic.CRYPTO__INTRO__WALLETS,
+      AcademyTopic.CRYPTO__INTRO__SMART_CONTRACTS,
+    ],
     [AcademyTopic.CRYPTO__BLOCKCHAIN]: [
       AcademyTopic.CRYPTO__BLOCKCHAIN__TRANSACTIONS,
       AcademyTopic.CRYPTO__BLOCKCHAIN__FEES,
-      AcademyTopic.CRYPTO__BLOCKCHAIN__ADVANCED,
+    ],
+    [AcademyTopic.CRYPTO__ADVANCED]: [
+      AcademyTopic.CRYPTO__ADVANCED__TRANSACTIONS,
+      AcademyTopic.CRYPTO__ADVANCED__MERKLETREE,
+      AcademyTopic.CRYPTO__ADVANCED__CONSENSUS,
+      AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_WORK,
+      AcademyTopic.CRYPTO__ADVANCED__PROOF_OF_STAKE,
     ],
   },
-  [AcademyCategory.TRADING]: {},
-  [AcademyCategory.TOP_FIVE_COINS]: {},
+  [AcademyCategory.TRADING]: {
+    [AcademyTopic.TRADING__MARKET_ORDER]: [],
+    [AcademyTopic.TRADING__LIMIT_ORDER]: [],
+    [AcademyTopic.TRADING__PRICE]: [],
+    [AcademyTopic.TRADING__AMM]: [],
+    [AcademyTopic.TRADING__SLIPPAGE]: [],
+    [AcademyTopic.TRADING__TAXES]: [],
+  },
+  [AcademyCategory.TOP_FIVE_COINS]: {
+    [AcademyTopic.TOP_FIVE_COINS__BTC]: [],
+    [AcademyTopic.TOP_FIVE_COINS__ETH]: [],
+    [AcademyTopic.TOP_FIVE_COINS__BNB]: [],
+    [AcademyTopic.TOP_FIVE_COINS__USDT]: [],
+    [AcademyTopic.TOP_FIVE_COINS__SOL]: [],
+  },
   [AcademyCategory.FIFTY_COINS__LIST]: {},
-  [AcademyCategory.GLOSSAR]: {},
+  [AcademyCategory.GLOSSAR__LIST]: {},
 };
