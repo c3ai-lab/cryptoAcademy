@@ -26,7 +26,7 @@ const getters = {
   sessionExpiresAt: (state) => () =>
     state.accessToken === null ? null : state.accessToken.expiresAt,
   getUser: (state) => () => state.user,
-  balance: (state) => () => state.user === null ? 0 : state.user.balance,
+  credit: (state) => () => state.user === null ? 0 : state.user.balance,
 };
 
 const actions = {

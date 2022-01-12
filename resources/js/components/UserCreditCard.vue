@@ -8,11 +8,11 @@
 
 <script>
 export default {
-  name: "CurrentCreditCard",
+  name: "UserCreditCard",
 
   computed: {
     credit() {
-      return this.$store.getters["user/balance"]();
+      return this.$store.getters["user/credit"]();
     },
   },
 };

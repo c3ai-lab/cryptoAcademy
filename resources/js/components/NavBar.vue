@@ -100,7 +100,10 @@ export default {
 
   computed: {
     balance() {
-      return this.$store.getters["user/getUser"]().balance;
+      return (
+        this.$store.getters["user/credit"]() +
+        this.$store.getters["wallets/totalValue"]()
+      );
     },
   },
 
