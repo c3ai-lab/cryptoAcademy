@@ -11,11 +11,16 @@
       </b-col>
     </b-row>
 
-    <h2>{{ $t("wallet.wallet_list") }}</h2>
-    <WalletSymbolList :wallets="wallets" />
-
-    <h2>{{ $t("wallet.transaction_histroy") }}</h2>
-    <TransactionCard :symbol="'all'" />
+    <b-row>
+      <b-col>
+        <h2>{{ $t("wallet.wallet_list") }}</h2>
+        <WalletSymbolList :wallets="wallets" />
+      </b-col>
+      <b-col>
+        <h2>{{ $t("wallet.transaction_histroy") }}</h2>
+        <TransactionCard :symbol="'all'" />
+      </b-col>
+    </b-row>
   </PaddedLayout>
 </template>
 

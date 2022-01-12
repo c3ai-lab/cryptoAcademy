@@ -2,7 +2,11 @@
   <div class="card" v-if="hasLoadedData" @click="showDetails">
     <div class="card-body">
       <div class="row" style="font-size: 24px">
-        <div class="col-6" style="display: flex">
+        <div class="col-6 icon-wrapper" style="display: flex">
+          <img
+            class="icon"
+            :src="`/images/coins/${tradeSymbol.toLowerCase()}.png`"
+          />
           {{ tradeSymbol }}
           <span
             class="text-muted"
@@ -11,7 +15,7 @@
           </span>
         </div>
         <div
-          class="col-6"
+          class="col-5"
           style="
             display: flex;
             justify-content: space-between;
@@ -86,6 +90,13 @@
 
 .card-body {
   padding: 8px 12px 8px 12px;
+}
+
+.icon {
+  display: inline-block;
+  margin: 0.5rem 0.6rem 0 0;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 </style>
 
