@@ -16,7 +16,7 @@ import ProfileView from "./views/ProfileView.vue";
 import RegisterSuccessView from "./views/RegisterSuccessView.vue";
 import NewPasswordView from "./views/NewPasswordView.vue";
 import DeleteAccountView from "./views/DeleteAccountView.vue";
-import WalletView from "./views/WalletView.vue";
+import WalletsView from "./views/WalletsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
 
 Vue.use(VueRouter);
@@ -58,9 +58,9 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/wallet",
-      name: "wallet",
-      component: WalletView,
+      path: "/wallets",
+      name: "wallets",
+      component: WalletsView,
       meta: {
         requiresAuth: true,
       },

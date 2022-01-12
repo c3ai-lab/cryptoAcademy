@@ -18,13 +18,13 @@ import TransactionCard from "../components/TransactionCard.vue";
 import WalletSymbolList from "../components/WalletSymbolList.vue";
 
 export default {
-  name: "WalletView",
+  name: "WalletsView",
 
   components: {
     PaddedLayout,
     TotalBalanceCard,
-    TransactionCard,
     WalletSymbolList,
+    TransactionCard,
   },
 
   computed: {
