@@ -21,11 +21,21 @@
             :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"
           >
-            <template #cell(user_balance)="data">
+            <template #cell(coin)="data">
+              <img
+                class="icon"
+                :src="`/images/coins/${data.value.symbol
+                  .replace('USDT', '')
+                  .toLowerCase()}.png`"
+              />
+              {{ data.value.name }}
+            </template>
+
+            <template #cell(value)="data">
               {{ data.value | eur }}
             </template>
 
-            <template #cell(user_quantity)="data">
+            <template #cell(quantity)="data">
               {{ data.value | crypto }}
             </template>
           </b-table>
@@ -45,38 +55,50 @@ export default {
     return {
       fields: [
         {
-          key: "name",
+          key: "coin",
           label: "Name",
           sortable: true,
         },
         {
-          key: "user_balance",
-          label: "Summe",
+          key: "value",
+          label: "Wert",
           sortable: true,
-          tdClass: "left",
+          thClass: "right",
+          tdClass: "right",
         },
         {
-          key: "user_quantity",
+          key: "quantity",
           label: "Menge",
           sortable: true,
-          tdClass: "left",
+          thClass: "right",
+          tdClass: "right",
         },
       ],
       currentPage: 1,
-      sortBy: "user_balance_eur",
+      sortBy: "value",
       sortDesc: true,
     };
   },
 
   computed: {
     nonEmptyWallets() {
-      return this.wallets.filter((v) => v.user_balance > 0);
+      return this.wallets
+        .filter((v) => v.user_balance > 0)
+        .map((v) => ({
+          coin: {
+            name: v.name,
+            symbol: v.symbol,
+          },
+          value: v.user_balance,
+          quantity: v.user_quantity,
+        }));
     },
   },
 };
 </script>
 
 <style>
+th.right,
 td.right {
   text-align: right;
 }
@@ -88,5 +110,12 @@ td.right {
 
 .hidden-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.icon {
+  display: inline-block;
+  margin: -0.2rem 0.5rem 0 0;
+  height: 1.75rem;
+  width: 1.75rem;
 }
 </style>
