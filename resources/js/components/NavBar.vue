@@ -75,8 +75,8 @@
         {{ $t("navigation.leaderboard") }}
       </router-link>
       <br />
-      <router-link :to="{ name: 'wallet' }" @click.native="closeNav()">
-        {{ $t("navigation.wallet") }}
+      <router-link :to="{ name: 'wallets' }" @click.native="closeNav()">
+        {{ $t("navigation.wallets") }}
       </router-link>
       <br />
       <router-link :to="{ name: 'trading' }" @click.native="closeNav()">
