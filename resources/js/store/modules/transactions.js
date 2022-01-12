@@ -29,25 +29,22 @@ const actions = {
     return false;
   },
 
-  fetchReturns({ commit, rootGetters }) {
-    fetch(`${location.origin}/api/user/returns/1`, {
+  async fetchReturns({ commit, rootGetters }) {
+    const response = await fetch(`${location.origin}/api/user/returns/1`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
       },
     })
-      .then((response) => {
-        if (response.ok === true) {
-          console.log(response);
-          // commit('setTransactions', response.data);
-          return response.json();
-        }
-        return null;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    if (response.ok === true) {
+      const data = await response.json();
+      console.log(data);
+      // commit('setTransactions', response.data);
+      return true;
+    }
+    return false;
   },
 
   async buy({ dispatch, rootGetters }, { symbol, quantity }) {

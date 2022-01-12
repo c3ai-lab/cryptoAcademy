@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-12 mb-4">
         <h1>{{ $t("dashboard.title") }}</h1>
+        <returns-chart />
         <ApexChartCard
           :title="$t('dashboard.portfolio_value')"
           :series="series"
@@ -53,6 +54,7 @@ import ApexChartCard from "../components/ApexChartCard.vue";
 import CoinCardRealData from "../components/CoinCardRealData.vue";
 import NewsCard from "../components/NewsCard.vue";
 import WelcomeModal from "../components/WelcomeModal.vue";
+import ReturnsChart from "../components/ReturnsChart.vue";
 
 import { Coin } from "../enums";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
@@ -67,6 +69,7 @@ export default {
     ApexChartCard,
     CoinCardRealData,
     NewsCard,
+    ReturnsChart
   },
 
   data() {
