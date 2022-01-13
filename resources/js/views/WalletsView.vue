@@ -42,14 +42,20 @@ export default {
     TransactionCard,
   },
 
+  data() {
+    return {
+      ready: true,
+    };
+  },
+
   computed: {
     wallets() {
       return this.$store.getters["wallets/all"]();
     },
   },
 
-  created() {
-    this.$store.dispatch("wallets/fetchAll");
+  async created() {
+    const success = await this.$store.dispatch("wallets/fetchAll");
   },
 };
 </script>

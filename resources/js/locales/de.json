@@ -134,6 +134,7 @@
     }
   },
   "wallet": {
+    "wallet": "Wallet",
     "total_value": "Gesamtwert aller Coins",
     "user_balance": "Guthaben",
     "wallet_list": "Wallet-Übersicht",

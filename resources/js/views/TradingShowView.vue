@@ -78,35 +78,24 @@
         </b-button-group>
       </div>
     </div>
-    <div v-if="0" style="width: 100%" class="mt-2">
-      <b-button
-        class="btn-block"
-        variant="primary"
-        style="width: 100%"
-        @click="buy"
-        >Trade</b-button
-      >
-    </div>
-    <div class="mt-4 px-lg-0">
-      <b-card>
-        <div class="text-muted pa-0 ma-0">
-          {{ $t("trade.amount") }}
-        </div>
-        <div class="font-size-22 w-100" style="text-align: right">
-          <b>
-            {{ balance | crypto }}
-          </b>
-          <span>{{ symbol | symbol }}</span>
-        </div>
-      </b-card>
-      <trading-buy-view v-if="1" :price="price"/>
-      <transaction-card :symbol="symbol" v-if="1" />
-    </div>
-    
+
+    <b-row class="mt-4">
+      <b-col>
+        <h2>{{ $t("wallet.user_balance") }}</h2>
+        <UserCreditCard />
+      </b-col>
+      <b-col>
+        <h2>{{ $t("wallet.wallet") }}</h2>
+        <WalletCoinQuantityCard :symbol="symbol" />
+      </b-col>
+    </b-row>
+
+    <TradingBuyView :price="price" />
+    <TransactionCard :symbol="symbol" />
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .dim-btn {
   background-color: #eff2f7 !important;
   border: none;
@@ -116,6 +105,7 @@
 .dim-btn:focus-visible {
   outline: none !important;
 }
+
 .active-dimension {
   background-color: #eff2f760 !important;
   color: var(--bs-gray-900) !important;
@@ -130,6 +120,8 @@ import MainChart from "../components/MainChart.vue";
 import TransactionCard from "../components/TransactionCard.vue";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
 import TradingBuyView from "./TradingBuyView.vue";
+import UserCreditCard from "../components/UserCreditCard.vue";
+import WalletCoinQuantityCard from "../components/WalletCoinQuantityCard.vue";
 
 export default {
   props: {
@@ -141,6 +133,8 @@ export default {
     TransactionCard,
     PaddedLayout,
     TradingBuyView,
+    UserCreditCard,
+    WalletCoinQuantityCard,
   },
 
   data() {

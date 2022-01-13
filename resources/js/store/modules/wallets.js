@@ -5,6 +5,9 @@ const state = {
 const getters = {
   all: (state) => () => state.wallets,
 
+  bySymbol: (state) => (symbol) =>
+    state.wallets.find((v) => v.symbol === symbol),
+
   totalValue: (state) => () =>
     state.wallets
       .map((v) => v.user_balance)
@@ -24,6 +27,7 @@ const actions = {
     if (response.ok === true) {
       const data = await response.json();
       commit("setWallets", data);
+      return true;
     }
 
     return false;

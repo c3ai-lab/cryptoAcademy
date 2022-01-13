@@ -48,6 +48,7 @@ const actions = {
     if (response.ok === true) {
       dispatch("fetchTransactions");
       dispatch("user/refreshUserData", null, { root: true });
+      dispatch("wallets/fetchAll", null, { root: true });
       dispatch("coinIndex/fetchSymbols", null, { root: true });
       return true;
     }
@@ -73,6 +74,7 @@ const actions = {
     if (response.ok === true) {
       dispatch("fetchTransactions");
       dispatch("user/refreshUserData", null, { root: true });
+      dispatch("wallets/fetchAll", null, { root: true });
       dispatch("coinIndex/fetchSymbols", null, { root: true });
       return true;
     }

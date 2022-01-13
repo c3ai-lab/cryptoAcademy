@@ -1,22 +1,14 @@
 <template>
   <b-card>
     <b-card-text class="value">
-      {{ totalValue | eur }}
+      <LoadingSpinners v-if="state === ComponentState.LOADING" />
+
+      <div v-if="state === ComponentState.ERROR">error</div>
+
+      <div v-if="state === ComponentState.READY">{{ totalValue | eur }}</div>
     </b-card-text>
   </b-card>
 </template>
-
-<script>
-export default {
-  name: "TotalCoinValueCard",
-
-  computed: {
-    totalValue() {
-      return this.$store.getters["wallets/totalValue"]();
-    },
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .value {
@@ -24,3 +16,34 @@ export default {
   font-size: 2rem;
 }
 </style>
+
+<script>
+import { ComponentState } from "../enums";
+import { dispatchAll } from "../utils";
+import LoadingSpinners from "./LoadingSpinners.vue";
+
+export default {
+  name: "TotalCoinValueCard",
+
+  components: {
+    LoadingSpinners,
+  },
+
+  data() {
+    return {
+      ComponentState,
+      state: ComponentState.LOADING,
+    };
+  },
+
+  computed: {
+    totalValue() {
+      return this.$store.getters["wallets/totalValue"]();
+    },
+  },
+
+  async created() {
+    this.state = await dispatchAll(this, "wallets/fetchAll");
+  },
+};
+</script>

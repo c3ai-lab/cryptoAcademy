@@ -1,3 +1,9 @@
+export const ComponentState = {
+  LOADING: "loading",
+  READY: "ready",
+  ERROR: "error",
+};
+
 export const TimeFrame = {
   ONE_MONTH: "one_month",
   SIX_MONTHS: "six_months",
