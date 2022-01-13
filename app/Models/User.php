@@ -13,6 +13,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
   use HasFactory, Notifiable;
 
+  const INIT_BALANCE = 10_000;
   /**
    * The attributes that are mass assignable.
    *
@@ -77,6 +78,24 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
   public function userVerification()
   {
     return $this->hasOne(UserVerifications::class, "user_id", "id");
+  }
+
+  public function getCumulativeReturns()
+  {
+    return $this->cumulateReturns(
+      $this->addStartMoney(
+        $this->getReturns()
+      )
+    );
+  }
+
+  public function getCumulativeReturnsPerSymbol(Symbol $symbol)
+  {
+    return $this->cumulateReturns(
+      $this->addStartMoney(
+        $this->getReturnsPerSymbol($symbol)
+      )
+    );
   }
 
   public function getReturnsPerSymbol(Symbol $symbol)
@@ -169,5 +188,33 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
       'profit_loss_percent' => $pl_rel,
       'made_at' => $sell['created_at'],
     ]);
+  }
+
+  public function cumulateReturns($returns)
+  {
+    return $returns->map(
+      function($entry, $idx) use ($returns) {
+        if ($idx > 0) {
+          $prev = $returns[$idx - 1];
+          return collect([
+            'profit_loss_euro' => $entry['profit_loss_euro'] + $prev['profit_loss_euro'],
+            'profit_loss_percent' => $entry['profit_loss_percent'] + $prev['profit_loss_percent'],
+            'made_at' => $entry['made_at'],
+          ]);
+        }
+        return $entry;
+      }
+    );
+  }
+
+  public function addStartMoney($returns)
+  {
+    return $returns->map(
+      fn($entry) => collect([
+        'profit_loss_euro' => $entry['profit_loss_euro'] + self::INIT_BALANCE,
+        'profit_loss_percent' => $entry['profit_loss_percent'],
+        'made_at' => $entry['made_at'],
+      ])
+    );
   }
 }

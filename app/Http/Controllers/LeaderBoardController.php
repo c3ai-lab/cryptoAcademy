@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Service\BianceApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,7 +60,7 @@ GROUP BY `transaction`
       $portfolio = (float)$portfolio + (float)$arr[$user_id]["user"]["balance"];
 
       // TODO: portfolio - portfoliowert von vor uebergebenemZeitraum
-      $tableArr[] = ["name" => $arr[$user_id]["user"]["name"], "growth" => $portfolio - UserController::Init_BALANCE, "balance_eur" => $portfolio];
+      $tableArr[] = ["name" => $arr[$user_id]["user"]["name"], "growth" => $portfolio - User::INIT_BALANCE, "balance_eur" => $portfolio];
     }
     return response()->json(array_slice($tableArr, 0, 3));
   }
