@@ -38,41 +38,46 @@
           </div>
 
           <hr class="my-4" />
-          <div class="row">{{ $t("profile.chart_info") }}</div>
+          <div>
+            <h4>{{ $t("profile.chart_info") }}</h4>
+          </div>
           <div class="row">
-            {{ $t("profile.x_axis") }}
+            <div class="col-6">
+              {{ $t("profile.x_axis") }}
 
-            <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
-              <b-tab
-                id="xaxison"
-                title="An"
-                v-bind:active="xAxis === 1"
-                @click="updateAxis(true, yAxis)"
-              />
-              <b-tab
-                id="xaxisoff"
-                title="Aus"
-                v-bind:active="xAxis === 0"
-                @click="updateAxis(false, yAxis)"
-              />
-            </b-tabs>
+              <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
+                <b-tab
+                  id="xaxison"
+                  title="An"
+                  v-bind:active="xAxis === 1"
+                  @click="updateAxis(true, yAxis)"
+                />
+                <b-tab
+                  id="xaxisoff"
+                  title="Aus"
+                  v-bind:active="xAxis === 0"
+                  @click="updateAxis(false, yAxis)"
+                />
+              </b-tabs>
+            </div>
+            <div class="col-6">
+              {{ $t("profile.y_axis") }}
 
-            {{ $t("profile.y_axis") }}
-
-            <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
-              <b-tab
-                id="yaxison"
-                title="An"
-                :active="yAxis === 1"
-                @click="updateAxis(xAxis, true)"
-              />
-              <b-tab
-                id="yaxisoff"
-                title="Aus"
-                :active="yAxis === 0"
-                @click="updateAxis(xAxis, false)"
-              />
-            </b-tabs>
+              <b-tabs pills nav-class="bg-light rounded" content-class="mt-4">
+                <b-tab
+                  id="yaxison"
+                  title="An"
+                  :active="yAxis === 1"
+                  @click="updateAxis(xAxis, true)"
+                />
+                <b-tab
+                  id="yaxisoff"
+                  title="Aus"
+                  :active="yAxis === 0"
+                  @click="updateAxis(xAxis, false)"
+                />
+              </b-tabs>
+            </div>
           </div>
 
           <hr class="my-4" />
@@ -203,6 +208,12 @@
           </div>
         </div>
       </div>
+      <span v-if="accountResetModal">
+        <AccountResetModal />
+      </span>
+      <span v-if="changePasswordModal">
+        <ChangePasswordModal />
+      </span>
     </div>
   </padded-layout>
 </template>
@@ -229,6 +240,8 @@ i.mdi-logout {
 <script>
 import Avatar from "../components/Avatar.vue";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
+import AccountResetModal from "../components/AccountResetModal.vue";
+import ChangePasswordModal from "../components/ChangePasswordModal.vue";
 
 export default {
   name: "ProfileView",
@@ -236,6 +249,8 @@ export default {
   components: {
     Avatar,
     PaddedLayout,
+    AccountResetModal,
+    ChangePasswordModal,
   },
 
   computed: {
@@ -266,6 +281,8 @@ export default {
       showChangePassword: false,
       showDeleteAccount: false,
       showResetAccount: false,
+      accountResetModal: false,
+      changePasswordModal: false,
     };
   },
   methods: {
@@ -288,29 +305,30 @@ export default {
       this.$store
         .dispatch("user/changePassword", this.changePasswordObj)
         .then(() => {
-          alert("geändert");
           this.showChangePassword = false;
           this.changePasswordObj.oldPassword = null;
           this.changePasswordObj.newPassword = null;
           this.changePasswordObj.newPassword2 = null;
+          this.changePasswordModal = true;
         })
         .catch(() => {
           alert("nicht geändert, FEHLER");
         });
     },
 
-    deleteAccount() {
-      // TODO: dem User mitteilen, dass sein Account erfolgreich geloescht wurde oder auch nicht
-      this.$store.dispatch("user/deleteAccount", () =>
-        this.$router.push({ name: "login" })
-      );
+    async deleteAccount() {
+      const success = await this.$store.dispatch("user/deleteAccount");
+      if (success === true) this.$router.push({ name: "delete-account" });
+      else alert("Account konnte nicht gelöscht werden");
     },
 
     resetAccount() {
-      // TODO: Meldung an den User weitergeben
       this.$store
         .dispatch("user/resetAccount")
-        .then(() => (this.showResetAccount = false));
+        .then(
+          () => (this.showResetAccount = false),
+          (this.accountResetModal = true)
+        );
     },
 
     async logout() {

@@ -73,7 +73,7 @@ export default Vue.extend({
     resetPassword() {
       this.$store
         .dispatch("user/resetPassword", this.email)
-        .then(() => this.$router.push({ name: "login" }))
+        .then(() => this.$router.push({ name: "new-password" }))
         .catch(() => (this.resetPasswordFailed = true));
     },
   },

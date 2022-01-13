@@ -52,11 +52,19 @@
         </button>
       </div>
     </div>
+       <span v-if="buySuccessModal">
+    <BuySuccessModal />
+    </span>
   </div>
 </template>
 
 <script>
+import BuySuccessModal from "../components/BuySuccessModal.vue";
+
 export default {
+  components: {
+    BuySuccessModal,
+  },
   props: ["price"],
 
   data() {
@@ -76,7 +84,12 @@ export default {
       await this.$store.dispatch("transactions/buy", {
         quantity: this.quantity,
         symbol: this.$route.params.symbol,
-      });
+        })
+        .then (() => {
+          this.buySuccessModal = true;
+        })
+        
+      
     },
   },
 };

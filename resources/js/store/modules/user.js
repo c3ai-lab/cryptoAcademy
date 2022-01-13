@@ -26,6 +26,7 @@ const getters = {
   sessionExpiresAt: (state) => () =>
     state.accessToken === null ? null : state.accessToken.expiresAt,
   getUser: (state) => () => state.user,
+  credit: (state) => () => state.user === null ? 0 : state.user.balance,
 };
 
 const actions = {
@@ -196,7 +197,7 @@ const actions = {
     return false;
   },
 
-  async deleteAccount({ commit, dispatch, rootGetters }, callback) {
+  async deleteAccount({ commit, dispatch, rootGetters }) {
     const response = await fetch("/api/user", {
       method: "DELETE",
       headers: {
@@ -207,8 +208,10 @@ const actions = {
     if (response.ok === true) {
       commit("clear");
       dispatch("save");
-      callback();
+      return true;
     }
+
+    return false;
   },
 
   async changePassword({ commit, dispatch, rootGetters }, data) {

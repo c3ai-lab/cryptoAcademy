@@ -45,11 +45,19 @@
         </button>
       </div>
     </div>
+           <span v-if="sellSuccessModal">
+    <SellSuccessModal />
+    </span>
   </div>
 </template>
 
 <script>
+import SellSuccessModal from "../components/SellSuccessModal.vue";
+
 export default {
+  components: {
+    SellSuccessModal,
+  },
   props: ["price"],
 
   data() {
@@ -72,7 +80,12 @@ export default {
       await this.$store.dispatch("transactions/sell", {
         quantity: this.quantity,
         symbol: this.$route.params.symbol,
-      });
+      })
+        .then (() => {
+          this.sellSuccessModal = true;
+        })
+        
+      
     },
   },
 };
