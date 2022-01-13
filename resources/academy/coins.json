@@ -1,5 +1,12 @@
 {
   "coins": [{
+      "symbol": "aave",
+      "logo": "aave.png",
+      "name": "Aave",
+      "color": "#43AAC1",
+      "file": "aave.html"
+    },
+    {
       "symbol": "ada",
       "logo": "ada.png",
       "name": "Cardano",
@@ -56,13 +63,6 @@
       "file": "btc.html"
     },
     {
-      "symbol": "btcb",
-      "logo": "btcb.png",
-      "name": "Bitcoin BEP2",
-      "color": "#F8A139",
-      "file": "btcb.html"
-    },
-    {
       "symbol": "btt",
       "logo": "btt.png",
       "name": "BitTorrent",
@@ -82,13 +82,6 @@
       "name": "PancakeSwap",
       "color": "#D1884F",
       "file": "cake.html"
-    },
-    {
-      "symbol": "cro",
-      "logo": "cro.png",
-      "name": "Crypto.com Coin",
-      "color": "#1B2F5E",
-      "file": "cro.html"
     },
     {
       "symbol": "dai",
@@ -203,6 +196,13 @@
       "file": "icp.html"
     },
     {
+      "symbol": "iota",
+      "logo": "iota.png",
+      "name": "IOTA",
+      "color": "#242424",
+      "file": "iota.html"
+    },
+    {
       "symbol": "klay",
       "logo": "klay.png",
       "name": "Klaytn",
@@ -210,11 +210,11 @@
       "file": "klay.html"
     },
     {
-      "symbol": "leo",
-      "logo": "leo.png",
-      "name": "UNUS SED LEO",
-      "color": "#EADA33",
-      "file": "leo.html"
+      "symbol": "ksm",
+      "logo": "ksm.png",
+      "name": "Kusama",
+      "color": "#000000",
+      "file": "ksm.html"
     },
     {
       "symbol": "link",
@@ -252,13 +252,6 @@
       "file": "matic.html"
     },
     {
-      "symbol": "miota",
-      "logo": "miota.png",
-      "name": "IOTA",
-      "color": "#242424",
-      "file": "miota.html"
-    },
-    {
       "symbol": "mkr",
       "logo": "mkr.png",
       "name": "Maker",
@@ -271,6 +264,13 @@
       "name": "NEAR Protocol",
       "color": "#000000",
       "file": "near.html"
+    },
+    {
+      "symbol": "one",
+      "logo": "one.png",
+      "name": "Harmony One",
+      "color": "#35DCDB",
+      "file": "one.html"
     },
     {
       "symbol": "sand",
@@ -292,6 +292,13 @@
       "name": "Solana",
       "color": "#C634F5",
       "file": "sol.html"
+    },
+    {
+      "symbol": "stx",
+      "logo": "stx.png",
+      "name": "Stacks",
+      "color": "#5546FF",
+      "file": "stx.html"
     },
     {
       "symbol": "theta",
@@ -322,13 +329,6 @@
       "file": "usdc.html"
     },
     {
-      "symbol": "usdt",
-      "logo": "usdt.png",
-      "name": "Tether USDT",
-      "color": "#26A17B",
-      "file": "usdt.html"
-    },
-    {
       "symbol": "ust",
       "logo": "ust.png",
       "name": "TerraUSD",
@@ -341,13 +341,6 @@
       "name": "VeChain",
       "color": "#15BDFF",
       "file": "vet.html"
-    },
-    {
-      "symbol": "wbtc",
-      "logo": "wbtc.png",
-      "name": "Wrapped Bitcoin",
-      "color": "#EF9547",
-      "file": "wbtc.html"
     },
     {
       "symbol": "xlm",

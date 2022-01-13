@@ -420,17 +420,6 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/btcb.png" /> Bitcoin BEP2 $BTCB</h2>
-        <p>
-          BTCB sind für den Handel auf der Binance Smart-Chain tokenisierte
-          Bitcoin. Für jeden BTCB-Token hält Binance einen Bitcoin in einem
-          bestimmten Reserven-Wallet.
-        </p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
         <h2><img src="/images/coins/ftm.png" /> Fantom $FTM</h2>
         <p>
           Fantom ist eine Layer2-Lösung die die Skalierungsprobleme von Ethereum
@@ -477,6 +466,18 @@
         <p>
           Gala ist eine Play-to-Earn Spieleplattform, die z.B. ein
           Farmville-artiges Spiel anbietet.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h2><img src="/images/coins/one.png" /> Harmony $ONE</h2>
+        <p>
+          Harmony ist eine Smart Contract Blockchain die 2017 von Stephen Tse gegründet wurde. 
+          Durch State Sharding erreicht sie eine höhere Blockgeschwindigkeit als zum Beispiel Ethereum. 
+          Sharding teilt die Blockchain auf Segmente auf. Bei Harmony ist die Zugehörigkeit zu einer Sharded 
+          Blockchain durch die "Verifiable random Function" unvorhersagbar.
         </p>
       </div>
     </div>
@@ -539,7 +540,7 @@
 
     <div class="card">
       <div class="card-body">
-        <h2><img src="/images/coins/miota.png" /> IOTA $IOTA</h2>
+        <h2><img src="/images/coins/iota.png" /> IOTA $IOTA</h2>
         <p>
           Distributed Ledger für das Internet of Things (IoT). Durch den
           "Tangle" soll es gebührenlose, schnelle unendlich skalierbare
@@ -547,19 +548,56 @@
         </p>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h2><img src="/images/coins/aave.png" /> Aave $AAVE</h2>
+        <p>
+          Governance Token der DeFi-Plattform Aave. Wer den Token hält bekommt außerdem einen Rabatt
+           auf die Gebühren der Plattform. Aave wurde von Stani Kulechov gegründet und
+          ist seit 2017 aktiv.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h2><img src="/images/coins/stx.png" /> Stacks $STX</h2>
+        <p>
+          Stacks ermöglicht Smart Contracts und DApps für Bitcoin. Stacks nutzt die Programmiersprache
+           Clarity und den Konsensmechanismus "Proof of Transfer", bei dem Stacks durch Bitcoin-Zahlungen
+            geschaffen werden, welche dann an "Stacker" verteilt werden.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h2><img src="/images/coins/ksm.png" /> Kusama $KSM</h2>
+        <p>
+          Kusama ist eine Kopie der Polkadot-Blockchain auf der Projekte von Polkadot getestet werden,
+           bevor sie dort live gehen. Durch Kusama soll die Sicherheit und Skalierbarkeit von Polkadot-Projekten
+            sichergestellt werden.
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-h2 img {
-  width: 25px;
-}
+  h2 img {
+    width: 25px;
+  }
+
 </style>
 
 <script>
-import { AcademyCategory } from "../../../enums";
+  import {
+    AcademyCategory
+  } from "../../../enums";
 
-export default {
-  name: AcademyCategory.FIFTY_COINS__LIST,
-};
+  export default {
+    name: AcademyCategory.FIFTY_COINS__LIST,
+  };
+
 </script>

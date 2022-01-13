@@ -49,6 +49,15 @@
       </div>
     </div>
 
+<div class="card">
+      <div class="card-body">
+        <h2>DAO</h2>
+        <p>
+          DAO steht für "Decentralized Autonomous Organization". Der Begriff wird gleichzeitig für die Governance-Token der Organisation benutzt. Bekannte DAOs sind z.B. Uniswap und Aave.
+        </p>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-body">
         <h2>Dezentralisiertes Finanzsystem</h2>
@@ -91,6 +100,16 @@
         <h2>Genesis Block</h2>
         <p>
           Der erste Block in einer Blockchain. Enthält keine Referenz auf vorherigen Block (da nicht vorhanden).
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h2>Governance Token</h2>
+        <p>
+          Ein Governance-Token oder DAO ist ein Token der einen Anteil an einer Organisation repräsentiert. Ähnlich wie eine Aktie hat man ein Mitspracherecht
+          über die zukünftige Entwicklung der Organisation. Mehrere DeFi-Plattformen werden über Governance Token gesteuert.
         </p>
       </div>
     </div>
@@ -294,6 +313,17 @@
         <h2>Public Key</h2>
         <p>
           Öffentliche Adresse für Transaktionen
+        </p>
+      </div>
+    </div>
+
+<div class="card">
+      <div class="card-body">
+        <h2>Sharding</h2>
+        <p>
+          Eine Technologie in der die Blockchain mehrere "Layer 2"-Blockchains hat deren Transaktionen nicht 
+          sofort auf der Layer1-Blockchain festgeschrieben werden, sondern nur periodisch. Durch Sharding kann 
+          ein Netzwerk ein Vielfaches der Transaktionen der Layer1 verarbeiten. 
         </p>
       </div>
     </div>
