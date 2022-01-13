@@ -21,19 +21,22 @@
         >
           <header id="modal-lg___BV_modal_header_" class="modal-header">
             <h5 id="modal-lg___BV_modal_title_" class="modal-title font-18">
-              {{ $t("trade.sell_success_modal.title") }} 
+              {{ $t("trade.sell_success_modal.title") }}
             </h5>
             <button type="button" class="close" @click="close">×</button>
           </header>
           <div id="modal-lg___BV_modal_body_" class="modal-body">
             <p>
-              {{ $t("trade.sell_success_modal.text1") }} <strong> { hier soll die Menge und der Coinname stehen } </strong> <br>
-              {{ $t("trade.sell_success_modal.text2") }} <strong> { hier soll der Kurswert beim Verkauf stehen } </strong> <br>
-              {{ $t("trade.sell_success_modal.text3") }} <strong> { hier soll der Verkaufwert in Euro stehen } </strong> 
+              {{ $t("trade.sell_success_modal.text1") }}
+              <strong> { hier soll die Menge und der Coinname stehen } </strong>
+              <br />
+              {{ $t("trade.sell_success_modal.text2") }}
+              <strong> { hier soll der Kurswert beim Verkauf stehen } </strong>
+              <br />
+              {{ $t("trade.sell_success_modal.text3") }}
+              <strong> { hier soll der Verkaufwert in Euro stehen } </strong>
             </p>
-            
           </div>
-          <!---->
         </div>
         <span tabindex="0"></span>
       </div>
@@ -46,10 +49,10 @@
 export default {
   name: "SellSuccessModal",
 
- methods: {
+  methods: {
     close() {
-      document.getElementById("modal-lg___BV_modal_outer_").style.display = "none";
+      this.$emit("close");
     },
   },
-  };
+};
 </script>
