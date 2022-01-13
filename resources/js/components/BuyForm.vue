@@ -47,14 +47,22 @@
       </div>
 
       <div class="text-center">
-        <button @click="buy" type="button" class="btn btn-success w-md">
+        <div
+          v-if="buyInProgress"
+          class="spinner-border text-success"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+        <button v-else @click="buy" type="button" class="btn btn-success w-md">
           {{ $t("trade.buy") }}
         </button>
       </div>
     </div>
-       <span v-if="buySuccessModal">
-    <BuySuccessModal />
-    </span>
+
+    <div v-if="buySuccessModal === true">
+      <BuySuccessModal v-on:close="buySuccessModal = false" />
+    </div>
   </div>
 </template>
 
@@ -70,6 +78,9 @@ export default {
   data() {
     return {
       quantity: 0.1,
+
+      buyInProgress: false,
+      buySuccessModal: false,
     };
   },
 
@@ -81,15 +92,18 @@ export default {
 
   methods: {
     async buy() {
-      await this.$store.dispatch("transactions/buy", {
+      this.buyInProgress = true;
+      const success = await this.$store.dispatch("transactions/buy", {
         quantity: this.quantity,
         symbol: this.$route.params.symbol,
-        })
-        .then (() => {
-          this.buySuccessModal = true;
-        })
-        
-      
+      });
+      this.buyInProgress = false;
+
+      if (success === true) {
+        this.buySuccessModal = true;
+      } else {
+        alert("Buy failed!");
+      }
     },
   },
 };

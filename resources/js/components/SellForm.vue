@@ -40,14 +40,22 @@
       </div>
 
       <div class="text-center">
-        <button @click="sell" type="button" class="btn btn-danger w-md">
+        <div
+          v-if="sellInProgress"
+          class="spinner-border text-danger"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+        <button v-else @click="sell" type="button" class="btn btn-danger w-md">
           {{ $t("trade.sell") }}
         </button>
       </div>
     </div>
-           <span v-if="sellSuccessModal">
-    <SellSuccessModal />
-    </span>
+
+    <div v-if="sellSuccessModal">
+      <SellSuccessModal v-on:close="sellSuccessModal = false" />
+    </div>
   </div>
 </template>
 
@@ -63,6 +71,9 @@ export default {
   data() {
     return {
       quantity: 0.1,
+
+      sellInProgress: false,
+      sellSuccessModal: false,
     };
   },
 
@@ -77,15 +88,18 @@ export default {
 
   methods: {
     async sell() {
-      await this.$store.dispatch("transactions/sell", {
+      this.sellInProgress = true;
+      const success = await this.$store.dispatch("transactions/sell", {
         quantity: this.quantity,
         symbol: this.$route.params.symbol,
-      })
-        .then (() => {
-          this.sellSuccessModal = true;
-        })
-        
-      
+      });
+      this.sellInProgress = false;
+
+      if (success === true) {
+        this.sellSuccessModal = true;
+      } else {
+        alert("Sell failed!");
+      }
     },
   },
 };
