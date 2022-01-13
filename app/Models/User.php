@@ -82,8 +82,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
   public function getCumulativeReturns()
   {
-    return $this->cumulateReturns(
-      $this->addStartMoney(
+    return $this->addStartMoney(
+      $this->cumulateReturns(
         $this->getReturns()
       )
     );
@@ -91,8 +91,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
   public function getCumulativeReturnsPerSymbol(Symbol $symbol)
   {
-    return $this->cumulateReturns(
-      $this->addStartMoney(
+    return $this->addStartMoney(
+      $this->cumulateReturns(
         $this->getReturnsPerSymbol($symbol)
       )
     );
