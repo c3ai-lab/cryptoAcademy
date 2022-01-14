@@ -4,7 +4,8 @@
     "no": "Nein",
     "save": "Speichern",
     "abort": "Abbrechen",
-    "back": "Zurück"
+    "back": "Zurück",
+    "all": "Alle"
   },
   "auth": {
     "welcome": "Herzlich willkommen!",
@@ -42,6 +43,7 @@
   "dashboard": {
     "title": "Dashboard",
     "portfolio_value": "Portfoliowert",
+    "returns": "Gewinn/Verlust",
     "news": "Neuigkeiten",
     "no_news": "Es gibt aktuell keine Neuigkeiten.",
     "favorites": "Favoriten",
@@ -107,6 +109,7 @@
     "profile": "Profil"
   },
   "trade": {
+    "asset": "Kryptowährung",
     "euro": "€",
     "all": "Alle",
     "bought": "Gekauft",

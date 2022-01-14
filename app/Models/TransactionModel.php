@@ -21,6 +21,10 @@ class TransactionModel extends Model
     'api_symbol'
   ];
 
+  protected $casts = [
+    'made_at' => 'datetime',
+  ];
+
   private function getSymbol(): HasOne
   {
     return $this->hasOne(Symbol::class, "id", "symbol_id");

@@ -20,8 +20,6 @@ use Validator;
 
 class UserController extends Controller
 {
-  const Init_BALANCE = 10000;
-
   public function __construct()
   {
     $this->middleware('jwt.verify', ['except' => ['createUser', 'verifyUser', 'resetCurrentUserPassword']]);
@@ -72,7 +70,7 @@ class UserController extends Controller
 
     $user = User::create(array_merge(
       $validator->validated(),
-      ['password' => bcrypt($request->password), "balance" => self::Init_BALANCE]
+      ['password' => bcrypt($request->password), "balance" => User::INIT_BALANCE]
     ));
 
     $verification_code = Str::random(30); //Generate verification code
@@ -126,7 +124,7 @@ class UserController extends Controller
     $user->userVerification()->delete();
     $user->transactions()->delete();
     $user->favorites()->detach();
-    $user->balance = self::Init_BALANCE;
+    $user->balance = User::INIT_BALANCE;
     $user->save();
 
     return response()->json(['msgcode' => MessageCodes::USER_RESET]);
