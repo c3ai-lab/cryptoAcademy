@@ -4,10 +4,7 @@
       <div class="col-12 mb-4">
         <h1>{{ $t("dashboard.title") }}</h1>
         <returns-chart />
-        <ApexChartCard
-          :title="$t('dashboard.portfolio_value')"
-          :series="series"
-        />
+        <PortfolioReturnsCard />
       </div>
       <div class="col-lg-6 mb-4">
         <h2>{{ $t("dashboard.favorites") }}</h2>
@@ -50,7 +47,7 @@
 </template>
 
 <script>
-import ApexChartCard from "../components/ApexChartCard.vue";
+import PortfolioReturnsCard from "../components/PortfolioReturnsCard.vue";
 import CoinCardRealData from "../components/CoinCardRealData.vue";
 import NewsCard from "../components/NewsCard.vue";
 import WelcomeModal from "../components/WelcomeModal.vue";
@@ -58,7 +55,6 @@ import ReturnsChart from "../components/ReturnsChart.vue";
 
 import { Coin } from "../enums";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
-import { generateSampleSeries } from "../utils";
 
 export default {
   name: "DashboardView",
@@ -66,7 +62,7 @@ export default {
   components: {
     PaddedLayout,
     WelcomeModal,
-    ApexChartCard,
+    PortfolioReturnsCard,
     CoinCardRealData,
     NewsCard,
     ReturnsChart
@@ -75,8 +71,6 @@ export default {
   data() {
     return {
       Coin,
-
-      series: generateSampleSeries("Total"),
     };
   },
 

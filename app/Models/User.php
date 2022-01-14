@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\VerificationMail;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,6 +51,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     'email_verified_at' => 'datetime',
   ];
 
+  // protected $appends = [
+  //   'sold_symbols',
+  // ];
+
   public function getJWTIdentifier()
   {
     return $this->getKey();
@@ -82,20 +87,18 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
   public function getCumulativeReturns()
   {
-    return $this->addStartMoney(
+    return array_values(
       $this->cumulateReturns(
-        $this->getReturns()
-      )
+        $this->getReturns()->values()
+      )->toArray()
     );
   }
 
   public function getCumulativeReturnsPerSymbol(Symbol $symbol)
   {
-    return $this->addStartMoney(
-      $this->cumulateReturns(
+    return $this->cumulateReturns(
         $this->getReturnsPerSymbol($symbol)
-      )
-    );
+      )->toArray();
   }
 
   public function getReturnsPerSymbol(Symbol $symbol)
@@ -153,20 +156,24 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
       }
     }
 
+    // dd($series);
     return $series;
   }
 
   public function getReturns()
   {
-    return $this->getSoldSymbols()
+    return $this->sold_symbols
       ->map(
         fn($symbol) => $this->getReturnsPerSymbol($symbol)
       )
       ->flatten(1)
-      ->sortBy('made_at');
+      ->sortBy('made_at')
+      ->map(
+        fn($x) => $x // wird benötigt, um die Indizes zu korrigieren
+      );
   }
 
-  public function getSoldSymbols()
+  public function getSoldSymbolsAttribute()
   {
     return Symbol::find(
       $this->transactions()
@@ -183,15 +190,29 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     $sell_price = $amount * ($sell['price'] / $sell['exchange_price']);
     $pl_abs = $sell_price - $buy_price;
     $pl_rel = ($sell_price/$buy_price - 1) * 100;
+    return $this->getReturnsSeriesEntryFormat($pl_abs, $pl_rel, $sell['created_at']);
+  }
+
+  protected function getFirstReturnEntry() {
+    return $this->getReturnsSeriesEntryFormat(0, 0, $this->created_at);
+  }
+
+  protected function getReturnsSeriesEntryFormat($pl_abs, $pl_rel, $time)
+  {
+    if(gettype($time ) === 'string') {
+      $time = (new Carbon($time));
+    }
+
     return collect([
       'profit_loss_euro' => $pl_abs,
       'profit_loss_percent' => $pl_rel,
-      'made_at' => $sell['created_at'],
+      'made_at' => $time->getPreciseTimestamp(3),
     ]);
   }
 
   public function cumulateReturns($returns)
   {
+    $returns->prepend($this->getFirstReturnEntry());
     return $returns->map(
       function($entry, $idx) use ($returns) {
         if ($idx > 0) {

@@ -1,5 +1,7 @@
 const state = {
   transactions: [],
+  returnsPerSymbol: {},
+  returns: [],
 };
 
 const getters = {
@@ -8,6 +10,13 @@ const getters = {
   },
   getTransactionsBySymbol: (state) => (symbol) => {
     return state.transactions.filter((t) => t.api_symbol === symbol);
+  },
+  getReturns: (state) => () => {
+    return state.returns;
+  },
+  getTransactionsBySymbol: (state) => (symbol) => {
+    return state.returnsPerSymbol[symbol]//.filter((t) => t.api_symbol === symbol);
+
   },
 };
 
@@ -30,7 +39,7 @@ const actions = {
   },
 
   async fetchReturns({ commit, rootGetters }) {
-    const response = await fetch(`${location.origin}/api/user/returns/1`, {
+    const response = await fetch(`${location.origin}/api/user/returns`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -40,8 +49,27 @@ const actions = {
 
     if (response.ok === true) {
       const data = await response.json();
-      console.log(data);
-      // commit('setTransactions', response.data);
+      commit(
+        'setReturns',
+        data.data
+      );
+      return true;
+    }
+    return false;
+  },
+
+  async fetchReturnsPerSymbol({ commit, rootGetters }, { symbol }) {
+    const response = await fetch(`${location.origin}/api/user/returns/${symbol.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${rootGetters['user/accessToken']()}`,
+      },
+    })
+
+    if (response.ok === true) {
+      const data = await response.json();
+      commit('setReturnsPerSymbol', { data: data.data, symbol: symbol.api_symbol});
       return true;
     }
     return false;
@@ -101,6 +129,12 @@ const actions = {
 const mutations = {
   setTransactions(state, transactions) {
     state.transactions = transactions;
+  },
+  setReturns(state, returns) {
+    state.returns = returns;
+  },
+  setReturnsPerSymbol(state, { data, symbol }) {
+    state.returnsPerSymbol[symbol] = data;
   },
 };
 
