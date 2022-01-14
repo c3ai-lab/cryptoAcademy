@@ -1,11 +1,9 @@
 <template>
-  <p>© 2021 CryptoCademy</p>
+  <p>© 2022 CryptoCademy</p>
 </template>
 
 <script>
-import Vue from "vue";
-
-export default Vue.extend({
+export default {
   name: "Copyright",
-});
+};
 </script>

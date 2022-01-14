@@ -20,12 +20,13 @@ const state = () => {
 const getters = {
   accessToken: (state) => () =>
     state.accessToken !== null &&
-      state.accessToken.expiresAt > new Date().getTime()
+    state.accessToken.expiresAt > new Date().getTime()
       ? state.accessToken.token
       : null,
   sessionExpiresAt: (state) => () =>
     state.accessToken === null ? null : state.accessToken.expiresAt,
   getUser: (state) => () => state.user,
+  credit: (state) => () => state.user === null ? 0 : state.user.balance,
 };
 
 const actions = {
@@ -150,7 +151,7 @@ const actions = {
     return false;
   },
 
-  async resetPassword({ }, email) {
+  async resetPassword({}, email) {
     const response = await fetch("/api/user/password/reset", {
       method: "POST",
       headers: {
