@@ -1,11 +1,9 @@
 <template>
   <b-card>
     <b-card-text class="credit">
-      <LoadingSpinners v-if="state === ComponentState.LOADING" />
-
-      <div v-if="state === ComponentState.ERROR">error</div>
-
-      <div v-if="state === ComponentState.READY">{{ credit | eur }}</div>
+      <LoadingStateWrapper :state="state">
+        {{ credit | eur }}
+      </LoadingStateWrapper>
     </b-card-text>
   </b-card>
 </template>
@@ -13,18 +11,17 @@
 <script>
 import { ComponentState } from "../enums";
 import { dispatchAll } from "../utils";
-import LoadingSpinners from "./LoadingSpinners.vue";
+import LoadingStateWrapper from "../components/utils/LoadingStateWrapper.vue";
 
 export default {
   name: "UserCreditCard",
 
   components: {
-    LoadingSpinners,
+    LoadingStateWrapper,
   },
 
   data() {
     return {
-      ComponentState,
       state: ComponentState.LOADING,
     };
   },

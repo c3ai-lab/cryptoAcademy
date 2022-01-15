@@ -1,37 +1,27 @@
 <template>
   <b-card>
     <b-card-text class="value">
-      <LoadingSpinners v-if="state === ComponentState.LOADING" />
-
-      <div v-if="state === ComponentState.ERROR">error</div>
-
-      <div v-if="state === ComponentState.READY">{{ totalValue | eur }}</div>
+      <LoadingStateWrapper :state="state">
+        {{ totalValue | eur }}
+      </LoadingStateWrapper>
     </b-card-text>
   </b-card>
 </template>
 
-<style lang="scss" scoped>
-.value {
-  text-align: center;
-  font-size: 2rem;
-}
-</style>
-
 <script>
 import { ComponentState } from "../enums";
 import { dispatchAll } from "../utils";
-import LoadingSpinners from "./LoadingSpinners.vue";
+import LoadingStateWrapper from "../components/utils/LoadingStateWrapper.vue";
 
 export default {
   name: "TotalCoinValueCard",
 
   components: {
-    LoadingSpinners,
+    LoadingStateWrapper,
   },
 
   data() {
     return {
-      ComponentState,
       state: ComponentState.LOADING,
     };
   },
@@ -47,3 +37,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.value {
+  text-align: center;
+  font-size: 2rem;
+}
+</style>

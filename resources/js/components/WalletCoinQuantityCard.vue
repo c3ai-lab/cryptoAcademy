@@ -1,13 +1,9 @@
 <template>
   <b-card>
     <b-card-text class="quantity">
-      <LoadingSpinners v-if="state === ComponentState.LOADING" />
-
-      <div v-if="state === ComponentState.ERROR">error</div>
-
-      <div v-if="state === ComponentState.READY">
+      <LoadingStateWrapper :state="state">
         {{ quantity | crypto }} {{ symbol | symbol }}
-      </div>
+      </LoadingStateWrapper>
     </b-card-text>
   </b-card>
 </template>
@@ -15,13 +11,13 @@
 <script>
 import { ComponentState } from "../enums";
 import { dispatchAll } from "../utils";
-import LoadingSpinners from "./LoadingSpinners.vue";
+import LoadingStateWrapper from "../components/utils/LoadingStateWrapper.vue";
 
 export default {
-  name: "WalletCoinQuantityCard",
+  name: "LoadingStateWrapper",
 
   components: {
-    LoadingSpinners,
+    LoadingStateWrapper,
   },
 
   props: {
@@ -33,7 +29,6 @@ export default {
 
   data() {
     return {
-      ComponentState,
       state: ComponentState.LOADING,
     };
   },
