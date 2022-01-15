@@ -33,6 +33,7 @@ class UserResource extends JsonResource
       'axis' => ['x' => $this->x_axis, 'y' => $this->y_axis],
       'favorites' => count($this->favorites) ? $this->favorites() : [],
       'is_first_visit' => $this->is_first_visit,
+      'sold_symbols' => $this->sold_symbols,
     ];
   }
 }

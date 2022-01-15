@@ -9,11 +9,9 @@
 import NavBar from "../components/NavBar";
 
 export default {
-  name: "MainLayout",
-  components: {
-    NavBar,
-  },
-};
+    components: { NavBar },
+    name: "MainLayout",
+}
 </script>
 
 <style scoped>

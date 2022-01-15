@@ -12,7 +12,6 @@ class Symbol extends Model
   protected $appends = [
     'is_favorite',
     'user_quantity',
-    'user_balance',
   ];
 
   public function getUserSymbolById($id)
