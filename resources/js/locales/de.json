@@ -4,7 +4,9 @@
     "no": "Nein",
     "save": "Speichern",
     "abort": "Abbrechen",
-    "back": "Zurück"
+    "back": "Zurück",
+    "login": "Login",
+    "register": "Registrieren"
   },
   "auth": {
     "welcome": "Herzlich willkommen!",
