@@ -13,7 +13,11 @@
     class="row px-lg-5"
   >
     <h1 class="mt-3 px-lg-0">
-      {{ symbol }}
+      <img
+        class="icon"
+        :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"
+      />
+      {{ symbol | symbol }}
     </h1>
     <div
       class="bg-white p-0"
@@ -96,6 +100,13 @@
 </template>
 
 <style lang="scss" scoped>
+.icon {
+  display: inline-block;
+  margin: -0.2rem 0.2rem 0.25rem 0.75rem;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
 .dim-btn {
   background-color: #eff2f7 !important;
   border: none;
