@@ -5,7 +5,9 @@
     "save": "Speichern",
     "abort": "Abbrechen",
     "back": "Zurück",
-    "all": "Alle"
+    "all": "Alle",
+    "login": "Login",
+    "register": "Registrieren"
   },
   "auth": {
     "welcome": "Herzlich willkommen!",
