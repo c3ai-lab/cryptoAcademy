@@ -140,7 +140,7 @@
   },
   "wallet": {
     "wallet": "Wallet",
-    "total_value": "Gesamtwert aller Coins",
+    "total_value": "Portfoliowert",
     "user_balance": "Guthaben",
     "wallet_list": "Wallet-Übersicht",
     "all_wallets_empty": "Alle deine Wallets sind im Moment leer.",
