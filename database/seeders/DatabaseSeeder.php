@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
   public function run()
   {
     $this->call(SymbolSeeder::class);
+    $this->call(IntervalSeeder::class);
+    $this->call(ResolutionSeeder::class);
   }
 }
