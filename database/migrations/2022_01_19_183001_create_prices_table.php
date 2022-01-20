@@ -16,7 +16,7 @@ class CreatePricesTable extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('symbol_id')->constrained()->cascadeOnDelete();
-            $table->double('price');
+            $table->double('value');
             $table->bigInteger('timestamp')->unsigned();
             $table->string('interval');
             $table->timestamps();

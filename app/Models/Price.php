@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Price extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+      'symbol_id',
+      'symbol_id',
+      'interval',
+      'value',
+      'timestamp',
+    ];
 }

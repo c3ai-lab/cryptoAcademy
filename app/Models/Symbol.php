@@ -29,6 +29,10 @@ class Symbol extends Model
 
   public function getUserQuantityAttribute()
   {
+    if (auth()->user() === null) {
+      return 0;
+    }
+
     if (auth()->user()->transactions->count() === 0) {
       return 0;
     }
