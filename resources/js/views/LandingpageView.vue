@@ -6,10 +6,12 @@
           <div class="col-md-8">
             <h1 class="my-3">Wilkommen bei deiner CryptoCademy</h1>
             <h3>
-              Lege jetzt ein Konto an, lerne Cryptotraden und messe dich mit deinen Freunden! Wer kann am meisten Gewinne erziehlen? 
+              Lege jetzt ein Konto an, lerne Cryptotraden und messe dich in
+              deiser Simulation mit deinen Freunden! Wer kann am meisten Gewinne
+              erziehlen?
             </h3>
             <router-link to="register">
-              <button class="btn btn-light text-primary">
+              <button class="btn btn-light text-primary btn-cta">
                 {{ $t("auth.register_now") }}
               </button>
             </router-link>
@@ -36,23 +38,19 @@
       </div>
       <div class="my-5"></div>
       <div class="content-box row">
-        <div class="col-6 text">
+        <div class="d-flex col-6 col-md-3 justify-content-center">
+          <img src="/images/landingpage/Login_iPhone.png" class="wide" />
+        </div>
+        <div class="d-flex col-6 col-md-3 justify-content-center">
+          <img src="/images/landingpage/wallet_iPhone.png" class="wide" />
+        </div>
+        <div class="col-12 col-md-6 mt-3 mt-md-0 text">
           <h2>Kostenlose Registrierung</h2>
           <p>
             Melde dich noch heute an, kostenfrei und risikolos - jetzt und für
             immer!
           </p>
-        </div>
-        <div class="d-flex col-6 justify-content-center">
-          <img src="/images/landingpage/Login_iPhone.png" />
-        </div>
-      </div>
-
-      <div class="content-box row">
-        <div class="d-flex col-6 justify-content-center">
-          <img src="/images/landingpage/wallet_iPhone.png" />
-        </div>
-        <div class="col-6 text">
+          <br class="d-md-block d-none" />
           <h2>Wallet</h2>
           <p>
             Analysiere deine Gewinne und Verluste in der Wallet-Übersicht und
@@ -76,7 +74,28 @@
           <img src="/images/landingpage/trading.png" class="full" />
         </div>
       </div>
-
+    </PaddedLayout>
+    <div class="cta px-2 px-md-0">
+      <PaddedLayout>
+        <div class="row">
+          <div class="col-md-8 col-12">
+            <h3>
+              Interesse geweckt? Lege jetzt ein Konto an, lerne Cryptotraden und
+              messe dich mit deinen Freunden! Wer kann am meisten Gewinne
+              erziehlen?
+            </h3>
+          </div>
+          <div class="d-flex col-md-4 col-12 justify-content-center my-3">
+            <router-link to="register">
+              <button class="btn btn-light text-primary btn-cta">
+                {{ $t("auth.register_now") }}
+              </button>
+            </router-link>
+          </div>
+        </div>
+      </PaddedLayout>
+    </div>
+    <PaddedLayout>
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
           <img src="/images/landingpage/dashboard.png" class="full" />
@@ -123,22 +142,36 @@
         </div>
       </div>
     </PaddedLayout>
-    <div class="cta">
+    <div class="footer-part px-2 px-md-0">
       <PaddedLayout>
         <div class="row">
-          <div class="col-md-8 col-12">
-            <h3>
-              Interesse geweckt? Lege jetzt ein Konto an, lerne Cryptotraden und
-              messe dich mit deinen Freunden! Wer kann am meisten Gewinne
-              erziehlen?
-            </h3>
+          <div class="col-md-7 col-12">
+            <h2>Fragen oder Anmerkungen?</h2>
+            <p>
+              Nimm jetzt Kontakt zu uns auf, wenn du Fragen oder konstruktives
+              Feedback zu unserer CryptoCademy-Anwendung hast. Melde dich dafür
+              per Mail an die <strong><a href="mailto:info@cryptocademy.app">info@cryptocademy.app</a></strong>.
+            </p>
           </div>
-          <div class="d-flex col-md-4 col-12 justify-content-center my-3">
+
+          <div class="d-flex col-md-5 col-12 justify-content-end my-3 button-right">
             <router-link to="register">
-              <button class="btn btn-light text-primary">
+              <button class="btn btn-light text-primary" style="margin-right: 20px">
                 {{ $t("auth.register_now") }}
               </button>
             </router-link>
+            <router-link to="login">
+              <button class="btn btn-light text-primary">
+                {{ $t("auth.login_now") }}
+              </button>
+            </router-link>
+          </div>
+          <hr>
+          <div class="col-md-6 col-12 ">
+          <p class="footer-legal">Impressum - Datenschutzerklärung</p>
+          </div>
+          <div class="col-md-6 col-12">
+          <p class="footer-copyright">© 2022 CryptoCademy</p>
           </div>
         </div>
       </PaddedLayout>
@@ -183,13 +216,12 @@ export default {
     color: white;
     font-size: 3rem;
   }
-  
-    h3 
-    {
-        color: white;
-        margin-bottom: 20px;
-        font-size: 1.2rem;
-    }
+
+  h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
   color: white;
   padding: 10% 0;
   font-size: 14pt;
@@ -207,6 +239,10 @@ export default {
     max-width: 60%;
     max-height: auto;
     position: relative;
+  }
+
+  img.wide {
+    max-width: 100%;
   }
 
   .full {
@@ -256,22 +292,91 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  .cta {
+    h3 {
+      text-align: center !important;
+    }
+  }
+
+  .footer-part
+  {
+    text-align: center !important;
+
+    hr 
+  {
+    margin: 20px 10%;
+    max-width: 80%;
+  }
+  }
+
+  .footer-legal, .footer-copyright
+  {
+    text-align: center!important;
+  }
+
+  .button-right
+  {
+    justify-content: center!important;
+  }
 }
 
 .cta {
   background-color: rgb(85, 110, 230);
-  padding: 30px 0 70px 0;
-  margin-top: 40px;
+  padding: 80px 0;
+  margin: 40px auto -60px auto;
 
   h3 {
     color: white;
+    line-height: 1.8 !important;
+    text-align: left;
   }
-.row
-{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+  .row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .container {
+    margin-top: 0 !important;
+  }
 }
+
+.btn {
+  font-weight: 700 !important;
+}
+
+.btn-cta {
+  padding: 1rem 1.5rem !important;
+  font-size: 1.1rem !important;
+}
+
+.footer-part {
+  background-color: rgb(85, 110, 230);
+  padding-top: 10px;
+  margin: 40px auto 0 auto;
+  
+
+  h2, p, a 
+  {
+    color: white!important;
+  }
+
+  .footer-legal
+  {
+    text-align: left;
+  }
+
+  .footer-copyright
+  {
+    text-align: right;
+  }
+
+  hr 
+  {
+    color: white;
+    margin: 20px 0;
+  }
 }
 </style>
