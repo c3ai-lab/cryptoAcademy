@@ -148,7 +148,7 @@
             <p>
               Nimm jetzt Kontakt zu uns auf, wenn du Fragen oder konstruktives
               Feedback zu unserer CryptoCademy-Anwendung hast. Melde dich dafür
-              per Mail an die <strong><a href="mailto:info@cryptocademy.app">info@cryptocademy.app</a></strong>.
+              per Mail an die <strong><a href="mailto:moin@cryptocademy.app">moin@cryptocademy.app</a></strong>.
             </p>
           </div>
           <hr>
