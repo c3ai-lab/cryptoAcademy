@@ -57,12 +57,14 @@ import i18n from "./i18n";
 
 import LoginLayout from "./layouts/LoginLayout.vue";
 import MainLayout from "./layouts/MainLayout.vue";
+import LandingLayout from "./layouts/LandingLayout.vue";
 
 store.dispatch("coinDetails/init");
 
 const app = new Vue({
   el: "#app",
   render: (h) => {
+    if (router.currentRoute.name === "landing") return h(LandingLayout);
     if (store.getters["user/accessToken"]() === null) return h(LoginLayout);
     return h(MainLayout);
   },

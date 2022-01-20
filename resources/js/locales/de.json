@@ -5,7 +5,9 @@
     "save": "Speichern",
     "abort": "Abbrechen",
     "back": "Zurück",
-    "all": "Alle"
+    "all": "Alle",
+    "login": "Login",
+    "register": "Registrieren"
   },
   "auth": {
     "welcome": "Herzlich willkommen!",
@@ -137,7 +139,8 @@
     }
   },
   "wallet": {
-    "total_value": "Gesamtwert aller Coins",
+    "wallet": "Wallet",
+    "total_value": "Portfoliowert",
     "user_balance": "Guthaben",
     "wallet_list": "Wallet-Übersicht",
     "all_wallets_empty": "Alle deine Wallets sind im Moment leer.",

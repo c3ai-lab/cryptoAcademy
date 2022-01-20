@@ -1,3 +1,5 @@
+import { ComponentState } from "./enums";
+
 export const generateSampleSeries = (name) => {
   let data = [];
 
@@ -21,3 +23,13 @@ export const enumKeyToRouteParam = (key) =>
   key.toLowerCase().replaceAll("_", "-");
 export const routeParamToEnumKey = (key) =>
   key.toUpperCase().replaceAll("-", "_");
+
+// not declared as arrow function to inherit "this" from the calling component
+export const dispatchAll = async (component, ...actions) => {
+  const results = await Promise.all(
+    actions.map((v) => component.$store.dispatch(v))
+  );
+  return results.filter((v) => v === false).length === 0
+    ? ComponentState.READY
+    : ComponentState.ERROR;
+};

@@ -13,7 +13,17 @@
     class="row px-lg-5"
   >
     <h1 class="mt-3 px-lg-0">
-      {{ symbol }}
+      <img
+        class="logo"
+        :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"
+      />
+      {{ symbol | symbol }}
+      <i
+        @click="toggleFavorite()"
+        class="mdi ml-4 favorite"
+        :class="[favoriteClasses]"
+        style="font-size: 24px"
+      />
     </h1>
     <div
       class="bg-white p-0"
@@ -78,35 +88,46 @@
         </b-button-group>
       </div>
     </div>
-    <div v-if="0" style="width: 100%" class="mt-2">
-      <b-button
-        class="btn-block"
-        variant="primary"
-        style="width: 100%"
-        @click="buy"
-        >Trade</b-button
-      >
-    </div>
-    <div class="mt-4 px-lg-0">
-      <b-card>
-        <div class="text-muted pa-0 ma-0">
-          {{ $t("trade.amount") }}
-        </div>
-        <div class="font-size-22 w-100" style="text-align: right">
-          <b>
-            {{ balance | crypto }}
-          </b>
-          <span>{{ symbol | symbol }}</span>
-        </div>
-      </b-card>
-      <trading-buy-view v-if="1" :price="price"/>
-      <transaction-card :symbol="symbol" v-if="1" />
-    </div>
-    
+
+    <b-row class="no-padding mt-4">
+      <b-col cols="12" md="6">
+        <h2>{{ $t("wallet.user_balance") }}</h2>
+        <UserCreditCard />
+      </b-col>
+      <b-col cols="12" md="6">
+        <h2>{{ $t("wallet.wallet") }}</h2>
+        <WalletCoinQuantityCard :symbol="symbol" />
+      </b-col>
+    </b-row>
+
+    <TradingBuyView :price="price" />
+    <TransactionCard :symbol="symbol" />
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+.no-padding {
+  padding: 0;
+
+  div:first-of-type {
+    padding-left: 0;
+  }
+  div:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.logo {
+  display: inline-block;
+  margin: -0.2rem 0.2rem 0.25rem 0.75rem;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.favorite {
+  cursor: pointer;
+}
+
 .dim-btn {
   background-color: #eff2f7 !important;
   border: none;
@@ -116,6 +137,7 @@
 .dim-btn:focus-visible {
   outline: none !important;
 }
+
 .active-dimension {
   background-color: #eff2f760 !important;
   color: var(--bs-gray-900) !important;
@@ -130,6 +152,8 @@ import MainChart from "../components/MainChart.vue";
 import TransactionCard from "../components/TransactionCard.vue";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
 import TradingBuyView from "./TradingBuyView.vue";
+import UserCreditCard from "../components/UserCreditCard.vue";
+import WalletCoinQuantityCard from "../components/WalletCoinQuantityCard.vue";
 
 export default {
   props: {
@@ -141,6 +165,8 @@ export default {
     TransactionCard,
     PaddedLayout,
     TradingBuyView,
+    UserCreditCard,
+    WalletCoinQuantityCard,
   },
 
   data() {
@@ -182,6 +208,24 @@ export default {
         (x) => x.symbol === this.symbol
       ).user_quantity;
     },
+
+    coin() {
+      return this.$store.getters["coinIndex/all"]().find(
+        (x) => x.symbol === this.symbol
+      );
+    },
+
+    isFavorite() {
+      return this.coin == null ? false : this.coin.is_favorite;
+    },
+
+    favoriteClasses() {
+      return this.isFavorite ? "mdi-heart text-danger" : "mdi-heart-outline";
+    },
+
+    id() {
+      return this.coin.id;
+    },
   },
 
   mounted() {
@@ -201,11 +245,12 @@ export default {
       });
     },
 
-    buy() {
-      this.$router.push({
-        name: "trading.buy",
-        params: { symbol: this.symbol },
-      });
+    toggleFavorite() {
+      if (this.isFavorite) {
+        this.$store.dispatch("coinIndex/removeFavorite", this.id);
+      } else {
+        this.$store.dispatch("coinIndex/addFavorite", this.id);
+      }
     },
   },
 };

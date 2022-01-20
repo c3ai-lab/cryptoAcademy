@@ -43,7 +43,7 @@ Vue.filter("eur", function (value) {
 });
 
 Vue.filter("symbol", function (value) {
-  return value.split("USDT")[0];
+  return value == null ? "" : value.split("USDT")[0];
 });
 
 Vue.filter("crypto", function (value) {

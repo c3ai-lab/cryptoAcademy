@@ -1,5 +1,5 @@
 import { DIMENSION_MAP } from "../../constants";
-import { MainClient, WebsocketClient } from 'binance';
+import { MainClient, WebsocketClient } from "binance";
 
 const binanceRest = new MainClient({
   beautifyResponses: true,
@@ -7,6 +7,7 @@ const binanceRest = new MainClient({
 
 const binanceWs = new WebsocketClient({
   beautify: true,
+  disableHeartbeat: true,
 });
 
 const state = {
@@ -20,19 +21,20 @@ const getters = {
     if (
       state.coins[symbol] === undefined ||
       state.coins[symbol][dimension] === undefined ||
-      state.coins['EURUSDT'] === undefined ||
-      state.coins['EURUSDT'][dimension] === undefined
-    ) return [];
+      state.coins["EURUSDT"] === undefined ||
+      state.coins["EURUSDT"][dimension] === undefined
+    )
+      return [];
 
-    const result = []
+    const result = [];
 
-    const series = state.coins[symbol][dimension]
+    const series = state.coins[symbol][dimension];
 
     for (let i = 0; i < series.length; i++) {
       result.push([
-        series[i][0], series[i][1] / state.coins['EURUSDT'][dimension][i][1]
+        series[i][0],
+        series[i][1] / state.coins["EURUSDT"][dimension][i][1],
       ]);
-
     }
     return result;
   },
@@ -40,42 +42,51 @@ const getters = {
 
 const actions = {
   init({ commit }) {
-    binanceWs.subscribeKlines('EURUSDT', '1m', 'spot');
+    binanceWs.subscribeKlines("EURUSDT", "1m", "spot");
 
-    binanceWs.on('formattedMessage', (data) => {
+    binanceWs.on("formattedMessage", (data) => {
       if (!Array.isArray(data)) {
-        if (data.eventType === 'kline') {
-          commit('setEurUsdt', data.kline.close);
+        if (data.eventType === "kline") {
+          commit("setEurUsdt", data.kline.close);
         }
       }
     });
   },
   subscribe({ commit, state }, { symbol, dimension }) {
-    if (state.coins[symbol] === undefined || state.coins[symbol][dimension] === undefined) {
-      binanceRest.getKlines({
-        ...DIMENSION_MAP[dimension],
-        symbol: symbol,
-      }).then(response =>
-        commit('set', { symbol, dimension, data: response.map(x => [x[0], Number(x[3])]) })
-      ).catch(error =>
-        alert(error)
-      );
+    if (
+      state.coins[symbol] === undefined ||
+      state.coins[symbol][dimension] === undefined
+    ) {
+      binanceRest
+        .getKlines({
+          ...DIMENSION_MAP[dimension],
+          symbol: symbol,
+        })
+        .then((response) =>
+          commit("set", {
+            symbol,
+            dimension,
+            data: response.map((x) => [x[0], Number(x[3])]),
+          })
+        )
+        .catch((error) => alert(error));
 
-      binanceRest.getKlines({
-        ...DIMENSION_MAP[dimension],
-        symbol: 'EURUSDT',
-      }).then(response =>
-        commit('set', { symbol: 'EURUSDT', dimension, data: response.map(x => [x[0], Number(x[3])]) })
-      ).catch(error =>
-        alert(error)
-      );
-
-      // binance.onNewCandle(() => {
-      //   commit('add', symbol, dimension, data);
-      // })
+      binanceRest
+        .getKlines({
+          ...DIMENSION_MAP[dimension],
+          symbol: "EURUSDT",
+        })
+        .then((response) =>
+          commit("set", {
+            symbol: "EURUSDT",
+            dimension,
+            data: response.map((x) => [x[0], Number(x[3])]),
+          })
+        )
+        .catch((error) => alert(error));
     }
   },
-  unsubscribe({ commit }) { },
+  unsubscribe({ commit }) {},
 };
 
 const mutations = {
@@ -86,7 +97,8 @@ const mutations = {
     state.user = user;
   },
   addConnection(state, { connection, symbol }) {
-    if (state.coins[symbol] !== undefined) state.coins[symbol]['connection'] = connection;
+    if (state.coins[symbol] !== undefined)
+      state.coins[symbol]["connection"] = connection;
   },
   set(state, { symbol, dimension, data }) {
     if (state.coins[symbol] === undefined) state.coins[symbol] = {};
@@ -100,7 +112,6 @@ const mutations = {
     };
   },
 };
-
 
 export default {
   namespaced: true,

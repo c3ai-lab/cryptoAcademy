@@ -18,6 +18,7 @@ import NewPasswordView from "./views/NewPasswordView.vue";
 import DeleteAccountView from "./views/DeleteAccountView.vue";
 import WalletsView from "./views/WalletsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
+import LandingpageView from "./views/LandingpageView.vue";
 
 Vue.use(VueRouter);
 
@@ -138,6 +139,11 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      path: "/landing",
+      name: "landing",
+      component: LandingpageView,
     },
   ],
 });
