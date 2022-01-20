@@ -12,7 +12,7 @@
     "
     class="row px-lg-5"
   >
-    <h1 class="mt-3 px-lg-0">
+    <h1 class="my-3 px-lg-0">
       <img
         class="logo"
         :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"

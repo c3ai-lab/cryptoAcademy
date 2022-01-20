@@ -126,16 +126,22 @@
     "yourAmount": "In deinem Wallet",
     "balance": "Konto",
     "buy_success_modal": {
-      "title": "Du hast erfolgreich Coins gekauft",
+      "title": "Du hast erfolgreich Coins gekauft!",
       "text1": "Deinem Wallet wurden die folgenden Coins gutgeschrieben: ",
       "text2": "Kurswert: ",
       "text3": "Kaufpreis: "
     },
+    "buy_error_modal": {
+      "title": "Der Kauf der Coins ist fehlgeschlagen!"
+    },
     "sell_success_modal": {
-      "title": "Du hast erfolgreich Coins verkauft",
+      "title": "Du hast erfolgreich Coins verkauft!",
       "text1": "Die folgenden Coins wurden verkauft:  ",
       "text2": "Kurswert: ",
       "text3": "Verkaufspreis: "
+    },
+    "sell_error_modal": {
+      "title": "Der Verkauf der Coins ist fehlgeschlagen!"
     }
   },
   "wallet": {
