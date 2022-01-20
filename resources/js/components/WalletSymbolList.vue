@@ -113,7 +113,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 th.right,
 td.right {
   text-align: right;

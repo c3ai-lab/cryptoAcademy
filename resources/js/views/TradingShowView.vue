@@ -14,10 +14,16 @@
   >
     <h1 class="mt-3 px-lg-0">
       <img
-        class="icon"
+        class="logo"
         :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"
       />
       {{ symbol | symbol }}
+      <i
+        @click="toggleFavorite()"
+        class="mdi ml-4 favorite"
+        :class="[favoriteClasses]"
+        style="font-size: 24px"
+      />
     </h1>
     <div
       class="bg-white p-0"
@@ -83,12 +89,12 @@
       </div>
     </div>
 
-    <b-row class="mt-4">
-      <b-col>
+    <b-row class="no-padding mt-4">
+      <b-col cols="12" md="6">
         <h2>{{ $t("wallet.user_balance") }}</h2>
         <UserCreditCard />
       </b-col>
-      <b-col>
+      <b-col cols="12" md="6">
         <h2>{{ $t("wallet.wallet") }}</h2>
         <WalletCoinQuantityCard :symbol="symbol" />
       </b-col>
@@ -100,11 +106,26 @@
 </template>
 
 <style lang="scss" scoped>
-.icon {
+.no-padding {
+  padding: 0;
+
+  div:first-of-type {
+    padding-left: 0;
+  }
+  div:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.logo {
   display: inline-block;
   margin: -0.2rem 0.2rem 0.25rem 0.75rem;
   height: 2.5rem;
   width: 2.5rem;
+}
+
+.favorite {
+  cursor: pointer;
 }
 
 .dim-btn {
@@ -187,6 +208,24 @@ export default {
         (x) => x.symbol === this.symbol
       ).user_quantity;
     },
+
+    coin() {
+      return this.$store.getters["coinIndex/all"]().find(
+        (x) => x.symbol === this.symbol
+      );
+    },
+
+    isFavorite() {
+      return this.coin == null ? false : this.coin.is_favorite;
+    },
+
+    favoriteClasses() {
+      return this.isFavorite ? "mdi-heart text-danger" : "mdi-heart-outline";
+    },
+
+    id() {
+      return this.coin.id;
+    },
   },
 
   mounted() {
@@ -206,11 +245,12 @@ export default {
       });
     },
 
-    buy() {
-      this.$router.push({
-        name: "trading.buy",
-        params: { symbol: this.symbol },
-      });
+    toggleFavorite() {
+      if (this.isFavorite) {
+        this.$store.dispatch("coinIndex/removeFavorite", this.id);
+      } else {
+        this.$store.dispatch("coinIndex/addFavorite", this.id);
+      }
     },
   },
 };

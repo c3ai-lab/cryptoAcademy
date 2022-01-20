@@ -73,10 +73,6 @@ export default {
       }));
     },
 
-    async created() {
-      this.state = await dispatchAll(this, "transactions/fetchTransactions");
-    },
-
     bought() {
       return this.transactions.filter((t) => t.quantity > 0);
     },
@@ -84,6 +80,10 @@ export default {
     sold() {
       return this.transactions.filter((t) => t.quantity < 0);
     },
+  },
+
+  async created() {
+    this.state = await dispatchAll(this, "transactions/fetchTransactions");
   },
 };
 </script>

@@ -1,22 +1,20 @@
 <template>
   <div>
-    <b-card v-if="card">
+    <b-card v-if="card && state !== ComponentState.READY">
       <b-card-text class="loading">
         <LoadingSpinners v-if="state === ComponentState.LOADING" />
 
         <div v-if="state === ComponentState.ERROR">error</div>
-
-        <slot v-if="state === ComponentState.READY"></slot>
       </b-card-text>
     </b-card>
 
-    <div v-else>
+    <div v-if="!card && state !== ComponentState.READY">
       <LoadingSpinners v-if="state === ComponentState.LOADING" />
 
       <div v-if="state === ComponentState.ERROR">error</div>
-
-      <slot v-if="state === ComponentState.READY"></slot>
     </div>
+
+    <slot v-if="state === ComponentState.READY"></slot>
   </div>
 </template>
 

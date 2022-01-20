@@ -1,3 +1,29 @@
+import { debounce } from "debounce";
+
+/**
+ * Actions
+ */
+const fetchAll = async ({ commit, rootGetters }) => {
+  const response = await fetch(`${location.origin}/api/user/wallet`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
+    },
+  });
+
+  if (response.ok === true) {
+    const data = await response.json();
+    commit("setWallets", data);
+    return true;
+  }
+
+  return false;
+};
+
+/**
+ * Store
+ */
 const state = {
   wallets: [],
 };
@@ -15,23 +41,7 @@ const getters = {
 };
 
 const actions = {
-  async fetchAll({ commit, rootGetters }) {
-    const response = await fetch(`${location.origin}/api/user/wallet`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${rootGetters["user/accessToken"]()}`,
-      },
-    });
-
-    if (response.ok === true) {
-      const data = await response.json();
-      commit("setWallets", data);
-      return true;
-    }
-
-    return false;
-  },
+  fetchAll: debounce(fetchAll, 1000, true),
 };
 
 const mutations = {

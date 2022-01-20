@@ -14,7 +14,7 @@ import { dispatchAll } from "../utils";
 import LoadingStateWrapper from "../components/utils/LoadingStateWrapper.vue";
 
 export default {
-  name: "LoadingStateWrapper",
+  name: "WalletCoinQuantityCard",
 
   components: {
     LoadingStateWrapper,
@@ -23,7 +23,6 @@ export default {
   props: {
     symbol: {
       type: String,
-      required: true,
     },
   },
 
@@ -35,7 +34,9 @@ export default {
 
   computed: {
     quantity() {
-      return this.$store.getters["wallets/bySymbol"](this.symbol).user_quantity;
+      const wallet = this.$store.getters["wallets/bySymbol"](this.symbol);
+      if (wallet == null) return 0;
+      return wallet.user_quantity;
     },
   },
 
