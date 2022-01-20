@@ -5,7 +5,7 @@ namespace App\Service;
 
 use Binance\API;
 
-class BianceApiService
+class BinanceApiService
 {
   /**
    * @var API
@@ -25,9 +25,9 @@ class BianceApiService
   /**
    * @throws \Exception
    */
-  public function getPriceOfSymbol(string $symbol): float
+  public function getPriceOfSymbol(string $apiSymbol): float
   {
-    return (float)$this->api->price($symbol);
+    return (float)$this->api->price($apiSymbol);
   }
 
   /**
@@ -36,5 +36,13 @@ class BianceApiService
   public function getPriceOfEuroToUsd(): float
   {
     return (float)$this->api->price("EURUSDT");
+  }
+
+  /**
+   * @throws \Exception
+   */
+  public function getKlines($apiSymbol, $interval, $limit, $endtime): array
+  {
+    return $this->api->candlesticks($apiSymbol, $interval, $limit, null, $endtime);
   }
 }

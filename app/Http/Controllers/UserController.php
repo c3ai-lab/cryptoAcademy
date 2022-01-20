@@ -10,7 +10,7 @@ use App\Models\Symbol;
 use App\Models\User;
 use App\Notifications\PasswordResetMail;
 use App\Rules\MatchOldPassword;
-use App\Service\BianceApiService;
+use App\Service\BinanceApiService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class UserController extends Controller
     $collection = Symbol::all();
     $filtered = $request->has('favorite') ? $collection->where('is_favorite', $request->get('favorite')) : $collection;
 
-    $apiService = new BianceApiService();
+    $apiService = new BinanceApiService();
     $rate = $apiService->getPriceOfEuroToUsd();
     $coll = $filtered->map(function ($item) use ($rate, $apiService) {
       $balance = $item->user_quantity > 0 ? $item->user_quantity * $apiService->getPriceOfSymbol($item->api_symbol) / $rate : 0;

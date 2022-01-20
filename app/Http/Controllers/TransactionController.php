@@ -6,7 +6,7 @@ use App\Enum\MessageCodes;
 use App\Http\Resources\TransactionResource;
 use App\Models\Symbol;
 use App\Models\TransactionModel;
-use App\Service\BianceApiService;
+use App\Service\BinanceApiService;
 use App\Service\EcbExchangeRatesApiService;
 use Illuminate\Http\Request;
 use Validator;
@@ -38,10 +38,10 @@ class TransactionController extends Controller
       return response()->json($validator->errors(), 400);
     }
     try {
-      $bianceService = new BianceApiService();
+      $binanceService = new BinanceApiService();
 
-      $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
-      $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
+      $this->symbolPrice = $binanceService->getPriceOfSymbol($request->symbol);
+      $this->exchangeRate = $binanceService->getPriceOfEuroToUsd();
 
       if ($this->isUserBalanceSufficient()) {
         $this->createTransaction($request, TransactionModel::ACTION_BUY);
@@ -74,9 +74,9 @@ class TransactionController extends Controller
       return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_SYMBOL_AMOUNT], 400);
     }
 
-    $bianceService = new BianceApiService();
-    $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
-    $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
+    $binanceService = new BinanceApiService();
+    $this->symbolPrice = $binanceService->getPriceOfSymbol($request->symbol);
+    $this->exchangeRate = $binanceService->getPriceOfEuroToUsd();
 
     $user->balance = $user->balance + $this->symbolPrice / $this->exchangeRate * $request->quantity;
     $user->save();

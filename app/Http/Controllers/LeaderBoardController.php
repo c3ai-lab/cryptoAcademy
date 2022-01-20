@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Service\BianceApiService;
+use App\Service\BinanceApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,7 +67,7 @@ GROUP BY `transaction`
 
   private function getSymbolRate()
   {
-    $apiService = new BianceApiService();
+    $apiService = new BinanceApiService();
     $this->symbolRate["EURUSDT"] = $apiService->getPriceOfEuroToUsd();
     $results = DB::select(DB::raw("SELECT api_symbol FROM `transaction` INNER JOIN symbols ON symbols.id = `transaction`.symbol_id GROUP BY `transaction`.symbol_id;"));
 
