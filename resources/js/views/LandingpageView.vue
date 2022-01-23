@@ -4,11 +4,12 @@
       <div class="container header-content px-lg-5 px-3">
         <div class="row">
           <div class="col-md-8">
-            <h1 class="my-3">Wilkommen bei deiner CryptoCademy</h1>
+            <h1 class="my-3">Kryptowährungen spielerisch kennenlernen</h1>
             <h3>
-              Lege jetzt ein Konto an, lerne Cryptotraden und messe dich in
-              deiser Simulation mit deinen Freunden! Wer kann am meisten Gewinne
-              erziehlen?
+              Lerne die Grundlagen, erweitere dein Wissen und messe dich
+              risikofreie in einer Simulation mit der Community! Entwickle deine
+              persönliche Erfolgsstrategie, um am echten Markt bestehen zu
+              können!
             </h3>
             <router-link to="register">
               <button class="btn btn-light text-primary btn-cta">
@@ -23,12 +24,12 @@
       <div class="row center-text col-md-8">
         <h2>Warum CryptoCademy?</h2>
         <p>
-          Was ist Bitcoin? Wie handelt man Alt-Coins und was würde passieren
-          wenn man wirklich mal was investiert?! CryptoCademy lässt dich mit
-          echten Preisen im Sekundentakt risikolos den Handel mit Bitcoin und
-          vielen anderen Kryptowährungen simulieren! Zahle realistische
-          Handelsgebühren, beobachte deinen Investitionserfolg und versuche mit
-          deiner Strategie auf den Mond zu kommen!
+          Was ist Bitcoin? Was ist Ethereum? Wie handelt man Alt-Coins und was
+          würde passieren, wenn man wirklich mal was investiert?! CryptoCademy
+          lässt dich mit echten Preisen im Sekundentakt risikolos den Handel mit
+          Bitcoin und vielen anderen Kryptowährungen simulieren! Zahle
+          realistische Handelsgebühren, beobachte deinen Investitionserfolg und
+          versuche mit deiner Strategie auf den Mond zu kommen!
         </p>
         <router-link to="register">
           <button class="btn btn-primary">
@@ -46,10 +47,7 @@
         </div>
         <div class="col-12 col-md-6 mt-3 mt-md-0 text">
           <h2>Kostenlose Registrierung</h2>
-          <p>
-            Melde dich noch heute an, kostenfrei und risikolos - jetzt und für
-            immer!
-          </p>
+          <p>Melde dich noch heute an, kostenfrei und risikolos.</p>
           <br class="d-md-block d-none" />
           <h2>Wallet</h2>
           <p>
@@ -80,9 +78,8 @@
         <div class="row">
           <div class="col-md-8 col-12">
             <h3>
-              Interesse geweckt? Lege jetzt ein Konto an, lerne Cryptotraden und
-              messe dich mit deinen Freunden! Wer kann am meisten Gewinne
-              erziehlen?
+              Interesse geweckt? Lege jetzt ein Konto an, erlerne den Handel mit
+              Kryptowährungen und messe dich mit der Community!
             </h3>
           </div>
           <div class="d-flex col-md-4 col-12 justify-content-center my-3">
@@ -103,8 +100,8 @@
         <div class="col-12 col-md-4 text">
           <h2>Dashboard</h2>
           <p>
-            Beobachte auf dem Dashboard die Nachrichtenlage und die Kursverläufe
-            deiner Lieblingswährungen! Zuhause und unterwegs.
+            Beobachte die News und die Kursverläufe deiner Lieblingswährungen!
+            Behalte die Performance deines Portfolios sekundengenau im Blick.
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
@@ -118,7 +115,7 @@
           <p>
             Verschaffe dir einen Überblick über die wichtigsten Begriffe und
             Technologien in der Welt der Blockchains. Von Krypto-Newbies bis hin
-            zu Trading-Profis, hier gibt es für jeden etwas neues zu lernen!
+            zu Trading-Profis, hier gibt es für jeden etwas Neues zu lernen!
           </p>
         </div>
         <div class="d-flex col-md-8 col-12 justify-content-center">
@@ -145,33 +142,29 @@
     <div class="footer-part px-2 px-md-0">
       <PaddedLayout>
         <div class="row">
-          <div class="col-md-7 col-12">
+          <div class="col-12">
             <h2>Fragen oder Anmerkungen?</h2>
             <p>
               Nimm jetzt Kontakt zu uns auf, wenn du Fragen oder konstruktives
               Feedback zu unserer CryptoCademy-Anwendung hast. Melde dich dafür
-              per Mail an die <strong><a href="mailto:info@cryptocademy.app">info@cryptocademy.app</a></strong>.
+              per Mail an die
+              <strong
+                ><a href="mailto:moin@cryptocademy.app"
+                  >info@cryptocademy.app</a
+                ></strong
+              >.
             </p>
           </div>
-
-          <div class="d-flex col-md-5 col-12 justify-content-end my-3 button-right">
-            <router-link to="register">
-              <button class="btn btn-light text-primary" style="margin-right: 20px">
-                {{ $t("auth.register_now") }}
-              </button>
-            </router-link>
-            <router-link to="login">
-              <button class="btn btn-light text-primary">
-                {{ $t("auth.login_now") }}
-              </button>
-            </router-link>
-          </div>
-          <hr>
-          <div class="col-md-6 col-12 ">
-          <p class="footer-legal">Impressum - Datenschutzerklärung</p>
+          <hr />
+          <div class="col-md-6 col-12">
+            <p class="footer-legal">
+              <a href="https://github.com/c3ai-lab/cryptoAcademy">
+                Zum GitHub-Projekt
+              </a>
+            </p>
           </div>
           <div class="col-md-6 col-12">
-          <p class="footer-copyright">© 2022 CryptoCademy</p>
+            <p class="footer-copyright">© 2022 CryptoCademy</p>
           </div>
         </div>
       </PaddedLayout>
@@ -299,25 +292,22 @@ export default {
     }
   }
 
-  .footer-part
-  {
+  .footer-part {
     text-align: center !important;
 
-    hr 
-  {
-    margin: 20px 10%;
-    max-width: 80%;
-  }
-  }
-
-  .footer-legal, .footer-copyright
-  {
-    text-align: center!important;
+    hr {
+      margin: 20px 10% !important;
+      max-width: 80%;
+    }
   }
 
-  .button-right
-  {
-    justify-content: center!important;
+  .footer-legal,
+  .footer-copyright {
+    text-align: center !important;
+  }
+
+  .button-right {
+    justify-content: center !important;
   }
 }
 
@@ -356,25 +346,22 @@ export default {
   background-color: rgb(85, 110, 230);
   padding-top: 10px;
   margin: 40px auto 0 auto;
-  
 
-  h2, p, a 
-  {
-    color: white!important;
+  h2,
+  p,
+  a {
+    color: white !important;
   }
 
-  .footer-legal
-  {
+  .footer-legal {
     text-align: left;
   }
 
-  .footer-copyright
-  {
+  .footer-copyright {
     text-align: right;
   }
 
-  hr 
-  {
+  hr {
     color: white;
     margin: 20px 0;
   }
