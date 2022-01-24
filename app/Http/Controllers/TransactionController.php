@@ -21,10 +21,14 @@ class TransactionController extends Controller
    * @var float
    */
   private $symbolPrice;
+  /**
+   * @var float
+   */
+  private $quantity;
 
   public function index(Request $request)
   {
-    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id',"desc")->get());
+    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id', "desc")->get());
   }
 
   public function buy(Request $request)
@@ -42,6 +46,7 @@ class TransactionController extends Controller
 
       $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
       $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
+      $this->quantity = $request->quantity;
 
       if ($this->isUserBalanceSufficient()) {
         $this->createTransaction($request, TransactionModel::ACTION_BUY);
@@ -112,7 +117,7 @@ class TransactionController extends Controller
 
   private function isUserBalanceSufficient(): bool
   {
-    return ($this->symbolPrice / $this->exchangeRate) <= auth()->user()->balance;
+    return ($this->symbolPrice / $this->exchangeRate * $this->quantity) <= auth()->user()->balance;
   }
 
   private function getCurrentSymbolAmount(string $symbol)
