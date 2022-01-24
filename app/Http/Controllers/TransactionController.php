@@ -50,11 +50,12 @@ class TransactionController extends Controller
 
       if ($this->isUserBalanceSufficient()) {
         $this->createTransaction($request, TransactionModel::ACTION_BUY);
-        $balance = $user->balance - $this->symbolPrice / $this->exchangeRate * $request->quantity;
+        $total = $this->symbolPrice / $this->exchangeRate * $request->quantity;
+        $balance = $user->balance - $total;
         $user->balance = $balance;
         $user->save();
 
-        return response()->json([], 201);
+        return response()->json(["quantity"=> $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
       } else {
         return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_USER_BALANCE], 400);
       }
@@ -82,13 +83,14 @@ class TransactionController extends Controller
     $bianceService = new BianceApiService();
     $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
     $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
-
-    $user->balance = $user->balance + $this->symbolPrice / $this->exchangeRate * $request->quantity;
+    $total  = $this->symbolPrice / $this->exchangeRate * $request->quantity;
+    $user->balance = $user->balance + $total;
     $user->save();
 
     try {
       $this->createTransaction($request, TransactionModel::ACTION_SELL);
-      return response()->json([], 201);
+
+      return response()->json(["quantity"=> $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
     } catch (\Exception $e) {
       return response($e->getMessage(), 500);
     }

@@ -71,13 +71,13 @@ export default {
         },
         {
           key: "growth",
-          label: "Zuwachs",
+          label: "Gewinn / Verlust",
           sortable: false,
           tdClass: "right",
         },
         {
           key: "balance_eur",
-          label: "Portfoliowert",
+          label: "Konto",
           sortable: false,
           tdClass: "right",
         },

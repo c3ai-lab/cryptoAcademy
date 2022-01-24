@@ -62,7 +62,7 @@ GROUP BY `transaction`
       // TODO: portfolio - portfoliowert von vor uebergebenemZeitraum
       $tableArr[] = ["name" => $arr[$user_id]["user"]["name"], "growth" => $portfolio - User::INIT_BALANCE, "balance_eur" => $portfolio];
     }
-    return response()->json(array_slice($tableArr, 0, 3));
+    return response()->json(array_slice($tableArr, 0, 20));
   }
 
   private function getSymbolRate()
