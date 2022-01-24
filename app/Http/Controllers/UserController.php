@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Validator;
 
@@ -167,23 +168,21 @@ class UserController extends Controller
 
   public function verifyUser($verification_code)
   {
+    $loginurl = "/login";
     $check = DB::table('user_verifications')->where('token', $verification_code)->first();
 
     if (!is_null($check)) {
       $user = User::find($check->user_id);
 
       if ($user->is_verified == 1) {
-        return response()->json([
-          'msgcode' => MessageCodes::ACCOUNT_ALREADY_VERIFIED
-        ]);
+        return Redirect::to($loginurl);
       }
 
       $user->update(['is_verified' => 1, 'email_verified_at' => Carbon::now()]);
       DB::table('user_verifications')->where('token', $verification_code)->delete();
 
-      return response()->json([
-        'msgcode' => MessageCodes::VERIFY_EMAIL_SUCCESS
-      ]);
+
+      return Redirect::to($loginurl);
     }
 
     return response()->json(['msgcode' => MessageCodes::VERIFY_EMAIL_FAIL], 400);
