@@ -47,8 +47,8 @@ jobs:
         run: |
           sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
           sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
-      #          sed -ri -e "s!MAIL_USERNAME=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
-      #          sed -ri -e "s!MAIL_PASSWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
+          sed -ri -e "s!MAIL_USERNAME=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
+          sed -ri -e "s!MAIL_PASSWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
       - name: Move .env, docker-compose and startup to Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
