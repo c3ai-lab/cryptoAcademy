@@ -10,7 +10,7 @@
             </span>
           </a>
         </div>
-        <div class="d-block d-lg-none" style="width: 100%">
+        <div class="d-block d-lg-none col-6" >
           <a href="/" class="logo">
             <span>
               <img
@@ -21,24 +21,14 @@
             </span>
           </a>
         </div>
-
-        <div class="col-md-6 col-2"></div>
-        <div class="d-flex p-1 justify-content-end col-2">
-          
-        </div>
-        <div class="d-flex p-1 justify-content-end col-2">
+<div class="d-none d-lg-block col-4"></div>
+       
+        <div class="d-flex p-1 justify-content-end col-6">
           <router-link
             to="login"
           >
-            <button class="btn btn-primary mx-4">
-              {{ $t("common.login") }}
-            </button>
-          </router-link>
-          <router-link
-            to="register"
-          >
-            <button class="btn btn-warning">
-              {{ $t("common.register") }}
+            <button class="btn btn-primary">
+              {{ $t("common.get_started") }}
             </button>
           </router-link>
         </div>

@@ -7,7 +7,8 @@
     "back": "Zurück",
     "all": "Alle",
     "login": "Login",
-    "register": "Registrieren"
+    "register": "Registrieren",
+    "get_started": "Get Started"
   },
   "auth": {
     "welcome": "Herzlich willkommen!",
