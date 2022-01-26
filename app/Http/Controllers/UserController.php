@@ -164,7 +164,7 @@ class UserController extends Controller
   public function verifyUser($verification_code)
   {
     $loginurl = "/login";
-    $check = DB::table('user')->where('verify_token', $verification_code)->first();
+    $check = DB::table('users')->where('verify_token', $verification_code)->first();
 
     if (!is_null($check)) {
       $user = User::find($check->id);

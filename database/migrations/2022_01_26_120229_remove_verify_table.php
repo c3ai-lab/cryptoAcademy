@@ -14,10 +14,6 @@ class RemoveVerifyTable extends Migration
   public function up()
   {
     Schema::dropIfExists("user_verifications");
-
-    Schema::table('users', function (Blueprint $table) {
-      $table->dropColumn('is_verified');
-    });
   }
 
   /**
@@ -33,10 +29,6 @@ class RemoveVerifyTable extends Migration
       $table->string('token');
 
       $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-    });
-
-    Schema::table('users', function (Blueprint $table) {
-      $table->boolean('is_verified')->default(0);
     });
   }
 
