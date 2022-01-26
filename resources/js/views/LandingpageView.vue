@@ -40,7 +40,7 @@
       <div class="my-5"></div>
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/Login_iPhone.png" class="full" />
+          <img src="/images/landingpage/login_registrierung.png" class="full" />
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Kostenlose Registrierung</h2>
@@ -49,7 +49,7 @@
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/Login_iPhone.png" class="full" />
+          <img src="/images/landingpage/login_registrierung.png" class="full" />
         </div>
       </div>
 
@@ -70,7 +70,7 @@
 
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/wallet_iPhone.png" class="full" />
+          <img src="/images/landingpage/wallet.png" class="full" />
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Wallet</h2>
@@ -81,7 +81,7 @@
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/wallet_iPhone.png" class="full" />
+          <img src="/images/landingpage/wallet.png" class="full" />
         </div>
       </div>
     </PaddedLayout>
