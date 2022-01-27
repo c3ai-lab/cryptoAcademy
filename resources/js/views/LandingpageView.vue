@@ -14,6 +14,9 @@
             <a class="btn btn-light text-primary btn-cta" href="/register">
               {{ $t("auth.register_now") }}
             </a>
+            <a class="btn btn-light text-primary btn-cta" href="#video">
+              Zum Video
+            </a>
           </div>
         </div>
       </div>
@@ -145,6 +148,14 @@
           <img src="/images/landingpage/Leaderboard.png" class="full"/>
         </div>
       </div>
+      <div class="content-box row" id="video">
+          <video controls>
+            <source src="video/Cryptocademy.mp4" type="video/mp4">
+            <source src="video/Cryptocademy.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>
+      </div>
+
     </PaddedLayout>
     <div class="footer-part px-2 px-md-0">
       <PaddedLayout>
