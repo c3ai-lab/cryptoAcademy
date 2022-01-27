@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-//use App\Service\GetBinancePricesService;
+use App\Service\GetBinancePricesService;
 use Illuminate\Console\Command;
 
 class GetBinancePrices extends Command
@@ -38,8 +38,8 @@ class GetBinancePrices extends Command
    */
   public function handle()
   {
-//    $service = new GetBinancePricesService();
-//    $service->handle();
+    $service = new GetBinancePricesService();
+    $service->handle();
     return 0;
   }
 }
