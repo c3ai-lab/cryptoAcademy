@@ -18,12 +18,13 @@ export default {
     series: Array,
     mtsPerTimestep: Number,
   },
-  data() {
-    return {
-      showAxis: this.$store.getters['user/getUser']().axis.x || this.$store.getters['user/getUser']().axis.y,
-    }
-  },
+
   computed: {
+    showAxis() {
+      const user = this.$store.getters["user/getUser"]();
+      return user.axis.x || user.axis.y;
+    },
+
     loaded() {
       return this.series.length > 0;
     },
@@ -32,57 +33,64 @@ export default {
         return [];
       }
       const newSeries = [
-        {data: this.series},
-        {data: this.series.map(x => [x[0], x[1] * 1.003])},
-        {data: this.series.map(x => [x[0], x[1] * 0.995])},
+        { data: this.series },
+        { data: this.series.map((x) => [x[0], x[1] * 1.003]) },
+        { data: this.series.map((x) => [x[0], x[1] * 0.995]) },
       ];
 
-      return newSeries
+      return newSeries;
     },
     high() {
       if (!this.loaded) return null;
 
-      return this.series.reduce(
-        (prev, current) => (prev[1] > current[1]) ? prev : current
+      return this.series.reduce((prev, current) =>
+        prev[1] > current[1] ? prev : current
       );
     },
     low() {
       if (!this.loaded) return null;
 
-      return this.series.reduce(
-        (prev, current) => (prev[1] < current[1]) ? prev : current
+      return this.series.reduce((prev, current) =>
+        prev[1] < current[1] ? prev : current
       );
     },
     minMts() {
       if (!this.loaded) return null;
 
-      return this.series[0][0] + this.offset
+      return this.series[0][0] + this.offset;
     },
     maxMts() {
       if (!this.loaded) return null;
 
-      return this.series[this.series.length - 1][0] - this.offset
+      return this.series[this.series.length - 1][0] - this.offset;
     },
     lowIsInFirstHalf() {
       if (!this.loaded) return null;
 
-      return Math.abs(this.low[0] - this.series[0][0]) <= Math.abs(this.low[0] - this.series[this.series.length - 1][0]);
+      return (
+        Math.abs(this.low[0] - this.series[0][0]) <=
+        Math.abs(this.low[0] - this.series[this.series.length - 1][0])
+      );
     },
     highIsInFirstHalf() {
       if (!this.loaded) return null;
 
-      return Math.abs(this.high[0] - this.series[0][0]) <= Math.abs(this.high[0] - this.series[this.series.length - 1][0])
+      return (
+        Math.abs(this.high[0] - this.series[0][0]) <=
+        Math.abs(this.high[0] - this.series[this.series.length - 1][0])
+      );
     },
     offset() {
       if (!this.loaded) return null;
 
       const lenOfPrice = Math.max(
         this.$options.filters.eur(this.high).length,
-        this.$options.filters.eur(this.low).length,
-      )
-      const offset = 0.25 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.02 : 0)
-      return Math.ceil(this.series.length * offset) * this.mtsPerTimestep
+        this.$options.filters.eur(this.low).length
+      );
+      const offset = 0.25 + (lenOfPrice > 7 ? (lenOfPrice - 7) * 0.02 : 0);
+      return Math.ceil(this.series.length * offset) * this.mtsPerTimestep;
     },
+
     chartOptions() {
       if (!this.loaded) return null;
 
@@ -92,7 +100,7 @@ export default {
             show: true,
           },
           type: "line",
-          height: '400px',
+          height: "400px",
           sparkline: {
             enabled: !this.showAxis,
           },
@@ -110,16 +118,16 @@ export default {
         },
         yaxis: {
           labels: {
-            formatter: (value) => this.$options.filters['eur'](value),
+            formatter: (value) => this.$options.filters["eur"](value),
           },
         },
         xaxis: {
-          type: 'datetime',
+          type: "datetime",
           datetimeFormatter: {
-            year: 'yyyy',
+            year: "yyyy",
             month: "MMM 'yy",
-            day: 'dd MMM',
-            hour: 'HH:mm',
+            day: "dd MMM",
+            hour: "HH:mm",
           },
         },
         legend: {
@@ -133,28 +141,28 @@ export default {
         },
         stroke: {
           curve: "smooth",
-          width: 2
+          width: 2,
         },
         colors: ["#f1b44c", "#f1b44c00", "#f1b44c00"],
 
         tooltip: {
-          custom: ({series, seriesIndex, dataPointIndex, w}) => {
+          custom: ({ series, seriesIndex, dataPointIndex, w }) => {
             return `
                 <div class="arrow_box"><span>
-                ${
-              this.$options.filters.eur(
-                series[seriesIndex][dataPointIndex]
-              )
-            }
+                ${this.$options.filters.eur(
+                  series[seriesIndex][dataPointIndex]
+                )}
                 </span></div>
-                `
+                `;
           },
           enabledOnSeries: [0],
         },
         annotations: {
           points: [
             {
-              x: this.lowIsInFirstHalf ? Math.max(this.low[0], this.minMts) : Math.min(this.low[0], this.maxMts),
+              x: this.lowIsInFirstHalf
+                ? Math.max(this.low[0], this.minMts)
+                : Math.min(this.low[0], this.maxMts),
               y: this.low[1],
               marker: {
                 size: 0,
@@ -164,13 +172,15 @@ export default {
                 offsetY: 26,
                 style: {
                   color: "#00000000",
-                  background: "#00000000"
+                  background: "#00000000",
                 },
-                text: this.$options.filters.eur(this.low[1])
-              }
+                text: this.$options.filters.eur(this.low[1]),
+              },
             },
             {
-              x: this.highIsInFirstHalf ? Math.max(this.high[0], this.minMts) : Math.min(this.high[0], this.maxMts),
+              x: this.highIsInFirstHalf
+                ? Math.max(this.high[0], this.minMts)
+                : Math.min(this.high[0], this.maxMts),
               y: this.high[1],
               marker: {
                 size: 0,
@@ -180,15 +190,15 @@ export default {
                 offsetY: 4,
                 style: {
                   color: "#00000000",
-                  background: "#00000000"
+                  background: "#00000000",
                 },
-                text: this.$options.filters.eur(this.high[1])
-              }
+                text: this.$options.filters.eur(this.high[1]),
+              },
             },
-          ]
-        }
-      }
+          ],
+        },
+      };
     },
   },
-}
+};
 </script>

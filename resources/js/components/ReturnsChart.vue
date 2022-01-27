@@ -1,6 +1,4 @@
-<template>
-
-</template>
+<template></template>
 
 <script>
 export default {
@@ -8,16 +6,12 @@ export default {
     symbol: String,
   },
   created() {
-    this.$store.dispatch('transactions/fetchReturns');
+    this.$store.dispatch("transactions/fetchReturns");
   },
   computed: {
     series() {
-      this.$store.dispatch('transactions/fetchReturns');
-    }
+      this.$store.dispatch("transactions/fetchReturns");
+    },
   },
-}
+};
 </script>
-
-<style>
-
-</style>

@@ -1,4 +1,4 @@
-import { AcademyCategory, AcademyTopic, Dimension } from "./enums";
+import { AcademyCategory, AcademyTopic, Resolution } from "./enums";
 
 export const SESSION_REFRESH_AFTER_MINUTES = 15;
 
@@ -147,46 +147,46 @@ export const APEXCHART_OPTIONS = {
   },
 };
 
-export const DIMENSION_MAP = {
-  [Dimension.ONE_HOUR]: {
+export const RESOLUTION_MAP = {
+  [Resolution.ONE_HOUR]: {
     interval: "1m",
     limit: 60,
   },
-  [Dimension.ONE_DAY]: {
+  [Resolution.ONE_DAY]: {
     interval: "30m",
     limit: 48,
   },
-  [Dimension.ONE_WEEK]: {
+  [Resolution.ONE_WEEK]: {
     interval: "4h",
     limit: 42,
   },
-  [Dimension.ONE_MONTH]: {
+  [Resolution.ONE_MONTH]: {
     interval: "12h",
     limit: 62,
   },
-  [Dimension.ONE_YEAR]: {
+  [Resolution.ONE_YEAR]: {
     interval: "1w",
     limit: 52,
   },
-  [Dimension.ALL]: {
+  [Resolution.ALL]: {
     interval: "1w",
     limit: 100,
   },
 };
 
-export const DIMENSION_MAP_LOW_RES = {
-  [Dimension.ONE_DAY]: {
+export const RESOLUTION_MAP_LOW_RES = {
+  [Resolution.ONE_DAY]: {
     interval: "1h",
     limit: 24,
   },
 };
 
-export const DIMENSION_TIMEFRAME_MTS_MAP = {
-  [Dimension.ONE_DAY]: 1_800_000,
-  [Dimension.ONE_WEEK]: 604_800_000,
-  [Dimension.ONE_MONTH]: 14_400_000,
-  [Dimension.ONE_YEAR]: 201_600_000,
-  [Dimension.ALL]: 201_600_000,
+export const RESOLUTION_TIMEFRAME_MTS_MAP = {
+  [Resolution.ONE_DAY]: 1_800_000,
+  [Resolution.ONE_WEEK]: 604_800_000,
+  [Resolution.ONE_MONTH]: 14_400_000,
+  [Resolution.ONE_YEAR]: 201_600_000,
+  [Resolution.ALL]: 201_600_000,
 };
 
 /**
@@ -212,7 +212,6 @@ export const DIMENSION_TIMEFRAME_MTS_MAP = {
  *    }
  * }
  */
-
 export const ACADEMY = {
   [AcademyCategory.CRYPTO]: {
     [AcademyTopic.CRYPTO__INTRO]: [

@@ -1,108 +1,89 @@
 <template>
-  <div
-    style="
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      margin-top: 80px !important;
-      max-width: 1140px;
-      justify-content: center;
-      margin-left: auto;
-      margin-right: auto;
-    "
-    class="row px-lg-5"
-  >
-    <h1 class="my-3 px-lg-0">
-      <img
-        class="logo"
-        :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"
-      />
-      {{ symbol | symbol }}
-      <span class="text-muted name">{{ this.coin.name }}</span>
-      <i
-        @click="toggleFavorite()"
-        class="mdi ml-4 favorite"
-        :class="[favoriteClasses]"
-      />
-    </h1>
+  <LoadingStateWrapper :state="state">
     <div
-      class="bg-white p-0"
       style="
-        box-shadow: 0 1rem 1.5rem rgba(95, 95, 95, 0.13);
-        border: 0 solid #f6f6f6;
-        border-radius: 0.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-top: 80px !important;
+        max-width: 1140px;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
       "
+      class="row px-lg-5"
     >
-      <div>
+      <h1 class="my-3 px-lg-0">
+        <img
+          class="logo"
+          :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"
+        />
+        {{ symbol | symbol }}
+        <span class="text-muted name">{{ coinName }}</span>
+        <i
+          @click="toggleFavorite()"
+          class="mdi ml-4 favorite"
+          :class="[favoriteClasses]"
+        />
+      </h1>
+      <div
+        class="bg-white p-0"
+        style="
+          box-shadow: 0 1rem 1.5rem rgba(95, 95, 95, 0.13);
+          border: 0 solid #f6f6f6;
+          border-radius: 0.25rem;
+        "
+      >
         <div>
-          <nice-price
-            v-if="price"
-            style="font-size: 20px"
-            :value="price"
-            currency="eur"
-            class="px-3"
-          />
+          <div>
+            <NicePrice
+              style="font-size: 20px"
+              :value="currentPrice"
+              currency="eur"
+              class="px-3"
+            />
+          </div>
+        </div>
+        <MainChart :series="series" :mtsPerTimestep="mtsPerCandle" />
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 28px;
+            max-width: 768px;
+            margin: 0 auto;
+          "
+        >
+          <b-button-group class="flex-grow-1 pb-3">
+            <b-button
+              v-for="(resolution, i) in resolutions"
+              :key="i"
+              class="min-w-20 dim-btn"
+              :class="{ 'active-resolution': resolution === activeResolution }"
+              @click="setResolution(resolution)"
+            >
+              {{ $t(`resolution.${resolution}`) }}
+            </b-button>
+          </b-button-group>
         </div>
       </div>
-      <main-chart
-        v-if="seriesLoaded"
-        :series="series"
-        :mtsPerTimestep="mtsPerCandle"
-      />
-      <div
-        v-else
-        class="
-          d-flex
-          justify-content-center
-          align-items-center
-          position-relative
-        "
-        style="height: 300px"
-      >
-        <b-spinner
-          class="position-absolute"
-          variant="primary"
-          style="width: 5rem; height: 5rem"
-        ></b-spinner>
-      </div>
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          padding: 0 28px;
-          max-width: 768px;
-          margin: 0 auto;
-        "
-      >
-        <b-button-group class="flex-grow-1 pb-3">
-          <b-button
-            v-for="(dimension, i) in dimensions"
-            :key="i"
-            class="min-w-20 dim-btn"
-            :class="{ 'active-dimension': dimension === activeDimension }"
-            @click="setDimension(dimension)"
-          >
-            {{ $t(`dimension.${dimension}`) }}
-          </b-button>
-        </b-button-group>
-      </div>
+
+      <b-row class="no-padding mt-4">
+        <b-col cols="12" md="6">
+          <h2>{{ $t("wallet.user_balance") }}</h2>
+          <UserCreditCard />
+        </b-col>
+        <b-col cols="12" md="6">
+          <h2>{{ $t("wallet.wallet") }}</h2>
+          <WalletCoinQuantityCard :symbol="symbol" />
+        </b-col>
+      </b-row>
+
+      <TradingBuyView :price="currentPrice" />
+      <!-- <TransactionCard :symbol="symbol" /> -->
     </div>
-
-    <b-row class="no-padding mt-4">
-      <b-col cols="12" md="6">
-        <h2>{{ $t("wallet.user_balance") }}</h2>
-        <UserCreditCard />
-      </b-col>
-      <b-col cols="12" md="6">
-        <h2>{{ $t("wallet.wallet") }}</h2>
-        <WalletCoinQuantityCard :symbol="symbol" />
-      </b-col>
-    </b-row>
-
-    <TradingBuyView :price="price" />
-    <TransactionCard :symbol="symbol" />
-  </div>
+  </LoadingStateWrapper>
 </template>
 
 <style lang="scss" scoped>
@@ -140,7 +121,7 @@
   outline: none !important;
 }
 
-.active-dimension {
+.active-resolution {
   background-color: #eff2f760 !important;
   color: var(--bs-gray-900) !important;
 }
@@ -154,13 +135,14 @@ span.name {
 </style>
 
 <script>
-import { Dimension } from "../enums";
-import { DIMENSION_TIMEFRAME_MTS_MAP } from "../constants";
-import { mapGetters } from "vuex";
+import { ComponentState, Resolution } from "../enums";
+import { dispatchAll } from "../utils";
+import { RESOLUTION_TIMEFRAME_MTS_MAP } from "../constants";
+import LoadingStateWrapper from "../components/utils/LoadingStateWrapper.vue";
 import MainChart from "../components/MainChart.vue";
 import TransactionCard from "../components/TransactionCard.vue";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
-import TradingBuyView from "./TradingBuyView.vue";
+import TradingBuyView from "../components/TradingCard.vue";
 import UserCreditCard from "../components/UserCreditCard.vue";
 import WalletCoinQuantityCard from "../components/WalletCoinQuantityCard.vue";
 
@@ -170,6 +152,7 @@ export default {
   },
 
   components: {
+    LoadingStateWrapper,
     MainChart,
     TransactionCard,
     PaddedLayout,
@@ -180,86 +163,77 @@ export default {
 
   data() {
     return {
+      state: ComponentState.LOADING,
+
       lineColor: "#f1b44c",
-      hasLoadedSeries: false,
-      hasLoadedPrice: false,
-      activeDimension: Dimension.ONE_DAY,
-      dimensions: Object.values(Dimension),
+      activeResolution: Resolution.ONE_DAY,
+      resolutions: Object.values(Resolution),
     };
   },
 
   computed: {
-    ...mapGetters("coinDetails", ["getSeries"]),
-
-    series() {
-      return this.getSeries(this.symbol, this.activeDimension);
+    coin() {
+      return this.$store.getters["coins/bySymbol"](this.symbol);
     },
 
-    seriesLoaded() {
-      return this.series.length > 0;
-    },
-
-    price() {
-      if (this.seriesLoaded) {
-        return this.series[this.series.length - 1][1];
-      }
-      return 0;
-    },
-
-    mtsPerCandle() {
-      return DIMENSION_TIMEFRAME_MTS_MAP[this.activeDimension];
+    coinName() {
+      return this.coin == null ? "" : this.coin.name;
     },
 
     balance() {
-      if (!this.seriesLoaded) return 0;
-
-      return this.$store.getters["coinIndex/all"]().find(
-        (x) => x.symbol === this.symbol
-      ).user_quantity;
+      if (this.coin == null) return 0;
+      return this.coin.user_quantity;
     },
 
-    coin() {
-      return this.$store.getters["coinIndex/all"]().find(
-        (x) => x.symbol === this.symbol
+    prices() {
+      const prices = this.$store.getters["prices/detailedByResolution"](
+        this.activeResolution
       );
+      return prices == null ? [] : prices.data;
     },
 
-    isFavorite() {
-      return this.coin == null ? false : this.coin.is_favorite;
+    currentPrice() {
+      if (this.prices.length === 0) return 0;
+      return this.prices[this.prices.length - 1][1];
+    },
+
+    series() {
+      const series = this.$store.getters["prices/detailedByResolution"](
+        this.activeResolution
+      );
+      return series == null ? [{ data: [] }] : [series];
+    },
+
+    mtsPerCandle() {
+      return RESOLUTION_TIMEFRAME_MTS_MAP[this.activeResolution];
     },
 
     favoriteClasses() {
-      return this.isFavorite ? "mdi-heart text-danger" : "mdi-heart-outline";
-    },
-
-    id() {
-      return this.coin.id;
+      if (this.coin == null || !this.coin.is_favorite) {
+        return "mdi-heart-outline";
+      }
+      return "mdi-heart text-danger";
     },
   },
 
-  mounted() {
-    this.$store.dispatch("coinDetails/subscribe", {
-      symbol: this.symbol,
-      dimension: this.activeDimension,
-    });
-    this.$store.dispatch("coinIndex/fetchSymbols");
+  async mounted() {
+    this.state = await dispatchAll(this, "coins/fetchAll", [
+      "prices/fetchDetailedForSymbol",
+      this.symbol,
+    ]);
   },
 
   methods: {
-    setDimension(dimension) {
-      this.activeDimension = dimension;
-      this.$store.dispatch("coinDetails/subscribe", {
-        symbol: this.symbol,
-        dimension: this.activeDimension,
-      });
+    toggleFavorite() {
+      if (this.coin.is_favorite) {
+        this.$store.dispatch("coins/removeFavorite", this.coin.symbol);
+      } else {
+        this.$store.dispatch("coins/addFavorite", this.coin.symbol);
+      }
     },
 
-    toggleFavorite() {
-      if (this.isFavorite) {
-        this.$store.dispatch("coinIndex/removeFavorite", this.id);
-      } else {
-        this.$store.dispatch("coinIndex/addFavorite", this.id);
-      }
+    setResolution(resolution) {
+      this.activeResolution = resolution;
     },
   },
 };

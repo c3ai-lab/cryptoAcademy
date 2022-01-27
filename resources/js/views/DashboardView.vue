@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-12 mb-4">
         <h1>{{ $t("dashboard.title") }}</h1>
-        <returns-chart />
         <PortfolioReturnsCard />
       </div>
       <div class="col-lg-6 mb-4">
@@ -17,14 +16,10 @@
           </p>
         </div>
         <div v-else>
-          <CoinCardRealData
+          <CoinCard
             v-for="coin in favoriteCoins"
             :key="coin.id"
-            :id="coin.id"
-            :name="coin.name"
             :symbol="coin.symbol"
-            :series="coin.series"
-            :isFavorite="coin.is_favorite"
           />
         </div>
       </div>
@@ -47,11 +42,10 @@
 </template>
 
 <script>
-import PortfolioReturnsCard from "../components/PortfolioReturnsCard.vue";
-import CoinCardRealData from "../components/CoinCardRealData.vue";
+import CoinCard from "../components/CoinCard.vue";
 import NewsCard from "../components/NewsCard.vue";
 import WelcomeModal from "../components/WelcomeModal.vue";
-import ReturnsChart from "../components/ReturnsChart.vue";
+import PortfolioReturnsCard from "../components/PortfolioReturnsCard.vue";
 
 import { Coin } from "../enums";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
@@ -63,9 +57,8 @@ export default {
     PaddedLayout,
     WelcomeModal,
     PortfolioReturnsCard,
-    CoinCardRealData,
+    CoinCard,
     NewsCard,
-    ReturnsChart
   },
 
   data() {
@@ -78,9 +71,11 @@ export default {
     latestNews() {
       return this.$store.getters["news/latest"](3);
     },
+
     favoriteCoins() {
-      return this.$store.getters["coinIndex/favorites"]();
+      return this.$store.getters["coins/favorites"]();
     },
+
     isFirstVisit() {
       return this.$store.getters["user/getUser"]().is_first_visit;
     },
@@ -88,7 +83,7 @@ export default {
 
   created() {
     this.$store.dispatch("news/fetchLatest");
-    this.$store.dispatch("coinIndex/fetchSymbols");
+    this.$store.dispatch("coins/fetchAll");
   },
 };
 </script>

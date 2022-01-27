@@ -46,6 +46,12 @@ Vue.filter("symbol", function (value) {
   return value == null ? "" : value.split("USDT")[0];
 });
 
+Vue.filter("change", function (value) {
+  if (value == null) return "-";
+  if (value >= 0) return `+${value.toFixed(2)}`;
+  return value.toFixed(2);
+});
+
 Vue.filter("crypto", function (value) {
   if (typeof value !== "number") {
     return value;

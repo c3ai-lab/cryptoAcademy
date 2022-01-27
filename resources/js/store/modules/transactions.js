@@ -98,7 +98,7 @@ const actions = {
       dispatch("fetchTransactions");
       dispatch("user/refreshUserData", null, { root: true });
       dispatch("wallets/fetchAll", null, { root: true });
-      dispatch("coinIndex/fetchSymbols", null, { root: true });
+      dispatch("coins/fetchAll", null, { root: true });
       return true;
     }
     return false;
@@ -124,7 +124,7 @@ const actions = {
       dispatch("fetchTransactions");
       dispatch("user/refreshUserData", null, { root: true });
       dispatch("wallets/fetchAll", null, { root: true });
-      dispatch("coinIndex/fetchSymbols", null, { root: true });
+      dispatch("coins/fetchAll", null, { root: true });
       return true;
     }
     return false;

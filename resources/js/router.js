@@ -8,7 +8,6 @@ import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
 import TradingIndexView from "./views/TradingIndexView.vue";
 import TradingShowView from "./views/TradingShowView.vue";
-import TradingBuyView from "./views/TradingBuyView.vue";
 import ResetPasswordView from "./views/ResetPasswordView.vue";
 import DashboardView from "./views/DashboardView.vue";
 import AcademyView from "./views/AcademyView.vue";
@@ -18,7 +17,7 @@ import NewPasswordView from "./views/NewPasswordView.vue";
 import DeleteAccountView from "./views/DeleteAccountView.vue";
 import WalletsView from "./views/WalletsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
-import LandingpageView from "./views/LandingpageView.vue";
+import LandingPageView from "./views/LandingPageView.vue";
 
 Vue.use(VueRouter);
 
@@ -132,25 +131,17 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/trading/:symbol/buy",
-      name: "trading.buy",
-      component: TradingBuyView,
-      props: true,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
       path: "/",
       name: "landing",
-      component: LandingpageView,
+      component: LandingPageView,
     },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   const sessionExpiresAt = store.getters["user/sessionExpiresAt"]();
-  const refreshData = () => !["login", "register", "reset-password"].includes(to.name);
+  const refreshData = () =>
+    !["login", "register", "reset-password"].includes(to.name);
   const refreshToken = () =>
     sessionExpiresAt <
     new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000;
