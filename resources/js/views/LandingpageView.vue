@@ -39,22 +39,17 @@
       </div>
       <div class="my-5"></div>
       <div class="content-box row">
-        <div class="d-flex col-6 col-md-3 justify-content-center">
-          <img src="/images/landingpage/Login_iPhone.png" class="wide" />
+        <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
+          <img src="/images/landingpage/login_registrierung.png" class="full" />
         </div>
-        <div class="d-flex col-6 col-md-3 justify-content-center">
-          <img src="/images/landingpage/wallet_iPhone.png" class="wide" />
-        </div>
-        <div class="col-12 col-md-6 mt-3 mt-md-0 text">
+        <div class="col-12 col-md-4 text">
           <h2>Kostenlose Registrierung</h2>
-          <p>Melde dich noch heute an, kostenfrei und risikolos.</p>
-          <br class="d-md-block d-none" />
-          <h2>Wallet</h2>
           <p>
-            Analysiere deine Gewinne und Verluste in der Wallet-Übersicht und
-            finde heraus welche Währungen deine Champions sind und welche dich
-            ärmer machen!
+           Melde dich noch heute an, kostenfrei und risikolos.
           </p>
+        </div>
+        <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
+          <img src="/images/landingpage/login_registrierung.png" class="full" />
         </div>
       </div>
 
@@ -70,6 +65,23 @@
         </div>
         <div class="d-flex col-md-8 col-12 justify-content-center">
           <img src="/images/landingpage/trading.png" class="full" />
+        </div>
+      </div>
+
+      <div class="content-box row">
+        <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
+          <img src="/images/landingpage/wallet.png" class="full" />
+        </div>
+        <div class="col-12 col-md-4 text">
+          <h2>Wallet</h2>
+          <p>
+           Analysiere deine Gewinne und Verluste in der Wallet-Übersicht und
+            finde heraus welche Währungen deine Champions sind und welche dich
+            ärmer machen!
+          </p>
+        </div>
+        <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
+          <img src="/images/landingpage/wallet.png" class="full" />
         </div>
       </div>
     </PaddedLayout>
@@ -125,7 +137,7 @@
 
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/Leaderboard_MB.png" class="full" />
+          <img src="/images/landingpage/Leaderboard.png" class="full" />
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Leaderboard</h2>
@@ -135,14 +147,14 @@
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/Leaderboard_MB.png" class="full" />
+          <img src="/images/landingpage/Leaderboard.png" class="full" />
         </div>
       </div>
     </PaddedLayout>
     <div class="footer-part px-2 px-md-0">
       <PaddedLayout>
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 col-md-8">
             <h2>Fragen oder Anmerkungen?</h2>
             <p>
               Nimm jetzt Kontakt zu uns auf, wenn du Fragen oder konstruktives
@@ -158,7 +170,7 @@
           <hr />
           <div class="col-md-6 col-12">
             <p class="footer-legal">
-              <a href="https://github.com/c3ai-lab/cryptoAcademy">
+              <a target="_blank" href="https://github.com/c3ai-lab/cryptoAcademy">
                 Zum GitHub-Projekt
               </a>
             </p>
@@ -187,6 +199,11 @@ export default {
 
 
 <style lang="scss" scoped>
+p, h3
+{
+  text-align: justify!important;
+}
+
 .header {
   color: rgb(85, 110, 230);
   position: relative;
@@ -353,12 +370,9 @@ export default {
     color: white !important;
   }
 
-  .footer-legal {
-    text-align: left;
-  }
 
   .footer-copyright {
-    text-align: right;
+    text-align: right!important;
   }
 
   hr {
