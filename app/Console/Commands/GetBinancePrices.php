@@ -7,10 +7,9 @@ use App\Models\Resolution;
 use App\Models\Symbol;
 use App\Service\BinanceApiService;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class GetBinancePrices extends Command
+class GetBinancePrices
 {
   /**
    * The name and signature of the console command.
@@ -37,7 +36,6 @@ class GetBinancePrices extends Command
    */
   public function __construct()
   {
-    parent::__construct();
     $this->api = new BinanceApiService();
     $this->resolutions = Resolution::all();
     $this->symbols = Symbol::all();

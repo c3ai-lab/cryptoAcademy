@@ -6,6 +6,7 @@ use Adrifkat\Cryptopanic\Http\Response\PostsResponse;
 use App\Models\NewsFeed;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\GetBinancePrices;
 
 class Kernel extends ConsoleKernel
 {
@@ -49,6 +50,12 @@ class Kernel extends ConsoleKernel
         sleep(6);
       }
     })->everyMinute();
+
+    $schedule->call(function() {
+      $command = new GetBinancePrices();
+      $command->handle();
+
+    })->everyFiveMinutes();
   }
 
   /**
