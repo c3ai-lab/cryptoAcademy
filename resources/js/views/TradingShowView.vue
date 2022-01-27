@@ -201,7 +201,7 @@ export default {
       const series = this.$store.getters["prices/detailedByResolution"](
         this.activeResolution
       );
-      return series == null ? [{ data: [] }] : [series];
+      return series == null ? [] : series.data;
     },
 
     mtsPerCandle() {
