@@ -75,21 +75,26 @@ class GetBinancePrices extends Command
 
   protected function makeRequest($endtime, $symbolId, $apiSymbol, $interval, $limit)
   {
+    $_usdt = $this->api->getKlines($apiSymbol, $interval, $limit, $endtime);
+    $euro_usdt = $this->api->getKlines("EURUSDT", $interval, $limit, $endtime);
+
+    $this->api->getKlines($apiSymbol, $interval, $limit, $endtime);
     return $this->convertCandlesToPriceModelData(
       $symbolId,
       $interval,
-      $this->api->getKlines($apiSymbol, $interval, $limit, $endtime)
+      $_usdt,
+      $euro_usdt
     );
   }
 
-  protected function convertCandlesToPriceModelData($symbolId, $interval, $candles)
+  protected function convertCandlesToPriceModelData($symbolId, $interval, $candles, $candlesEURUSDT)
   {
     $results = [];
     foreach ($candles as $timestamp => $data) {
       $results[] = [
         'symbol_id' => $symbolId,
         'interval' => $interval,
-        'value' => $data['close'],
+        'value' => $data['close'] / $candlesEURUSDT[$timestamp]['close'],
         'timestamp' => $timestamp,
       ];
     }
