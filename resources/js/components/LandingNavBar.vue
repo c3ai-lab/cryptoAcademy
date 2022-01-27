@@ -6,11 +6,11 @@
         <div class="d-none d-lg-block col-2">
           <a href="/" class="logo">
             <span>
-              <img src="/images/cryptocademy.svg" style="width: 100%" />
+              <img src="/images/cryptocademy.svg" style="width: 100%"/>
             </span>
           </a>
         </div>
-        <div class="d-block d-lg-none col-6" >
+        <div class="d-block d-lg-none col-6">
           <a href="/" class="logo">
             <span>
               <img
@@ -21,16 +21,12 @@
             </span>
           </a>
         </div>
-<div class="d-none d-lg-block col-4"></div>
-       
+        <div class="d-none d-lg-block col-4"></div>
+
         <div class="d-flex p-1 justify-content-end col-6">
-          <router-link
-            to="login"
-          >
-            <button class="btn btn-primary">
-              {{ $t("common.get_started") }}
-            </button>
-          </router-link>
+          <a class="btn btn-primary" href="/login">
+            {{ $t("common.get_started") }}
+          </a>
         </div>
       </div>
     </div>

@@ -11,11 +11,9 @@
               persönliche Erfolgsstrategie, um am echten Markt bestehen zu
               können!
             </h3>
-            <router-link to="register">
-              <button class="btn btn-light text-primary btn-cta">
-                {{ $t("auth.register_now") }}
-              </button>
-            </router-link>
+            <a class="btn btn-light text-primary btn-cta" href="/register">
+              {{ $t("auth.register_now") }}
+            </a>
           </div>
         </div>
       </div>
@@ -31,25 +29,24 @@
           realistische Handelsgebühren, beobachte deinen Investitionserfolg und
           versuche mit deiner Strategie auf den Mond zu kommen!
         </p>
-        <router-link to="register">
-          <button class="btn btn-primary">
-            {{ $t("auth.register_now") }}
-          </button>
-        </router-link>
+
+        <a class="btn btn-primary" href="/register">
+          {{ $t("auth.register_now") }}
+        </a>
       </div>
       <div class="my-5"></div>
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/login_registrierung.png" class="full" />
+          <img src="/images/landingpage/login_registrierung.png" class="full"/>
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Kostenlose Registrierung</h2>
           <p>
-           Melde dich noch heute an, kostenfrei und risikolos.
+            Melde dich noch heute an, kostenfrei und risikolos.
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/login_registrierung.png" class="full" />
+          <img src="/images/landingpage/login_registrierung.png" class="full"/>
         </div>
       </div>
 
@@ -64,24 +61,24 @@
           </p>
         </div>
         <div class="d-flex col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/trading.png" class="full" />
+          <img src="/images/landingpage/trading.png" class="full"/>
         </div>
       </div>
 
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/wallet.png" class="full" />
+          <img src="/images/landingpage/wallet.png" class="full"/>
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Wallet</h2>
           <p>
-           Analysiere deine Gewinne und Verluste in der Wallet-Übersicht und
+            Analysiere deine Gewinne und Verluste in der Wallet-Übersicht und
             finde heraus welche Währungen deine Champions sind und welche dich
             ärmer machen!
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/wallet.png" class="full" />
+          <img src="/images/landingpage/wallet.png" class="full"/>
         </div>
       </div>
     </PaddedLayout>
@@ -95,11 +92,9 @@
             </h3>
           </div>
           <div class="d-flex col-md-4 col-12 justify-content-center my-3">
-            <router-link to="register">
-              <button class="btn btn-light text-primary btn-cta">
-                {{ $t("auth.register_now") }}
-              </button>
-            </router-link>
+            <a class="btn btn-light text-primary btn-cta" href="/register">
+              {{ $t("auth.register_now") }}
+            </a>
           </div>
         </div>
       </PaddedLayout>
@@ -107,7 +102,7 @@
     <PaddedLayout>
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/dashboard.png" class="full" />
+          <img src="/images/landingpage/dashboard.png" class="full"/>
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Dashboard</h2>
@@ -117,7 +112,7 @@
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/dashboard.png" class="full" />
+          <img src="/images/landingpage/dashboard.png" class="full"/>
         </div>
       </div>
 
@@ -131,13 +126,13 @@
           </p>
         </div>
         <div class="d-flex col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/academy.png" class="full" />
+          <img src="/images/landingpage/academy.png" class="full"/>
         </div>
       </div>
 
       <div class="content-box row">
         <div class="d-md-flex d-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/Leaderboard.png" class="full" />
+          <img src="/images/landingpage/Leaderboard.png" class="full"/>
         </div>
         <div class="col-12 col-md-4 text">
           <h2>Leaderboard</h2>
@@ -147,7 +142,7 @@
           </p>
         </div>
         <div class="d-flex d-md-none col-md-8 col-12 justify-content-center">
-          <img src="/images/landingpage/Leaderboard.png" class="full" />
+          <img src="/images/landingpage/Leaderboard.png" class="full"/>
         </div>
       </div>
     </PaddedLayout>
@@ -161,13 +156,13 @@
               Feedback zu unserer CryptoCademy-Anwendung hast. Melde dich dafür
               per Mail an die
               <strong
-                ><a href="mailto:moin@cryptocademy.app"
-                  >info@cryptocademy.app</a
-                ></strong
+              ><a href="mailto:moin@cryptocademy.app"
+              >info@cryptocademy.app</a
+              ></strong
               >.
             </p>
           </div>
-          <hr />
+          <hr/>
           <div class="col-md-6 col-12">
             <p class="footer-legal">
               <a target="_blank" href="https://github.com/c3ai-lab/cryptoAcademy">
@@ -199,9 +194,8 @@ export default {
 
 
 <style lang="scss" scoped>
-p, h3
-{
-  text-align: justify!important;
+p, h3 {
+  text-align: justify !important;
 }
 
 .header {
@@ -211,8 +205,8 @@ p, h3
       90deg,
       rgba(85, 110, 230, 1),
       rgba(85, 110, 230, 0)
-    ),
-    url("/images/landingpage/Header_2.jpg") no-repeat scroll;
+  ),
+  url("/images/landingpage/Header_2.jpg") no-repeat scroll;
   background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -232,6 +226,7 @@ p, h3
     margin-bottom: 20px;
     font-size: 1.2rem;
   }
+
   color: white;
   padding: 10% 0;
   font-size: 14pt;
@@ -274,6 +269,7 @@ p, h3
     h1 {
       font-size: 2rem;
     }
+
     color: white;
     padding: 10% 0;
     font-size: 12pt;
@@ -338,6 +334,7 @@ p, h3
     line-height: 1.8 !important;
     text-align: left;
   }
+
   .row {
     display: flex;
     align-items: center;
@@ -372,7 +369,7 @@ p, h3
 
 
   .footer-copyright {
-    text-align: right!important;
+    text-align: right !important;
   }
 
   hr {

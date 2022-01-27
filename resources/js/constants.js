@@ -116,10 +116,7 @@ export const APEXCHART_OPTIONS = {
   chart: {
     type: "",
     height: 250,
-    toolbar: "false",
-
     toolbar: false,
-
     defaultLocale: "de",
     locales: APEXCHART_LOCALES,
   },

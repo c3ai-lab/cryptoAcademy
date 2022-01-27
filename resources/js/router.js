@@ -91,7 +91,7 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/",
+      path: "/dashboard",
       name: "dashboard",
       component: DashboardView,
       meta: {
@@ -141,7 +141,7 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/landing",
+      path: "/",
       name: "landing",
       component: LandingpageView,
     },
@@ -150,7 +150,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const sessionExpiresAt = store.getters["user/sessionExpiresAt"]();
-  const refreshData = () => !["login", "register"].includes(to.name);
+  const refreshData = () => !["login", "register", "reset-password"].includes(to.name);
   const refreshToken = () =>
     sessionExpiresAt <
     new Date().getTime() + SESSION_REFRESH_AFTER_MINUTES * 60 * 1000;

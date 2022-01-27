@@ -16,8 +16,6 @@ RUN set -ex; \
 
 COPY . /var/www/html/
 
-RUN ls -la /var/www/html/
-
 # Optimizing
 RUN php artisan optimize
 
