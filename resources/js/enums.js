@@ -21,7 +21,7 @@ export const Coin = {
   ETH: "ETH",
 };
 
-export const Dimension = {
+export const Resolution = {
   ONE_HOUR: "1H",
   ONE_DAY: "1D",
   ONE_WEEK: "1W",

@@ -24,10 +24,12 @@ export const enumKeyToRouteParam = (key) =>
 export const routeParamToEnumKey = (key) =>
   key.toUpperCase().replaceAll("-", "_");
 
-// not declared as arrow function to inherit "this" from the calling component
 export const dispatchAll = async (component, ...actions) => {
   const results = await Promise.all(
-    actions.map((v) => component.$store.dispatch(v))
+    actions.map((v) => {
+      if (typeof v === "string") return component.$store.dispatch(v);
+      else return component.$store.dispatch(v[0], v[1]);
+    })
   );
   return results.filter((v) => v === false).length === 0
     ? ComponentState.READY

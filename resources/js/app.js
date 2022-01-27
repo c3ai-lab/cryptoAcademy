@@ -59,8 +59,6 @@ import LoginLayout from "./layouts/LoginLayout.vue";
 import MainLayout from "./layouts/MainLayout.vue";
 import LandingLayout from "./layouts/LandingLayout.vue";
 
-store.dispatch("coinDetails/init");
-
 const app = new Vue({
   el: "#app",
   render: (h) => {
