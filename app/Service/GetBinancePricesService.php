@@ -7,7 +7,6 @@ use App\Models\Resolution;
 use App\Models\Symbol;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use function collect;
 
 class GetBinancePricesService
 {

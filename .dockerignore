@@ -9,7 +9,6 @@
 **/.styleci.yml
 **/*.md
 **/composer-exec
-**/composer.json
 **/composer.lock
 **/npm-exec
 **/package-lock.json
