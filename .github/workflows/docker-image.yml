@@ -25,6 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Migrate
+        run: php artisan:migrate
+
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
 
