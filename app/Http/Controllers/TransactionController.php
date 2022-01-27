@@ -7,7 +7,6 @@ use App\Http\Resources\TransactionResource;
 use App\Models\Symbol;
 use App\Models\TransactionModel;
 use App\Service\BinanceApiService;
-use App\Service\EcbExchangeRatesApiService;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -55,7 +54,7 @@ class TransactionController extends Controller
         $user->balance = $balance;
         $user->save();
 
-        return response()->json(["quantity"=> $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
+        return response()->json(["quantity" => $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
       } else {
         return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_USER_BALANCE], 400);
       }
@@ -80,25 +79,17 @@ class TransactionController extends Controller
       return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_SYMBOL_AMOUNT], 400);
     }
 
-<<<<<<< HEAD
-    $binanceService = new BinanceApiService();
-    $this->symbolPrice = $binanceService->getPriceOfSymbol($request->symbol);
-    $this->exchangeRate = $binanceService->getPriceOfEuroToUsd();
-
-    $user->balance = $user->balance + $this->symbolPrice / $this->exchangeRate * $request->quantity;
-=======
-    $bianceService = new BianceApiService();
+    $bianceService = new BinanceApiService();
     $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
     $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
-    $total  = $this->symbolPrice / $this->exchangeRate * $request->quantity;
+    $total = $this->symbolPrice / $this->exchangeRate * $request->quantity;
     $user->balance = $user->balance + $total;
->>>>>>> main
     $user->save();
 
     try {
       $this->createTransaction($request, TransactionModel::ACTION_SELL);
 
-      return response()->json(["quantity"=> $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
+      return response()->json(["quantity" => $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
     } catch (\Exception $e) {
       return response($e->getMessage(), 500);
     }

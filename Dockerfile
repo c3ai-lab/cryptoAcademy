@@ -14,7 +14,6 @@ RUN set -ex; \
         echo 'date.timezone = "'${TZ}'"'; \
     } > $PHP_INI_DIR/php.ini
 
-CMD ls -la .
 COPY . /var/www/html/
 
 # Optimizing
