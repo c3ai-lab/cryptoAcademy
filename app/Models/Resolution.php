@@ -18,7 +18,7 @@ class Resolution extends Model
 
     public static function forIndex()
     {
-      return self::where('dimension', self::LOW_RES_NAME)->get();
+      return self::where('dimension', self::LOW_RES_NAME)->first();
     }
 
     public static function forBinance()

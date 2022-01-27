@@ -91,12 +91,14 @@ class GetBinancePrices extends Command
   {
     $results = [];
     foreach ($candles as $timestamp => $data) {
-      $results[] = [
-        'symbol_id' => $symbolId,
-        'interval' => $interval,
-        'value' => $data['close'] / $candlesEURUSDT[$timestamp]['close'],
-        'timestamp' => $timestamp,
-      ];
+      if(array_key_exists($timestamp, $candlesEURUSDT)) {
+        $results[] = [
+          'symbol_id' => $symbolId,
+          'interval' => $interval,
+          'value' => $data['close'] / $candlesEURUSDT[$timestamp]['close'],
+          'timestamp' => $timestamp,
+        ];
+      }
     }
 
     return $results;
