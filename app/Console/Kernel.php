@@ -51,11 +51,11 @@ class Kernel extends ConsoleKernel
       }
     })->everyMinute();
 
-    $schedule->call(function() {
-      $command = new GetBinancePrices();
-      $command->handle();
-
-    })->everyFiveMinutes();
+//    $schedule->call(function() {
+//      $command = new GetBinancePrices();
+//      $command->handle();
+//
+//    })->everyFiveMinutes();
   }
 
   /**
