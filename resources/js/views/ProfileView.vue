@@ -105,6 +105,7 @@
                   label-for="old-password"
                 >
                   <b-form-input
+                    type="password"
                     v-model="changePasswordObj.oldPassword"
                     id="old-password"
                     minlength="6"
@@ -117,6 +118,7 @@
                   label-for="new-password"
                 >
                   <b-form-input
+                    type="password"
                     v-model="changePasswordObj.newPassword"
                     id="new-password"
                     minlength="6"
@@ -129,6 +131,7 @@
                   label-for="new-password2"
                 >
                   <b-form-input
+                    type="password"
                     v-model="changePasswordObj.newPassword2"
                     id="new-password2"
                     minlength="6"
