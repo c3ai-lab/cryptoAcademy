@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Validator;
 
@@ -67,14 +68,11 @@ class UserController extends Controller
     if ($validator->fails()) {
       return response()->json($validator->errors(), 400);
     }
-
+    $verification_code = Str::random(30);
     $user = User::create(array_merge(
       $validator->validated(),
-      ['password' => bcrypt($request->password), "balance" => User::INIT_BALANCE]
+      ['password' => bcrypt($request->password), "balance" => User::INIT_BALANCE, "verify_token" => $verification_code]
     ));
-
-    $verification_code = Str::random(30); //Generate verification code
-    DB::table('user_verifications')->insert(['user_id' => $user->id, 'token' => $verification_code]);
 
     event(new Registered($user));
 
@@ -110,7 +108,6 @@ class UserController extends Controller
   public function deleteCurrentUser()
   {
     $user = auth()->user();
-    $user->userVerification()->delete();
     $user->transactions()->delete();
     $user->favorites()->detach();
     User::find(auth()->user()->id)->delete();
@@ -121,7 +118,6 @@ class UserController extends Controller
   public function resetCurrentUser()
   {
     $user = auth()->user();
-    $user->userVerification()->delete();
     $user->transactions()->delete();
     $user->favorites()->detach();
     $user->balance = User::INIT_BALANCE;
@@ -167,23 +163,19 @@ class UserController extends Controller
 
   public function verifyUser($verification_code)
   {
-    $check = DB::table('user_verifications')->where('token', $verification_code)->first();
+    $loginurl = "/login";
+    $check = DB::table('users')->where('verify_token', $verification_code)->first();
 
     if (!is_null($check)) {
-      $user = User::find($check->user_id);
+      $user = User::find($check->id);
 
       if ($user->is_verified == 1) {
-        return response()->json([
-          'msgcode' => MessageCodes::ACCOUNT_ALREADY_VERIFIED
-        ]);
+        return Redirect::to($loginurl);
       }
 
-      $user->update(['is_verified' => 1, 'email_verified_at' => Carbon::now()]);
-      DB::table('user_verifications')->where('token', $verification_code)->delete();
+      $user->update(['is_verified' => 1, 'email_verified_at' => Carbon::now(), 'verify_token' => ""]);
 
-      return response()->json([
-        'msgcode' => MessageCodes::VERIFY_EMAIL_SUCCESS
-      ]);
+      return Redirect::to($loginurl);
     }
 
     return response()->json(['msgcode' => MessageCodes::VERIFY_EMAIL_FAIL], 400);

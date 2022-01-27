@@ -1,58 +1,78 @@
 <template>
   <div class="row">
     <div class="col-lg-12">
-      <div v-if="nonEmptyWallets.length === 0">
-        <p class="text-center">
-          {{ $t("wallet.all_wallets_empty") }}
-          <br />
-          <router-link to="trading">
-            {{ $t("wallet.buy_coins") }}
-          </router-link>
-        </p>
-      </div>
-
-      <div class="card" v-else>
-        <div class="card-body">
-          <b-table
-            responsive="sm"
-            :items="nonEmptyWallets"
-            :fields="fields"
-            :current-page="currentPage"
-            :sort-by.sync="sortBy"
-            :sort-desc.sync="sortDesc"
-          >
-            <template #cell(coin)="data">
-              <img
-                class="icon"
-                :src="`/images/coins/${data.value.symbol
-                  .replace('USDT', '')
-                  .toLowerCase()}.png`"
-              />
-              {{ data.value.name }}
-            </template>
-
-            <template #cell(value)="data">
-              {{ data.value | eur }}
-            </template>
-
-            <template #cell(quantity)="data">
-              {{ data.value | crypto }}
-            </template>
-          </b-table>
+      <LoadingStateWrapper :state="state" card>
+        <div v-if="nonEmptyWallets.length === 0">
+          <p class="text-center">
+            {{ $t("wallet.all_wallets_empty") }}
+            <br />
+            <router-link to="trading">
+              {{ $t("wallet.buy_coins") }}
+            </router-link>
+          </p>
         </div>
-      </div>
+
+        <div class="card" v-else>
+          <div class="card-body">
+            <b-table
+              responsive="sm"
+              :items="nonEmptyWallets"
+              :fields="fields"
+              :current-page="currentPage"
+              :sort-by.sync="sortBy"
+              :sort-desc.sync="sortDesc"
+            >
+              <template #cell(coin)="data">
+                <div
+                  class="clickable"
+                  @click="openTradingShowView(data.value.symbol)"
+                >
+                  <img
+                    class="icon"
+                    :src="`/images/coins/${data.value.symbol
+                      .replace('USDT', '')
+                      .toLowerCase()}.png`"
+                  />
+                  <span>
+                    <b>{{ data.value.symbol | symbol }}</b> &ndash;
+                    {{ data.value.name }}
+                  </span>
+                </div>
+              </template>
+
+              <template #cell(value)="data">
+                {{ data.value | eur }}
+              </template>
+
+              <template #cell(quantity)="data">
+                {{ data.value | crypto }}
+              </template>
+            </b-table>
+          </div>
+        </div>
+      </LoadingStateWrapper>
     </div>
   </div>
 </template>
 
 <script>
+import { ComponentState } from "../enums";
+import { dispatchAll } from "../utils";
+import LoadingStateWrapper from "../components/utils/LoadingStateWrapper.vue";
+
 export default {
   props: {
     wallets: Array,
   },
 
+  components: {
+    LoadingStateWrapper,
+  },
+
   data() {
     return {
+      state: ComponentState.LOADING,
+
       fields: [
         {
           key: "coin",
@@ -94,13 +114,27 @@ export default {
         }));
     },
   },
+
+  methods: {
+    openTradingShowView(symbol) {
+      this.$router.push({ name: "trading.show", params: { symbol: symbol } });
+    },
+  },
+
+  async created() {
+    this.state = await dispatchAll(this, "wallets/fetchAll");
+  },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 th.right,
 td.right {
   text-align: right;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .hidden-scroll {

@@ -21,10 +21,14 @@ class TransactionController extends Controller
    * @var float
    */
   private $symbolPrice;
+  /**
+   * @var float
+   */
+  private $quantity;
 
   public function index(Request $request)
   {
-    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id',"desc")->get());
+    return TransactionResource::collection(auth()->user()->transactions()->orderBy('id', "desc")->get());
   }
 
   public function buy(Request $request)
@@ -42,14 +46,16 @@ class TransactionController extends Controller
 
       $this->symbolPrice = $binanceService->getPriceOfSymbol($request->symbol);
       $this->exchangeRate = $binanceService->getPriceOfEuroToUsd();
+      $this->quantity = $request->quantity;
 
       if ($this->isUserBalanceSufficient()) {
         $this->createTransaction($request, TransactionModel::ACTION_BUY);
-        $balance = $user->balance - $this->symbolPrice / $this->exchangeRate * $request->quantity;
+        $total = $this->symbolPrice / $this->exchangeRate * $request->quantity;
+        $balance = $user->balance - $total;
         $user->balance = $balance;
         $user->save();
 
-        return response()->json([], 201);
+        return response()->json(["quantity"=> $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
       } else {
         return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_USER_BALANCE], 400);
       }
@@ -74,16 +80,25 @@ class TransactionController extends Controller
       return response()->json(["msgcode" => MessageCodes::INSUFFICIENT_SYMBOL_AMOUNT], 400);
     }
 
+<<<<<<< HEAD
     $binanceService = new BinanceApiService();
     $this->symbolPrice = $binanceService->getPriceOfSymbol($request->symbol);
     $this->exchangeRate = $binanceService->getPriceOfEuroToUsd();
 
     $user->balance = $user->balance + $this->symbolPrice / $this->exchangeRate * $request->quantity;
+=======
+    $bianceService = new BianceApiService();
+    $this->symbolPrice = $bianceService->getPriceOfSymbol($request->symbol);
+    $this->exchangeRate = $bianceService->getPriceOfEuroToUsd();
+    $total  = $this->symbolPrice / $this->exchangeRate * $request->quantity;
+    $user->balance = $user->balance + $total;
+>>>>>>> main
     $user->save();
 
     try {
       $this->createTransaction($request, TransactionModel::ACTION_SELL);
-      return response()->json([], 201);
+
+      return response()->json(["quantity"=> $this->quantity, "symbolprice" => $this->symbolPrice / $this->exchangeRate, "total" => $total]);
     } catch (\Exception $e) {
       return response($e->getMessage(), 500);
     }
@@ -112,7 +127,7 @@ class TransactionController extends Controller
 
   private function isUserBalanceSufficient(): bool
   {
-    return ($this->symbolPrice / $this->exchangeRate) <= auth()->user()->balance;
+    return ($this->symbolPrice / $this->exchangeRate * $this->quantity) <= auth()->user()->balance;
   }
 
   private function getCurrentSymbolAmount(string $symbol)

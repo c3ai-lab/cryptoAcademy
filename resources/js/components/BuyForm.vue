@@ -59,20 +59,13 @@
         </button>
       </div>
     </div>
-
-    <div v-if="buySuccessModal === true">
-      <BuySuccessModal v-on:close="buySuccessModal = false" />
-    </div>
   </div>
 </template>
 
 <script>
-import BuySuccessModal from "../components/BuySuccessModal.vue";
+import Swal from "sweetalert2";
 
 export default {
-  components: {
-    BuySuccessModal,
-  },
   props: ["price"],
 
   data() {
@@ -80,7 +73,6 @@ export default {
       quantity: 0.1,
 
       buyInProgress: false,
-      buySuccessModal: false,
     };
   },
 
@@ -100,9 +92,17 @@ export default {
       this.buyInProgress = false;
 
       if (success === true) {
-        this.buySuccessModal = true;
+        Swal.fire({
+          icon: "success",
+          title: this.$i18n.t("trade.buy_success_modal.title"),
+          confirmButtonColor: "#556ee6",
+        });
       } else {
-        alert("Buy failed!");
+        Swal.fire({
+          icon: "error",
+          title: this.$i18n.t("trade.buy_error_modal.title"),
+          confirmButtonColor: "#556ee6",
+        });
       }
     },
   },

@@ -1,49 +1,61 @@
 <template>
   <PaddedLayout>
-    <div class="row">
-      <p class="col col-md justify-content-center d-flex">
-        <button @click="clickHour()" class="btn btn-secondary">{{ $t("leaderboard.time.hour") }}</button>
-      </p>
-      <p class="col col-md justify-content-center d-flex">
-        <button @click="clickDay()" class="btn btn-secondary">{{ $t("leaderboard.time.day") }}</button>
-      </p>
-      <p class="col col-md justify-content-center d-flex">
-        <button @click="clickWeek()" class="btn btn-secondary">{{ $t("leaderboard.time.week") }}</button>
-      </p>
-      <p class="col col-md justify-content-center d-flex">
-        <button @click="clickYear()" class="btn btn-secondary">{{ $t("leaderboard.time.year") }}</button>
-      </p>
-      <p class="col col-md justify-content-center d-flex">
-        <button @click="clickAll()" class="btn btn-secondary">{{ $t("leaderboard.time.all") }}</button>
-      </p>
-    </div>
-    <div class="row">{{ $t("leaderboard.currentSelectedTime") }}: {{ $t(this.currentSelectedTime) }}
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <b-table
-              responsive="sm"
-              :items="highscoreUsers"
-              :fields="fields"
-              :current-page="currentPage"
-              :sort-by.sync="sortBy"
-              :sort-desc.sync="sortDesc"
-            >
-              <template #cell(growth)="data">
-                {{ data.value | eur }}
-              </template>
-              <template #cell(balance_eur)="data">
-                {{ data.value | eur }}
-              </template>
+    <h1>{{ $t("leaderboard.title") }}</h1>
 
-            </b-table>
+    <div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <p class="col col-md justify-content-center d-flex">
+              <button @click="clickHour()" class="btn">
+                {{ $t("leaderboard.time.hour") }}
+              </button>
+            </p>
+            <p class="col col-md justify-content-center d-flex">
+              <button @click="clickDay()" class="btn">
+                {{ $t("leaderboard.time.day") }}
+              </button>
+            </p>
+            <p class="col col-md justify-content-center d-flex">
+              <button @click="clickWeek()" class="btn">
+                {{ $t("leaderboard.time.week") }}
+              </button>
+            </p>
+            <p class="col col-md justify-content-center d-flex">
+              <button @click="clickYear()" class="btn">
+                {{ $t("leaderboard.time.year") }}
+              </button>
+            </p>
+            <p class="col col-md justify-content-center d-flex">
+              <button @click="clickAll()" class="btn">
+                {{ $t("leaderboard.time.all") }}
+              </button>
+            </p>
           </div>
+
+          <p>
+            {{ $t("leaderboard.currentSelectedTime") }}:<strong>
+              {{ $t(this.currentSelectedTime) }}</strong
+            >
+          </p>
+          <b-table
+            responsive="sm"
+            :items="highscoreUsers"
+            :fields="fields"
+            :current-page="currentPage"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+          >
+            <template #cell(growth)="data">
+              {{ data.value | eur }}
+            </template>
+            <template #cell(balance_eur)="data">
+              {{ data.value | eur }}
+            </template>
+          </b-table>
         </div>
       </div>
     </div>
-
   </PaddedLayout>
 </template>
 
@@ -59,7 +71,6 @@ export default {
     PaddedLayout,
   },
 
-
   data() {
     return {
       currentSelectedTime: "leaderboard.time.day",
@@ -71,13 +82,13 @@ export default {
         },
         {
           key: "growth",
-          label: "Zuwachs",
+          label: "Gewinn / Verlust",
           sortable: false,
           tdClass: "right",
         },
         {
           key: "balance_eur",
-          label: "Portfoliowert",
+          label: "Konto",
           sortable: false,
           tdClass: "right",
         },
@@ -119,3 +130,17 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss" scoped>
+.btn {
+  border-color: var(--bs-blue);
+  color: var(--bs-blue);
+  width: 100%;
+}
+button:focus {
+  background-color: var(--bs-blue);
+  border: unset;
+  color: white;
+}
+</style>

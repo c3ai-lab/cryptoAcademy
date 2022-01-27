@@ -60,12 +60,9 @@
 </template>
 
 <script>
-import SellSuccessModal from "../components/SellSuccessModal.vue";
+import Swal from "sweetalert2";
 
 export default {
-  components: {
-    SellSuccessModal,
-  },
   props: ["price"],
 
   data() {
@@ -96,9 +93,17 @@ export default {
       this.sellInProgress = false;
 
       if (success === true) {
-        this.sellSuccessModal = true;
+        Swal.fire({
+          icon: "success",
+          title: this.$i18n.t("trade.sell_success_modal.title"),
+          confirmButtonColor: "#556ee6",
+        });
       } else {
-        alert("Sell failed!");
+        Swal.fire({
+          icon: "error",
+          title: this.$i18n.t("trade.sell_error_modal.title"),
+          confirmButtonColor: "#556ee6",
+        });
       }
     },
   },

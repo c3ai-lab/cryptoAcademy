@@ -55,14 +55,14 @@ GROUP BY `transaction`
         $result = DB::select(DB::raw($queryNow), ["id" => $symbol_id])[0];
         $sell = array_key_exists("sell", $symbol) ? $symbol['sell'] : 0;
         $buy = array_key_exists("buy", $symbol) ? $symbol['buy'] : 0;
-        $portfolio += (float)$buy - (float)$sell * $this->symbolRate[$result->api_symbol] / $this->symbolRate["EURUSDT"];
+        $portfolio += ((float)$buy - (float)$sell) * $this->symbolRate[$result->api_symbol] / $this->symbolRate["EURUSDT"];
       }
       $portfolio = (float)$portfolio + (float)$arr[$user_id]["user"]["balance"];
 
       // TODO: portfolio - portfoliowert von vor uebergebenemZeitraum
       $tableArr[] = ["name" => $arr[$user_id]["user"]["name"], "growth" => $portfolio - User::INIT_BALANCE, "balance_eur" => $portfolio];
     }
-    return response()->json(array_slice($tableArr, 0, 3));
+    return response()->json(array_slice($tableArr, 0, 20));
   }
 
   private function getSymbolRate()

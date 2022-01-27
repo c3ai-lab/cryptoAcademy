@@ -5,7 +5,10 @@
     "save": "Speichern",
     "abort": "Abbrechen",
     "back": "Zurück",
-    "all": "Alle"
+    "all": "Alle",
+    "login": "Login",
+    "register": "Registrieren",
+    "get_started": "Get Started"
   },
   "auth": {
     "welcome": "Herzlich willkommen!",
@@ -124,20 +127,27 @@
     "yourAmount": "In deinem Wallet",
     "balance": "Konto",
     "buy_success_modal": {
-      "title": "Du hast erfolgreich Coins gekauft",
+      "title": "Du hast erfolgreich Coins gekauft!",
       "text1": "Deinem Wallet wurden die folgenden Coins gutgeschrieben: ",
       "text2": "Kurswert: ",
       "text3": "Kaufpreis: "
     },
+    "buy_error_modal": {
+      "title": "Der Kauf der Coins ist fehlgeschlagen!"
+    },
     "sell_success_modal": {
-      "title": "Du hast erfolgreich Coins verkauft",
+      "title": "Du hast erfolgreich Coins verkauft!",
       "text1": "Die folgenden Coins wurden verkauft:  ",
       "text2": "Kurswert: ",
       "text3": "Verkaufspreis: "
+    },
+    "sell_error_modal": {
+      "title": "Der Verkauf der Coins ist fehlgeschlagen!"
     }
   },
   "wallet": {
-    "total_value": "Gesamtwert aller Coins",
+    "wallet": "Wallet",
+    "total_value": "Portfoliowert",
     "user_balance": "Guthaben",
     "wallet_list": "Wallet-Übersicht",
     "all_wallets_empty": "Alle deine Wallets sind im Moment leer.",

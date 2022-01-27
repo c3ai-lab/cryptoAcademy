@@ -14,7 +14,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
   use HasFactory, Notifiable;
 
-  const INIT_BALANCE = 10_000;
+  const INIT_BALANCE = 10000;
   /**
    * The attributes that are mass assignable.
    *
@@ -29,6 +29,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     'email_verified_at',
     'x_axis',
     'y_axis',
+    'verify_token',
 //    'password_confirmation',
   ];
 
@@ -78,11 +79,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
   public function transactions()
   {
     return $this->hasMany(TransactionModel::class, "user_id", "id");
-  }
-
-  public function userVerification()
-  {
-    return $this->hasOne(UserVerifications::class, "user_id", "id");
   }
 
   public function getCumulativeReturns()
