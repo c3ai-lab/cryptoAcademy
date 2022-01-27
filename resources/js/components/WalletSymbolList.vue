@@ -23,13 +23,21 @@
               :sort-desc.sync="sortDesc"
             >
               <template #cell(coin)="data">
-                <img
-                  class="icon"
-                  :src="`/images/coins/${data.value.symbol
-                    .replace('USDT', '')
-                    .toLowerCase()}.png`"
-                />
-                {{ data.value.name }}
+                <div
+                  class="clickable"
+                  @click="openTradingShowView(data.value.symbol)"
+                >
+                  <img
+                    class="icon"
+                    :src="`/images/coins/${data.value.symbol
+                      .replace('USDT', '')
+                      .toLowerCase()}.png`"
+                  />
+                  <span>
+                    <b>{{ data.value.symbol | symbol }}</b> &ndash;
+                    {{ data.value.name }}
+                  </span>
+                </div>
               </template>
 
               <template #cell(value)="data">
@@ -107,6 +115,12 @@ export default {
     },
   },
 
+  methods: {
+    openTradingShowView(symbol) {
+      this.$router.push({ name: "trading.show", params: { symbol: symbol } });
+    },
+  },
+
   async created() {
     this.state = await dispatchAll(this, "wallets/fetchAll");
   },
@@ -117,6 +131,10 @@ export default {
 th.right,
 td.right {
   text-align: right;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .hidden-scroll {

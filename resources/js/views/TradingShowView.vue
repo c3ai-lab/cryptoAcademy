@@ -18,11 +18,11 @@
         :src="`/images/coins/${symbol.replace('USDT', '').toLowerCase()}.png`"
       />
       {{ symbol | symbol }}
+      <span class="text-muted name">{{ this.coin.name }}</span>
       <i
         @click="toggleFavorite()"
         class="mdi ml-4 favorite"
         :class="[favoriteClasses]"
-        style="font-size: 24px"
       />
     </h1>
     <div
@@ -126,6 +126,8 @@
 
 .favorite {
   cursor: pointer;
+  font-size: 2rem;
+  margin-left: 0.5rem;
 }
 
 .dim-btn {
@@ -141,6 +143,13 @@
 .active-dimension {
   background-color: #eff2f760 !important;
   color: var(--bs-gray-900) !important;
+}
+
+span.name {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
 }
 </style>
 
