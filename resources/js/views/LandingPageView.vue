@@ -7,7 +7,7 @@
             <h1 class="my-3">Kryptowährungen spielerisch kennenlernen</h1>
             <h3>
               Lerne die Grundlagen, erweitere dein Wissen und messe dich
-              risikofreie in einer Simulation mit der Community! Entwickle deine
+              risikofrei in einer Simulation mit der Community! Entwickle deine
               persönliche Erfolgsstrategie, um am echten Markt bestehen zu
               können!
             </h3>
