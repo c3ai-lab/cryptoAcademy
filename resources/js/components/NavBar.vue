@@ -22,14 +22,14 @@
         </button>
         <!-- LOGO -->
         <div class="navbar-brand-box d-none d-lg-block col-2">
-          <a href="/" class="logo">
+          <a href="/dashboard" class="logo">
             <span>
               <img src="/images/cryptocademy.svg" style="width: 100%" />
             </span>
           </a>
         </div>
         <div class="d-block d-lg-none" style="width: 100%">
-          <a href="/" class="logo">
+          <a href="/dashboard" class="logo">
             <span>
               <img
                 src="/images/cryptocademy_coin.svg"
