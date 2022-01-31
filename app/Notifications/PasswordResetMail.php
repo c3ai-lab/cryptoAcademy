@@ -47,8 +47,8 @@ class PasswordResetMail extends Notification
     return (new MailMessage)
       ->subject('Passwort zurücksetzen.')
       ->line('Hallo ' . $this->user->name)
-      ->line('Ihr neues Passwort: ' . $this->password)
-      ->line('Danke, dass Sie diese Applikation nutzen!');
+      ->line('Deine neues Passwort: ' . $this->password)
+      ->line('Danke, dass Du diese Applikation nutzt!');
 
 
   }
