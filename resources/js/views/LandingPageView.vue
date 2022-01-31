@@ -1,9 +1,17 @@
 <template>
   <div>
     <div class="header">
-      <div class="container header-content px-lg-5 px-3">
-        <div class="row">
-          <div class="col-md-8">
+      <div class="header-content px-lg-5 px-3">
+        <div
+          class="row"
+          style="
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+          "
+        >
+          <div class="col-lg-5">
             <h1 class="my-3">Kryptowährungen spielerisch kennenlernen</h1>
             <h3>
               Lerne die Grundlagen, erweitere dein Wissen und messe dich
@@ -14,9 +22,15 @@
             <a class="btn btn-light text-primary btn-cta" href="/register">
               {{ $t("auth.register_now") }}
             </a>
-            <a class="btn btn-light text-primary btn-cta" href="#video">
-              Zum Video
-            </a>
+          </div>
+          <div class="col-lg-2 col-0">
+            </div>
+          <div class="col-lg-5 my-5 my-lg-0" id="video">
+            <video controls style="max-width: 100%">
+              <source src="video/Cryptocademy.mp4" type="video/mp4" />
+              <source src="video/Cryptocademy.ogg" type="video/ogg" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
@@ -146,13 +160,6 @@
           <img src="/images/landingpage/Leaderboard.png" class="full" />
         </div>
       </div>
-      <div class="content-box row" id="video">
-        <video controls>
-          <source src="video/Cryptocademy.mp4" type="video/mp4" />
-          <source src="video/Cryptocademy.ogg" type="video/ogg" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
     </PaddedLayout>
     <div class="footer-part px-2 px-md-0">
       <PaddedLayout>
@@ -165,7 +172,7 @@
               per Mail an die
               <strong
                 ><a href="mailto:moin@cryptocademy.app"
-                  >info@cryptocademy.app</a
+                  >moin@cryptocademy.app</a
                 ></strong
               >.
             </p>
@@ -242,6 +249,8 @@ h3 {
   color: white;
   padding: 10% 0;
   font-size: 14pt;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .center-text {
