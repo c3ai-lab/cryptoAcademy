@@ -59,7 +59,9 @@
       "trade_now": "Zum Trading",
       "academy": "Wenn du dich noch nicht gut mit Kryptowährungen auskennst oder noch mehr zu dem Thema lernen möchtest, schaue doch mal in unserer Crypto Academy vorbei, wo du Informationen zu den relevantesten Themen Rund um bestimmte Crypto-Coins, Blockchain-Technologien und Trading findest.",
       "academy_now": "Zur Academy"
-    }
+    },
+    "welcome_text": "Herzlich Willkommen bei CryptoCademy! Für deinen Start findest du in der Academy allerhand interessante und hilfreiche Informationen.",
+    "welcome_text2": "Oder du startest direkt mit den aktuellen Kryptokursen durch!"
   },
   "profile": {
     "title": "Profil",

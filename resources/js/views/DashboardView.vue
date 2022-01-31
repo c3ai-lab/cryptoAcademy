@@ -3,8 +3,35 @@
     <div class="row">
       <div class="col-12 mb-4">
         <h1>{{ $t("dashboard.title") }}</h1>
-        <PortfolioReturnsCard />
+        <b-card>
+          <div class="text-center">
+            <p>
+              {{ $t("dashboard.welcome_text") }}
+              <br />
+              <router-link to="academy">
+                {{ $t("dashboard.welcome_modal.academy_now") }}
+              </router-link>
+            </p>
+            <p>
+              {{ $t("dashboard.welcome_text2") }}
+              <br />
+              <router-link to="trading">
+                {{ $t("dashboard.welcome_modal.trade_now") }}
+              </router-link>
+            </p>
+          </div>
+        </b-card>
       </div>
+      <b-row>
+        <b-col class="clickable" @click="openWalletsView">
+          <h1>{{ $t("wallet.total_value") }}</h1>
+          <TotalCoinValueCard />
+        </b-col>
+        <b-col class="clickable" @click="openWalletsView">
+          <h1>{{ $t("wallet.user_balance") }}</h1>
+          <UserCreditCard />
+        </b-col>
+      </b-row>
       <div class="col-lg-6 mb-4">
         <h2>{{ $t("dashboard.favorites") }}</h2>
         <div v-if="favoriteCoins.length === 0">
@@ -45,7 +72,8 @@
 import CoinCard from "../components/CoinCard.vue";
 import NewsCard from "../components/NewsCard.vue";
 import WelcomeModal from "../components/WelcomeModal.vue";
-import PortfolioReturnsCard from "../components/PortfolioReturnsCard.vue";
+import TotalCoinValueCard from "../components/TotalCoinValueCard.vue";
+import UserCreditCard from "../components/UserCreditCard.vue";
 
 import { Coin } from "../enums";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
@@ -56,7 +84,8 @@ export default {
   components: {
     PaddedLayout,
     WelcomeModal,
-    PortfolioReturnsCard,
+    TotalCoinValueCard,
+    UserCreditCard,
     CoinCard,
     NewsCard,
   },
@@ -85,5 +114,17 @@ export default {
     this.$store.dispatch("news/fetchLatest");
     this.$store.dispatch("coins/fetchAll");
   },
+
+  methods: {
+    openWalletsView() {
+      this.$router.push({ name: "wallets" });
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.clickable {
+  cursor: pointer;
+}
+</style>

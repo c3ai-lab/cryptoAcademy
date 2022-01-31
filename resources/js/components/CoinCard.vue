@@ -1,11 +1,11 @@
 <template>
   <LoadingStateWrapper :state="state" card>
-    <div class="card" @click="showDetails">
-      <div class="card-body">
+    <div class="card coin-card" @click="showDetails">
+      <div class="card-body coin-card-body">
         <div class="row" style="font-size: 24px">
           <div class="col-6 icon-wrapper" style="display: flex">
             <img
-              class="icon"
+              class="coin-card-icon"
               :src="`/images/coins/${this.coin.symbol
                 .replace('USDT', '')
                 .toLowerCase()}.png`"
@@ -81,8 +81,8 @@
   </LoadingStateWrapper>
 </template>
 
-<style scoped>
-.card {
+<style>
+.coin-card {
   cursor: pointer;
   border-radius: 0em;
   border-bottom-left-radius: 0;
@@ -90,11 +90,11 @@
   box-shadow: 0 1px 2px rgba(95, 95, 95, 0.2);
 }
 
-.card-body {
+.coin-card-body {
   padding: 8px 12px 8px 12px;
 }
 
-.icon {
+.coin-card-icon {
   display: inline-block;
   margin: 0.5rem 0.6rem 0 0;
   width: 1.75rem;

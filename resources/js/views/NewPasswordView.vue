@@ -5,18 +5,14 @@
         <p>
           {{ $t("auth.new_password") }}
         </p>
-          <div class="my-3 d-grid">
-              <router-link to="login" class="fw-medium text-primary">
-              <b-button
-                variant="primary"
-                class="btn-block"
-              >
-                {{ $t("auth.login_now") }}
-              </b-button>
-            
+        <div class="my-3 d-grid">
+          <router-link to="login" class="fw-medium text-primary">
+            <b-button variant="primary" class="btn-block">
+              {{ $t("auth.login_now") }}
+            </b-button>
           </router-link>
-
-      </div></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
