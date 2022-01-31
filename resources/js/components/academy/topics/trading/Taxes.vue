@@ -53,7 +53,7 @@
         <p>
           Bei weiterem Interesse zu diesem Thema bietet sich die möglichkeit, einen online-Rechner zu nutzen, um den potentiellen Steuersatz für
           den Trading-Gewinn zu ermitteln. Unter diesem
-          <a href="https://www.steuerschroeder.de/Bitcoin-und-die-Steuer.html">Link</a>
+          <a href="https://www.steuerschroeder.de/Bitcoin-und-die-Steuer.html" target="_blank">Link</a>
           geht dies Beispielsweise für die Kryptowährung Bitcoin.
         </p>
       </div>
