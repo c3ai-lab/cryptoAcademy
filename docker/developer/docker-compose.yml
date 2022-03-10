@@ -25,7 +25,7 @@ services:
     cryptocademy_scheduler:
         container_name: cryptocademy_scheduler
         restart: always
-        image: registry.cryptocademy.app:5000/cryptocademy:latest
+        image: cryptocademy.app:5000/cryptocademy:latest
         volumes:
             - ./:/var/www/html
             - /etc/localtime:/etc/localtime:ro
