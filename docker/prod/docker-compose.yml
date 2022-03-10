@@ -96,6 +96,15 @@ services:
             - ./data/certbot/conf/live/cryptocademy.app:/certs:ro
         ports:
             - 5000:5000
+    registry-ui:
+        container_name: registry-ui
+        image: joxit/docker-registry-ui:latest
+        environment:
+            - REGISTRY_TITLE=CryptoCademy Private Docker Registry
+            - REGISTRY_URL=https://cryptocademy.app:5000
+            - SINGLE_REGISTRY=true
+        depends_on:
+            - registry
 volumes:
     mysql_data:
         name: mysql_data
