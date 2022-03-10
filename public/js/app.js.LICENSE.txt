@@ -1,14 +1,7 @@
 /*!
- * ApexCharts v3.29.0
+ * ApexCharts v3.30.0
  * (c) 2018-2021 ApexCharts
  * Released under the MIT License.
- */
-
-/*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <http://feross.org>
- * @license  MIT
  */
 
 /*!
@@ -18,20 +11,19 @@
  */
 
 /*!
- * vue-i18n v8.26.7 
- * (c) 2021 kazuya kawaguchi
- * Released under the MIT License.
- */
-
-/*!
  * vuex v3.6.2
  * (c) 2021 Evan You
  * @license MIT
  */
 
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+/*!
+* metismenujs - v1.3.1
+* MetisMenu: Collapsible menu plugin with Vanilla-JS
+* https://github.com/onokumus/metismenujs#readme
+*
+* Made by Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
+* Under MIT License
+*/
 
 /*! svg.draggable.js - v2.2.2 - 2019-01-08
   * https://github.com/svgdotjs/svg.draggable.js

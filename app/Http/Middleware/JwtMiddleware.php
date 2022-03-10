@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class JwtMiddleware
 {
@@ -15,9 +15,9 @@ class JwtMiddleware
         return response()->json(['message' => 'Please make sure you entered the right information and you have verified your email address'], 401);
       }
     } catch (\Exception $e) {
-      if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+      if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException) {
         return response()->json(['message' => 'Token is Invalid'], 401);
-      } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+      } else if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException) {
         return response()->json(['message' => 'Token is Expired'], 401);
       } else {
         return response()->json(['message' => 'Authorization Token not found'], 401);
