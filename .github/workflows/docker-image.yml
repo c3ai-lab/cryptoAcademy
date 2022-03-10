@@ -55,7 +55,7 @@ jobs:
 
       - name: Build the Dockerimage
         run: |
-          docker build --no-cache ./docker/prod/ --tag registry.cryptocademy.app/cryptocademy:latest
+          docker build --no-cache . --tag registry.cryptocademy.app/cryptocademy:latest
           docker login -u cryptocademy -p ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
           docker push registry.cryptocademy.app/cryptocademy:latest
 
