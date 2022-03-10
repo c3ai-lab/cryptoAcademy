@@ -14,5 +14,5 @@ jobs:
     - name: Build the Docker image
       run: |
         docker login -u cryptocademy -p ${{ secrets.PRIVATE_REGISTRY_PASSWORD }} registry.cryptocademy.app
-        docker build . -t registry.cryptocademy.app/laravel8-php-8-apache:latest
+        docker build ./docker/build/ -t registry.cryptocademy.app/laravel8-php-8-apache:latest
         docker push registry.cryptocademy.app/laravel8-php-8-apache:latest
