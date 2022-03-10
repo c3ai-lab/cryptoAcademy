@@ -3,7 +3,7 @@ services:
     cryptocademy:
         container_name: cryptocademy
         restart: always
-        image: https://registry.cryptocademy.app/cryptocademy:latest
+        image: registry.cryptocademy.app/cryptocademy:latest
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
@@ -17,7 +17,7 @@ services:
     cryptocademy_scheduler:
         container_name: cryptocademy_scheduler
         restart: always
-        image: https://registry.cryptocademy.app/cryptocademy:latest
+        image: registry.cryptocademy.app/cryptocademy:latest
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
