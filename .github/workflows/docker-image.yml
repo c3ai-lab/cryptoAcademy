@@ -29,7 +29,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/"
-          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p ${{ env.SUB_DIR }}/data/registry/auth && docker run -rm --entrypoint htpasswd httpd:2 -Bbn cryptocademy ${{ secrets.PRIVATE_REGISTRY_PASSWORD }} > ${{ env.SUB_DIR }}/data/registry/auth/htpasswd"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p ${{ env.SUB_DIR }}/data/registry/auth && docker run --rm --entrypoint htpasswd httpd:2 -Bbn cryptocademy ${{ secrets.PRIVATE_REGISTRY_PASSWORD }} > ${{ env.SUB_DIR }}/data/registry/auth/htpasswd"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd ${{ env.SUB_DIR }}/ && docker-compose pull --ignore-pull-failures --no-parallel registry && docker-compose up -d registry"
           rm ~/.ssh/id_rsa
 
