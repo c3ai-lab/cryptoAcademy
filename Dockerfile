@@ -53,7 +53,7 @@ RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /e
 VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2"]
 EXPOSE 80 443
 USER root
-COPY docker/prod/start.sh /usr/local/bin/start
+COPY start.sh /usr/local/bin/start
 
 COPY ./ /var/www/html/
 
