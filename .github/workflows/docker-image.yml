@@ -15,7 +15,7 @@ on:
 env:
   NODE_VERSION: '14.x'                # set this to the node version to use
   SSH_CONNECTION: 'root@cryptocademy.app'
-  SUB_DIR: 'app'
+  SUB_DIR: 'services'
 
 jobs:
   build-and-deploy:
@@ -24,6 +24,14 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v2
+
+      - name: Start Registry
+        run: |
+          mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "mkdir -p ${{ env.SUB_DIR }}/data/registry/auth && docker run -rm --entrypoint htpasswd httpd:2 -Bbn cryptocademy ${{ secrets.PRIVATE_REGISTRY_PASSWORD }} > ${{ env.SUB_DIR }}/data/registry/auth/htpasswd"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd ${{ env.SUB_DIR }}/ && docker-compose pull --ignore-pull-failures --no-parallel registry && docker-compose up -d registry"
+          rm ~/.ssh/id_rsa
 
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader --no-dev
@@ -38,22 +46,21 @@ jobs:
           # Build and test the project
           npm install --production
 
-      - name: Build the Docker image
-        run: |
-          docker build --no-cache . --tag mats9798/cryptocademy:latest
-          docker login -u mats9798 -p ${{ secrets.DOCKER_LOGIN_PASSWORD }}
-          docker push mats9798/cryptocademy:latest
-      - name: .env
+      - name: Generate .env File
         run: |
           sed -ri -e "s!APP_KEY=!APP_KEY=${{ secrets.APP_KEY }}!g" docker/prod/laravel.env
           sed -ri -e "s!DB_PASSWORD=!DB_PASSWORD=${{ secrets.DB_PASSWORD }}!g" docker/prod/laravel.env
-          sed -ri -e "s!MAIL_USERNAME=!MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}!g" docker/prod/laravel.env
           sed -ri -e "s!MAIL_PASSWORD=!MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}!g" docker/prod/laravel.env
-      - name: Move .env, docker-compose and startup to Prod-Server
+          mv docker/prod/laravel.env .env
+
+      - name: Build the Dockerimage
+        run: |
+          docker build --no-cache ./docker/prod/Dockerfile --tag https://registry.cryptocademy.app/cryptocademy:latest
+          docker login -u cryptocademy -p ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
+          docker push https://registry.cryptocademy.app/cryptocademy:latest
+
+      - name: Deploy Docke-Compose.yml & Start CryptoCademy Prod-Server
         run: |
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-          scp -o StrictHostKeyChecking=no docker/prod/docker-compose.yml "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/"
-          scp -o StrictHostKeyChecking=no docker/prod/*.env "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/"
-          scp -o StrictHostKeyChecking=no docker/prod/startup "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/"
-          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd ${{ env.SUB_DIR }}/ && bash startup"
+          ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd ${{ env.SUB_DIR }}/ && docker-compose pull --ignore-pull-failures --no-parallel && docker-compose up -d --force-recreate && docker restart reverse_proxy"
           rm ~/.ssh/id_rsa

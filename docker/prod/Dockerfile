@@ -25,10 +25,9 @@ RUN docker-php-ext-install bcmath ctype fileinfo mbstring pdo pdo_mysql soap mys
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && docker-php-ext-install imap
 RUN docker-php-ext-configure calendar && docker-php-ext-install calendar
 
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 
 RUN set -ex; \
     { \
@@ -55,6 +54,11 @@ VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2"]
 EXPOSE 80 443
 USER root
 COPY start.sh /usr/local/bin/start
+
+COPY ../build /var/www/html/
+
+# Optimizing
+RUN php artisan optimize
 
 RUN chown www-data:www-data -R /var/www/html
 RUN chmod u+x /usr/local/bin/start

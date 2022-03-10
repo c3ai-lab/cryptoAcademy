@@ -1,30 +1,103 @@
 version: "3.9"
 services:
-    app:
+    cryptocademy:
         container_name: cryptocademy
         restart: always
-        image: mats9798/cryptocademy:latest
+        image: https://registry.cryptocademy.app/cryptocademy:latest
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - cryptocademy_appdata:/var/www/html/storage
+            - cryptocademy_data:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: app
-    scheduler:
+        depends_on:
+            - database
+
+    cryptocademy_scheduler:
         container_name: cryptocademy_scheduler
         restart: always
-        image: mats9798/cryptocademy:latest
+        image: https://registry.cryptocademy.app/cryptocademy:latest
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - cryptocademy_appdata:/var/www/html/storage
+            - cryptocademy_data:/var/www/html/storage
         environment:
             APP_ENV: production
             CONTAINER_ROLE: scheduler
+        depends_on:
+            - database
+
+    reverse_proxy:
+        restart: always
+        image: nginx:latest
+        container_name: reverse_proxy
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+            - ./data/nginx:/etc/nginx/conf.d
+            - ./data/certbot/conf:/etc/letsencrypt:ro
+            - ./data/certbot/www:/var/www/certbot
+        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+    certbot:
+        restart: always
+        image: certbot/certbot:latest
+        container_name: certbot
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+    database:
+        restart: always
+        image: mysql:8
+        container_name: database
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: root
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin
+        restart: always
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        environment:
+            - PMA_ABSOLUTE_URI=https://pma.cryptocademy.app
+            - PMA_HOST=database
+            - PMA_VERBOSE=VM01
+            - UPLOAD_LIMIT=2500M
+        depends_on:
+            - database
+    registry:
+        restart: always
+        container_name: registry
+        image: registry:2
+        environment:
+            REGISTRY_AUTH: htpasswd
+            REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+            REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+        volumes:
+            - registry_data:/var/lib/registry
+            - ./data/registry/auth:/auth
 volumes:
-    cryptocademy_appdata:
-        name: cryptocademy_appdata
+    mysql_data:
+        name: mysql_data
+    cryptocademy_data:
+        name: cryptocademy_data
+    registry_data:
+        name: registry_data
 networks:
     default:
         name: docker-net

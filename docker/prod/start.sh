@@ -7,11 +7,14 @@ if [ "$env" != "local" ]; then
   (cd /var/www/html && php artisan config:cache && php artisan route:cache && php artisan view:cache)
 fi
 if [ "$role" = "app" ]; then
+  php /var/www/html/artisan migrate --force
   exec apache2-foreground
 elif [ "$role" = "queue" ]; then
   echo "Running the queue..."
+  php /var/www/html/artisan migrate --force
   php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90
 elif [ "$role" = "scheduler" ]; then
+  php /var/www/html/artisan migrate --force
   while [ true ]; do
     php /var/www/html/artisan schedule:run --verbose --no-interaction &
     sleep 60

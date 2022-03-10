@@ -1,21 +1,40 @@
 version: "3.9"
 services:
-    crypto-app:
-        container_name: crypto-app
+    cryptocademy:
+        container_name: cryptocademy
         restart: always
-        image: mats9798/laravel8-php-8-apache:latest
+        image: cryptocademy:latest
+        build:
+            dockerfile: ../build/Dockerfile
         extra_hosts:
             - "host.docker.internal:host-gateway"
         volumes:
-            - ${PROJECT_ROOT}:/var/www/html
+            - ./:/var/www/html
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
-            - .config/psysh:/.config/psysh
-        hostname: cryptocademy.developer.local
+        environment:
+            APP_ENV: local
+            CONTAINER_ROLE: app
+        depends_on:
+            - database
         ports:
             - 9876:80
         networks:
             crypto-net:
+
+    cryptocademy_scheduler:
+        container_name: cryptocademy_scheduler
+        restart: always
+        image: https://registry.cryptocademy.app/cryptocademy:latest
+        volumes:
+            - ./:/var/www/html
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        environment:
+            APP_ENV: local
+            CONTAINER_ROLE: scheduler
+        depends_on:
+            - database
 
     crypto-app_db:
         container_name: crypto-app_db

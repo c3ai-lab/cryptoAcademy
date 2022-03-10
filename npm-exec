@@ -1,2 +1,0 @@
-#!/bin/bash
-docker run --rm --interactive --tty -v $(pwd):/var/www/html mats9798/laravel8-php-8-apache:latest npm $@
