@@ -1,5 +1,6 @@
 <template>
-  <div><ResetPasswordCard />
+  <div>
+    <ResetPasswordCard />
     <div class="mt-4 text-center">
       <p>
         {{ $t("auth.remember_password") }}
@@ -8,12 +9,12 @@
         </router-link>
       </p>
       <Copyright />
-    </div></div>
+    </div>
+  </div>
 </template>
 
       
 <script>
-
 import ResetPasswordCard from "../components/ResetPasswordCard.vue";
 import Copyright from "../components/Copyright.vue";
 export default {

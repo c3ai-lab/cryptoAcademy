@@ -54,7 +54,6 @@ class Kernel extends ConsoleKernel
     $schedule->call(function() {
       $command = new GetBinancePricesService();
       $command->handle();
-
     })->everyFiveMinutes();
   }
 

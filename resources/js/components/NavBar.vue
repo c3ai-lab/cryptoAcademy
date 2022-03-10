@@ -22,14 +22,14 @@
         </button>
         <!-- LOGO -->
         <div class="navbar-brand-box d-none d-lg-block col-2">
-          <a href="/" class="logo">
+          <a href="/dashboard" class="logo">
             <span>
               <img src="/images/cryptocademy.svg" style="width: 100%" />
             </span>
           </a>
         </div>
         <div class="d-block d-lg-none" style="width: 100%">
-          <a href="/" class="logo">
+          <a href="/dashboard" class="logo">
             <span>
               <img
                 src="/images/cryptocademy_coin.svg"
@@ -41,7 +41,10 @@
         </div>
         <div class="col-md-7 col-2"></div>
         <div class="d-flex balance p-4 justify-content-end">
-          <span style="line-height: 1">
+          <span
+            style="line-height: 1; cursor: pointer"
+            @click="openWalletsView"
+          >
             Konto: <b>{{ balance | eur }}</b></span
           >
         </div>
@@ -107,6 +110,13 @@ export default {
     },
   },
 
+  created() {
+    setInterval(() => {
+      this.$store.dispatch("user/refreshUserData");
+      this.$store.dispatch("wallets/fetchAll");
+    }, 20000);
+  },
+
   methods: {
     openNav() {
       document.getElementById("open-btn").style.display = "none";
@@ -120,6 +130,10 @@ export default {
       document.getElementById("open-btn").style.display = "block";
       document.getElementById("nav-menu").style.display = "none";
       document.getElementById("background").style.display = "none";
+    },
+
+    openWalletsView() {
+      this.$router.push({ name: "wallets" });
     },
   },
 };

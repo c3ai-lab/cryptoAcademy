@@ -79,22 +79,8 @@
                 {{ $t("auth.invalid_password") }}
               </b-form-invalid-feedback>
             </b-form-group>
-            <b-form-group id="input-group-3" class="mt-4 text-center">
-              <p class="mb-0">
-                <b-form-checkbox
-                  id="input-3"
-                  name="terms-of-use"
-                  value="accepted"
-                  unchecked-value="not_accepted"
-                  required
-                  >&nbsp; {{ $t("auth.accept_terms_of_use") }}
-                  <router-link to="terms-of-use" class="fw-medium text-primary">
-                    AGBs
-                  </router-link>
-                  !
-                </b-form-checkbox>
-              </p>
-            </b-form-group>
+             {{ $t("auth.register_spaminfo") }}
+                  
             <div class="mt-3 d-grid">
               <b-button type="submit" variant="primary" class="btn-block">
                 {{ $t("auth.register_now") }}

@@ -3,9 +3,35 @@
     <div class="row">
       <div class="col-12 mb-4">
         <h1>{{ $t("dashboard.title") }}</h1>
-        <returns-chart />
-        <PortfolioReturnsCard />
+        <b-card>
+          <div class="text-center">
+            <p>
+              {{ $t("dashboard.welcome_text") }}
+              <br />
+              <router-link to="academy">
+                {{ $t("dashboard.welcome_modal.academy_now") }}
+              </router-link>
+            </p>
+            <p>
+              {{ $t("dashboard.welcome_text2") }}
+              <br />
+              <router-link to="trading">
+                {{ $t("dashboard.welcome_modal.trade_now") }}
+              </router-link>
+            </p>
+          </div>
+        </b-card>
       </div>
+      <b-row>
+        <b-col class="clickable" @click="openWalletsView">
+          <h1>{{ $t("wallet.total_value") }}</h1>
+          <TotalCoinValueCard />
+        </b-col>
+        <b-col class="clickable" @click="openWalletsView">
+          <h1>{{ $t("wallet.user_balance") }}</h1>
+          <UserCreditCard />
+        </b-col>
+      </b-row>
       <div class="col-lg-6 mb-4">
         <h2>{{ $t("dashboard.favorites") }}</h2>
         <div v-if="favoriteCoins.length === 0">
@@ -17,14 +43,10 @@
           </p>
         </div>
         <div v-else>
-          <CoinCardRealData
+          <CoinCard
             v-for="coin in favoriteCoins"
             :key="coin.id"
-            :id="coin.id"
-            :name="coin.name"
             :symbol="coin.symbol"
-            :series="coin.series"
-            :isFavorite="coin.is_favorite"
           />
         </div>
       </div>
@@ -47,11 +69,11 @@
 </template>
 
 <script>
-import PortfolioReturnsCard from "../components/PortfolioReturnsCard.vue";
-import CoinCardRealData from "../components/CoinCardRealData.vue";
+import CoinCard from "../components/CoinCard.vue";
 import NewsCard from "../components/NewsCard.vue";
 import WelcomeModal from "../components/WelcomeModal.vue";
-import ReturnsChart from "../components/ReturnsChart.vue";
+import TotalCoinValueCard from "../components/TotalCoinValueCard.vue";
+import UserCreditCard from "../components/UserCreditCard.vue";
 
 import { Coin } from "../enums";
 import PaddedLayout from "../layouts/PaddedLayout.vue";
@@ -62,10 +84,10 @@ export default {
   components: {
     PaddedLayout,
     WelcomeModal,
-    PortfolioReturnsCard,
-    CoinCardRealData,
+    TotalCoinValueCard,
+    UserCreditCard,
+    CoinCard,
     NewsCard,
-    ReturnsChart
   },
 
   data() {
@@ -78,9 +100,11 @@ export default {
     latestNews() {
       return this.$store.getters["news/latest"](3);
     },
+
     favoriteCoins() {
-      return this.$store.getters["coinIndex/favorites"]();
+      return this.$store.getters["coins/favorites"]();
     },
+
     isFirstVisit() {
       return this.$store.getters["user/getUser"]().is_first_visit;
     },
@@ -88,7 +112,19 @@ export default {
 
   created() {
     this.$store.dispatch("news/fetchLatest");
-    this.$store.dispatch("coinIndex/fetchSymbols");
+    this.$store.dispatch("coins/fetchAll");
+  },
+
+  methods: {
+    openWalletsView() {
+      this.$router.push({ name: "wallets" });
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.clickable {
+  cursor: pointer;
+}
+</style>

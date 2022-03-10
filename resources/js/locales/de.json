@@ -23,6 +23,7 @@
     "enter_password": "Passwort eingeben",
     "register_now": "Jetzt registrieren!",
     "register_with": "Registrieren mit",
+    "register_spaminfo": "Nach der Registrierung wird dir eine Willkommens-Mail zugeschickt. Bestätige diese bevor du dich einloggen kannst. Falls du diese Mail nicht bekommen hast, überprüfe bitte deinen Spam-Ordner.",
     "login_now": "Jetzt einloggen!",
     "login_with": "Einloggen mit",
     "forgot_password": "Passwort vergessen?",
@@ -40,7 +41,7 @@
     "mail_failed": "Die angegebene Mail-Adresse ist nicht vergeben.",
     "remember_password": "Du erinnerst dich an dein Passwort?",
     "register_success": "Du hast dich erfolgreich registriert. Bitte bestätige die Registrierungsmail, bevor du dich einloggen kannst.",
-    "new_password": "Du hast erfolgreich dein Passwort geändert. Du wurdest automatisch ausgeloggt und kannst dich jetzt mit deinem neuen Passwort einloggen.",
+    "new_password": "Du hast erfolgreich ein neues Passwort angefordert. Wir haben dir eine E-Mail mit deinem neuen Passwort zugeschickt. Falls du diese nicht bekommen hast, überprüfe bitte auch deinen Spam-Ordner. Mit dem neuen Passwort kannst du dich wieder anmelden. In deinem Profil kannst du das Passwort jederzeit ändern.",
     "delete_account": "Du hast erfolgreich deinen Account gelöscht. Wir verabschieden uns von dir und hoffen, dass dir unsere Crypotcademy Anwendung Spaß gemacht und etwas gelehrt hat. Wir heißen dich Willkommen, falls du dich entschließt wieder Teil der Community zu werden."
   },
   "dashboard": {
@@ -58,7 +59,9 @@
       "trade_now": "Zum Trading",
       "academy": "Wenn du dich noch nicht gut mit Kryptowährungen auskennst oder noch mehr zu dem Thema lernen möchtest, schaue doch mal in unserer Crypto Academy vorbei, wo du Informationen zu den relevantesten Themen Rund um bestimmte Crypto-Coins, Blockchain-Technologien und Trading findest.",
       "academy_now": "Zur Academy"
-    }
+    },
+    "welcome_text": "Herzlich Willkommen bei CryptoCademy! Für deinen Start findest du in der Academy allerhand interessante und hilfreiche Informationen.",
+    "welcome_text2": "Oder du startest direkt mit den aktuellen Kryptokursen durch!"
   },
   "profile": {
     "title": "Profil",
@@ -87,7 +90,7 @@
     "year_short": "J",
     "all": "Gesamt"
   },
-  "dimension": {
+  "resolution": {
     "1H": "1H",
     "1D": "1T",
     "1W": "1W",

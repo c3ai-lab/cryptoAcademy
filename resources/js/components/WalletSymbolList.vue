@@ -127,12 +127,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 th.right,
 td.right {
   text-align: right;
 }
+</style>
 
+<style lang="scss">
 .clickable {
   cursor: pointer;
 }

@@ -50,7 +50,6 @@
               </b-button>
             </router-link>
           </div>
-          <!---->
         </div>
         <span tabindex="0"></span>
       </div>

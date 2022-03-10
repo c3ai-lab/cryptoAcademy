@@ -187,7 +187,7 @@ const deleteAccount = async ({ commit, dispatch, rootGetters }) => {
   return false;
 };
 
-const changePassword = async ({ commit, dispatch, rootGetters }, data) => {
+const changePassword = async ({ rootGetters }, data) => {
   const response = await fetch("/api/user/password", {
     method: "PUT",
     headers: {
