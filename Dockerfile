@@ -8,5 +8,5 @@ COPY . /var/www/html/
 
 # Optimizing
 RUN php artisan optimize
-
+RUN chmod 777 -R /var/www/html
 RUN chown www-data:www-data -R /var/www/html
