@@ -21,9 +21,9 @@ RUN requirements="tzdata gnupg gosu curl ca-certificates zip unzip git superviso
     && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
     && apt-get install -y nodejs
 
-RUN docker-php-ext-install bcmath ctype fileinfo mbstring pdo pdo_mysql soap mysqli exif gettext opcache pcntl shmop sockets sysvmsg sysvsem sysvshm tokenizer xml zip
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && docker-php-ext-install imap
-RUN docker-php-ext-configure calendar && docker-php-ext-install calendar
+#RUN docker-php-ext-install bcmath ctype fileinfo mbstring pdo pdo_mysql soap mysqli exif gettext opcache pcntl shmop sockets sysvmsg sysvsem sysvshm tokenizer xml zip
+#RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && docker-php-ext-install imap
+#RUN docker-php-ext-configure calendar && docker-php-ext-install calendar
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
@@ -55,7 +55,7 @@ EXPOSE 80 443
 USER root
 COPY start.sh /usr/local/bin/start
 
-COPY ../build /var/www/html/
+COPY ../../ /var/www/html/
 
 # Optimizing
 RUN php artisan optimize
