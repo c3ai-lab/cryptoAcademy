@@ -57,7 +57,7 @@ jobs:
         run: |
           docker login -u cryptocademy -p ${{ secrets.PRIVATE_REGISTRY_PASSWORD }} cryptocademy.app:5000
           docker pull cryptocademy.app:5000/cryptocademy:latest
-          docker build --no-cache . --tag cryptocademy.app:5000/cryptocademy:latest
+          docker build . --tag cryptocademy.app:5000/cryptocademy:latest
           docker push cryptocademy.app:5000/cryptocademy:latest
 
       - name: Deploy Docke-Compose.yml & Start CryptoCademy Prod-Server
@@ -65,7 +65,7 @@ jobs:
           mkdir -p ~/.ssh && echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "docker login -u cryptocademy -p ${{ secrets.PRIVATE_REGISTRY_PASSWORD }} cryptocademy.app:5000"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "rm -rf $SUB_DIR/data/nginx/*.conf"
-          scp -o StrictHostKeyChecking=no nginx/*.conf "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/data/nginx/"
+          scp -o StrictHostKeyChecking=no docker/prod/nginx/*.conf "${{ env.SSH_CONNECTION }}:${{ env.SUB_DIR }}/data/nginx/"
           ssh -o StrictHostKeyChecking=no "${{ env.SSH_CONNECTION }}" "cd ${{ env.SUB_DIR }}/ && docker-compose pull --ignore-pull-failures --no-parallel && docker-compose up -d --force-recreate && docker restart reverse_proxy"
           rm ~/.ssh/id_rsa
 
